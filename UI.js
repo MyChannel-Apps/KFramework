@@ -1,6 +1,6 @@
 var UI = {
-	Basic:		'[UILayout Basic]',
-	Box:		'[UILayout Box]',
-	Poker:		'[UILayout Poker]',
-	Billard:	'[UILayout Billard]'
+	Basic:		0x00,
+	Box:		0x01,
+	Billard:	0x02,
+	Poker:		0x03
 };
