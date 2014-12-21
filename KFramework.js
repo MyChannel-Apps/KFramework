@@ -1,7 +1,10 @@
 var App;
 var Bot;
-var Version		= '1.0.0';
+var Users;
+var DB;
+var Version		= '1.0.1';
 var Exceptions	= [];
+var Queue		= [];
 
 require('framework/UI.js');
 require('framework/KCode.js');
@@ -11,16 +14,29 @@ try {
 		_layout:	UI.Poker
 	};
 
-	function registerFramework(func, methods) {
+	function registerFramework(instance, func, methods) {
+		for(var methods in instance) {
+			func[methods] = instance[methods];
+		}
+		
 		func.getUI = function() {
 			return Container._layout;
 		};
 		
 		func.registerCommand = function(command, callback) {
-			App.chatCommands[command] = function(user, params, command) {
-				callback(params, user);
-			};
+			callback = registerFramework(func, callback);
 			
+			if(App.chatCommands == undefined) {
+				Queue.push({
+					action:		'registerCommand',
+					command:	command,
+					callback:	callback
+				});
+				
+				return;
+			}
+			
+			App.chatCommands[command] = callback;
 			KnuddelsServer.refreshHooks();
 		};
 		
@@ -36,6 +52,53 @@ try {
 	}
 	
 	function bootstrap(instance) {
+		Users = (new function() {
+			this.get = function(nickname) {
+				if(KnuddelsServer.userExists(nickname)) {
+					var userId	= KnuddelsServer.getUserId(nickname);
+					
+					if(KnuddelsServer.canAccessUser(userId)) {
+						nickname	= KnuddelsServer.getUser(userId);
+					}
+				}
+				
+				if(typeof(nickname) == 'string') {
+					return (new function User() {
+						var _nickname			= nickname;
+						this.virtual			= true;
+						this.getPersistence		= function() {
+							return (new function Persistence() {
+								var _data = {};
+								
+								this.deleteNumber = function(key) { delete _data[key]; };
+								this.deleteObject = function(key) { delete _data[key]; };
+								this.deleteString = function(key) { delete _data[key]; };
+								this.getString = function(key, defaults) { return _data[key] || defaults; };
+								this.getNumber = function(key, defaults) { return _data[key] || defaults; };
+								this.getObject = function(key, defaults) { return _data[key] || defaults; };
+							}());
+						};
+						this.getNick			= function() { return _nickname; };
+						this.getUserId			= function() { return -1; };
+						this.getKnuddelAmount	= function() { return new KnuddelAmount(-1); };
+						this.sendPrivateMessage	= function(message) {};
+					}());
+				}
+				
+				return nickname;
+			};
+		}());
+		
+		DB	= (new function() {
+			this.getUser = function(user) {
+				return user.getPersistence();
+			};
+			
+			this.getChannel = function() {
+				return KnuddelsServer.getPersistence();
+			};
+		}());
+		
 		Bot = (new function() {
 			var _user = KnuddelsServer.getDefaultBotUser();
 			
@@ -47,6 +110,10 @@ try {
 				_user.leaveChannel();
 			};
 			
+			this.exception = function(exception) {
+				_user.sendPublicMessage('°RR°_Exception:_°r°#' + (exception.message == undefined ? exception : exception.message));
+			};
+			
 			this.publicMessage = function(message) {
 				if(message instanceof KCode) {
 					message = message.toString();
@@ -55,20 +122,38 @@ try {
 				_user.sendPublicMessage(message);
 			};
 			
+			this.postMessage = function(user, message, topic) {
+				if(message instanceof KCode) {
+					message = message.toString();
+				}
+				
+				// send to online users
+				if(user == undefined) {
+					var users = KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
+					for(var index in users) {
+						var user = users[index];
+						user.sendPostMessage(topic, message);
+					}
+				} else {
+					user.sendPostMessage(topic, message);
+				}
+			};
+			
 			this.privateMessage = function(user, message) {
 				if(message instanceof KCode) {
 					message = message.toString();
 				}
 				
-				_user.sendPrivateMessage(message, user);
-			};
-			
-			this.postMessage = function(user, subject, message) {
-				if(message instanceof KCode) {
-					message = message.toString();
+				// send to online users
+				if(user == undefined) {
+					var users = KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
+					for(var index in users) {
+						var user = users[index];
+						_user.sendPrivateMessage(message, user);
+					}
+				} else {
+					_user.sendPrivateMessage(message, user);
 				}
-				
-				_user.sendPostMessage(user, subject, message);
 			};
 			
 			this.exec = function(command) {
@@ -76,56 +161,39 @@ try {
 			};
 		}());
 		
-		
 		App = (new function() {
 			if(instance.init != undefined) {
-				this.onAppStart		= registerFramework(instance.init, ['setUI']);
+				this.onAppStart		= registerFramework(instance, instance.init, ['setUI']);
+				this.onAppStart.run	= function() {
+					var entry = Queue.shift();
+					if(entry != undefined) {
+						switch(entry.action) {
+							case 'registerCommand':
+								if(App.chatCommands == undefined) {
+									App.chatCommands = {};
+								}
+								
+								App.chatCommands[entry.command] = entry.callback;
+								KnuddelsServer.refreshHooks();
+							break;
+						}
+					}
+					
+					if(instance.run != undefined) {
+						instance.run();
+					}
+				};
+				
+				setInterval(this.onAppStart.run, 100);
 			}
 			
 			if(instance.userJoin != undefined) {
-				this.onUserJoined	= registerFramework(instance.userJoin);
+				this.onUserJoined	= registerFramework(instance, instance.userJoin);
 			}
 			
 			if(instance.userLeave != undefined) {
-				this.onUserLeft		= registerFramework(instance.userLeave);
+				this.onUserLeft		= registerFramework(instance, instance.userLeave);
 			}
-			
-			this.chatCommands	= {
-				framework: function(user, params, command) {
-					if(params == 'exceptions') {
-						if(Exceptions.length == 0) {
-							Bot.privateMessage(user, 'Currently no _Exceptions_ tracked.');
-							return;
-						}
-						
-						var exceptions = '';
-						for(var index in Exceptions) {
-							var Exception	= Exceptions[index];
-							exceptions		+= '#°%10°[' + Exception.name + '] ' + Exception.message;
-						}
-						
-						Bot.privateMessage(user, '_Exception:_#' + exceptions);
-						return;
-					}
-					
-					var commands = [
-						'°%10>/framework exceptions|/framework exceptions<°'
-					];
-					
-					var usercommands = [];
-					KnuddelsServer.refreshHooks();
-					// @ToDo UserCommands won't work correctly...
-					for(var command in this.chatCommands) {
-						if(command == 'framework') {
-							continue;
-						}
-						
-						usercommands.push('°%10>/' + command + '|' + command + '<°');
-					}
-					
-					Bot.privateMessage(user, '°BB°_MyChannel-Apps.de_°r° Framework v' + Version + '#Following commands are available:#' + commands.join('#') + '#°r%00°User Commands:#' + usercommands.join('#'));
-				}
-			};
 		}());
 	}
 } catch(e) {
