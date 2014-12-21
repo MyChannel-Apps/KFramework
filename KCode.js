@@ -1,5 +1,12 @@
 require('framework/ui/KButton.js');
 
+var Alignment = {
+	LEFT:		'°>LEFT<°',
+	MIDDLE:		'°>CENTER<°',
+	CENTER:		'°>CENTER<°',
+	RIGHT:		'°>RIGHT<°',
+	JUSTIFY:	'°>JUSTIFY<°',
+};
 function KCode() {
 	var _buffer = [];
 	var _debug	= false;
@@ -9,8 +16,17 @@ function KCode() {
 	};
 	
 	this.newLine = function() {
-		_buffer.push('#');
+		_buffer.push('°#°');
+	};
+	
+	this.setAlignment = function(alignment) {
+		_buffer.push(alignment);
 	};	
+	
+	this.addImage = function(file) {
+		// @ToDo to Image-Object with addition options (margin, hover, what ever)
+		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
+	};
 	
 	this.toString = function() {
 		var string = '';
