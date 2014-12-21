@@ -1,16 +1,29 @@
-function KButton(text) {
+function KButton(text, command) {
 	var _text		= '';
 	var _command	= '';
 	var _properties	= {};
 	
-	function KButton(text) {
+	function KButton(text, command) {
 		if(text === undefined) {
 			return;
 		}
 		
 		_text = text;
+		if(command === undefined) {
+			return;
+		}
+		
+		_command = command;
 	};
 	
+	/* COMMAND */
+	this.getCommand = function() {
+		return _command;
+	};
+	
+	this.setCommand = function(command) {
+		_command = command;
+	};
 	/* TEXT */
 	this.getText = function() {
 		return _text;
@@ -22,6 +35,9 @@ function KButton(text) {
 	
 	/* ICON */
 	this.setIcon = function(icon) {
+		if(icon.indexOf('https://') == 0 || icon.indexOf('http://') == 0) {
+			//Logger.warn('Can\t use http:// or https:// URL\'s on Buttons because the Path is implemented on the Client side!');
+		}
 		_properties.icon = icon;
 	};
 	
@@ -120,7 +136,7 @@ function KButton(text) {
 		}
 		
 		for(var name in _properties) {
-			string += name + '|' + _properties[name];
+			string += '|' + name + '|' + _properties[name];
 		}
 		
 		string += '<°';
@@ -130,5 +146,5 @@ function KButton(text) {
 	
 	
 	// Call the Constructor
-	KButton(text);
+	KButton(text, command);
 }
