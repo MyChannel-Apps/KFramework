@@ -17,6 +17,9 @@ function KCode() {
 	
 	this.newLine = function() {
 		_buffer.push('°#°');
+		
+		// DEPRECATED!
+		_buffer.push('#');
 	};
 	
 	this.setAlignment = function(alignment) {

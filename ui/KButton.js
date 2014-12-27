@@ -123,6 +123,15 @@ function KButton(text, command) {
 		}
 	};
 	
+	/* DISABLED */
+	this.setEnabled = function(bool) {
+		if(bool == false) {
+			_properties.enabled = '0';
+		} else {
+			delete _properties.enabled;
+		}
+	};
+	
 	/* @ToDo TEXTCOLOR */
 	
 	this.toString = function() {
