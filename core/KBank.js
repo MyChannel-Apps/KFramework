@@ -1,7 +1,6 @@
 var KBank = (new function(data) {
 	var _data = DB.load('_bank');
-	this.fixData();
-	
+
 	this.create = function(uid) {
 		if(uid === undefined) {
 			return;
@@ -170,4 +169,5 @@ var KBank = (new function(data) {
 		}
 		return transit;
 	};
+	this.fixData();	
 }());

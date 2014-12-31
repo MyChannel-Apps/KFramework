@@ -72,6 +72,4 @@ var DB	= (new function() {
 		}
 		return true;
 	};
-
-	return this.getChannel();
 }());
