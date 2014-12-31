@@ -1,4 +1,6 @@
 require('framework/ui/KButton.js');
+require('framework/ui/KLink.js');
+require('framework/ui/KCountdown.js');
 
 var Alignment = {
 	LEFT:		'°>LEFT<°',
@@ -7,6 +9,7 @@ var Alignment = {
 	RIGHT:		'°>RIGHT<°',
 	JUSTIFY:	'°>JUSTIFY<°',
 };
+
 function KCode() {
 	var _buffer = [];
 	var _debug	= false;
@@ -35,16 +38,12 @@ function KCode() {
 		var string = '';
 		
 		for(var index in _buffer) {
-			try {
-				var component	= _buffer[index];
-				
-				if(component instanceof String) {
-					string		+= component;
-				} else {
-					string		+= component.toString();
-				}
-			} catch(e) {
-				Exceptions.push(e);
+			var component	= _buffer[index];
+			
+			if(component instanceof String) {
+				string		+= component;
+			} else {
+				string		+= component.toString();
 			}
 		}
 		
