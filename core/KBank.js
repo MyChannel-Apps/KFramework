@@ -45,7 +45,7 @@ var KBank = (new function(data) {
 		
 		this.create(uid);
 
-		if(kn < 0) {
+		if(kn <= 0.00) {
 			return false;
 		}
 
@@ -76,7 +76,7 @@ var KBank = (new function(data) {
 		
 		this.create(uid);
 		
-		if(kn < 0) {
+		if(kn <= 0.00) {
 			return false;
 		}
 		
