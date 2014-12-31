@@ -28,8 +28,11 @@ var DB	= (new function() {
 			break;
 			
 			case 'object':
-			case 'undefined':			
 				return selectedDB.getObject(key, defaultValue);
+			break;
+			
+			case 'undefined':
+				return selectedDB.getObject(key, {});
 			break;
 		}
 		
