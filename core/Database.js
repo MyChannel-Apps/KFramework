@@ -1,9 +1,11 @@
 var DB	= (new function() {
 	this.getUser = function(user) {
+		Logger.info("This shit is _DEPERECATED_!");		
 		return user.getPersistence();
 	};
 	
 	this.getChannel = function() {
+		Logger.info("This shit is _DEPERECATED_!");		
 		return KnuddelsServer.getPersistence();
 	};
 	
@@ -13,9 +15,9 @@ var DB	= (new function() {
 			return false;
 		}
 		
-		selectedDB = this.getChannel();
+		selectedDB = KnuddelsServer.getPersistence();
 		if(user != undefined) { 
-			selectedDB = this.getUser(user);
+			selectedDB = user.getPersistence();
 		}
 		
 		switch(typeof defaultValue) {
@@ -50,9 +52,9 @@ var DB	= (new function() {
 			return false;
 		}
 		
-		selectedDB = this.getChannel();
+		selectedDB = KnuddelsServer.getPersistence();
 		if(user != undefined) { 
-			selectedDB = this.getUser(user);
+			selectedDB = user.getPersistence();
 		}
 		
 		switch(typeof data) {
@@ -70,7 +72,6 @@ var DB	= (new function() {
 		}
 		return true;
 	};
-	
-	Logger.info("This shit is _DEPERECATED_!");
+
 	return this.getChannel();
 }());
