@@ -30,14 +30,23 @@ var Bot = (new function() {
 	};
 	
 	this.publicMessage = function(message) {
+		Logger.info("This shit is _DEPERECATED_!");		
+		this.public(message);
+	}
+	
+	this.publicMessage = function(message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
-		
 		_user.sendPublicMessage(message);
 	};
 	
 	this.postMessage = function(user, message, topic) {
+		Logger.info("This shit is _DEPERECATED_!");
+		this.post(user, message, topic);
+	}
+	
+	this.post = function(user, message, topic) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
@@ -53,8 +62,13 @@ var Bot = (new function() {
 			user.sendPostMessage(topic, message);
 		}
 	};
-	
+
 	this.privateMessage = function(user, message) {
+		Logger.info("This shit is _DEPERECATED_!");
+		this.private(user, message);
+	}
+	
+	this.private = function(user, message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
