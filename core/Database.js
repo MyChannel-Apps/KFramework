@@ -1,11 +1,11 @@
 var DB	= (new function() {
 	this.getUser = function(user) {
-		Logger.info("This shit is _DEPERECATED_!");		
+		Logger.info("DB.getUser(user) is DEPRECATED");
 		return user.getPersistence();
 	};
 	
 	this.getChannel = function() {
-		Logger.info("This shit is _DEPERECATED_!");		
+		Logger.info("DB.getChannel() is DEPRECATED");	
 		return KnuddelsServer.getPersistence();
 	};
 	

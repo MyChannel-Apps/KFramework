@@ -36,7 +36,7 @@ function Cronjob(name, cycle, callback) {
 		var minute	= _cycle_data[1] || '*';
 		var hour	= _cycle_data[2] || '*';
 		
-		if(time.getSeconds() == 0) {
+		if(time.getTime() - _last_run.getTime() > 60000) {
 			if(minute == '*' || parseInt(minute) == time.getMinutes()) {
 				if(hour == '*' || parseInt(hour) == time.getHours()) {
 					if(day == '*' || parseInt(day) == time.getDate()) {

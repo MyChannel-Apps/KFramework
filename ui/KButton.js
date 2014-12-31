@@ -36,8 +36,9 @@ function KButton(text, command) {
 	/* ICON */
 	this.setIcon = function(icon) {
 		if(icon.indexOf('https://') == 0 || icon.indexOf('http://') == 0) {
-			//Logger.warn('Can\t use http:// or https:// URL\'s on Buttons because the Path is implemented on the Client side!');
+			Logger.warn("Can\t use http:// or https:// URL\'s on Buttons because the Path is implemented on the Client side!");
 		}
+		
 		_properties.icon = icon;
 	};
 	

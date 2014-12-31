@@ -30,17 +30,17 @@ var Bot = (new function() {
 	};
 	
 	this.publicMessage = function(message) {
-		Logger.info("This shit is _DEPERECATED_!");		
+		Logger.info("Bot.publicMessage(message) is DEPRECATED");
 		this.public(message);
 	}
 	
 	this.postMessage = function(user, message, topic) {
-		Logger.info("This shit is _DEPERECATED_!");
+		Logger.info("Bot.postMessage(user, message, topic) is DEPRECATED");
 		this.post(user, message, topic);
 	}
 	
 	this.privateMessage = function(user, message) {
-		Logger.info("This shit is _DEPERECATED_!");
+		Logger.info("Bot.privateMessage(user, message) is DEPRECATED");
 		this.private(user, message);
 	}
 	
