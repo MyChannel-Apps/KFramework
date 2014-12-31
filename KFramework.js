@@ -6,3 +6,4 @@ require('framework/core/User.js');
 require('framework/core/Bot.js');
 require('framework/core/Database.js');
 require('framework/core/KCode.js');
+require('framework/core/KBank.js');

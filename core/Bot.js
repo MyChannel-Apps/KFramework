@@ -14,7 +14,11 @@ var Bot = (new function() {
 	};
 	
 	this.knuddel = function(user, amount, message) {
-		_user.transferKnuddel(user, amount, message);
+		if(message === undefined) {
+			_user.transferKnuddel(user, amount);
+		} else {
+			_user.transferKnuddel(user, amount, message);
+		}
 	};
 	
 	this.getKnuddels = function() {
