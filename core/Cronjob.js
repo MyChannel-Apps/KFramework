@@ -20,7 +20,7 @@ function Cronjob(name, cycle, callback) {
 			
 			while(true) {
 				time = new Date(_last_check.getTime()+500);
-				if(this.check(time)) {
+				if(check(time)) {
 					_last_run = time
 					_callback(_last_run);
 					break;
@@ -33,7 +33,7 @@ function Cronjob(name, cycle, callback) {
 	
 	this.start = function() {
 		this.stop();
-		_watcher	= setInterval(this.run, 500);	
+		_watcher	= setInterval(run, 500);	
 	};
 	
 	this.stop = function() {
@@ -42,7 +42,7 @@ function Cronjob(name, cycle, callback) {
 		}
 	};
 	
-	this.check = function(time) {
+	function check(time) {
 		var day		= _cycle_data[5] || '*';
 		var month	= _cycle_data[4] || '*';
 		var year	= _cycle_data[3] || '*';
@@ -67,10 +67,10 @@ function Cronjob(name, cycle, callback) {
 		return false;		
 	};
 	
-	this.run = function() {
+	function run() {
 		var time	= new Date();
 		
-		if(this.check(time)) {
+		if(check(time)) {
 			_last_run = time;
 			_callback(time);
 		}
