@@ -78,6 +78,7 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	this.onShutdown = function() {
+		this.stop();
 		DB.save('_cronrun_' + _name, _last_run.getTime());
 		DB.save('_croncheck_' + _name, _last_check.getTime());
 	};
