@@ -7,12 +7,16 @@ function Cronjob(name, cycle, callback) {
 	var _watcher;
 	
 	function Cronjob(instance, name, cycle, callback) {
-		var db		= DB.getChannel();
 		_name		= name;
 		_cycle		= cycle;
 		_callback	= callback;
 		_cycle_data = _cycle.match(/^([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]*$/);
-		_last_run	= new Date(db.getString('_cronjob_' + _name, undefined));
+		_last_run	= new Date(DB.load('_cronjob_' + _name, undefined));
+		
+		if(new Time().getTime() > _last_run.getTime()) {
+			_last_run = new Date();
+			_callback(_last_run);
+		}
 		
 		instance.start();
 	}
@@ -53,10 +57,8 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	this.onShutdown = function() {
-		var db		= DB.getChannel();
-		
-		db.deleteString('_cronjob_' + _name);
-		db.setString('_cronjob_' + _name, _last_run.toGMTString());
+		//DB.deleteString('_cronjob_' + _name);
+		DB.save('_cronjob_' + _name, _last_run.toGMTString());
 	};
 	
 	Cronjob(this, name, cycle, callback);
