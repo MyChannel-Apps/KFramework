@@ -25,6 +25,10 @@ function Cronjob(name, cycle, callback) {
 					_callback(_last_run);
 					break;
 				}
+
+				if(new Date().getTime() >= _last_check.getTime()) {
+					break;
+				}
 			}
 		}
 		
