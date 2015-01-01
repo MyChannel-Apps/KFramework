@@ -26,9 +26,6 @@ function Cronjob(name, cycle, callback) {
 					break;
 				}
 			}
-			
-			_last_run = new Date();
-			_callback(_last_run);
 		}
 		
 		instance.start();
