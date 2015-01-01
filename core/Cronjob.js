@@ -4,20 +4,18 @@ function Cronjob(name, cycle, callback) {
 	var _cycle_data	= [];
 	var _callback	= function(time) { /* Override Me */ };
 	var _last_run	= undefined;
+	var _last_check = undefined;
 	var _watcher;
-	
+		
 	function Cronjob(instance, name, cycle, callback) {
 		_name		= name;
 		_cycle		= cycle;
 		_callback	= callback;
 		_cycle_data = _cycle.match(/^([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]*$/);
-		db = DB.load('_cronjob_' + _name, {run:undefined, check:undefined});
-		_last_run	= new Date(db.run);
-		_last_check	= new Date(db.check);		
+		_last_run	= new Date(DB.load('_cronrun_' + _name, 0));
+		_last_check	= new Date(DB.load('_croncheck_' + _name, 0));
 		
-		
-		if(new Date().getTime() < _last_check.getTime()) {
-			
+		if(new Date().getTime() > _last_check.getTime() && _last_check.getTime() != 0) {
 			while(true) {
 				time = new Date(_last_check.getTime()+500);
 				if(check(time)) {
@@ -26,12 +24,12 @@ function Cronjob(name, cycle, callback) {
 					break;
 				}
 
-				if(new Date().getTime() >= _last_check.getTime()) {
+				if(new Date().getTime() <= _last_check.getTime()) {
 					break;
 				}
 			}
 		}
-		
+
 		instance.start();
 	}
 	
@@ -52,7 +50,6 @@ function Cronjob(name, cycle, callback) {
 		var year	= _cycle_data[3] || '*';
 		var minute	= _cycle_data[1] || '*';
 		var hour	= _cycle_data[2] || '*';
-
 		_last_check = time;
 		
 		if(time.getTime() - _last_run.getTime() > 60000) {
@@ -67,24 +64,25 @@ function Cronjob(name, cycle, callback) {
 					}
 				}
 			}
-		}
+		}		
 		return false;		
 	};
 	
 	function run() {
 		var time	= new Date();
-		
+
 		if(check(time)) {
 			_last_run = time;
 			_callback(time);
 		}
-		
-		_last_check = time;
 	};
 	
 	this.onShutdown = function() {
-		DB.save('_cronjob_' + _name, {run:_last_run.toGMTString(), check:_last_check.toGMTString()});
+		DB.save('_cronrun_' + _name, _last_run.getTime());
+		DB.save('_croncheck_' + _name, _last_check.getTime());
 	};
 	
 	Cronjob(this, name, cycle, callback);
+	//ohne komm ich nicht an .shutdown ran, kp wie du das machst :D
+	return this;
 }
