@@ -13,7 +13,7 @@ function Cronjob(name, cycle, callback) {
 		_cycle_data = _cycle.match(/^([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]*$/);
 		_last_run	= new Date(DB.load('_cronjob_' + _name, undefined));
 		
-		if(new Time().getTime() > _last_run.getTime()) {
+		if(new Date().getTime() > _last_run.getTime()) {
 			_last_run = new Date();
 			_callback(_last_run);
 		}
