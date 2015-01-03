@@ -93,7 +93,7 @@ var DB	= (new function() {
 			break;
 			
 			case 'object':
-				selectedDB.getObject(key, data);
+				selectedDB.setObject(key, data);
 			break;
 		}
 		return true;
