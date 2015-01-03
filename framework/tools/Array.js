@@ -21,7 +21,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Christoph Kühl <djchrisnet>
+	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
 */
 
 if(!Array.prototype.each) {
@@ -35,6 +35,17 @@ if(!Array.prototype.each) {
 					break;
 				}
 			}
+		}
+	});
+}
+
+if(!Array.prototype.random) {
+	Object.defineProperty(Array.prototype, 'random', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function() {
+			return this[Math.floor((Math.random() * this.length))];
 		}
 	});
 }
