@@ -1,9 +1,9 @@
-°>{mdist}<°, °>{mdist!}<°, °>{mdistend}<°
-
 Table:
 w1,middle,lnorth
 bgimg;
+min3, min264
 
+Unknown:
 °>{textfield}0||width|83|height|20|onEnter|/color input<°
 °>{slider}<°
 °>{checkbox}<°
@@ -14,20 +14,28 @@ bgimg;
 °>{sprite}<°
 °>{colorboxstart}<°, °>{colorboxend}<°
 °>{imageboxstart}<°, °>{imageboxend}<°, °>{bgimagebox}<°, °>{bgimageboxoff}<°
+°>{imageBoxStart}.noImages.hover.push.bgColorH_255,0,0.bgColorP_0,0,255<°
 °>{switchtab}<°, °>{showtab}<°
 °>{noxrep}<°
 °>{drag}<°, °>{dragging}<°
 °>{scroll}<°, °>{scrolling}<°
 °>{textbordersize}<°
 °>{linkhovercolor}<°, °>{linkhovercolorreset}<°
-°>{wordbreak}<°, °>{autolinecut}<°
-°>{definetext}<°
-
-Positions:
-middle, lnorth
+°>{wordbreak}<°, °>{autolinecut|1}<°
+°>{definetext|928346}<°
+°>{+superscript}<°, °>{-superscript}<°
+°>{padding}8<°, °>{paddingLeft}8<°, °>{paddingRight}8<°
+°>{alignTop}62<°
+°>{mdist}<°, °>{mdist!}<°, °>{mdistend}<°
+°>{pp:}<°, °>{pp}<°, °>{pponly}<°, °>{noppcount}<°
+°>{snap}<°
+°>{signaturestart}<°, °>{signatureend}<°
+°>{displayGroup}<°, °>{displayGroupEnd}<°
 
 Button / Image?
 tx, ty
+snapx, snapy
+shuffled
 mousex, mousey
 delay
 xrepeat
@@ -41,3 +49,8 @@ opacity
 bordercol, hbordercol
 minw
 alwayscopy
+clippath_circle
+click
+recolor_255,0,0
+loadingImage
+errorImage

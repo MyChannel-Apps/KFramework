@@ -128,4 +128,18 @@ function KImage(image) {
 	};
 	
 	KImage(image);
+	
+	/*
+		grayDone
+		mousew
+		mouseh
+		colorize
+		colorizationcolor
+		path
+		ending
+		cursor
+		velocity
+		imgfly
+		bottomfade
+	*/
 }
