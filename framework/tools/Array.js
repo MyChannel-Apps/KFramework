@@ -45,7 +45,7 @@ if(!Array.prototype.random) {
 		configurable:	false,
 		writable:		false,
 		value:			function() {
-			return this[Math.floor((Math.random() * this.length))];
+			return this[RandomOperations.nextInt(this.length)];
 		}
 	});
 }
