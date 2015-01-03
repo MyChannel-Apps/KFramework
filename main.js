@@ -30,7 +30,10 @@ var App = (new function() {
 	/* App Events */
 	this.onAppStart = function() {};
 	this.onPrepareShutdown = function(secondsTillShutdown) {};
-	this.onShutdown = function() {};
+	this.onShutdown = function() {
+		/* Required if you using Cronjobs! */
+		Cron.onShutdown();
+	};
 	
 	/* User Events */
 	this.onUserJoined = function(user) {};

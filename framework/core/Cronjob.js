@@ -24,92 +24,169 @@
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
 */
 
-function Cronjob(name, cycle, callback) {
-	var _name		= '';
-	var _cycle		= '* * * * *';
-	var _cycle_data	= [];
-	var _callback	= function(time) { /* Override Me */ };
-	var _last_run	= undefined;
-	var _last_check = undefined;
+var Cron = (new function() {
+	var _cronjobs	= [];
 	var _watcher;
+	
+	this.init = function() {
+		clearInterval(_watcher);
+		_watcher	= setInterval(this.run, 500);
+	};
+	
+	this.run = function() {
+		var time = new Date();
 		
-	function Cronjob(instance, name, cycle, callback) {
-		_name		= name;
-		_cycle		= cycle;
-		_callback	= callback;
-		_cycle_data = _cycle.match(/^([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]+([0-9]+|\*{1})[ \n\t\b]*$/);
-		_last_run	= new Date(DB.load('_cronrun_' + _name, 0));
-		_last_check	= new Date(DB.load('_croncheck_' + _name, 0));
-		
-		if(new Date().getTime() > _last_check.getTime() && _last_check.getTime() != 0) {
-			while(true) {
-				time = new Date(_last_check.getTime()+500);
-				if(check(time)) {
-					_last_run = time
-					_callback(_last_run);
-					break;
-				}
-
-				if(new Date().getTime() <= _last_check.getTime()) {
-					break;
-				}
+		for(var index in _cronjobs) {
+			var job = _cronjobs[index];
+			
+			if(!job.isRunning()) {
+				continue;
 			}
-		}
-
-		instance.start();
-	}
-	
-	this.start = function() {
-		this.stop();
-		_watcher	= setInterval(run, 500);	
-	};
-	
-	this.stop = function() {
-		if(_watcher != undefined) {
-			clearInterval(_watcher);
-		}
-	};
-	
-	function check(time) {
-		var day		= _cycle_data[5] || '*';
-		var month	= _cycle_data[4] || '*';
-		var year	= _cycle_data[3] || '*';
-		var minute	= _cycle_data[1] || '*';
-		var hour	= _cycle_data[2] || '*';
-		_last_check = time;
-		
-		if(time.getTime() - _last_run.getTime() > 60000) {
-			if(minute == '*' || parseInt(minute) == time.getMinutes()) {
-				if(hour == '*' || parseInt(hour) == time.getHours()) {
-					if(day == '*' || parseInt(day) == time.getDate()) {
-						if(month == '*' || (parseInt(month) - 1) == time.getMonth()) {
-							if(day == '*' || parseInt(day) == time.getDay()) {
-								return true;
+			
+			if(Cron.match(job.getMinutes(), time.getMinutes())) {
+				if(Cron.match(job.getHours(), time.getHours())) {
+					if(Cron.match(job.getYear(), time.getDate())) {
+						if(Cron.match(job.getMonth(), time.getMonth())) {
+							if(Cron.match(job.getDay(), time.getDay())) {
+								job.run(time);
 							}
 						}
 					}
 				}
 			}
-		}		
-		return false;		
+		}
 	};
 	
-	function run() {
-		var time	= new Date();
-
-		if(check(time)) {
-			_last_run = time;
-			_callback(time);
+	this.add = function(cronjob) {
+		_cronjobs.push(cronjob);
+	};
+	
+	this.match = function(a, b) {
+		for(var index = 0; index < a.length; index++) {
+			var c = a[index];
+			
+			if(c[0] === -1 || (b >= c[0] && b <= c[1])) {
+				var b0 = b - c[0]; // make the modulo start from 1st miniture of from matched time, not first minute of from 0 minutes
+				
+				if(c[2] === -1 || b0 === 0 || b0 % c[2] === 0) {
+					return true;
+				}
+			}
 		}
+		
+		return  false;
+	};
+	
+	this.parse = function(entry) {
+		return entry.split(',').map(function(index) {
+			var z = index.split('/');
+			var x = z[0].split('-');
+
+			if(x[0] == '*') {
+				x[0] = -1;
+			}
+			
+			if(x.length == 1) {
+				x.push(x[0]);
+			}
+
+			x[2] = z.length === 1 ? -1 : z[1];
+			x[0] = parseInt(x[0]); // 0 - from
+			x[1] = parseInt(x[1]); // 1 - to
+			x[2] = parseInt(x[2]); // 2 modulus 
+
+			return x;
+		});
+	};
+	
+	this.onShutdown = function() {
+		for(var index in _cronjobs) {
+			_cronjobs[index].onShutdown();
+		}
+		
+		clearInterval(_watcher);
+	};
+	
+	this.init();
+}());
+
+function Cronjob(name, cycle, callback) {
+	var _name		= '';
+	var _cycle		= '* * * * *';
+	var _cycle_data	= [];
+	var _is_running	= false;
+	var _callback	= function(time) { /* Override Me */ };
+	var _last_run	= undefined;
+	var _last_check = undefined;
+	var _time_data	= {
+		day:	'*',
+		month:	'*',
+		year:	'*',
+		minute:	'*',
+		hour:	'*'
+	};
+		
+	function Cronjob(instance, name, cycle, callback) {
+		_name			= name;
+		_cycle			= cycle;
+		_callback		= callback;
+		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
+		_last_run		= new Date(DB.load('_cronrun_' + _name, 0));
+		_last_check		= new Date(DB.load('_croncheck_' + _name, 0));
+		_time_data		= {
+			day:	Cron.parse(_cycle_data[5]),
+			month:	Cron.parse(_cycle_data[4]),
+			year:	Cron.parse(_cycle_data[3]),
+			minute:	Cron.parse(_cycle_data[1]),
+			hour:	Cron.parse(_cycle_data[2])
+		};
+		instance.start();
+		Cron.add(instance);
+	}
+	
+	this.isRunning = function() {
+		return _is_running;
+	};
+	
+	this.start = function() {
+		_is_running	= true;
+	};
+	
+	this.stop = function() {
+		_is_running	= false;
+	};
+	
+	function run(time) {
+		_last_run = time;
+		_callback(time);
+	};
+	
+	this.getMinutes = function() {
+		return _time_data.minute;
+	};
+
+	this.getHours = function() {
+		return _time_data.hour;
+	};
+
+	this.getYear = function() {
+		return _time_data.year;
+	};
+	
+	this.getMonth = function() {
+		return _time_data.month;
+	};
+	
+	this.getDay = function() {
+		return _time_data.day;
 	};
 	
 	this.onShutdown = function() {
 		this.stop();
+		
 		DB.save('_cronrun_' + _name, _last_run.getTime());
 		DB.save('_croncheck_' + _name, _last_check.getTime());
 	};
 	
 	Cronjob(this, name, cycle, callback);
-	//ohne komm ich nicht an .shutdown ran, kp wie du das machst :D
-	return this;
 }
