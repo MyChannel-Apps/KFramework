@@ -45,7 +45,7 @@ var Cron = (new function() {
 			if(!job.isRunning()) {
 				continue;
 			}
-			
+
 			if(time.getTime() - job.getLastRun().getTime() > 60000) {
 				if(Cron.match(job.getMinutes(), time.getMinutes())) {
 					if(Cron.match(job.getHours(), time.getHours())) {
@@ -138,7 +138,7 @@ function Cronjob(name, cycle, callback) {
 		_cycle			= cycle;
 		_callback		= callback;
 		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
-		_crondb			= DB.load('_cron_' + _name, {});
+		_crondb			= DB.load('_cron_' + _name, {run:0, check:0});
 		_last_run		= new Date(parseInt(_crondb.run));
 		_last_check		= new Date(parseInt(_crondb.check));
 		_time_data		= {
