@@ -25,15 +25,13 @@
 */
 
 var Users = (new function() {
-	this.online = function(type) {
-		return KnuddelsServer.getChannel().getOnlineUsers(type);
-	};
-	
-	this.moderators = function() {
-		return KnuddelsServer.getChannel().getChannelConfiguration().getChannelRights().getChannelModerators();
-	};
-	
-	this.get = function(nickname) {		
+	this.get = function(nickname) {
+		if(typeof(nickname) == 'number') {
+			if(KnuddelsServer.canAccessUser(nickname)) {
+				nickname	= KnuddelsServer.getUser(nickname).getNick();
+			}
+		}
+		
 		if(KnuddelsServer.userExists(nickname)) {
 			var userId	= KnuddelsServer.getUserId(nickname);
 			
