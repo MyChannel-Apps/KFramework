@@ -50,11 +50,18 @@ function KLink(text) {
 	this.toString = function() {
 		var string = '°>';
 		
-		if(_hover == false) {
-			string += '_h';
+		if(_text instanceof KImage) {
+			string += _text.toString(true);
+			
+			// @ToDo The Hover
+			string += '|' + _text.toString(true) '<>--<>';
+		} else {
+			if(_hover == false) {
+				string += '_h';
+			}
+			
+			string += prepareLink(_text);
 		}
-		
-		string += prepareLink(_text);
 		
 		if(_command_left != undefined) {
 			string += '|' + _command_left;
