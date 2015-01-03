@@ -28,7 +28,7 @@ var Users = (new function() {
 	this.get = function(nickname) {
 		if(typeof(nickname) == 'number') {
 			if(KnuddelsServer.canAccessUser(nickname)) {
-				nickname	= KnuddelsServer.getUser(nickname).getNick();
+				nickname	= KnuddelsServer.getUser(nickname);
 			}
 		}
 		
@@ -36,7 +36,7 @@ var Users = (new function() {
 			var userId	= KnuddelsServer.getUserId(nickname);
 			
 			if(KnuddelsServer.canAccessUser(userId)) {
-				nickname	= KnuddelsServer.getUser(userId);
+				return KnuddelsServer.getUser(userId);
 			}
 		} else {
 			return undefined;
