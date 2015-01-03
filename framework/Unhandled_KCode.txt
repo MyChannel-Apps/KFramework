@@ -1,0 +1,43 @@
+°>{mdist}<°, °>{mdist!}<°, °>{mdistend}<°
+
+Table:
+w1,middle,lnorth
+bgimg;
+
+°>{textfield}0||width|83|height|20|onEnter|/color input<°
+°>{slider}<°
+°>{checkbox}<°
+°>{choice|}<°
+°>{globalopacity}<°
+°>{overlaypositioning}<°
+°>{imageboxbackground}<°
+°>{sprite}<°
+°>{colorboxstart}<°, °>{colorboxend}<°
+°>{imageboxstart}<°, °>{imageboxend}<°, °>{bgimagebox}<°, °>{bgimageboxoff}<°
+°>{switchtab}<°, °>{showtab}<°
+°>{noxrep}<°
+°>{drag}<°, °>{dragging}<°
+°>{scroll}<°, °>{scrolling}<°
+°>{textbordersize}<°
+°>{linkhovercolor}<°, °>{linkhovercolorreset}<°
+°>{wordbreak}<°, °>{autolinecut}<°
+°>{definetext}<°
+
+Positions:
+middle, lnorth
+
+Button / Image?
+tx, ty
+mousex, mousey
+delay
+xrepeat
+nopush
+vtop
+hoveralign
+clipx, clipy, clipw, cliph
+albborder
+shadow
+opacity
+bordercol, hbordercol
+minw
+alwayscopy

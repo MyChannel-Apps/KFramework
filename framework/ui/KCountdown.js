@@ -24,6 +24,10 @@
 	@author		Adrian Preuß <Bizarrus>
 */
 
+/*
+	format=DE
+*/
+
 function KCountdown() {
 	var _properties	= {};
 	
