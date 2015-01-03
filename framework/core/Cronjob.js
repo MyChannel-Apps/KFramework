@@ -49,7 +49,7 @@ var Cron = (new function() {
 			if(time.getTime() - job.getLastRun().getTime() > 60000) {
 				if(Cron.match(job.getMinutes(), time.getMinutes())) {
 					if(Cron.match(job.getHours(), time.getHours())) {
-						if(Cron.match(job.getYear(), time.getDate())) {
+						if(Cron.match(job.getDate(), time.getDate())) {
 							if(Cron.match(job.getMonth(), time.getMonth())) {
 								if(Cron.match(job.getDay(), time.getDay())) {
 									job.run(time);
@@ -126,11 +126,11 @@ function Cronjob(name, cycle, callback) {
 	var _last_run	= undefined;
 	var _last_check = undefined;
 	var _time_data	= {
-		day:	'*',
-		month:	'*',
-		year:	'*',
 		minute:	'*',
-		hour:	'*'
+		hour:	'*',
+		date:	'*',
+		month:	'*',
+		day:	'*'
 	};
 		
 	function Cronjob(instance, name, cycle, callback) {
@@ -138,14 +138,15 @@ function Cronjob(name, cycle, callback) {
 		_cycle			= cycle;
 		_callback		= callback;
 		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
-		_last_run		= new Date(DB.load('_cronrun_' + _name, 0));
-		_last_check		= new Date(DB.load('_croncheck_' + _name, 0));
+		_crondb			= DB.load('_cron_' + _name, {});
+		_last_run		= new Date(parseInt(_crondb.run));
+		_last_check		= new Date(parseInt(_crondb.check));
 		_time_data		= {
-			day:	Cron.parse(_cycle_data[5]),
-			month:	Cron.parse(_cycle_data[4]),
-			year:	Cron.parse(_cycle_data[3]),
 			minute:	Cron.parse(_cycle_data[1]),
-			hour:	Cron.parse(_cycle_data[2])
+			hour:	Cron.parse(_cycle_data[2]),
+			date:	Cron.parse(_cycle_data[3]),
+			month:	Cron.parse(_cycle_data[4]),
+			day:	Cron.parse(_cycle_data[5])			
 		};
 		instance.start();
 		Cron.add(instance);
@@ -180,8 +181,8 @@ function Cronjob(name, cycle, callback) {
 		return _time_data.hour;
 	};
 
-	this.getYear = function() {
-		return _time_data.year;
+	this.getDate = function() {
+		return _time_data.date;
 	};
 	
 	this.getMonth = function() {
@@ -195,8 +196,7 @@ function Cronjob(name, cycle, callback) {
 	this.onShutdown = function() {
 		this.stop();
 		
-		DB.save('_cronrun_' + _name, _last_run.getTime());
-		DB.save('_croncheck_' + _name, _last_check.getTime());
+		DB.save('_cron_' + _name, {run: _last_run.getTime(), check: _last_check.getTime()});
 	};
 	
 	Cronjob(this, name, cycle, callback);
