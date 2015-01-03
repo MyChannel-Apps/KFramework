@@ -90,6 +90,22 @@ function KImage(image) {
 		_properties.border = size;
 	};
 	
+	this.setQuadcut = function(size) {
+		_properties.quadcut = size;
+	};
+	
+	this.setShadow = function(position) {
+		_properties.shadow = position;
+	};
+	
+	this.setMirror = function(state) {
+		_properties.mirror = (state == true ? 0x01 : 0x00);
+	};
+	
+	this.setGreyscale = function(state) {
+		_properties.gray = (state == true ? 0x01 : 0x00);
+	};
+	
 	this.toString = function(only_path) {
 		only_path	= only_path || false;
 		var output	= (only_path == true ? '' : '°>') + _path + _name;
@@ -98,7 +114,13 @@ function KImage(image) {
 			output += '..';
 			
 			for(var name in _properties) {
-				output += '.' + name + '_' + _properties[name];
+				var value = _properties[name];
+				
+				if(value == 0x00) {
+					continue;
+				}
+				
+				output += '.' + name + (value == 0x01 ? '' : '_' + value);
 			}
 		}
 				
