@@ -27,6 +27,9 @@
 require('framework/ui/KButton.js');
 require('framework/ui/KLink.js');
 require('framework/ui/KCountdown.js');
+require('framework/ui/KFont.js');
+require('framework/ui/KImage.js');
+require('framework/ui/KTable.js');
 
 var Alignment = {
 	LEFT:		'°>LEFT<°',

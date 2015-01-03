@@ -54,7 +54,7 @@ function KLink(text) {
 			string += _text.toString(true);
 			
 			// @ToDo The Hover
-			string += '|' + _text.toString(true) '<>--<>';
+			string += '|' + _text.toString(true) + '<>--<>';
 		} else {
 			if(_hover == false) {
 				string += '_h';

@@ -29,7 +29,10 @@ var Cron = (new function() {
 	var _watcher;
 	
 	this.init = function() {
-		clearInterval(_watcher);
+		if(_watcher != undefined) {
+			clearInterval(_watcher);
+		}
+		
 		_watcher	= setInterval(this.run, 500);
 	};
 	
@@ -43,12 +46,14 @@ var Cron = (new function() {
 				continue;
 			}
 			
-			if(Cron.match(job.getMinutes(), time.getMinutes())) {
-				if(Cron.match(job.getHours(), time.getHours())) {
-					if(Cron.match(job.getYear(), time.getDate())) {
-						if(Cron.match(job.getMonth(), time.getMonth())) {
-							if(Cron.match(job.getDay(), time.getDay())) {
-								job.run(time);
+			if(time.getTime() - job.getLastRun().getTime() > 60000) {
+				if(Cron.match(job.getMinutes(), time.getMinutes())) {
+					if(Cron.match(job.getHours(), time.getHours())) {
+						if(Cron.match(job.getYear(), time.getDate())) {
+							if(Cron.match(job.getMonth(), time.getMonth())) {
+								if(Cron.match(job.getDay(), time.getDay())) {
+									job.run(time);
+								}
 							}
 						}
 					}
@@ -104,7 +109,9 @@ var Cron = (new function() {
 			_cronjobs[index].onShutdown();
 		}
 		
-		clearInterval(_watcher);
+		if(_watcher != undefined) {
+			clearInterval(_watcher);
+		}
 	};
 	
 	this.init();
@@ -144,6 +151,10 @@ function Cronjob(name, cycle, callback) {
 		Cron.add(instance);
 	}
 	
+	this.getLastRun = function() {
+		return _last_run;
+	};
+	
 	this.isRunning = function() {
 		return _is_running;
 	};
@@ -156,7 +167,7 @@ function Cronjob(name, cycle, callback) {
 		_is_running	= false;
 	};
 	
-	function run(time) {
+	this.run = function(time) {
 		_last_run = time;
 		_callback(time);
 	};
