@@ -72,8 +72,9 @@ var Cron = (new function() {
 			
 			if(c[0] === -1 || (b >= c[0] && b <= c[1])) {
 				var b0 = b - c[0]; // make the modulo start from 1st miniture of from matched time, not first minute of from 0 minutes
+				//WHAT THE FUCK IS b0 ?!?!?!?!?! BULLSHIT ..|..
 				
-				if(c[2] === -1 || b0 === 0 || b0 % c[2] === 0) {
+				if(c[2] === -1 || b === 0 || b % c[2] === 0) {
 					return true;
 				}
 			}
