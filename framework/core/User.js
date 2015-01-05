@@ -48,7 +48,7 @@ var Users = (new function() {
 				var _uid 				= userId;
 				this.virtual			= true;
 				this.getPersistence		= function(_uid) {
-					return (new function Persistence(uid) {
+					return (new function VirtualPersistence(uid) {
 						_uid = uid;
 						
 						this.getString = function(key, defaults) { return DB.load('_userdb')[_uid][key] || defaults; };
@@ -60,26 +60,31 @@ var Users = (new function() {
 							delete userdb[_uid][key];
 							DB.save('_userdb', userdb);
 						};
+						
 						this.deleteObject = function(key) {
 							userdb = DB.load('_userdb');
 							delete userdb[_uid][key];
 							DB.save('_userdb', userdb);
 						};
+						
 						this.deleteString = function(key) {
 							userdb = DB.load('_userdb');
 							delete userdb[_uid][key];
 							DB.save('_userdb', userdb);
 						};
+						
 						this.setString = function(key, data) { 
 							userdb = DB.load('_userdb');
 							userdb[_uid][key] = data;
 							DB.save('_userdb', userdb);
 						};
+						
 						this.setNumber = function(key, data) { 
 							userdb = DB.load('_userdb');
 							userdb[_uid][key] = data;
 							DB.save('_userdb', userdb);
 						};
+						
 						this.setObject = function(key, data) {
 							userdb = DB.load('_userdb');
 							userdb[_uid][key] = data;
@@ -87,13 +92,18 @@ var Users = (new function() {
 						};
 					}());
 				};
-				this.equals				= function(user) {/* TODO */};
+				
+				this.equals				= function(user) {
+					Logger.warn('using User.equals() on virtual User-Object');
+					/* TODO */
+				};
+				
 				this.getAge				= function() { return -1; };
 				this.getGender			= function() { return Gender.Unknown; };
 				this.getKnuddelAmount	= function() { return new KnuddelAmount(0); };
 				this.getNick			= function() { return _nickname; };
 				this.getOnlineMinutes	= function() { return -1; };
-				this.getProfileLink		= function() { return '°>_h'+_nickname.escapeKCode()+'|/w "|/serverpp "<°'; };
+				this.getProfileLink		= function() { return '°>_h' + _nickname.escapeKCode() + '|/w "|/serverpp "<°'; };
 				this.getReadme			= function() { return ''; };
 				this.getRegDate			= function() { return new Date(0); };
 				this.getUserId			= function() { return _uid; };
@@ -106,8 +116,13 @@ var Users = (new function() {
 				this.isEventModerator	= function() { return false; };
 				this.isOnline			= function() { return false; };
 				this.isOnlineInChannel	= function() { return false; };
-				this.sendPostMessage	= function(topic, message) {};
-				this.sendPrivateMessage	= function(message) {};
+				this.sendPostMessage	= function(topic, message) {
+					Logger.error('Can\t send message to a virtual User-Object!');
+				};
+				
+				this.sendPrivateMessage	= function(message) {
+					Logger.error('Can\t send message to a virtual User-Object!');
+				};
 			}());
 		}
 		
