@@ -89,8 +89,13 @@ var KBank = (new function() {
 		this.create(uid);
 		_data[uid].knuddel += kn;
 	};
-
+	
 	this.delKn = function(uid, kn) {
+		Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
+		return this.subKn(uid, kn);
+	};
+	
+	this.subKn = function(uid, kn) {
 		if(uid === undefined) {
 			return;
 		}
