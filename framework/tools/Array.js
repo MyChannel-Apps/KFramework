@@ -49,3 +49,14 @@ if(!Array.prototype.random) {
 		}
 	});
 }
+
+if(!Array.prototype.exists) {
+	Object.defineProperty(Array.prototype, 'exists', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function(value) {
+			return (this.indexOf(value) > -1);
+		}
+	});
+}

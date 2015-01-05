@@ -101,3 +101,14 @@ if(!Object.prototype.sort) {
 		}
 	});
 }
+
+if(!Object.prototype.exists) {
+	Object.defineProperty(Object.prototype, 'exists', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function(value) {
+			return (this[value] != undefined);
+		}
+	});
+}
