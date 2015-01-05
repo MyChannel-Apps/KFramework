@@ -27,6 +27,8 @@
 var KConfig = (new function() {
 	var _data = DB.load('_config');
 	var _defaults = {};
+	var _puffer = {};
+	var _useChangesPuffer = false;
 	
 	this.setDefaults = function(defaults) {
 		_defaults = defaults;
@@ -41,6 +43,15 @@ var KConfig = (new function() {
 	this.resetData = function() {
 		DB.save('_config', {});
 		_data = {};
+	};
+	
+	this.applyChanges = function() {
+		_useChangesPuffer = true;
+		
+		_puffer.each(function(newvalue, key) {
+			_data[key] = newvalue;
+		});
+		_puffer = {};
 	};
 	
 	this.get = function(key) {
@@ -76,7 +87,11 @@ var KConfig = (new function() {
 			return error;
 		}
 		
-		_data[key] = value;
+		if(_useChangesPuffer) {
+			_puffer[key] = value;
+		} else {
+			_data[key] = value;
+		}
 	};
 	
 	this.check = function() {
