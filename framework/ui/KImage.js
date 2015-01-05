@@ -69,6 +69,14 @@ function KImage(image) {
 		_properties.my = y;
 	};
 	
+	this.setX = function(x) {
+		_properties.mx = x;
+	};
+	
+	this.setY = function(y) {
+		_properties.my = y;
+	};
+	
 	this.setLabel = function(text) {
 		_properties.label = text;
 	};
