@@ -128,4 +128,32 @@ var Users = (new function() {
 		
 		return nickname;
 	};
+	
+	this.toString = function(value) {
+		switch(value) {
+			case UserStatus.Newbie:
+				return 'Newbie';
+			break;
+			case UserStatus.Family:
+				return 'Family';
+			break;
+			case UserStatus.Stammi:
+				return 'Stammi';
+			break;
+			case UserStatus.HonoryMember:
+				return 'Ehrenz';
+			break;
+			case UserStatus.Admin:
+				return 'Admin';
+			break;
+			case UserStatus.Sysadmin:
+				return 'Sysadmin';
+			break;
+			case UserStatus.SystemBot:
+				return 'Bot';
+			break;
+		}
+		
+		return value + '';
+	};
 }());
