@@ -26,18 +26,18 @@
 
 var DB	= (new function() {
 	this.getUser = function(user) {
-		Logger.info("DB.getUser(user) is DEPRECATED");
+		Logger.info('DB.getUser(user) is DEPRECATED');
 		return user.getPersistence();
 	};
 	
 	this.getChannel = function() {
-		Logger.info("DB.getChannel() is DEPRECATED");	
+		Logger.info('DB.getChannel() is DEPRECATED');	
 		return KnuddelsServer.getPersistence();
 	};
 	
 	this.load = function(key, defaultValue, user) {
 		if(key === undefined) {
-			Logger.error("No key submitted");
+			Logger.error('No key submitted');
 			return false;
 		}
 		
@@ -69,12 +69,12 @@ var DB	= (new function() {
 
 	this.save = function(key, data, user) {
 		if(key === undefined) {
-			Logger.error("No key submitted");
+			Logger.error('No key submitted');
 			return false;
 		}
 
 		if(data === undefined) {
-			Logger.error("No Data submitted");
+			Logger.error('No Data submitted');
 			return false;
 		}
 		
