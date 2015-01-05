@@ -112,3 +112,21 @@ if(!Object.prototype.exists) {
 		}
 	});
 }
+
+if (!Object.prototype.compare) {
+  Object.defineProperty(Object.prototype, 'compare', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function(defaultObj) {
+		for(var property in defaultObj) {
+			if(this[property] && (typeof(this[property]) == 'object') && (this[property].toString() == '[object Object]') && defaultObj[property]) {
+				this[property].compare(defaultObj[property]);
+			} else if(typeof this[property] == 'undefined') {
+				this[property] = defaultObj[property];
+			}
+		}
+		return this;
+    }
+  });
+}

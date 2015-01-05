@@ -41,5 +41,6 @@ require('framework/core/Cronjob.js');
 require('framework/core/Bot.js');
 require('framework/core/KCode.js');
 require('framework/core/KBank.js');
+require('framework/core/KConfig.js');
 require('framework/core/Channel.js');
 require('framework/core/User.js');

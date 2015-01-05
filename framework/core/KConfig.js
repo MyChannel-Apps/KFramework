@@ -21,5 +21,67 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Christoph Kühl <djchrisnet>
+	@author		Christoph KÃ¼hl <djchrisnet>
 */
+
+var KConfig = (new function() {
+	var _data = DB.load('_config');
+	var _defaults = {};
+	
+	this.setDefaults = function(defaults) {
+		_defaults = defaults;
+		_data.compare(_defaults);
+	};
+	
+	this.saveData = function() {
+		//this.cleanData();
+		DB.save('_config', _data);
+	};
+	
+	this.resetData = function() {
+		DB.save('_config', {});
+		_data = {};
+	};
+	
+	this.get = function(key) {
+		if(key === undefined) {
+			Logger.error("No key submitted");
+			return undefined;
+		}
+		
+		if(_data[key] === undefined) {
+			Logger.error("Key '"+key+"' not exists");			
+			return undefined;
+		}
+		
+		return _data[key];
+	};
+
+	this.set = function(key, value) {
+		if(key === undefined) {
+			Logger.error("No key submitted");
+			return false;
+		}
+		
+		if(_data[key] === undefined) {
+			Logger.error("Key '"+key+"' not exists");			
+			return false;
+		}
+		
+		if(value === undefined) {
+			value = _defaults[key];
+		}
+		
+		if(!(error = this.check(key, value))) {
+			return error;
+		}
+		
+		_data[key] = value;
+	};
+	
+	this.check = function() {
+		
+		return true;
+	};
+		
+}());

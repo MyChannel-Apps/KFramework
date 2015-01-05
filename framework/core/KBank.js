@@ -24,7 +24,7 @@
 	@author		Christoph Kühl <djchrisnet>
 */
 
-var KBank = (new function(data) {
+var KBank = (new function() {
 	var _data = DB.load('_bank');
 
 	this.create = function(uid) {
