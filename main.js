@@ -28,12 +28,7 @@ require('framework/KFramework.js');
 
 var App = (new function() {
 	/* App Events */
-	this.onAppStart = function() {
-		new Cronjob('example', '*/5 * * * *', function(time) {
-			Bot.public('Der _Cronjob_ wurde um ' +  time.toString() + ' ausgeführt.');
-		});
-	};
-	
+	this.onAppStart = function() {};
 	this.onPrepareShutdown = function(secondsTillShutdown) {};
 	this.onShutdown = function() {
 		/* Required if you using Cronjobs! */
