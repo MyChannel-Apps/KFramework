@@ -170,7 +170,7 @@ var Channel = (new function() {
 			if(filter.readme != undefined) {
 				// user.getReadme();
 			}
-		}
+		});
 		
 		return users;
 	};
