@@ -56,17 +56,17 @@ var Bot = (new function() {
 	};
 	
 	this.publicMessage = function(message) {
-		Logger.info("Bot.publicMessage(message) is DEPRECATED");
+		Logger.info('Bot.publicMessage(message) is DEPRECATED');
 		this.public(message);
 	}
 	
 	this.postMessage = function(user, message, topic) {
-		Logger.info("Bot.postMessage(user, message, topic) is DEPRECATED");
+		Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
 		this.post(user, message, topic);
 	}
 	
 	this.privateMessage = function(user, message) {
-		Logger.info("Bot.privateMessage(user, message) is DEPRECATED");
+		Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
 		this.private(user, message);
 	}
 	
@@ -74,6 +74,7 @@ var Bot = (new function() {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
+		
 		_user.sendPublicMessage(message);
 	};
 	
@@ -84,10 +85,10 @@ var Bot = (new function() {
 		
 		// send to online users
 		if(user == undefined) {
-			var users = KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
+			var users = Channel.getUsers();
+			
 			for(var index in users) {
-				var user = users[index];
-				user.sendPostMessage(topic, message);
+				users[index].sendPostMessage(topic, message);
 			}
 		} else {
 			user.sendPostMessage(topic, message);
@@ -101,21 +102,19 @@ var Bot = (new function() {
 		
 		// send to online users
 		if(user == undefined) {
-			var users = KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
+			var users = Channel.getUsers();
+			
 			for(var index in users) {
-				var user = users[index];
-				user.sendPrivateMessage(message);
-				//_user.sendPrivateMessage(message, user);
+				users[index].sendPrivateMessage(message);
 			}
 		} else {
-			var users = KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
+			var users = Channel.getUsers();
+			
 			for(var index in users) {
 				if(users[index].getNick() == user.toString()) {
 					users[index].sendPrivateMessage(message);
 				}
-				//_user.sendPrivateMessage(message, user);
 			}
-			//_user.sendPrivateMessage(message, user);
 		}
 	};
 	
