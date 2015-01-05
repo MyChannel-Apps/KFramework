@@ -56,5 +56,5 @@ loadingImage
 errorImage
 
 /*
-	Test commit
+	Test commit.
 */
