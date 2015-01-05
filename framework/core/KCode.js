@@ -34,6 +34,7 @@ require('framework/ui/KTable.js');
 function KCode() {
 	var _buffer = [];
 	var _debug	= false;
+	var _minify	= true;
 	
 	this.append = function(component) {
 		_buffer.push(component);
@@ -70,6 +71,10 @@ function KCode() {
 		
 		if(_debug) {
 			string = string.replace(/°/g, '\\°');
+		}
+		
+		if(_minify) {
+			string = string.replace(/°°/g, '');
 		}
 		
 		return string;
