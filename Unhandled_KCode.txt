@@ -54,3 +54,7 @@ click
 recolor_255,0,0
 loadingImage
 errorImage
+
+/*
+	Test commit
+*/
