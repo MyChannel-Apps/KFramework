@@ -45,13 +45,13 @@ var Logger = (new function() {
 		var lines	= stack.replace(/\t/g, '     ').replace(/\(anonymous\)/g, '').replace(/at (.*)@(.*): /g, 'at ').split('\n');
 		var output	= '';
 		
-		for(var index in lines) {
+		lines.each(function(line, index) {
 			if(index <= 1) {
-				continue;
+				return;
 			}
 			
-			output += '\n' + lines[index];
-		}
+			output += '\n' + line;
+		});
 		
 		return output;
 	}

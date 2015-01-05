@@ -78,43 +78,33 @@ var Bot = (new function() {
 		_user.sendPublicMessage(message);
 	};
 	
-	this.post = function(user, message, topic) {
+	this.post = function(nick, message, topic) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
 		
 		// send to online users
-		if(user == undefined) {
-			var users = Channel.getUsers();
-			
-			for(var index in users) {
-				users[index].sendPostMessage(topic, message);
-			}
+		if(nick == undefined) {
+			Channel.getUsers().each(function(user) {
+				user.sendPostMessage(topic, message);
+			});
 		} else {
-			user.sendPostMessage(topic, message);
+			nick.sendPostMessage(topic, message);
 		}
 	};
 	
-	this.private = function(user, message) {
+	this.private = function(nick, message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
 		
 		// send to online users
-		if(user == undefined) {
-			var users = Channel.getUsers();
-			
-			for(var index in users) {
-				users[index].sendPrivateMessage(message);
-			}
+		if(nick == undefined) {
+			Channel.getUsers().each(function(user) {
+				user.sendPrivateMessage(message);
+			});
 		} else {
-			var users = Channel.getUsers();
-			
-			for(var index in users) {
-				if(users[index].getNick() == user.toString()) {
-					users[index].sendPrivateMessage(message);
-				}
-			}
+			nick.sendPrivateMessage(message);
 		}
 	};
 	

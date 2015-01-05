@@ -167,20 +167,20 @@ var KBank = (new function() {
 	};
 	
 	this.fixData = function() {
-		for(uid in _data) {
+		_data.each(function(uid) {
 			_data[uid].knuddel = parseFloat(_data[uid].knuddel);
 			_data[uid].buyin = parseFloat(_data[uid].buyin);
 			_data[uid].payout = parseFloat(_data[uid].payout);
-		}
+		});
 	};
 	
 	this.cleanData = function() {
-		for(uid in _data) {
-			if(_data[uid].knuddel != 0.00) { continue; }
-			if(_data[uid].buyin != 0.00) { continue; }
-			if(_data[uid].payout != 0.00) { continue; }
+		_data.each(function(uid) {
+			if(_data[uid].knuddel != 0.00) { return; }
+			if(_data[uid].buyin != 0.00) { return; }
+			if(_data[uid].payout != 0.00) { return; }
 			delete _data[uid];
-		}
+		});
 	};
 	
 	this.getUsers = function() {
@@ -190,9 +190,9 @@ var KBank = (new function() {
 	this.getTransit = function() {
 		transit = 0.00;
 		
-		for(var uid in _data) {
-			transit += this.getKn(uid);
-		}
+		_data.each(function(uid) {
+			transit += KBank.getKn(uid);
+		});
 		return transit;
 	};
 	this.fixData();	
