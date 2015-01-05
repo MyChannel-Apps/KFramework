@@ -1,9 +1,13 @@
-Table:
+#####################################################
+## Table:
+#####################################################
 w1,middle,lnorth
 bgimg;
 min3, min264
 
-Unknown:
+#####################################################
+## Unknown:
+#####################################################
 °>{textfield}0||width|83|height|20|onEnter|/color input<°
 °>{slider}<°
 °>{checkbox}<°
@@ -32,7 +36,9 @@ Unknown:
 °>{signaturestart}<°, °>{signatureend}<°
 °>{displayGroup}<°, °>{displayGroupEnd}<°
 
-Button / Image?
+#####################################################
+## Button / Image?
+#####################################################
 tx, ty
 snapx, snapy
 shuffled
@@ -54,7 +60,3 @@ click
 recolor_255,0,0
 loadingImage
 errorImage
-
-/*
-	Test commit.
-*/
