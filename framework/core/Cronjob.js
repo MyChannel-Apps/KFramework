@@ -27,6 +27,7 @@
 var Cron = (new function() {
 	var _cronjobs	= [];
 	var _watcher;
+	var _offlineCheck = false;
 	
 	this.init = function() {
 		if(_watcher != undefined) {
@@ -34,6 +35,36 @@ var Cron = (new function() {
 		}
 		
 		_watcher	= setInterval(this.run, 500);
+	};
+	
+	this.enableOfflineRunCheck = function() {
+		_offlineCheck = true;
+	};
+	
+	this.checkOfflineRun = function(job) {
+		if(job.getLastCheck() == 0) {
+			return;
+		}
+		
+		while(new Date().getTime() >= job.getLastCheck()) {
+			var time = new Date(job.getLastCheck()+500);
+			job.setLastCheck(time);
+			
+			if(time.getTime() - job.getLastRun() > 60000) {
+				if(Cron.match(job.getMinutes(), time.getMinutes())) {
+					if(Cron.match(job.getHours(), time.getHours())) {
+						if(Cron.match(job.getDate(), time.getDate())) {
+							if(Cron.match(job.getMonth(), time.getMonth())) {
+								if(Cron.match(job.getDay(), time.getDay())) {
+									job.run(time);
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	};
 	
 	this.run = function() {
@@ -45,8 +76,8 @@ var Cron = (new function() {
 			if(!job.isRunning()) {
 				continue;
 			}
-
-			if(time.getTime() - job.getLastRun().getTime() > 60000) {
+			
+			if(time.getTime() - job.getLastRun() > 60000) {
 				if(Cron.match(job.getMinutes(), time.getMinutes())) {
 					if(Cron.match(job.getHours(), time.getHours())) {
 						if(Cron.match(job.getDate(), time.getDate())) {
@@ -64,6 +95,10 @@ var Cron = (new function() {
 	
 	this.add = function(cronjob) {
 		_cronjobs.push(cronjob);
+		
+		if(_offlineCheck) {
+			this.checkOfflineRun(cronjob);
+		}
 	};
 	
 	this.match = function(a, b) {
@@ -119,6 +154,7 @@ var Cron = (new function() {
 }());
 
 function Cronjob(name, cycle, callback) {
+
 	var _name		= '';
 	var _cycle		= '* * * * *';
 	var _cycle_data	= [];
@@ -149,12 +185,24 @@ function Cronjob(name, cycle, callback) {
 			month:	Cron.parse(_cycle_data[4]),
 			day:	Cron.parse(_cycle_data[5])			
 		};
-		instance.start();
 		Cron.add(instance);
+		instance.start();
 	}
 	
 	this.getLastRun = function() {
-		return _last_run;
+		return _last_run.getTime();
+	};
+	
+	this.getName = function() {
+		return _name;
+	};
+	
+	this.getLastCheck = function() {
+		return _last_check.getTime();
+	};
+	
+	this.setLastCheck = function(time) {
+		_last_check = time;
 	};
 	
 	this.isRunning = function() {
@@ -170,6 +218,7 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	this.run = function(time) {
+		_last_check = time;
 		_last_run = time;
 		_callback(time);
 	};
