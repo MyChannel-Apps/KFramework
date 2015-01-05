@@ -56,12 +56,12 @@ var KConfig = (new function() {
 	
 	this.get = function(key) {
 		if(key === undefined) {
-			Logger.error("No key submitted");
+			Logger.error('No key submitted');
 			return undefined;
 		}
 		
 		if(_data[key] === undefined) {
-			Logger.error("Key '"+key+"' not exists");			
+			Logger.error('Key "'+key+'" not exists');			
 			return undefined;
 		}
 		
@@ -70,12 +70,12 @@ var KConfig = (new function() {
 
 	this.set = function(key, value) {
 		if(key === undefined) {
-			Logger.error("No key submitted");
+			Logger.error('No key submitted');
 			return false;
 		}
 		
 		if(_data[key] === undefined) {
-			Logger.error("Key '"+key+"' not exists");			
+			Logger.error('Key "'+key+'" not exists');
 			return false;
 		}
 		
