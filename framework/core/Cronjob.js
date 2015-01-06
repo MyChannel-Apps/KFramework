@@ -140,6 +140,12 @@ var Cron = (new function() {
 		});
 	};
 	
+	this.saveData = function() {
+		for(var index in _cronjobs) {
+			_cronjobs[index].save();
+		}
+	};
+	
 	this.onShutdown = function() {
 		for(var index in _cronjobs) {
 			_cronjobs[index].onShutdown();
@@ -243,10 +249,13 @@ function Cronjob(name, cycle, callback) {
 		return _time_data.day;
 	};
 	
+	this.save = function() {
+		DB.save('_cron_' + _name, {run: this.getLastRun(), check: this.getLastCheck()});
+	};
+	
 	this.onShutdown = function() {
 		this.stop();
-		
-		DB.save('_cron_' + _name, {run: _last_run.getTime(), check: _last_check.getTime()});
+		this.save();
 	};
 	
 	Cronjob(this, name, cycle, callback);

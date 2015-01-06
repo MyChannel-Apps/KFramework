@@ -44,3 +44,19 @@ require('framework/core/KBank.js');
 require('framework/core/KConfig.js');
 require('framework/core/Channel.js');
 require('framework/core/User.js');
+
+var KFramework = (new function() {
+	this.startUp = function() {
+		KBank.loadData();
+	};
+	
+	this.store = function() {
+		KBank.saveData();
+		Cron.saveData();
+	};
+	
+	this.shutDown = function() {
+		KBank.saveData();
+		Cron.onShutdown();
+	};
+}());

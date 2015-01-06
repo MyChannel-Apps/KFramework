@@ -25,8 +25,8 @@
 */
 
 var KBank = (new function() {
-	var _data = DB.load('_bank');
-
+	var _data = {};
+	
 	this.create = function(uid) {
 		if(uid === undefined) {
 			return;
@@ -159,6 +159,11 @@ var KBank = (new function() {
 		this.create(uid);
 		_data[uid].knuddel += kn;
 		_data[uid].buyin += kn;
+	};
+	
+	this.loadData = function() {
+		_data = DB.load('_bank');
+		this.fixData();
 	};
 	
 	this.saveData = function() {
