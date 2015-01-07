@@ -47,6 +47,10 @@ function KCode() {
 		_buffer.push('#');
 	};
 	
+	this.newHr = function() {
+		_buffer.push('°-°');
+	};
+	
 	this.setAlignment = function(alignment) {
 		_buffer.push(alignment);
 	};	
