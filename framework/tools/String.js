@@ -47,7 +47,6 @@ if(!String.prototype.endsWith) {
 			
 			position -= searchString.length;
 			var lastIndex = subjectString.indexOf(searchString, position);
-			
 			return lastIndex !== -1 && lastIndex === position;
 		}
 	});
@@ -60,7 +59,6 @@ if(!String.prototype.format) {
 		writable:		false,
 		value:			function() {
 			var args = arguments;
-			
 			return this.replace(/{(\d+)}/g, function(match, number) {
 				return (typeof(args[number]) != 'undefined') ? args[number] : match;
 			});

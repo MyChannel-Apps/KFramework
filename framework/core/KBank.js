@@ -198,7 +198,7 @@ var KBank = (new function() {
 	};
 	
 	this.getTransit = function() {
-		transit = 0.00;
+		var transit = 0.00;
 		
 		_data.each(function(uid) {
 			transit += KBank.getKn(uid);

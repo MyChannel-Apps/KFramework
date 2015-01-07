@@ -83,6 +83,7 @@ var KConfig = (new function() {
 			value = _defaults[key];
 		}
 		
+		var error;
 		if(!(error = this.check(key, value))) {
 			return error;
 		}
@@ -95,7 +96,6 @@ var KConfig = (new function() {
 	};
 	
 	this.check = function() {
-		
 		return true;
 	};
 		

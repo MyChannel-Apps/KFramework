@@ -41,7 +41,7 @@ var DB	= (new function() {
 			return false;
 		}
 		
-		selectedDB = KnuddelsServer.getPersistence();
+		var selectedDB = KnuddelsServer.getPersistence();
 		if(user != undefined) { 
 			selectedDB = user.getPersistence();
 		}
@@ -78,7 +78,7 @@ var DB	= (new function() {
 			return false;
 		}
 		
-		selectedDB = KnuddelsServer.getPersistence();
+		var selectedDB = KnuddelsServer.getPersistence();
 		if(user != undefined) { 
 			selectedDB = user.getPersistence();
 		}

@@ -56,37 +56,37 @@ var Users = (new function() {
 						this.getObject = function(key, defaults) { return DB.load('_userdb')[_uid][key] || defaults; };
 
 						this.deleteNumber = function(key) { 
-							userdb = DB.load('_userdb');
+							var userdb = DB.load('_userdb');
 							delete userdb[_uid][key];
 							DB.save('_userdb', userdb);
 						};
 						
 						this.deleteObject = function(key) {
-							userdb = DB.load('_userdb');
+							var userdb = DB.load('_userdb');
 							delete userdb[_uid][key];
 							DB.save('_userdb', userdb);
 						};
 						
 						this.deleteString = function(key) {
-							userdb = DB.load('_userdb');
+							var userdb = DB.load('_userdb');
 							delete userdb[_uid][key];
 							DB.save('_userdb', userdb);
 						};
 						
 						this.setString = function(key, data) { 
-							userdb = DB.load('_userdb');
+							var userdb = DB.load('_userdb');
 							userdb[_uid][key] = data;
 							DB.save('_userdb', userdb);
 						};
 						
 						this.setNumber = function(key, data) { 
-							userdb = DB.load('_userdb');
+							var userdb = DB.load('_userdb');
 							userdb[_uid][key] = data;
 							DB.save('_userdb', userdb);
 						};
 						
 						this.setObject = function(key, data) {
-							userdb = DB.load('_userdb');
+							var userdb = DB.load('_userdb');
 							userdb[_uid][key] = data;
 							DB.save('_userdb', userdb);
 						};
