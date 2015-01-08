@@ -25,7 +25,7 @@
 */
 
 var KConfig = (new function() {
-	var _data = DB.load('_config');
+	var _data = DB.load('_config', {});
 	var _defaults = {};
 	var _puffer = {};
 	var _useChangesPuffer = false;

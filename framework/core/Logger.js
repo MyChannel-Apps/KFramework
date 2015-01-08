@@ -26,9 +26,21 @@
 
 var Logger = (new function() {
 	var _logger;
+	var _watcher;
 	
 	function Logger() {
 		_logger = KnuddelsServer.getDefaultLogger();
+		_watcher = {};
+	};
+	
+	this.addLogUser = function(uid, types) {
+		_watcher[uid] = types || 'E_ALL';
+	};
+
+	this.delLogUser = function(uid) {
+		if(_watcher[uid] != undefined) {
+			delete _watcher[uid];
+		}
 	};
 	
 	function getStrackTrace() {
@@ -37,9 +49,8 @@ var Logger = (new function() {
 		} catch(e) {
 			return prettyStackTrace(e.stack);
 		}
-		
 		return '';
-	}
+	};
 	
 	function prettyStackTrace(stack) {
 		var lines	= stack.replace(/\t/g, '     ').replace(/\(anonymous\)/g, '').replace(/at (.*)@(.*): /g, 'at ').split('\n');
@@ -52,28 +63,40 @@ var Logger = (new function() {
 			
 			output += '\n' + line;
 		});
-		
 		return output;
-	}
+	};
 	
+	sendLog = function(prefix, message) {
+		_watcher.each(function(value, uid) {
+			if(value.contains(prefix) || value == 'E_ALL') {
+				Users.get(uid).sendPrivateMessage(prefix+': '+message);
+			}
+		});
+	};
+
 	this.debug = function(message) {
 		_logger.debug(message + getStrackTrace());
+		sendLog('DEBUG', message);
 	};
 	
 	this.info = function(message) {
 		_logger.info(message + getStrackTrace());
+		sendLog('INFO', message);
 	};
 	
 	this.error = function(message) {
 		_logger.error(message + getStrackTrace());
+		sendLog('ERROR', message);
 	};
 	
 	this.fatal = function(message) {
 		_logger.fatal(message + getStrackTrace());
+		sendLog('FATAL', message);
 	};
 	
 	this.warn = function(message) {
 		_logger.warn(message + getStrackTrace());
+		sendLog('WARN', message);
 	};
 	
 	Logger();
