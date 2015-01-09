@@ -39,27 +39,40 @@
 	Bot.public(table);
 */
 function KTable() {
-	var _rows = [];
+	var _rows = new Array();
 	
 	this.add = function(element) {
 		_rows.push(element);
 	};
 	
 	this.toString = function() {
-		var output = '°>{table';
+		var output = new KCode();
+		output.append('°>{table');
 		
-		for(var index in _rows) {
-			var cel = _rows[index].getCells();
-			output += '|' + cell.getSize();
+		// first row fix
+		if(_rows.length > 0) {
+			output.append('|');
 		}
 		
-		output += '}<°';
+		for(var row in _rows) {
+			var _cells = _rows[row].getCells();
+			
+			for(cell in _cells) {
+				output.append('|');
+				output.append(_cells[cell].getSize());
+			};
+			
+			// only the first Row...
+			break;
+		};
 		
-		for(var index in _rows) {
-			output += _rows[index];
-		}
+		output.append('}<°');
 		
-		output += '°>{endtable}<°';
+		for(var row in _rows) {
+			output.append(_rows[row]);
+		};
+		
+		output.append('°>{endtable}<°');
 		
 		return output;
 	};
@@ -69,18 +82,23 @@ function KRow() {
 	var _cells = [];
 	
 	function KRow() {
-		_cells	= arguments || [];
+		_cells	= [];
 	}
+	
+	this.add = function(cell) {
+		_cells.push(cell);
+	};
 	
 	this.getCells = function() {
 		return _cells;
 	};
 	
 	this.toString	= function() {
-		var output = '°>{tr}<°';
+		var output = new KCode();
+		output.append('°>{tr}<°');
 		
 		for(var index in _cells) {
-			output += _cells[index];
+			output.append(_cells[index]);
 		}
 		
 		return output;
@@ -98,8 +116,16 @@ function KCell(size, content) {
 		_content	= content;
 	}
 	
+	this.getSize = function() {
+		return _size;
+	};
+	
 	this.toString	= function() {
-		return '°>{tc}<°' + _content;
+		var output = new KCode();
+		output.append('°>{tc}<°');
+		output.append(_content);
+		
+		return output;
 	};
 	
 	KCell(size, content);
