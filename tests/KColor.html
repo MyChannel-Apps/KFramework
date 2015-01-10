@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KCode :: KTable</title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="virtual.js"></script>
+		<script type="text/javascript" src="../framework/KFramework.js"></script>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<script type="text/javascript">
+			InvokeLater(function() {
+				var text	= new KCode();
+				
+				text.append(Color.CHANNEL_RED);
+				text.append(Color.WHITE);
+				text.append(Color.RED);
+				text.append(new KColor(255, 0, 0));
+				text.append(Color.BLUE);
+				text.append(new KColor(123, 75, 44));
+				text.append(Color.decode('#FF0000'));
+				text.append(new KColor('#00FF00'));
+				text.append(new KColor('0,0,255'));
+				
+				document.getElementById('debug').innerHTML = text;
+			});
+		</script>
+	</body>
+</html>
