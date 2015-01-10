@@ -29,6 +29,7 @@ require('framework/ui/KLink.js');
 require('framework/ui/KCountdown.js');
 require('framework/ui/KFont.js');
 require('framework/ui/KImage.js');
+require('framework/ui/KColor.js');
 require('framework/ui/KTable.js');
 
 function KCode() {
@@ -66,9 +67,9 @@ function KCode() {
 		for(var index in _buffer) {
 			var component	= _buffer[index];
 			
-			if(component instanceof String) {
+			if(typeof(component) == 'string' || typeof(component) == 'number') {
 				string		+= component;
-			} else {
+			} else if(component != undefined) {
 				string		+= component.toString();
 			}
 		}
