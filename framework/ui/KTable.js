@@ -54,23 +54,20 @@ function KTable() {
 			output.append('|');
 		}
 		
-		for(var row in _rows) {
-			var _cells = _rows[row].getCells();
-			
-			for(cell in _cells) {
+		_rows.each(function(row, row_index) {
+			row.getCells().each(function(cell, cell_index) {
 				output.append('|');
-				output.append(_cells[cell].getSize());
-			};
+				output.append(cell.getSize());
+			});
 			
-			// only the first Row...
-			break;
-		};
+			return false;
+		});
 		
 		output.append('}<°');
 		
-		for(var row in _rows) {
-			output.append(_rows[row]);
-		};
+		_rows.each(function(row) {
+			output.append(row);
+		});
 		
 		output.append('°>{endtable}<°');
 		
@@ -97,9 +94,9 @@ function KRow() {
 		var output = new KCode();
 		output.append('°>{tr}<°');
 		
-		for(var index in _cells) {
-			output.append(_cells[index]);
-		}
+		_cells.each(function(cell) {
+			output.append(cell);
+		});
 		
 		return output;
 	};
