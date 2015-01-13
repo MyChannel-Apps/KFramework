@@ -31,12 +31,18 @@ if(!Object.prototype.each) {
 		writable:		false,
 		value:			function(callback) {
 			for(var index in this) {
-				if(this.hasOwnProperty(index)) {
+				if(!this.hasOwnProperty(index)) {
 					continue;
 				}
 				
-				if(callback.apply(this[index], index) === false) {
-					break;
+				if(typeof(this[index]) == 'object') {
+					if(callback.call(this, this[index], index) === false) {
+						break;
+					}
+				} else {
+					if(callback.apply(this[index], index) === false) {
+						break;
+					}
 				}
 			}
 		}
