@@ -171,9 +171,9 @@ function KButton(text, command) {
 			string += 'call|' + _command;
 		}
 		
-		for(var name in _properties) {
-			string += '|' + name + '|' + _properties[name];
-		}
+		_properties.each(function(value, name) {
+			string += '|' + name + '|' + value;
+		});
 		
 		string += '<°';
 		

@@ -121,15 +121,13 @@ function KImage(image) {
 		if(Object.keys(_properties).length > 0) {
 			output += '..';
 			
-			for(var name in _properties) {
-				var value = _properties[name];
-				
+			_properties.each(function(value, name) {
 				if(value == 0x00) {
 					continue;
 				}
 				
 				output += '.' + name + (value == 0x01 ? '' : '_' + value);
-			}
+			});
 		}
 				
 		return output + '.' + _extension + (only_path == true ? '' : '<°');
