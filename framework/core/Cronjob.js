@@ -50,19 +50,9 @@ var Cron = (new function() {
 			var time = new Date(job.getLastCheck()+500);
 			job.setLastCheck(time);
 			
-			if(time.getTime() - job.getLastRun() > 60000) {
-				if(Cron.match(job.getMinutes(), time.getMinutes())) {
-					if(Cron.match(job.getHours(), time.getHours())) {
-						if(Cron.match(job.getDate(), time.getDate())) {
-							if(Cron.match(job.getMonth(), time.getMonth())) {
-								if(Cron.match(job.getDay(), time.getDay())) {
-									job.run(time);
-									return;
-								}
-							}
-						}
-					}
-				}
+			if((time.getTime() - job.getLastRun() > 60000) && Cron.match(job.getMinutes(), time.getMinutes())&& Cron.match(job.getHours(), time.getHours()) && Cron.match(job.getDate(), time.getDate()) && Cron.match(job.getMonth(), time.getMonth()) && Cron.match(job.getDay(), time.getDay())) {
+				job.run(time);
+				return;
 			}
 		}
 	};
@@ -70,27 +60,15 @@ var Cron = (new function() {
 	this.run = function() {
 		var time = new Date();
 		
-		for(var index in _cronjobs) {
-			var job = _cronjobs[index];
-			
+		_cronjobs.each(function(job) {
 			if(!job.isRunning()) {
 				continue;
 			}
 			
-			if(time.getTime() - job.getLastRun() > 60000) {
-				if(Cron.match(job.getMinutes(), time.getMinutes())) {
-					if(Cron.match(job.getHours(), time.getHours())) {
-						if(Cron.match(job.getDate(), time.getDate())) {
-							if(Cron.match(job.getMonth(), time.getMonth())) {
-								if(Cron.match(job.getDay(), time.getDay())) {
-									job.run(time);
-								}
-							}
-						}
-					}
-				}
+			if((time.getTime() - job.getLastRun() > 60000) && Cron.match(job.getMinutes(), time.getMinutes()) && Cron.match(job.getHours(), time.getHours()) && Cron.match(job.getDate(), time.getDate()) && Cron.match(job.getMonth(), time.getMonth()) && Cron.match(job.getDay(), time.getDay())) {
+				job.run(time);
 			}
-		}
+		});
 	};
 	
 	this.add = function(cronjob) {
@@ -102,7 +80,10 @@ var Cron = (new function() {
 	};
 	
 	this.match = function(a, b) {
-		for(var index = 0; index < a.length; index++) {
+		var index	= 0;
+		var length	= a.length;
+		
+		for(; index < length; ++index) {
 			var c = a[index];
 			
 			if(c[0] === -1 || (b >= c[0] && b <= c[1])) {
@@ -141,15 +122,15 @@ var Cron = (new function() {
 	};
 	
 	this.saveData = function() {
-		for(var index in _cronjobs) {
-			_cronjobs[index].save();
-		}
+		_cronjobs.each(function(cron) {
+			cron.save();
+		});
 	};
 	
 	this.onShutdown = function() {
-		for(var index in _cronjobs) {
-			_cronjobs[index].onShutdown();
-		}
+		_cronjobs.each(function(cron) {
+			cron.onShutdown();
+		});
 		
 		if(_watcher != undefined) {
 			clearInterval(_watcher);
@@ -160,7 +141,6 @@ var Cron = (new function() {
 }());
 
 function Cronjob(name, cycle, callback) {
-
 	var _name		= '';
 	var _cycle		= '* * * * *';
 	var _cycle_data	= [];
@@ -224,8 +204,8 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	this.run = function(time) {
-		_last_check = time;
-		_last_run = time;
+		_last_check	= time;
+		_last_run	= time;
 		_callback(time);
 	};
 	
@@ -250,7 +230,10 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	this.save = function() {
-		DB.save('_cron_' + _name, {run: this.getLastRun(), check: this.getLastCheck()});
+		DB.save('_cron_' + _name, {
+			run:	this.getLastRun(),
+			check:	this.getLastCheck()
+		});
 	};
 	
 	this.onShutdown = function() {
