@@ -62,7 +62,7 @@ var Cron = (new function() {
 		
 		_cronjobs.each(function(job) {
 			if(!job.isRunning()) {
-				continue;
+				return;
 			}
 			
 			if((time.getTime() - job.getLastRun() > 60000) && Cron.match(job.getMinutes(), time.getMinutes()) && Cron.match(job.getHours(), time.getHours()) && Cron.match(job.getDate(), time.getDate()) && Cron.match(job.getMonth(), time.getMonth()) && Cron.match(job.getDay(), time.getDay())) {

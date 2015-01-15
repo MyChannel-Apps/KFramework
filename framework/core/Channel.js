@@ -109,55 +109,55 @@ var Channel = (new function() {
 			// Is Online
 			if(filter.online != undefined && filter.online && user.isOnline()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Is Online in Channel
 			if(filter.inChannel != undefined && filter.inChannel && user.isOnlineInChannel()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Is Away
 			if(filter.away != undefined && filter.away && user.isAway()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// App Developer
 			if(filter.developer != undefined && filter.developer && user.isAppDeveloper()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Channel Owner
 			if(filter.owner != undefined && filter.owner && user.isChannelOwner()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Event Moderator
 			if(filter.event != undefined && filter.event && user.isEventModerator()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// ChannelModerator
 			if(filter.cm != undefined && filter.cm && user.isChannelModerator()) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Status
 			if(filter.status != undefined && filter.status.exists(user.getUserStatus())) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Gender
 			if(filter.gender != undefined && filter.gender.exists(user.getGender())) {
 				users.push(user);
-				continue;
+				return;
 			}
 			
 			// Age

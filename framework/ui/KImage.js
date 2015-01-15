@@ -123,7 +123,7 @@ function KImage(image) {
 			
 			_properties.each(function(value, name) {
 				if(value == 0x00) {
-					continue;
+					return;
 				}
 				
 				output += '.' + name + (value == 0x01 ? '' : '_' + value);

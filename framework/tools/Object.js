@@ -39,10 +39,8 @@ if(!Object.prototype.each) {
 					if(callback.call(this, this[index], index) === false) {
 						break;
 					}
-				} else {
-					if(callback.apply(this[index], index) === false) {
-						break;
-					}
+				} else if(callback.apply(this, [this[index], index]) === false) {
+					break;
 				}
 			}
 		}

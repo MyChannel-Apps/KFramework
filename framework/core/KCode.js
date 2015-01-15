@@ -68,7 +68,7 @@ function KCode() {
 		_buffer.each(function(component) {
 			if(typeof(component) == 'string' || typeof(component) == 'number') {
 				string		+= component;
-			} else if(component != undefined) {
+			} else if(component != undefined && component != null) {
 				string		+= component.toString();
 			}
 		});
