@@ -77,7 +77,7 @@ var Channel = (new function() {
 		var types	= [UserType.Human];
 		
 		if(filter.bot != undefined) {
-			if(filter.bot == true) {
+			if(filter.bot) {
 				types.push(UserType.AppBot);
 				types.push(UserType.SystemBot);
 			}
@@ -107,48 +107,57 @@ var Channel = (new function() {
 		
 		_users.each(function(user, index) {
 			// Is Online
-			if(filter.online != undefined && filter.online == true && user.isOnline() == true) {
+			if(filter.online != undefined && filter.online && user.isOnline()) {
 				users.push(user);
+				continue;
 			}
 			
 			// Is Online in Channel
-			if(filter.inChannel != undefined && filter.inChannel == true && user.isOnlineInChannel() == true) {
+			if(filter.inChannel != undefined && filter.inChannel && user.isOnlineInChannel()) {
 				users.push(user);
+				continue;
 			}
 			
 			// Is Away
-			if(filter.away != undefined && filter.away == true && user.isAway() == true) {
+			if(filter.away != undefined && filter.away && user.isAway()) {
 				users.push(user);
+				continue;
 			}
 			
 			// App Developer
-			if(filter.developer != undefined && filter.developer == true && user.isAppDeveloper() == true) {
+			if(filter.developer != undefined && filter.developer && user.isAppDeveloper()) {
 				users.push(user);
+				continue;
 			}
 			
 			// Channel Owner
-			if(filter.owner != undefined && filter.owner == true && user.isChannelOwner() == true) {
+			if(filter.owner != undefined && filter.owner && user.isChannelOwner()) {
 				users.push(user);
+				continue;
 			}
 			
 			// Event Moderator
-			if(filter.event != undefined && filter.event == true && user.isEventModerator() == true) {
+			if(filter.event != undefined && filter.event && user.isEventModerator()) {
 				users.push(user);
+				continue;
 			}
 			
 			// ChannelModerator
-			if(filter.cm != undefined && filter.cm == true && user.isChannelModerator() == true) {
+			if(filter.cm != undefined && filter.cm && user.isChannelModerator()) {
 				users.push(user);
+				continue;
 			}
 			
 			// Status
 			if(filter.status != undefined && filter.status.exists(user.getUserStatus())) {
 				users.push(user);
+				continue;
 			}
 			
 			// Gender
 			if(filter.gender != undefined && filter.gender.exists(user.getGender())) {
 				users.push(user);
+				continue;
 			}
 			
 			// Age
