@@ -60,3 +60,14 @@ if(!Array.prototype.exists) {
 		}
 	});
 }
+
+if(!Array.prototype.size) {
+	Object.defineProperty(Array.prototype, 'size', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function() {
+			return this.length;
+		}
+	});
+}

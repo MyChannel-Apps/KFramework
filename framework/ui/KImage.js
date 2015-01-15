@@ -118,7 +118,7 @@ function KImage(image) {
 		only_path	= only_path || false;
 		var output	= (only_path == true ? '' : '°>') + _path + _name;
 		
-		if(Object.keys(_properties).length > 0) {
+		if(_properties.size() > 0) {
 			output += '..';
 			
 			_properties.each(function(value, name) {

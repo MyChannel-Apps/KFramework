@@ -119,7 +119,7 @@ if(!Object.prototype.exists) {
 	});
 }
 
-if (!Object.prototype.compare) {
+if(!Object.prototype.compare) {
   Object.defineProperty(Object.prototype, 'compare', {
     enumerable: false,
     configurable: false,
@@ -135,4 +135,15 @@ if (!Object.prototype.compare) {
 		return this;
     }
   });
+}
+
+if(!Object.prototype.size) {
+	Object.defineProperty(Object.prototype, 'size', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function() {
+			return Object.keys(this).length;
+		}
+	});
 }

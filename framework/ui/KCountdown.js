@@ -46,7 +46,7 @@ function KCountdown() {
 	this.toString = function() {
 		var string	= '°>{countdown}';
 		var index	= 0;
-		var length	= Object.keys(_properties).length;
+		var length	= _properties.size();
 		
 		_properties.each(function(value, name) {
 			string += name + '=' + value;
