@@ -57,6 +57,7 @@ function KCode() {
 	};	
 	
 	this.addImage = function(file) {
+		Logger.info('KCode.addImage(file) is DEPRECATED');
 		// @ToDo to Image-Object with addition options (margin, hover, what ever)
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
 	};
@@ -64,15 +65,13 @@ function KCode() {
 	this.toString = function() {
 		var string = '';
 		
-		for(var index in _buffer) {
-			var component	= _buffer[index];
-			
+		_buffer.each(function(component) {
 			if(typeof(component) == 'string' || typeof(component) == 'number') {
 				string		+= component;
 			} else if(component != undefined) {
 				string		+= component.toString();
 			}
-		}
+		});
 		
 		if(_debug) {
 			string = string.replace(/°/g, '\\°');
