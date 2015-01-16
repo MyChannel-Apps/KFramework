@@ -65,8 +65,8 @@ function KTable() {
 		
 		output.append('}<°');
 		
-		_rows.each(function(row) {
-			output.append(row);
+		_rows.each(function(row, index) {
+			output.append(row.toString(index == 0));
 		});
 		
 		output.append('°>{endtable}<°');
@@ -90,9 +90,13 @@ function KRow() {
 		return _cells;
 	};
 	
-	this.toString	= function() {
-		var output = new KCode();
-		output.append('°>{tr}<°');
+	this.toString	= function(display) {
+		display		= display || false;
+		var output	= new KCode();
+		
+		if(!display) {
+			output.append('°>{tr}<°');
+		}
 		
 		_cells.each(function(cell) {
 			output.append(cell);
@@ -109,8 +113,8 @@ function KCell(size, content) {
 	var _content	= '';
 	
 	function KCell(size, content) {
-		_size		= size;
-		_content	= content;
+		_size		= size || 0;
+		_content	= content || '';
 	}
 	
 	this.getSize = function() {
