@@ -36,13 +36,20 @@
 	Bot.public(link);
 */
 function KImage(image) {
-	var _path		= '';
-	var _name		= '';
-	var _extension	= '';
-	var _properties	= {};
+	var _path			= '';
+	var _name			= '';
+	var _extension		= '';
+	var _properties		= {};
+	var _use_direct		= false;
+	var _version		= '';
 	
 	function KImage(image) {
-		// @ToDo parse image with properties or HTTP Links!
+		// HTTP(S) Links
+		if(image.substring(0, 7) == 'http://' || image.substring(0, 8) == 'https://') {
+			_use_direct = true;
+			return;
+		}
+		
 		var split	= image.split('.');
 		_name		= split[0];
 		_extension	= split[1];
@@ -114,6 +121,14 @@ function KImage(image) {
 		_properties.gray = (state == true ? 0x01 : 0x00);
 	};
 	
+	this.addCustom = function(name, value) {
+		_properties[name] = value;
+	};
+	
+	this.setVersion = function(version) {
+		_version = version;
+	};
+	
 	this.toString = function(only_path) {
 		only_path	= only_path || false;
 		var output	= (only_path == true ? '' : '°>') + _path + _name;
@@ -130,7 +145,7 @@ function KImage(image) {
 			});
 		}
 				
-		return output + '.' + _extension + (only_path == true ? '' : '<°');
+		return output + '.' + _extension + (_version == '' ? '' : '?' + _version + '&.' + _extension) + (only_path == true ? '' : '<°');
 	};
 	
 	KImage(image);
