@@ -29,6 +29,7 @@ function KLink(text) {
 	var _command_left	= undefined;
 	var _command_right	= undefined;
 	var _hover			= true;
+	var _hover_image	= undefined;
 	
 	function KLink(text) {
 		_text = text || '';
@@ -46,7 +47,15 @@ function KLink(text) {
 	this.enableHover = function(state) {
 		_hover = state;
 	};
-
+	
+	this.setHoverImage = function(image) {
+		if(_text instanceof KImage) {
+			_hover_image = image;
+		} else {
+			Logger.warn('You can only use KImage.setHoverImage(image) when you bind a KImage!');
+		}
+	};
+	
 	this.toString = function() {
 		var string = '°>';
 		
@@ -54,7 +63,7 @@ function KLink(text) {
 			string += _text.toString(true);
 			
 			// @ToDo The Hover
-			string += '|' + _text.toString(true) + '<>--<>';
+			string += '|' + (_hover_image == undefined ? _text.toString(true) : _hover_image.toString(true)) + '<>--<>';
 		} else {
 			if(_hover == false) {
 				string += '_h';
