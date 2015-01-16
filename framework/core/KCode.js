@@ -62,6 +62,10 @@ function KCode() {
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
 	};
 	
+	this.disableOptimization = function(state) {
+		_minify = state;
+	};
+	
 	this.toString = function() {
 		var string = '';
 		
