@@ -83,7 +83,7 @@ var Channel = (new function() {
 			}
 		}
 		
-		var users	= [];
+		var users = [];
 		var _users	= _channel.getOnlineUsers(types);
 		
 		// Return users if no other filters available
@@ -104,60 +104,51 @@ var Channel = (new function() {
 		) {
 			return _users;
 		}
-		
-		_users.each(function(user, index) {
+
+		//_users.each(function(user, index) {
+		for(var index = 0; index < _users.length; index++) {
 			// Is Online
-			if(filter.online != undefined && filter.online === user.isOnline()) {
-				users.push(user);
-				return;
+			if(filter.online != undefined && filter.online != _users[index].isOnline()) {
+				continue;
 			}
 			
 			// Is Online in Channel
-			if(filter.inChannel != undefined && filter.inChannel === user.isOnlineInChannel()) {
-				users.push(user);
-				return;
+			if(filter.inChannel != undefined && filter.inChannel != _users[index].isOnlineInChannel()) {
+				continue;
 			}
 			
 			// Is Away
-			if(filter.away != undefined && filter.away === user.isAway()) {
-				users.push(user);
-				return;
+			if(filter.away != undefined && filter.away != _users[index].isAway()) {
+				continue;
 			}
 			
 			// App Developer
-			if(filter.developer != undefined && filter.developer === user.isAppDeveloper()) {
-				users.push(user);
-				return;
+			if(filter.developer != undefined && filter.developer != _users[index].isAppDeveloper()) {
+				continue;
 			}
 			
 			// Channel Owner
-			if(filter.owner != undefined && filter.owner === user.isChannelOwner()) {
-				users.push(user);
-				return;
+			if(filter.owner != undefined && filter.owner != _users[index].isChannelOwner()) {
+				continue;
 			}
 			
 			// Event Moderator
-			if(filter.event != undefined && filter.event === user.isEventModerator()) {
-				users.push(user);
-				return;
+			if(filter.event != undefined && filter.event != _users[index].isEventModerator()) {
+				continue;
 			}
 			
 			// ChannelModerator
-			if(filter.cm != undefined && filter.cm === user.isChannelModerator()) {
-				users.push(user);
-				return;
+			if(filter.cm != undefined && filter.cm != _users[index].isChannelModerator()) {
+				continue;
 			}
 			
 			// Status
-			if(filter.status != undefined && filter.status.exists(user.getUserStatus())) {
-				users.push(user);
-				return;
+			if(filter.status != undefined && !filter.status.exists(_users[index].getUserStatus())) {
+				continue;
 			}
 			
 			// Gender
-			if(filter.gender != undefined && filter.gender.exists(user.getGender())) {
-				users.push(user);
-				return;
+			if(filter.gender != undefined && !filter.gender.exists(_users[index].getGender())) {
 			}
 			
 			// Age
@@ -179,8 +170,9 @@ var Channel = (new function() {
 			if(filter.readme != undefined) {
 				// user.getReadme();
 			}
-		});
-		
+
+			users.push(_users[index]);
+		}
 		return users;
 	};
 }());
