@@ -27,8 +27,76 @@
 var Bot = (new function() {
 	var _user = KnuddelsServer.getDefaultBotUser();
 	
+	this.getAge = function() { 
+		return _user.getAge();
+	};
+	
+	this.getGender = function() { 
+		return _user.getGender();
+	};
+	
+	this.getKnuddelAmount = function() {
+		return _user.getKnuddelAmount()
+	};
+	
 	this.getNick = function() {
 		return _user.getNick();
+	};
+	
+	this.getOnlineMinutes = function() {
+		return _user.getOnlineMinutes();
+	};
+	
+	this.getProfileLink	= function(displayText) {
+		return _user.getProfileLink(displayText);
+	};
+	
+	this.getReadme = function() {
+		return _user.getReadme();
+	};
+	
+	this.getRegDate = function() {
+		return _user.getRegDate();
+	};
+	
+	this.getUserId = function() {
+		return _user.getUserId();
+	};
+	
+	this.getUserStatus = function() {
+		return _user.getUserStatus();
+	};
+	
+	this.getUserType = function() {
+		return _user.getUserType();
+	};
+	
+	this.isAppDeveloper = function() {
+		return _user.isAppDeveloper();
+	};
+
+	this.isAway = function() {
+		return _user.isAway();
+	};
+
+	this.isChannelModerator = function() {
+		return _user.isChannelModerator();
+	};
+
+	this.isChannelOwner = function() {
+		return _user.isChannelOwner();
+	};
+
+	this.isEventModerator = function() {
+		return _user.isEventModerator();
+	};
+
+	this.isOnline = function() {
+		return _user.isOnline();
+	};
+	
+	this.isOnlineInChannel = function() {
+		return _user.isOnlineInChannel();
 	};
 	
 	this.join = function() {
@@ -74,7 +142,6 @@ var Bot = (new function() {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
-		
 		_user.sendPublicMessage(message);
 	};
 	

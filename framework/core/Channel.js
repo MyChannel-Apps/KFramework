@@ -107,43 +107,43 @@ var Channel = (new function() {
 		
 		_users.each(function(user, index) {
 			// Is Online
-			if(filter.online != undefined && filter.online && user.isOnline()) {
+			if(filter.online != undefined && filter.online === user.isOnline()) {
 				users.push(user);
 				return;
 			}
 			
 			// Is Online in Channel
-			if(filter.inChannel != undefined && filter.inChannel && user.isOnlineInChannel()) {
+			if(filter.inChannel != undefined && filter.inChannel === user.isOnlineInChannel()) {
 				users.push(user);
 				return;
 			}
 			
 			// Is Away
-			if(filter.away != undefined && filter.away && user.isAway()) {
+			if(filter.away != undefined && filter.away === user.isAway()) {
 				users.push(user);
 				return;
 			}
 			
 			// App Developer
-			if(filter.developer != undefined && filter.developer && user.isAppDeveloper()) {
+			if(filter.developer != undefined && filter.developer === user.isAppDeveloper()) {
 				users.push(user);
 				return;
 			}
 			
 			// Channel Owner
-			if(filter.owner != undefined && filter.owner && user.isChannelOwner()) {
+			if(filter.owner != undefined && filter.owner === user.isChannelOwner()) {
 				users.push(user);
 				return;
 			}
 			
 			// Event Moderator
-			if(filter.event != undefined && filter.event && user.isEventModerator()) {
+			if(filter.event != undefined && filter.event === user.isEventModerator()) {
 				users.push(user);
 				return;
 			}
 			
 			// ChannelModerator
-			if(filter.cm != undefined && filter.cm && user.isChannelModerator()) {
+			if(filter.cm != undefined && filter.cm === user.isChannelModerator()) {
 				users.push(user);
 				return;
 			}
