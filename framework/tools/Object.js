@@ -112,7 +112,15 @@ if(!Object.prototype.exists) {
 		configurable:	false,
 		writable:		false,
 		value:			function(value) {
-			return (this[value] != undefined);
+			if(this[value] == undefined) {
+				return false;
+			}
+			
+			if(this.indexOf(value) == -1) {
+				return false;
+			}
+			
+			return true;
 		}
 	});
 }
