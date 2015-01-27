@@ -27,6 +27,7 @@
 var Channel = (new function() {
 	var _channel		= KnuddelsServer.getChannel();
 	var _configuration	= _channel.getChannelConfiguration();
+	var _restrictions	= _channel.getChannelRestrictions();
 	var _rights			= _configuration.getChannelRights();
 	
 	this.getName = function() {
@@ -43,6 +44,18 @@ var Channel = (new function() {
 	
 	this.getMods = function() {
 		return _rights.getEventModerators();
+	};
+	
+	this.getCMutes = function() {
+		return _restrictions.getColorMutedUsers();
+	};
+	
+	this.getMutes = function() {
+		return _restrictions.getMutedUsers();
+	};
+	
+	this.getCLs = function() {
+		return _restrictions.getLockedUsers();
 	};
 	
 	/*
@@ -91,6 +104,9 @@ var Channel = (new function() {
 			!filter.exists('online') &&
 			!filter.exists('inChannel') &&
 			!filter.exists('away') &&
+			!filter.exists('cmute') &&
+			!filter.exists('mute') &&
+			!filter.exists('cl') &&						
 			!filter.exists('developer') &&
 			!filter.exists('owner') &&
 			!filter.exists('event') &&
@@ -119,6 +135,21 @@ var Channel = (new function() {
 			
 			// Is Away
 			if(filter.away != undefined && filter.away != _users[index].isAway()) {
+				continue;
+			}
+			
+			// Is CMuted
+			if(filter.cmute != undefined && filter.cmute != _users[index].isColorMuted()) {
+				continue;
+			}
+			
+			// Is Muted
+			if(filter.mute != undefined && filter.mute != _users[index].isMuted()) {
+				continue;
+			}
+			
+			// Is CMuted
+			if(filter.cl != undefined && filter.cl != _users[index].isLocked()) {
 				continue;
 			}
 			

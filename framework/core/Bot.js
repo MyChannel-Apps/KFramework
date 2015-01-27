@@ -86,10 +86,22 @@ var Bot = (new function() {
 	this.isChannelOwner = function() {
 		return _user.isChannelOwner();
 	};
+	
+	this.isColorMuted = function() {
+		return _user.isColorMuted();
+	};
 
 	this.isEventModerator = function() {
 		return _user.isEventModerator();
 	};
+	
+	this.isLocked = function() {
+		return _user.isLocked();
+	};
+	
+	this.isMuted = function() {
+		return _user.isMuted();
+	};	
 
 	this.isOnline = function() {
 		return _user.isOnline();
