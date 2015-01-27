@@ -26,6 +26,15 @@
 
 require('framework/KFramework.js');
 
+// Example Hooks
+Hooks.add('onAppStart', function() {
+	Bot.public('App wurde gestartet!');
+});
+
+Hooks.add('onUserJoined', function(user) {
+	Bot.private(user, 'Willkommen!');
+}, 5);
+
 var App = (new function() {
 	/* App Events */
 	this.onAppStart = function() {
