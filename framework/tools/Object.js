@@ -76,7 +76,7 @@ if(!Object.prototype.sort) {
 				keys.push({
 					index:	index,
 					value:	this[index],
-					sortby:	sortBy
+					sortby:	sortby
 				});
 			}
 
