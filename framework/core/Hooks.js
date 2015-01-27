@@ -21,43 +21,42 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Adrian Preuß <Bizarrus>
+	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
 */
 
-var VERSION		= '1.0.3';
-
-// Defaults
-require('framework/Constants.js');
-
-// Tools
-require('framework/tools/String.js');
-require('framework/tools/Object.js');
-require('framework/tools/Array.js');
-
-// Core
-require('framework/core/Hooks.js');
-require('framework/core/Database.js');
-require('framework/core/Logger.js');
-require('framework/core/Cronjob.js');
-require('framework/core/Bot.js');
-require('framework/core/KCode.js');
-require('framework/core/KBank.js');
-require('framework/core/Channel.js');
-require('framework/core/User.js');
-//require('framework/core/KConfig.js');
-
-var KFramework = (new function() {
-	this.startUp = function() {
-		KBank.loadData();
+var Hooks = (new function() {
+	var _hooks = {};
+	
+	this.add = function(name, callback, priority) {
+		priority = (priority == undefined ? 10 : priority); // default Priority is 10
+		
+		_hooks[priority].push({
+			name:		name,
+			callback:	callback
+		});
 	};
 	
-	this.store = function() {
-		KBank.saveData();
-		Cron.saveData();
+	this.remove = function(name, priority) {
+		priority = (priority == undefined ? 10 : priority); // default Priority is 10
+		
+		_hooks[priority].each(function(hook, index) {
+			if(hook.name == name) {
+				delete _hooks[priority][index];
+			}
+		});
 	};
 	
-	this.shutDown = function() {
-		KBank.saveData();
-		Cron.onShutdown();
+	this.do = function(name) {
+		var args = arguments;
+		args.shift(); // remove the first argument
+		
+		// sort by priority?
+		_hooks.each(function(priority, hooks) {
+			hooks.each(function(hook) {
+				if(hooks.name == name) {
+					hook.callback.call(this, args); // with params?
+				}
+			});
+		});
 	};
 }());
