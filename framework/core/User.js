@@ -50,7 +50,13 @@ var Users = (new function() {
 				this.getPersistence		= function(_uid) {
 					return (new function VirtualPersistence(uid) {
 						_uid = uid;
-						
+
+						this.addNumber = function(key, value) {
+							var userdb = DB.load('_userdb');
+							if(userdb[_uid][key] === undefined) { userdb[_uid][key] = 0; }
+							userdb[_uid][key] += value;
+							DB.save('_userdb', userdb);
+						};
 						this.getString = function(key, defaults) { return DB.load('_userdb')[_uid][key] || defaults; };
 						this.getNumber = function(key, defaults) { return DB.load('_userdb')[_uid][key] || defaults; };
 						this.getObject = function(key, defaults) { return DB.load('_userdb')[_uid][key] || defaults; };
