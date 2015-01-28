@@ -190,4 +190,8 @@ var Bot = (new function() {
 	this.exec = function(command) {
 		_user.sendToChannel(command);
 	};
+	
+	this.toString = function() {
+		return '[KFramework Bot]';
+	};
 }());

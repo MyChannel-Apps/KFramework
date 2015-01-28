@@ -98,5 +98,8 @@ var KConfig = (new function() {
 	this.check = function() {
 		return true;
 	};
-		
+	
+	this.toString = function() {
+		return '[KFramework KConfig]';
+	};
 }());

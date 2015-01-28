@@ -98,4 +98,8 @@ var DB	= (new function() {
 		}
 		return true;
 	};
+	
+	this.toString = function() {
+		return '[KFramework Database]';
+	};
 }());

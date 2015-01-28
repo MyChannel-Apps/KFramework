@@ -135,4 +135,8 @@ var Hooks = (new function() {
 		
 		return output;
 	};
+	
+	this.toString = function() {
+		return '[KFramework Hooks]';
+	};
 }());

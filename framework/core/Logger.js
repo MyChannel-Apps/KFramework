@@ -99,5 +99,9 @@ var Logger = (new function() {
 		sendLog('WARN', message);
 	};
 	
+	this.toString = function() {
+		return '[KFramework Logger]';
+	};
+	
 	Logger();
 }());

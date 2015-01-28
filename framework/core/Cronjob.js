@@ -241,5 +241,9 @@ function Cronjob(name, cycle, callback) {
 		this.save();
 	};
 	
+	this.toString = function() {
+		return '[KFramework Cronjob]';
+	};
+	
 	Cronjob(this, name, cycle, callback);
 }

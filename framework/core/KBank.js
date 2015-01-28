@@ -205,5 +205,10 @@ var KBank = (new function() {
 		});
 		return transit;
 	};
-	this.fixData();	
+	
+	this.toString = function() {
+		return '[KFramework KBank]';
+	};
+	
+	this.fixData();
 }());

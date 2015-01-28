@@ -155,6 +155,9 @@ var Users = (new function() {
 			case UserStatus.SystemBot:
 				return 'Bot';
 			break;
+			default:
+				return '[KFramework User]';
+			break;
 		}
 		
 		return value + '';

@@ -60,4 +60,8 @@ var KFramework = (new function() {
 		KBank.saveData();
 		Cron.onShutdown();
 	};
+	
+	this.toString = function() {
+		return '[KFramework Core]';
+	};
 }());

@@ -206,4 +206,8 @@ var Channel = (new function() {
 		}
 		return users;
 	};
+	
+	this.toString = function() {
+		return '[KFramework Channel]';
+	};
 }());
