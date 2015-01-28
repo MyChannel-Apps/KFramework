@@ -28,27 +28,37 @@ var Hooks = (new function() {
 	var _hooks	= {};
 	var _debug	= false;
 	
-	this.add = function(name, callback, priority) {
-		priority = (priority == undefined ? 10 : priority); // default Priority is 10
+	this.addFilter = function(name, callback, priority) {
+		this.add(name, callback, priority, true);
+	};
+	
+	this.addAction = function(name, callback, priority) {
+		this.add(name, callback, priority);
+	};
+	
+	this.add = function(name, callback, priority, is_filter) {
+		priority	= (priority == undefined ? 10 : priority); // default Priority is 10
+		is_filter	= (is_filter == undefined ? false : is_filter);
 		
 		if(_hooks[priority] == undefined) {
 			_hooks[priority] = [];
 		}
 		
-		if(_hooks) {
+		if(_debug) {
 			Logger.info('[Hooks] Adding "' + name + '" with Priority of ' + priority);
 		}
 		
 		_hooks[priority].push({
 			name:		name,
-			callback:	callback
+			callback:	callback,
+			is_filter:	is_filter
 		});
 	};
 	
 	this.remove = function(name, priority) {
 		priority = (priority == undefined ? 10 : priority); // default Priority is 10
 		
-		if(_hooks) {
+		if(_debug) {
 			Logger.info('[Hooks] Removing "' + name + '" with Priority of ' + priority);
 		}
 		
@@ -59,9 +69,10 @@ var Hooks = (new function() {
 		});
 	};
 	
-	this.do = function(name) {
+	this.applyFilter = function(name) {
 		var args		= [];
 		var args_length	= arguments.size();
+		
 		for(var index = 0; index < args_length; ++index) {
 			var argument = arguments[index];
 			
@@ -71,9 +82,35 @@ var Hooks = (new function() {
 			
 			args.push(argument);
 		}
-		args.shift(); // remove the first argument
 		
-		if(_hooks) {
+		args.splice(1, 0, true);
+		
+		return this.do.apply(this, args);
+	};
+	
+	this.do = function(name, is_filter) {
+		var is_filter	= (is_filter == undefined ? false : is_filter);
+		var args		= [];
+		var args_length	= arguments.size();
+		var output		= undefined;
+		
+		for(var index = 0; index < args_length; ++index) {
+			var argument = arguments[index];
+			
+			if(argument == undefined || argument == null) {
+				continue;
+			}
+			
+			args.push(argument);
+		}
+		
+		// remove the arguments
+		args.shift();
+		args.shift();
+		
+		output			= args[0];
+		
+		if(_debug) {
 			Logger.info('[Hooks] Execute "' + name + '" with params: ' + JSON.stringify(args));
 		}
 		
@@ -81,15 +118,21 @@ var Hooks = (new function() {
 		_hooks.sort('index', 'ASC');
 		
 		_hooks.each(function(hooks, priority) {
-			if(_hooks) {
+			if(_debug) {
 				Logger.info('[Hooks] Each: PRIORITY ' + priority);
 			}
 			
 			hooks.each(function(hook) {
 				if(hook.name == name) {
-					hook.callback.apply(this, args);
+					if(typeof(output) != 'array') {
+						output = [ output ];
+					}
+					
+					output = hook.callback.apply(this, (is_filter ? output : args));
 				}
 			});
 		});
+		
+		return output;
 	};
 }());
