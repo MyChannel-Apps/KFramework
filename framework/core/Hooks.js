@@ -89,10 +89,14 @@ var Hooks = (new function() {
 	};
 	
 	this.do = function(name, is_filter) {
-		var is_filter	= (is_filter == undefined ? false : is_filter);
-		var args		= [];
-		var args_length	= arguments.size();
-		var output		= undefined;
+		if(_debug) {
+			Logger.info('[Hooks] ' + JSON.stringify(arguments));
+		}
+		
+		var is_filter_set	= (is_filter == undefined || typeof(is_filter) != 'boolean');
+		var args			= [];
+		var args_length		= arguments.size();
+		var output			= undefined;
 		
 		for(var index = 0; index < args_length; ++index) {
 			var argument = arguments[index];
@@ -106,7 +110,10 @@ var Hooks = (new function() {
 		
 		// remove the arguments
 		args.shift();
-		args.shift();
+		
+		if(!is_filter_set) {
+			args.shift();
+		}
 		
 		output			= args[0];
 		
@@ -128,7 +135,7 @@ var Hooks = (new function() {
 						output = [ output ];
 					}
 					
-					output = hook.callback.apply(this, (is_filter ? output : args));
+					output = hook.callback.apply(this, ((is_filter_set ? false : is_filter) ? output : args));
 				}
 			});
 		});
