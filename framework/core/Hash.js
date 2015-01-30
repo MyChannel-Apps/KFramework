@@ -28,9 +28,11 @@ var Hash = {
 	decodeForm: function(string) {
 		var chars	= string.split('');
 		var output	= [];
+		var a		= 97;
+		var b		= 4;
 		
 		for(var index = 0, char_index = 0; index < chars.length / 2; index++, char_index += 2) {
-			output.push((chars[char_index].charCodeAt(0) - 97 << 4 | chars[char_index + 1].charCodeAt(0) - 97) ^ index & 255);
+			output.push((chars[char_index].charCodeAt(0) - a << b | chars[char_index + 1].charCodeAt(0) - a) ^ index & 255);
 		}
 		
 		for(var index = 0; index < output.length; index++) {
