@@ -161,7 +161,13 @@ function Cronjob(name, cycle, callback) {
 		_cycle			= cycle;
 		_callback		= callback;
 		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
-		_crondb			= DB.load('_cron_' + _name, {run:0, check:0});
+		
+		if(DB == undefined) {
+			_crondb		= KnuddelsServer.getPersistence().getObject('_cron_' + _name, {run:0, check:0});
+		} else {
+			_crondb		= DB.load('_cron_' + _name, {run:0, check:0});
+		}
+		
 		_last_run		= new Date(parseInt(_crondb.run));
 		_last_check		= new Date(parseInt(_crondb.check));
 		_time_data		= {
@@ -230,6 +236,14 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	this.save = function() {
+		if(DB == undefined) {
+			KnuddelsServer.getPersistence().setObject('_cron_' + _name, {
+				run:	this.getLastRun(),
+				check:	this.getLastCheck()
+			});
+			return;
+		}
+		
 		DB.save('_cron_' + _name, {
 			run:	this.getLastRun(),
 			check:	this.getLastCheck()
