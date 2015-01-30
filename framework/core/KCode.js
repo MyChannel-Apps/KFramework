@@ -31,6 +31,7 @@ require('framework/ui/KFont.js');
 require('framework/ui/KImage.js');
 require('framework/ui/KColor.js');
 require('framework/ui/KTable.js');
+require('framework/ui/KGroup.js');
 
 function KCode() {
 	var _buffer = [];
