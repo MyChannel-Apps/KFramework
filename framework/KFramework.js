@@ -33,8 +33,10 @@ require('framework/Constants.js');
 require('framework/tools/String.js');
 require('framework/tools/Object.js');
 require('framework/tools/Array.js');
+require('framework/tools/StringBuffer.js');
 
 // Core
+require('framework/core/Hash.js');
 require('framework/core/Hooks.js');
 require('framework/core/Database.js');
 require('framework/core/Logger.js');
