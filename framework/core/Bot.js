@@ -136,17 +136,32 @@ var Bot = (new function() {
 	};
 	
 	this.publicMessage = function(message) {
-		Logger.info('Bot.publicMessage(message) is DEPRECATED');
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('Bot.publicMessage(message) is DEPRECATED');
+		} else {
+			Logger.info('Bot.publicMessage(message) is DEPRECATED');
+		}
+		
 		this.public(message);
 	}
 	
 	this.postMessage = function(user, message, topic) {
-		Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('Bot.postMessage(user, message, topic) is DEPRECATED');
+		} else {
+			Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
+		}
+		
 		this.post(user, message, topic);
 	}
 	
 	this.privateMessage = function(user, message) {
-		Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('Bot.privateMessage(user, message) is DEPRECATED');
+		} else {
+			Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
+		}
+		
 		this.private(user, message);
 	}
 	
@@ -179,9 +194,22 @@ var Bot = (new function() {
 		
 		// send to online users
 		if(nick == undefined) {
-			Channel.getUsers().each(function(user) {
-				user.sendPrivateMessage(message);
-			});
+			if(Channel == undefined && !Object.prototype.each) {
+				var users	= KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
+				var size	= users.length;
+				
+				for(var index = 0; index < size; ++index) {
+					users[index].sendPrivateMessage(message);
+				}
+			} else if(Channel != undefined && Object.prototype.each) {
+				KnuddelsServer.getChannel().getOnlineUsers(UserType.Human).each(function(user) {
+					user.sendPrivateMessage(message);
+				});
+			} else {
+				Channel.getUsers().each(function(user) {
+					user.sendPrivateMessage(message);
+				});
+			}
 		} else {
 			nick.sendPrivateMessage(message);
 		}
