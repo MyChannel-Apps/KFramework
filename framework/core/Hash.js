@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2015 MyChannel-Apps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -25,18 +25,18 @@
 */
 
 var Hash = {
-	encodeForm: function(string) {
+	decodeForm: function(string) {
 		var chars	= string.split('');
-		string		= [];
+		var output	= [];
 		
 		for(var index = 0, char_index = 0; index < chars.length / 2; index++, char_index += 2) {
-			string.push((chars[char_index].charCodeAt(0) - 97 << 4 | chars[char_index + 1].charCodeAt(0) - 97) ^ index & 255);
+			output.push((chars[char_index].charCodeAt(0) - 97 << 4 | chars[char_index + 1].charCodeAt(0) - 97) ^ index & 255);
 		}
 		
-		for(var index = 0; index < string.length; index++) {
-			string[index] = String.fromCharCode(string[index]);
+		for(var index = 0; index < output.length; index++) {
+			output[index] = output.fromCharCode(output[index]);
 		}
 		
-		return string.join('');
+		return output.join('');
 	}
 };
