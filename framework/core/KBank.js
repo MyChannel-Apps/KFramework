@@ -47,7 +47,7 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
-		return _data[uid].knuddel;
+		return parseFloat(_data[uid].knuddel.toFixed(2));
 	};
 	
 	this.getKonto = function(uid) {
@@ -69,7 +69,7 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
-
+		
 		if(kn <= 0.00) {
 			return false;
 		}
@@ -88,6 +88,7 @@ var KBank = (new function() {
 		
 		this.create(uid);
 		_data[uid].knuddel += kn;
+		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
 	};
 	
 	this.delKn = function(uid, kn) {
@@ -107,7 +108,7 @@ var KBank = (new function() {
 		this.create(uid);
 		
 		if(kn <= 0.00) {
-			return false;
+		//	return false;
 		}
 		
 		if(_data[uid].knuddel < kn) {
@@ -115,6 +116,7 @@ var KBank = (new function() {
 		}
 		
 		_data[uid].knuddel -= kn;
+		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
 		return true;
 	};
 	
@@ -126,7 +128,7 @@ var KBank = (new function() {
 		if(kn === undefined) {
 			return false;
 		}
-		
+
 		if(kn < 0) {
 			return false;
 		}
@@ -138,7 +140,10 @@ var KBank = (new function() {
 		this.create(uid);
 		_data[uid].knuddel -= kn;
 		_data[uid].payout += kn;
-		
+
+		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
+		_data[uid].payout = parseFloat(_data[uid].payout.toFixed(2));
+
 		Bot.knuddel(KnuddelsServer.getUser(uid), kn, reason);
 		return true;
 	};
@@ -151,7 +156,7 @@ var KBank = (new function() {
 		if(kn === undefined) {
 			return;
 		}
-		
+
 		if(kn < 0) {
 			return false;
 		}
@@ -159,6 +164,10 @@ var KBank = (new function() {
 		this.create(uid);
 		_data[uid].knuddel += kn;
 		_data[uid].buyin += kn;
+		
+		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
+		_data[uid].buyin = parseFloat(_data[uid].buyin.toFixed(2));
+		return true;
 	};
 	
 	this.loadData = function() {
@@ -177,20 +186,25 @@ var KBank = (new function() {
 	};
 	
 	this.fixData = function() {
-		_data.each(function(uid) {
-			_data[uid].knuddel = parseFloat(_data[uid].knuddel);
-			_data[uid].buyin = parseFloat(_data[uid].buyin);
-			_data[uid].payout = parseFloat(_data[uid].payout);
+		_data.each(function(konto, uid) {
+			_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
+			_data[uid].buyin = parseFloat(_data[uid].buyin.toFixed(2));
+			_data[uid].payout = parseFloat(_data[uid].payout.toFixed(2));
 		});
 	};
 	
 	this.cleanData = function() {
-		_data.each(function(uid) {
-			if(_data[uid].knuddel != 0.00) { return; }
-			if(_data[uid].buyin != 0.00) { return; }
-			if(_data[uid].payout != 0.00) { return; }
-			delete _data[uid];
+		var newDB = {};
+		_data.each(function(konto, uid) {
+			if(konto.knuddel > 0.00 || konto.buyin > 0.00 || konto.payout > 0.00) {
+				newDB[uid] = konto;
+			}
 		});
+		_data = newDB;
+	};
+	
+	this.getData = function() {
+		return _data;
 	};
 	
 	this.getUsers = function() {
@@ -200,15 +214,10 @@ var KBank = (new function() {
 	this.getTransit = function() {
 		var transit = 0.00;
 		
-		_data.each(function(uid) {
-			transit += KBank.getKn(uid);
+		_data.each(function(konto) {
+			transit += konto.knuddel;
 		});
-		return transit;
+		return parseFloat(transit.toFixed(2));;
 	};
-	
-	this.toString = function() {
-		return '[KFramework KBank]';
-	};
-	
 	this.fixData();
 }());
