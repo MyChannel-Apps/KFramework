@@ -26,41 +26,54 @@
 
 var DB	= (new function() {
 	this.getUser = function(user) {
-		Logger.info('DB.getUser(user) is DEPRECATED');
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('DB.getUser(user) is DEPRECATED');
+		} else {
+			Logger.info('DB.getUser(user) is DEPRECATED');
+		}
+		
 		return user.getPersistence();
 	};
 	
 	this.getChannel = function() {
-		Logger.info('DB.getChannel() is DEPRECATED');	
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('DB.getChannel() is DEPRECATED');
+		} else {
+			Logger.info('DB.getChannel() is DEPRECATED');	
+		}
+		
 		return KnuddelsServer.getPersistence();
 	};
 	
 	this.load = function(key, defaultValue, user) {
 		if(key === undefined) {
-			Logger.error('No key submitted');
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			
 			return false;
 		}
 		
-		var selectedDB = KnuddelsServer.getPersistence();
+		var _db = KnuddelsServer.getPersistence();
+		
 		if(user != undefined) { 
-			selectedDB = user.getPersistence();
+			_db = user.getPersistence();
 		}
 		
 		switch(typeof defaultValue) {
 			case 'string':
-				return selectedDB.getString(key, defaultValue);
-			break;	
-
+				return _db.getString(key, defaultValue);
+			break;
 			case 'number':
-				return selectedDB.getNumber(key, defaultValue);
+				return _db.getNumber(key, defaultValue);
 			break;
-			
 			case 'object':
-				return selectedDB.getObject(key, defaultValue);
+				return _db.getObject(key, defaultValue);
 			break;
-			
 			case 'undefined':
-				return selectedDB.getObject(key, {});
+				return _db.getObject(key, {});
 			break;
 		}
 		
@@ -69,34 +82,73 @@ var DB	= (new function() {
 
 	this.save = function(key, data, user) {
 		if(key === undefined) {
-			Logger.error('No key submitted');
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			
 			return false;
 		}
 
 		if(data === undefined) {
-			Logger.error('No Data submitted');
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No Data submitted');
+			} else {
+				Logger.error('No Data submitted');
+			}
+			
 			return false;
 		}
 		
-		var selectedDB = KnuddelsServer.getPersistence();
+		var _db = KnuddelsServer.getPersistence();
+		
 		if(user != undefined) { 
-			selectedDB = user.getPersistence();
+			_db = user.getPersistence();
 		}
 		
 		switch(typeof data) {
 			case 'string':
-				selectedDB.setString(key, data);
-			break;	
-
-			case 'number':
-				selectedDB.setNumber(key, data);
+				_db.setString(key, data);
 			break;
-			
+			case 'number':
+				_db.setNumber(key, data);
+			break;
 			case 'object':
-				selectedDB.setObject(key, data);
+				_db.setObject(key, data);
 			break;
 		}
 		return true;
+	};
+	
+	this.delete = function(key, user) {
+		if(key === undefined) {
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			
+			return false;
+		}
+		
+		var _db = KnuddelsServer.getPersistence();
+		
+		if(user != undefined) { 
+			_db = user.getPersistence();
+		}
+		
+		if(_db.hasString(key)) {
+			_db.deleteString(key);
+		}
+		
+		if(_db.hasNumber(key)) {
+			_db.deleteNumber(key);
+		}
+		
+		if(_db.hasObject(key)) {
+			_db.deleteObject(key);
+		}
 	};
 	
 	this.toString = function() {
