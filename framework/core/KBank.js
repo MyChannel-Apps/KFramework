@@ -34,9 +34,9 @@ var KBank = (new function() {
 		
 		if(_data[uid] === undefined) {
 			_data[uid] = {
-				knuddel: 0.00,
-				buyin: 0.00,
-				payout: 0.00,
+				knuddel:	0.00,
+				buyin:		0.00,
+				payout:		0.00,
 			};
 		}
 	};
@@ -47,6 +47,7 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
+		
 		return parseFloat(_data[uid].knuddel.toFixed(2));
 	};
 	
@@ -56,6 +57,7 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
+		
 		return _data[uid];
 	};
 
@@ -87,12 +89,18 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
+		
 		_data[uid].knuddel += kn;
 		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
 	};
 	
 	this.delKn = function(uid, kn) {
-		Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
+		} else {
+			Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
+		}
+		
 		return this.subKn(uid, kn);
 	};
 	
@@ -108,7 +116,7 @@ var KBank = (new function() {
 		this.create(uid);
 		
 		if(kn <= 0.00) {
-		//	return false;
+			// return false;
 		}
 		
 		if(_data[uid].knuddel < kn) {
@@ -117,6 +125,7 @@ var KBank = (new function() {
 		
 		_data[uid].knuddel -= kn;
 		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
+		
 		return true;
 	};
 	
@@ -138,13 +147,19 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
-		_data[uid].knuddel -= kn;
-		_data[uid].payout += kn;
+		
+		_data[uid].knuddel	-= kn;
+		_data[uid].payout	+= kn;
+		_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
+		_data[uid].payout	= parseFloat(_data[uid].payout.toFixed(2));
 
-		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
-		_data[uid].payout = parseFloat(_data[uid].payout.toFixed(2));
-
-		Bot.knuddel(KnuddelsServer.getUser(uid), kn, reason);
+		// @ToDo Chris, pls check if Bot has knuddel available!
+		if(Bot == undefined) {
+			KnuddelsServer.getDefaultBotUser().transferKnuddel(KnuddelsServer.getUser(uid), kn, reason);
+		} else {
+			Bot.knuddel(KnuddelsServer.getUser(uid), kn, reason);
+		}
+		
 		return true;
 	};
 
@@ -162,44 +177,80 @@ var KBank = (new function() {
 		}
 		
 		this.create(uid);
-		_data[uid].knuddel += kn;
-		_data[uid].buyin += kn;
 		
-		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
-		_data[uid].buyin = parseFloat(_data[uid].buyin.toFixed(2));
+		_data[uid].knuddel	+= kn;
+		_data[uid].buyin	+= kn;
+		_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
+		_data[uid].buyin	= parseFloat(_data[uid].buyin.toFixed(2));
+		
 		return true;
 	};
 	
 	this.loadData = function() {
-		_data = DB.load('_bank');
+		if(DB == undefined) {
+			_data = KnuddelsServer.getPersistence().getObject('_bank', _data);
+		} else {
+			_data = DB.load('_bank', _data);
+		}
+		
 		this.fixData();
 	};
 	
 	this.saveData = function() {
 		this.cleanData();
-		DB.save('_bank', _data);
+		
+		if(DB == undefined) {
+			KnuddelsServer.getPersistence().setObject('_bank', _data);
+		} else {
+			DB.save('_bank', _data);
+		}
 	};
 
 	this.resetData = function() {
-		DB.save('_bank', {});
-		_data = {};		
+		_data = {};
+		
+		if(DB == undefined) {
+			KnuddelsServer.getPersistence().setObject('_bank', _data);
+		} else {
+			DB.save('_bank', _data);
+		}
 	};
 	
 	this.fixData = function() {
-		_data.each(function(konto, uid) {
-			_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
-			_data[uid].buyin = parseFloat(_data[uid].buyin.toFixed(2));
-			_data[uid].payout = parseFloat(_data[uid].payout.toFixed(2));
-		});
+		if(!Object.prototype.each) {
+			for(var uid in _data) {
+				_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
+				_data[uid].buyin	= parseFloat(_data[uid].buyin.toFixed(2));
+				_data[uid].payout	= parseFloat(_data[uid].payout.toFixed(2));
+			}
+		} else {
+			_data.each(function(konto, uid) {
+				_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
+				_data[uid].buyin	= parseFloat(_data[uid].buyin.toFixed(2));
+				_data[uid].payout	= parseFloat(_data[uid].payout.toFixed(2));
+			});
+		}
 	};
 	
 	this.cleanData = function() {
 		var newDB = {};
-		_data.each(function(konto, uid) {
-			if(konto.knuddel > 0.00 || konto.buyin > 0.00 || konto.payout > 0.00) {
-				newDB[uid] = konto;
+		
+		if(!Object.prototype.each) {
+			for(var uid in _data) {
+				var konto = _data[uid];
+				
+				if(konto.knuddel > 0.00 || konto.buyin > 0.00 || konto.payout > 0.00) {
+					newDB[uid] = konto;
+				}
 			}
-		});
+		} else {
+			_data.each(function(konto, uid) {
+				if(konto.knuddel > 0.00 || konto.buyin > 0.00 || konto.payout > 0.00) {
+					newDB[uid] = konto;
+				}
+			});
+		}
+		
 		_data = newDB;
 	};
 	
@@ -214,10 +265,19 @@ var KBank = (new function() {
 	this.getTransit = function() {
 		var transit = 0.00;
 		
-		_data.each(function(konto) {
-			transit += konto.knuddel;
-		});
+		if(!Object.prototype.each) {
+			for(var entry in _data) {
+				var konto	= _data[entry];
+				transit		+= konto.knuddel;
+			}
+		} else {
+			_data.each(function(konto) {
+				transit += konto.knuddel;
+			});
+		}
+		
 		return parseFloat(transit.toFixed(2));;
 	};
+	
 	this.fixData();
 }());
