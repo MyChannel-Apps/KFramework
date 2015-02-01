@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/core/channel
 */
 
 var Channel = (new function() {
@@ -30,18 +31,30 @@ var Channel = (new function() {
 	var _restrictions	= _channel.getChannelRestrictions();
 	var _rights			= _configuration.getChannelRights();
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getChannel
+	*/
 	this.getName = function() {
 		return _channel.getChannelName();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getModerators
+	*/
 	this.getModerators = function() {
 		return _rights.getChannelModerators();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwners
+	*/
 	this.getOwners = function() {
 		return _rights.getChannelOwners();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getMods
+	*/
 	this.getMods = function() {
 		return _rights.getEventModerators();
 	};
@@ -59,6 +72,8 @@ var Channel = (new function() {
 	};
 	
 	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getUsers
+		
 		Example Filter:
 		{
 			bot:		true,		// AppBot or SystemBot

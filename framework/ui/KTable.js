@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/kcode/table
 */
 
 /*
@@ -37,14 +38,21 @@
 	var table	= new KTable();
 	table.add(new KRow(new KCell('100', 'Hallo Welt'), new KCell('w1', 'Sonstiges')));
 	Bot.public(table);
+	@docs	http://www.mychannel-apps.de/documentation/KTable_constructor
 */
 function KTable() {
 	var _rows = new Array();
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KTable_add
+	*/
 	this.add = function(element) {
 		_rows.push(element);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KTable_toString
+	*/
 	this.toString = function() {
 		var output = new KCode();
 		output.append('°>{table');
@@ -75,6 +83,9 @@ function KTable() {
 	};
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KRow_constructor
+*/
 function KRow() {
 	var _cells = [];
 	
@@ -82,14 +93,23 @@ function KRow() {
 		_cells	= [];
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KRow_add
+	*/
 	this.add = function(cell) {
 		_cells.push(cell);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KRow_getCells
+	*/
 	this.getCells = function() {
 		return _cells;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KRow_toString
+	*/
 	this.toString	= function(display) {
 		display		= display || false;
 		var output	= new KCode();
@@ -108,6 +128,9 @@ function KRow() {
 	KRow();
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KCell_constructor
+*/
 function KCell(size, content) {
 	var _size		= 0;
 	var _content	= '';
@@ -117,10 +140,16 @@ function KCell(size, content) {
 		_content	= content || '';
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCell_getSize
+	*/
 	this.getSize = function() {
 		return _size;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCell_toString
+	*/
 	this.toString	= function() {
 		var output = new KCode();
 		output.append('°>{tc}<°');

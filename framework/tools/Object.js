@@ -22,8 +22,12 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/
 */
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_each
+*/
 if(!Object.prototype.each) {
 	Object.defineProperty(Object.prototype, 'each', {
 		enumerable:		false,
@@ -47,6 +51,9 @@ if(!Object.prototype.each) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_sort
+*/
 if(!Object.prototype.sort) {
 	Object.defineProperty(Object.prototype, 'sort', {
 		enumerable:		false,
@@ -106,6 +113,9 @@ if(!Object.prototype.sort) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_exists
+*/
 if(!Object.prototype.exists) {
 	Object.defineProperty(Object.prototype, 'exists', {
 		enumerable:		false,
@@ -117,6 +127,9 @@ if(!Object.prototype.exists) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_compare
+*/
 if(!Object.prototype.compare) {
   Object.defineProperty(Object.prototype, 'compare', {
     enumerable: false,

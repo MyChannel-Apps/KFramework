@@ -22,8 +22,12 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/tools/array
 */
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Array_each
+*/
 if(!Array.prototype.each) {
 	Object.defineProperty(Array.prototype, 'each', {
 		enumerable:		false,
@@ -39,6 +43,9 @@ if(!Array.prototype.each) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Array_random
+*/
 if(!Array.prototype.random) {
 	Object.defineProperty(Array.prototype, 'random', {
 		enumerable:		false,
@@ -50,6 +57,9 @@ if(!Array.prototype.random) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Array_exists
+*/
 if(!Array.prototype.exists) {
 	Object.defineProperty(Array.prototype, 'exists', {
 		enumerable:		false,

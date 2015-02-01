@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/core/kcode
 */
 
 require('framework/ui/KButton.js');
@@ -33,15 +34,24 @@ require('framework/ui/KColor.js');
 require('framework/ui/KTable.js');
 require('framework/ui/KGroup.js');
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KCode_constructor
+*/
 function KCode() {
 	var _buffer = [];
 	var _debug	= false;
 	var _minify	= true;
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_append
+	*/
 	this.append = function(component) {
 		_buffer.push(component);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_newLine
+	*/
 	this.newLine = function() {
 		_buffer.push('°#°');
 		
@@ -49,14 +59,23 @@ function KCode() {
 		_buffer.push('#');
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_newHr
+	*/
 	this.newHr = function() {
 		_buffer.push('°-°');
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_setAlignment
+	*/
 	this.setAlignment = function(alignment) {
 		_buffer.push(alignment);
 	};	
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_addImage
+	*/
 	this.addImage = function(file) {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('KCode.addImage(file) is DEPRECATED');
@@ -64,7 +83,6 @@ function KCode() {
 			Logger.info('KCode.addImage(file) is DEPRECATED');
 		}
 		
-		// @ToDo to Image-Object with addition options (margin, hover, what ever)
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
 	};
 	
@@ -72,6 +90,9 @@ function KCode() {
 		_minify = state;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_toString
+	*/
 	this.toString = function() {
 		var string = '';
 		

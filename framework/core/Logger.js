@@ -33,10 +33,16 @@ var Logger = (new function() {
 		_watcher	= {};
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_addLogUser
+	*/
 	this.addLogUser = function(uid, types) {
 		_watcher[uid] = types || 'E_ALL';
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_delLogUser
+	*/
 	this.delLogUser = function(uid) {
 		if(_watcher[uid] != undefined) {
 			delete _watcher[uid];
@@ -96,26 +102,41 @@ var Logger = (new function() {
 		}
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_debug
+	*/
 	this.debug = function(message) {
 		_logger.debug(message + getStrackTrace());
 		sendLog('DEBUG', message);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_info
+	*/
 	this.info = function(message) {
 		_logger.info(message + getStrackTrace());
 		sendLog('INFO', message);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_error
+	*/
 	this.error = function(message) {
 		_logger.error(message + getStrackTrace());
 		sendLog('ERROR', message);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_fatal
+	*/
 	this.fatal = function(message) {
 		_logger.fatal(message + getStrackTrace());
 		sendLog('FATAL', message);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Logger_warn
+	*/
 	this.warn = function(message) {
 		_logger.warn(message + getStrackTrace());
 		sendLog('WARN', message);

@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs	http://www.mychannel-apps.de/documentation/kcode/button
 */
 
 function KButton(text, command) {
@@ -29,6 +30,9 @@ function KButton(text, command) {
 	var _command	= '';
 	var _properties	= {};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_constructor
+	*/
 	function KButton(text, command) {
 		if(text === undefined) {
 			return;
@@ -43,23 +47,39 @@ function KButton(text, command) {
 	};
 	
 	/* COMMAND */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getCommand
+	*/
 	this.getCommand = function() {
 		return _command;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setCommand
+	*/
 	this.setCommand = function(command) {
 		_command = command;
 	};
+	
 	/* TEXT */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getText
+	*/
 	this.getText = function() {
 		return _text;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getText
+	*/
 	this.setText = function(text) {
 		_text = text;
 	};
 	
 	/* ICON */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setIcon
+	*/
 	this.setIcon = function(icon) {
 		if(icon.indexOf('https://') == 0 || icon.indexOf('http://') == 0) {
 			Logger.info("Can\t use http:// or https:// URL\'s on Buttons because the Path is implemented on the Client side!");
@@ -68,80 +88,131 @@ function KButton(text, command) {
 		_properties.icon = icon;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_removeIcon
+	*/
 	this.removeIcon = function() {
 		delete _properties.icon;
 	};
 	
 	/* COLOR */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setColor
+	*/
 	this.setColor = function(color) {
 		// @ToDo can be gradient like "120,230,90~60,170,25~24,96,1"
 		_properties.color = color;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_removeColor
+	*/
 	this.removeColor = function() {
 		delete _properties.color;
 	};
 	
 	/* HEIGHT */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setHeight
+	*/
 	this.getHeight = function() {
 		return _properties.height;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setHeight
+	*/
 	this.setHeight = function(height) {
 		_properties.height = height;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_removeHeight
+	*/
 	this.removeHeight = function() {
 		delete _properties.height;
 	};
 	
 	/* WIDTH */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getWidth
+	*/
 	this.getWidth = function() {
 		return _properties.width;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setWidth
+	*/
 	this.setWidth = function(width) {
 		_properties.width = width;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_removeWidth
+	*/
 	this.removeWidth = function() {
 		delete _properties.width;
 	};
 	
 	/* SIZE */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setSize
+	*/
 	this.setSize = function(width, height) {
 		this.setWidth(width);
 		this.setHeight(height);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_removeSize
+	*/
 	this.removeSize = function() {
 		this.removeWidth();
 		this.removeHeight();
 	};
 	
 	/* POSITION */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getX
+	*/
 	this.getX = function() {
 		return _properties.mx;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setX
+	*/
 	this.setX = function(x) {
 		_properties.mx = x;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getY
+	*/
 	this.getY = function() {
 		return _properties.my;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setY
+	*/
 	this.setY = function(y) {
 		_properties.my = y;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setPosition
+	*/
 	this.setPosition = function(x, y) {
 		this.setX(x);
 		this.setY(y);
 	};
 	
 	/* TEXTBORDER */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_useTextborder
+	*/
 	this.useTextborder = function(bool) {
 		if(bool) {
 			_properties.textborder = '1';
@@ -151,6 +222,9 @@ function KButton(text, command) {
 	};
 	
 	/* DISABLED */
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setEnabled
+	*/
 	this.setEnabled = function(bool) {
 		if(bool == false) {
 			_properties.enabled = '0';
@@ -160,7 +234,9 @@ function KButton(text, command) {
 	};
 	
 	/* @ToDo TEXTCOLOR */
-	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_toString
+	*/
 	this.toString = function() {
 		var string = '°>{button}';
 		if(_text.length > 0) {

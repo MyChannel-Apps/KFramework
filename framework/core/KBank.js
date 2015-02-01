@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/core/bank
 */
 
 var KBank = (new function() {
@@ -41,6 +42,9 @@ var KBank = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getKn
+	*/
 	this.getKn = function(uid) {
 		if(uid === undefined) {
 			return;
@@ -51,6 +55,9 @@ var KBank = (new function() {
 		return parseFloat(_data[uid].knuddel.toFixed(2));
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getKonto
+	*/
 	this.getKonto = function(uid) {
 		if(uid === undefined) {
 			return;
@@ -61,6 +68,9 @@ var KBank = (new function() {
 		return _data[uid];
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_setKn
+	*/
 	this.setKn = function(uid, kn) {
 		if(uid === undefined) {
 			return;
@@ -79,6 +89,9 @@ var KBank = (new function() {
 		_data[uid].knuddel = kn;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_addKn
+	*/
 	this.addKn = function(uid, kn) {
 		if(uid === undefined) {
 			return;
@@ -94,6 +107,9 @@ var KBank = (new function() {
 		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_delKn
+	*/
 	this.delKn = function(uid, kn) {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
@@ -104,6 +120,9 @@ var KBank = (new function() {
 		return this.subKn(uid, kn);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_subKn
+	*/
 	this.subKn = function(uid, kn) {
 		if(uid === undefined) {
 			return;
@@ -129,6 +148,9 @@ var KBank = (new function() {
 		return true;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_payout
+	*/
 	this.payout = function(uid, kn, reason) {
 		if(uid === undefined) {
 			return false;
@@ -163,6 +185,9 @@ var KBank = (new function() {
 		return true;
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_payin
+	*/
 	this.payin = function(uid, kn) {
 		if(uid === undefined) {
 			return;
@@ -262,6 +287,9 @@ var KBank = (new function() {
 		return Object.keys(_data);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getTransit
+	*/
 	this.getTransit = function() {
 		var transit = 0.00;
 		

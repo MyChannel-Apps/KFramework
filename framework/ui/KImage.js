@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/kcode/image
 */
 
 /*
@@ -34,6 +35,7 @@
 	var link = new KLink(image);
 	
 	Bot.public(link);
+	@docs	http://www.mychannel-apps.de/documentation/KImage_constructor
 */
 function KImage(image) {
 	var _path			= '';
@@ -61,62 +63,104 @@ function KImage(image) {
 		}
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setContainerSize
+	*/
 	this.setContainerSize = function(width, height) {
 		_properties.w = width;
 		_properties.h = height;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setSize
+	*/
 	this.setSize = function(width, height) {
 		_properties.mw = width;
 		_properties.mh = height;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setPosition
+	*/
 	this.setPosition = function(x, y) {
 		_properties.mx = x;
 		_properties.my = y;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setX
+	*/
 	this.setX = function(x) {
 		_properties.mx = x;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setY
+	*/
 	this.setY = function(y) {
 		_properties.my = y;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabel
+	*/
 	this.setLabel = function(text) {
 		_properties.label = text;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelPosition
+	*/
 	this.setLabelPosition = function(x, y) {
 		_properties.lmx = x;
 		_properties.lmy = y;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelColor
+	*/
 	this.setLabelColor = function(color) {
 		_properties.labelcolor = color;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_enableLabelBorder
+	*/
 	this.enableLabelBorder = function(bool) {
 		_properties.labelborder = (bool == true ? '1' : '0');
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setBorder
+	*/
 	this.setBorder = function(size) {
 		_properties.border = size;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setQuadcut
+	*/
 	this.setQuadcut = function(size) {
 		_properties.quadcut = size;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setShadow
+	*/
 	this.setShadow = function(position) {
 		_properties.shadow = position;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setMirror
+	*/
 	this.setMirror = function(state) {
 		_properties.mirror = (state == true ? 0x01 : 0x00);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setGreyscale
+	*/
 	this.setGreyscale = function(state) {
 		_properties.gray = (state == true ? 0x01 : 0x00);
 	};
@@ -129,6 +173,9 @@ function KImage(image) {
 		_version = version;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_toString
+	*/
 	this.toString = function(only_path) {
 		only_path	= only_path || false;
 		var output	= (only_path == true ? '' : '°>') + _path + _name;

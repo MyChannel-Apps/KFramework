@@ -22,8 +22,12 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs	http://www.mychannel-apps.de/documentation/kcode/link
 */
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KLink_constructor
+*/
 function KLink(text) {
 	var _text			= '';
 	var _command_left	= undefined;
@@ -39,11 +43,17 @@ function KLink(text) {
 		return string.replace(/(<|>|\||°)/g, '\\$1');
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KLink_setCommand
+	*/
 	this.setCommand = function(command_left, command_right) {
 		_command_left	= command_left;
 		_command_right	= command_right;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KLink_enableHover
+	*/
 	this.enableHover = function(state) {
 		_hover = state;
 	};
@@ -56,6 +66,9 @@ function KLink(text) {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KLink_toString
+	*/
 	this.toString = function() {
 		var string = '°>';
 		

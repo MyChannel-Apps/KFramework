@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/kcode/font
 */
 
 /*
@@ -31,13 +32,26 @@
 	text.append("Deine neue Font..");
 	Bot.public(text);
 */
-
 var FontStyle = {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/FontStyle_PLAIN
+	*/
 	PLAIN:		0x00,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/FontStyle_BOLD
+	*/
 	BOLD:		0x01,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/FontStyle_ITALIC
+	*/
 	ITALIC:		0x02
 };
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KFont_constructor
+*/
 function KFont(name, style, size) {
 	var _name		= 'Arial';
 	var _size		= 14;
@@ -57,6 +71,9 @@ function KFont(name, style, size) {
 		_style	= style;
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KFont_toString
+	*/
 	this.toString = function() {
 		var output = '';
 		

@@ -22,9 +22,13 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/core/user
 */
 
 var Users = (new function() {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/User_get
+	*/
 	this.get = function(nickname) {
 		if(typeof(nickname) == 'number') {
 			if(KnuddelsServer.canAccessUser(nickname)) {
@@ -138,6 +142,9 @@ var Users = (new function() {
 		return nickname;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/User_toString
+	*/
 	this.toString = function(value) {
 		switch(value) {
 			case UserStatus.Newbie:

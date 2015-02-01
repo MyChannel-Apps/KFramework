@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/core/cronjob
 */
 
 var Cron = (new function() {
@@ -37,6 +38,9 @@ var Cron = (new function() {
 		_watcher	= setInterval(this.run, 500);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_enableOfflineRunCheck
+	*/
 	this.enableOfflineRunCheck = function() {
 		_offlineCheck = true;
 	};
@@ -71,6 +75,9 @@ var Cron = (new function() {
 		});
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_add
+	*/
 	this.add = function(cronjob) {
 		_cronjobs.push(cronjob);
 		
@@ -121,12 +128,18 @@ var Cron = (new function() {
 		});
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_saveData
+	*/
 	this.saveData = function() {
 		_cronjobs.each(function(cron) {
 			cron.save();
 		});
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_onShutdown
+	*/
 	this.onShutdown = function() {
 		_cronjobs.each(function(cron) {
 			cron.onShutdown();
@@ -181,30 +194,51 @@ function Cronjob(name, cycle, callback) {
 		instance.start();
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastRun
+	*/
 	this.getLastRun = function() {
 		return _last_run.getTime();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_getName
+	*/
 	this.getName = function() {
 		return _name;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastCheck
+	*/
 	this.getLastCheck = function() {
 		return _last_check.getTime();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_SetLastCheck
+	*/
 	this.setLastCheck = function(time) {
 		_last_check = time;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_isRunning
+	*/
 	this.isRunning = function() {
 		return _is_running;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_start
+	*/
 	this.start = function() {
 		_is_running	= true;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_stop
+	*/
 	this.stop = function() {
 		_is_running	= false;
 	};
@@ -250,6 +284,9 @@ function Cronjob(name, cycle, callback) {
 		});
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_onShutdown
+	*/
 	this.onShutdown = function() {
 		this.stop();
 		this.save();

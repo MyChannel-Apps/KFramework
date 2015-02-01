@@ -22,26 +22,98 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs	http://www.mychannel-apps.de/documentation/kcode/color
 */
 
 var Color = {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_CHANNEL_RED
+	*/
 	CHANNEL_RED:	new ColorInstance('RR', [-255, 0, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_CHANNEL_BLUE
+	*/
 	CHANNEL_BLUE:	new ColorInstance('BB', [0, 0, -255]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_WHITE
+	*/
 	WHITE:			new ColorInstance('W', [255, 255, 255]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_BLACK
+	*/
 	BLACK:			new ColorInstance('K', [0, 0, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_GRAY
+	*/
 	GRAY:			new ColorInstance('A', [128, 128, 128]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_LIGHT_GREY
+	*/
 	LIGHT_GREY:		new ColorInstance('L', [192, 192, 192]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_DARK_GREY
+	*/
 	DARK_GREY:		new ColorInstance('D', [64, 64, 64]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_RED
+	*/
 	RED:			new ColorInstance('R', [255, 0, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_BLUE
+	*/
 	BLUE:			new ColorInstance('B', [0, 0, 255]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_GREEN
+	*/
 	GREEN:			new ColorInstance('G', [0, 255, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_DARK_GREEN
+	*/
 	DARK_GREEN:		new ColorInstance('E', [0, 172, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_YELLOW
+	*/
 	YELLOW:			new ColorInstance('Y', [255, 255, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_CYAN
+	*/
 	CYAN:			new ColorInstance('C', [0, 255, 255]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_MAGENTA
+	*/
 	MAGENTA:		new ColorInstance('M', [255, 0, 255]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_PINK
+	*/
 	PINK:			new ColorInstance('P', [255, 175, 175]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_ORANGE
+	*/
 	ORANGE:			new ColorInstance('O', [255, 200, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_BROWN
+	*/
 	BROWN:			new ColorInstance('N', [150, 74, 0]),
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Color_decode
+	*/
 	decode:			function(hex) {
 		var color = new KColor();
 		color.decode(hex);
@@ -49,6 +121,9 @@ var Color = {
 	}
 };
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KColor_constructor
+*/
 function KColor(red, green, blue) {
 	var _red	= -1;
 	var _green	= -1;
@@ -120,6 +195,9 @@ function KColor(red, green, blue) {
 		return '';
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KColor_decode
+	*/
 	this.decode = function(hex) {
 		var result	= /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 		_red		= parseInt(result[1], 16);
@@ -127,6 +205,9 @@ function KColor(red, green, blue) {
 		_blue		= parseInt(result[3], 16);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KColor_toString
+	*/
 	this.toString = function() {
 		var output = new KCode();
 		

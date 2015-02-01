@@ -22,9 +22,13 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/core/database
 */
 
 var DB	= (new function() {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_getUser
+	*/
 	this.getUser = function(user) {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('DB.getUser(user) is DEPRECATED');
@@ -35,6 +39,9 @@ var DB	= (new function() {
 		return user.getPersistence();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_getChannel
+	*/
 	this.getChannel = function() {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('DB.getChannel() is DEPRECATED');
@@ -45,6 +52,9 @@ var DB	= (new function() {
 		return KnuddelsServer.getPersistence();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_load
+	*/
 	this.load = function(key, defaultValue, user) {
 		if(key === undefined) {
 			if(Logger == undefined) {
@@ -80,6 +90,9 @@ var DB	= (new function() {
 		return false;
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_save
+	*/
 	this.save = function(key, data, user) {
 		if(key === undefined) {
 			if(Logger == undefined) {

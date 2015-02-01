@@ -22,19 +22,26 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs	http://www.mychannel-apps.de/documentation/kcode/countdown
 */
 
 /*
 	format=DE
+	@docs	http://www.mychannel-apps.de/documentation/KCountdown_constructor
 */
-
 function KCountdown() {
 	var _properties	= {};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setTime
+	*/
 	this.setTime = function(time) {
 		_properties.time = time;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setFormat
+	*/
 	this.setFormat = function(format) {
 		_properties.format = format;
 	};
@@ -43,6 +50,9 @@ function KCountdown() {
 		_properties.timeUpText = text;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCountdown_toString
+	*/
 	this.toString = function() {
 		var string	= '°>{countdown}';
 		var index	= 0;

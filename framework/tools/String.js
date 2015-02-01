@@ -22,8 +22,12 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/tools/string
 */
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/String_format
+*/
 if(!String.prototype.format) {
 	Object.defineProperty(String.prototype, 'format', {
 		enumerable:		false,
@@ -38,6 +42,9 @@ if(!String.prototype.format) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/String_contains
+*/
 if(!String.prototype.contains) {
 	Object.defineProperty(String.prototype, 'contains', {
 		enumerable:		false,

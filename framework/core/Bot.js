@@ -22,6 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/core/bot
 */
 
 var Bot = (new function() {
@@ -111,14 +112,23 @@ var Bot = (new function() {
 		return _user.isOnlineInChannel();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_join
+	*/
 	this.join = function() {
 		_user.joinChannel();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_leave
+	*/
 	this.leave = function() {
 		_user.leaveChannel();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_knuddel
+	*/
 	this.knuddel = function(user, amount, message) {
 		if(message === undefined) {
 			_user.transferKnuddel(user, amount);
@@ -127,14 +137,23 @@ var Bot = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getKnuddels
+	*/
 	this.getKnuddels = function() {
 		return _user.getKnuddelAmount().asNumber();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_exception
+	*/
 	this.exception = function(exception) {
 		_user.sendPublicMessage('°RR°_Exception:_°r°#' + (exception.message == undefined ? exception : exception.message));
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_publicMessage
+	*/
 	this.publicMessage = function(message) {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('Bot.publicMessage(message) is DEPRECATED');
@@ -145,6 +164,9 @@ var Bot = (new function() {
 		this.public(message);
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_postMessage
+	*/
 	this.postMessage = function(user, message, topic) {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('Bot.postMessage(user, message, topic) is DEPRECATED');
@@ -155,6 +177,9 @@ var Bot = (new function() {
 		this.post(user, message, topic);
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_privateMessage
+	*/
 	this.privateMessage = function(user, message) {
 		if(Logger == undefined) {
 			KnuddelsServer.getDefaultLogger().info('Bot.privateMessage(user, message) is DEPRECATED');
@@ -165,6 +190,9 @@ var Bot = (new function() {
 		this.private(user, message);
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_public
+	*/
 	this.public = function(message) {
 		if(message instanceof KCode) {
 			message = message.toString();
@@ -172,6 +200,9 @@ var Bot = (new function() {
 		_user.sendPublicMessage(message);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_post
+	*/
 	this.post = function(nick, message, topic) {
 		if(message instanceof KCode) {
 			message = message.toString();
@@ -187,6 +218,9 @@ var Bot = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_private
+	*/
 	this.private = function(nick, message) {
 		if(message instanceof KCode) {
 			message = message.toString();
@@ -215,6 +249,9 @@ var Bot = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_exec
+	*/
 	this.exec = function(command) {
 		_user.sendToChannel(command);
 	};
