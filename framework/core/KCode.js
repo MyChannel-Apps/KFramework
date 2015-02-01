@@ -58,7 +58,12 @@ function KCode() {
 	};	
 	
 	this.addImage = function(file) {
-		Logger.info('KCode.addImage(file) is DEPRECATED');
+		if(Logger == undefined) {
+			KnuddelsServer.getDefaultLogger().info('KCode.addImage(file) is DEPRECATED');
+		} else {
+			Logger.info('KCode.addImage(file) is DEPRECATED');
+		}
+		
 		// @ToDo to Image-Object with addition options (margin, hover, what ever)
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
 	};
