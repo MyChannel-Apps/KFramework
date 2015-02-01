@@ -29,8 +29,8 @@ var Logger = (new function() {
 	var _watcher;
 	
 	function Logger() {
-		_logger = KnuddelsServer.getDefaultLogger();
-		_watcher = {};
+		_logger		= KnuddelsServer.getDefaultLogger();
+		_watcher	= {};
 	};
 	
 	this.addLogUser = function(uid, types) {
@@ -49,6 +49,7 @@ var Logger = (new function() {
 		} catch(e) {
 			return prettyStackTrace(e.stack);
 		}
+		
 		return '';
 	};
 	
@@ -56,22 +57,43 @@ var Logger = (new function() {
 		var lines	= stack.replace(/\t/g, '     ').replace(/\(anonymous\)/g, '').replace(/at (.*)@(.*): /g, 'at ').split('\n');
 		var output	= '';
 		
-		lines.each(function(line, index) {
-			if(index <= 1) {
-				return;
+		if(!Object.prototype.each) {
+			for(var index in lines) {
+				if(index <= 1) {
+					return;
+				}
+				
+				output += '\n' + lines[index];
 			}
-			
-			output += '\n' + line;
-		});
+		} else {
+			lines.each(function(line, index) {
+				if(index <= 1) {
+					return;
+				}
+				
+				output += '\n' + line;
+			});
+		}
+		
 		return output;
 	};
 	
 	sendLog = function(prefix, message) {
-		_watcher.each(function(value, uid) {
-			if(value.contains(prefix) || value == 'E_ALL') {
-				Users.get(uid).sendPrivateMessage(prefix+': '+message);
+		if(!Object.prototype.each) {
+			for(var uid in _watcher) {
+				var value = _watcher[uid];
+				
+				if(value == prefix || value == 'E_ALL') {
+					Users.get(uid).sendPrivateMessage(prefix + ': ' + message);
+				}
 			}
-		});
+		} else {
+			_watcher.each(function(value, uid) {
+				if(value.contains(prefix) || value == 'E_ALL') {
+					Users.get(uid).sendPrivateMessage(prefix + ': ' + message);
+				}
+			});
+		}
 	};
 
 	this.debug = function(message) {
