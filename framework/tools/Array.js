@@ -52,7 +52,13 @@ if(!Array.prototype.random) {
 		configurable:	false,
 		writable:		false,
 		value:			function() {
-			return this[RandomOperations.nextInt(this.length)];
+			var random = RandomOperations.nextInt(this.length);
+			
+			if(this.length <= 0 || random >= this.length) {
+				return undefined;
+			}
+			
+			return this[random];
 		}
 	});
 }
