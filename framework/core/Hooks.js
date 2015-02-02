@@ -180,7 +180,7 @@ var Hooks = (new function() {
 						
 						output = hook.callback.apply(this, ((is_filter_set ? false : is_filter) ? output : args));
 					}
-				});
+				};
 			}
 		} else {
 			_hooks.each(function(hooks, priority) {
