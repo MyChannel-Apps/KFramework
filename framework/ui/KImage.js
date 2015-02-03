@@ -48,8 +48,14 @@ function KImage(image) {
 	function KImage(image) {
 		// HTTP(S) Links
 		if(image.substring(0, 7) == 'http://' || image.substring(0, 8) == 'https://') {
-			_use_direct = true;
-			return;
+			var split	= image.split('/');
+			var length	= split.length;
+			image		= split[length - 1];
+			
+			for(var index = 0; index < length - 1; ++index) {
+				_path += split[index];
+				_path += '/';
+			}
 		}
 		
 		var split	= image.split('.');
