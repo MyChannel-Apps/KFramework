@@ -49,7 +49,7 @@ var Bot = (new function() {
 	};
 	
 	this.getProfileLink	= function(displayText) {
-		return _user.getProfileLink(displayText);
+		return _user.getProfileLink(displayText == undefined ? this.getNick() : displayText);
 	};
 	
 	this.getReadme = function() {
