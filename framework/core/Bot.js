@@ -75,6 +75,10 @@ var Bot = (new function() {
 	this.isAppDeveloper = function() {
 		return _user.isAppDeveloper();
 	};
+	
+	this.isAppManager = function() {
+		return _user.isAppManager();
+	};
 
 	this.isAway = function() {
 		return _user.isAway();

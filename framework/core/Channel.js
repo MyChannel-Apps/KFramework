@@ -71,6 +71,10 @@ var Channel = (new function() {
 		return _restrictions.getLockedUsers();
 	};
 	
+	this.onDev = function() {
+		return KnuddelsServer.isTestSystem();
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getUsers
 		

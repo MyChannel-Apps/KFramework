@@ -120,6 +120,7 @@ var Users = (new function() {
 				this.getUserStatus		= function() { return UserStatus.Newbie; };
 				this.getUserType		= function() { return UserType.Human; };
 				this.isAppDeveloper		= function() { return false; };
+				this.isAppManager		= function() { return false; };
 				this.isAway				= function() { return false; };
 				this.isChannelModerator	= function() { return false; };
 				this.isChannelOwner		= function() { return false; };
