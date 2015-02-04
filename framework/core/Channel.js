@@ -38,6 +38,20 @@ var Channel = (new function() {
 		return _channel.getChannelName();
 	};
 	
+	this.getOwner = function() {
+		var owners	= this.getOwners();
+		var owner	= undefined;
+		
+		owners.each(function(user, index) {
+			if(user.isOnlineInChannel()) {
+				owner = user;
+				return;
+			}
+		});
+		
+		return owner;
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getModerators
 	*/
