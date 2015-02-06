@@ -134,6 +134,9 @@ var DB	= (new function() {
 		return true;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_delete
+	*/
 	this.delete = function(key, user) {
 		if(key === undefined) {
 			if(Logger == undefined) {
@@ -164,6 +167,9 @@ var DB	= (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_toString
+	*/
 	this.toString = function() {
 		return '[KFramework Database]';
 	};

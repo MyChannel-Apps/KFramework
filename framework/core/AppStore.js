@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2015 MyChannel-Apps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/bot
+	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/core/store
 */
 
 var Payment = {
@@ -59,16 +59,22 @@ var AppStore = (new function() {
 		allowed_commands: 		[],
 		tier:					Payment.TIER_0,
 		payment: {
-			knuddel: 	5
+			knuddel: 	0
 			interval:	PaymentInterval.Weekly,
-			profit:		10
+			profit:		0
 		}
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/AppStore_setSettings
+	*/
 	this.setSettings = function(options) {
 		_options = options.compare(_options);
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/AppStore_app
+	*/
 	this.app = function(container) {
 		_container	= new container();
 		_app		= new container();
@@ -276,6 +282,9 @@ var AppStore = (new function() {
 		}
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/AppStore_isLocked
+	*/
 	this.isLocked = function() {
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() != _owner.getUserId()) {
 			return true;
@@ -288,6 +297,9 @@ var AppStore = (new function() {
 		return false;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/AppStore_hasPayed
+	*/
 	this.hasPayed = function() {
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() == _owner.getUserId()) {
 			return true;
@@ -360,6 +372,9 @@ var AppStore = (new function() {
 		Bot.private(_owner, text);
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/AppStore_toString
+	*/
 	this.toString = function() {
 		return '[KFramework AppStore]';
 	};

@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2015 MyChannel-Apps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,31 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
+	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/core/hooks
 */
 
 var Hooks = (new function() {
 	var _hooks	= {};
 	var _debug	= false;
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_addFilter
+	*/
 	this.addFilter = function(name, callback, priority) {
 		this.add(name, callback, priority, true);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_addAction
+	*/
 	this.addAction = function(name, callback, priority) {
 		this.add(name, callback, priority);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_add
+	*/
 	this.add = function(name, callback, priority, is_filter) {
 		priority	= (priority == undefined ? 10 : priority); // default Priority is 10
 		is_filter	= (is_filter == undefined ? false : is_filter);
@@ -59,6 +69,9 @@ var Hooks = (new function() {
 		});
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_remove
+	*/
 	this.remove = function(name, priority) {
 		priority = (priority == undefined ? 10 : priority); // default Priority is 10
 		
@@ -87,6 +100,9 @@ var Hooks = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_applyFilter
+	*/
 	this.applyFilter = function(name) {
 		var args		= [];
 		var args_length	= arguments.size();
@@ -106,6 +122,9 @@ var Hooks = (new function() {
 		return this.do.apply(this, args);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_do
+	*/
 	this.do = function(name, is_filter) {
 		if(_debug) {
 			if(Logger == undefined) {
@@ -207,6 +226,9 @@ var Hooks = (new function() {
 		return output;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Hooks_toString
+	*/
 	this.toString = function() {
 		return '[KFramework Hooks]';
 	};

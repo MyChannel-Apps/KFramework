@@ -211,6 +211,9 @@ var KBank = (new function() {
 		return true;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_loadData
+	*/
 	this.loadData = function() {
 		if(DB == undefined) {
 			_data = KnuddelsServer.getPersistence().getObject('_bank', _data);
@@ -221,6 +224,9 @@ var KBank = (new function() {
 		this.fixData();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_saveData
+	*/
 	this.saveData = function() {
 		this.cleanData();
 		
@@ -231,6 +237,9 @@ var KBank = (new function() {
 		}
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_resetData
+	*/
 	this.resetData = function() {
 		_data = {};
 		
@@ -241,6 +250,9 @@ var KBank = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_fixData
+	*/
 	this.fixData = function() {
 		if(!Object.prototype.each) {
 			for(var uid in _data) {
@@ -257,6 +269,9 @@ var KBank = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_cleanData
+	*/
 	this.cleanData = function() {
 		var newDB = {};
 		
@@ -279,10 +294,16 @@ var KBank = (new function() {
 		_data = newDB;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getData
+	*/
 	this.getData = function() {
 		return _data;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getUsers
+	*/
 	this.getUsers = function() {
 		return Object.keys(_data);
 	};
@@ -305,6 +326,13 @@ var KBank = (new function() {
 		}
 		
 		return parseFloat(transit.toFixed(2));;
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_toString
+	*/
+	this.toString = function() {
+		return '[KFramework KBank]';
 	};
 	
 	this.fixData();

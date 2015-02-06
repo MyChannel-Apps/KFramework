@@ -148,6 +148,9 @@ if(!Object.prototype.compare) {
   });
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_size
+*/
 if(!Object.prototype.size) {
 	Object.defineProperty(Object.prototype, 'size', {
 		enumerable:		false,

@@ -22,15 +22,21 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/tools/stringbuffer
 */
-
 function StringBuffer() {
 	var _data = '';
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_append
+	*/
 	this.append = function(data) {
 		_data += data;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_toString
+	*/
 	this.toString = function() {
 		return _data;
 	};

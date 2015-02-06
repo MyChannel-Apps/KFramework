@@ -37,6 +37,8 @@ var Logger = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Logger_addLogUser
 	*/
 	this.addLogUser = function(uid, types) {
+		Logger.info('Logger.addLogUser(uid, types) is DEPRECATED');
+		
 		_watcher[uid] = types || 'E_ALL';
 	};
 
@@ -44,7 +46,9 @@ var Logger = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Logger_delLogUser
 	*/
 	this.delLogUser = function(uid) {
+		Logger.info('Logger.delLogUser(uid) is DEPRECATED');
 		if(_watcher[uid] != undefined) {
+			
 			delete _watcher[uid];
 		}
 	};
@@ -84,7 +88,7 @@ var Logger = (new function() {
 		return output;
 	};
 	
-	sendLog = function(prefix, message) {
+	function sendLog(prefix, message) {
 		if(!Object.prototype.each) {
 			for(var uid in _watcher) {
 				var value = _watcher[uid];

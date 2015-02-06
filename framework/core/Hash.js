@@ -22,9 +22,13 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/core/hash
 */
 
 var Hash = {
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Hash_decodeForm
+	*/
 	decodeForm: function(string) {
 		var chars	= string.split('');
 		var output	= [];
@@ -43,5 +47,11 @@ var Hash = {
 		}
 		
 		return output.join('');
+	},
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Hash_toString
+	*/
+	toString: function() {
+		return '[KFramework Hash]';
 	}
 };

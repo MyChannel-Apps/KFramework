@@ -38,6 +38,9 @@ var Channel = (new function() {
 		return _channel.getChannelName();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwner
+	*/
 	this.getOwner = function() {
 		var owners	= this.getOwners();
 		var owner	= undefined;
@@ -73,18 +76,30 @@ var Channel = (new function() {
 		return _rights.getEventModerators();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getCMutes
+	*/
 	this.getCMutes = function() {
 		return _restrictions.getColorMutedUsers();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getMutes
+	*/
 	this.getMutes = function() {
 		return _restrictions.getMutedUsers();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_getCLs
+	*/
 	this.getCLs = function() {
 		return _restrictions.getLockedUsers();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_onDev
+	*/
 	this.onDev = function() {
 		return KnuddelsServer.isTestSystem();
 	};
@@ -240,6 +255,9 @@ var Channel = (new function() {
 		return users;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Channel_toString
+	*/
 	this.toString = function() {
 		return '[KFramework Channel]';
 	};

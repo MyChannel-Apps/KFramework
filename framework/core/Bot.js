@@ -28,90 +28,156 @@
 var Bot = (new function() {
 	var _user = KnuddelsServer.getDefaultBotUser();
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getAge
+	*/
 	this.getAge = function() { 
 		return _user.getAge();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getGender
+	*/
 	this.getGender = function() { 
 		return _user.getGender();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getKnuddelAmount
+	*/
 	this.getKnuddelAmount = function() {
 		return _user.getKnuddelAmount()
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getNick
+	*/
 	this.getNick = function() {
 		return _user.getNick();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getOnlineMinutes
+	*/
 	this.getOnlineMinutes = function() {
 		return _user.getOnlineMinutes();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getProfileLink
+	*/
 	this.getProfileLink	= function(displayText) {
 		return _user.getProfileLink(displayText == undefined ? this.getNick() : displayText);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getReadme
+	*/
 	this.getReadme = function() {
 		return _user.getReadme();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getRegDate
+	*/
 	this.getRegDate = function() {
 		return _user.getRegDate();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getUserId
+	*/
 	this.getUserId = function() {
 		return _user.getUserId();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getUserStatus
+	*/
 	this.getUserStatus = function() {
 		return _user.getUserStatus();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getUserType
+	*/
 	this.getUserType = function() {
 		return _user.getUserType();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isAppDeveloper
+	*/
 	this.isAppDeveloper = function() {
 		return _user.isAppDeveloper();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isAppManager
+	*/
 	this.isAppManager = function() {
 		return _user.isAppManager();
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isAway
+	*/
 	this.isAway = function() {
 		return _user.isAway();
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isChannelModerator
+	*/
 	this.isChannelModerator = function() {
 		return _user.isChannelModerator();
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isChannelOwner
+	*/
 	this.isChannelOwner = function() {
 		return _user.isChannelOwner();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isColorMuted
+	*/
 	this.isColorMuted = function() {
 		return _user.isColorMuted();
 	};
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isEventModerator
+	*/
 	this.isEventModerator = function() {
 		return _user.isEventModerator();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isLocked
+	*/
 	this.isLocked = function() {
 		return _user.isLocked();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isMuted
+	*/
 	this.isMuted = function() {
 		return _user.isMuted();
 	};	
 
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isOnline
+	*/
 	this.isOnline = function() {
 		return _user.isOnline();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_isOnlineInChannel
+	*/
 	this.isOnlineInChannel = function() {
 		return _user.isOnlineInChannel();
 	};
@@ -260,6 +326,9 @@ var Bot = (new function() {
 		_user.sendToChannel(command);
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_toString
+	*/
 	this.toString = function() {
 		return '[KFramework Bot]';
 	};

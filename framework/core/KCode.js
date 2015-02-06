@@ -72,6 +72,9 @@ function KCode() {
 		_buffer.push('°-°');
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_addDots
+	*/
 	this.addDots = function() {
 		_buffer.push('.........');
 	};
@@ -96,6 +99,9 @@ function KCode() {
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KCode_disableOptimization
+	*/
 	this.disableOptimization = function(state) {
 		_minify = state;
 	};

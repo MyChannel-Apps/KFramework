@@ -150,6 +150,13 @@ var Cron = (new function() {
 		}
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cron_toString
+	*/
+	this.toString = function() {
+		return '[KFramework Cron]';
+	};
+	
 	this.init();
 }());
 
@@ -292,6 +299,9 @@ function Cronjob(name, cycle, callback) {
 		this.save();
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Cronjob_toString
+	*/
 	this.toString = function() {
 		return '[KFramework Cronjob]';
 	};
