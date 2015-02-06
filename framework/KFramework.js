@@ -49,9 +49,9 @@ var KFramework = (new function() {
 		/* 'core/KConfig' */
 	];
 	
-	this.load.each(function(name) {
-		require('framework/' + name + '.js');
-	});
+	for(var entry in this.load) {
+		require('framework/' + this.load[entry] + '.js');
+	}
 	
 	this.startUp = function() {
 		KBank.loadData();

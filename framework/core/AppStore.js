@@ -101,7 +101,7 @@ var AppStore = (new function() {
 		allowed_commands: 		[],
 		tier:					Payment.TIER_0,
 		payment: {
-			knuddel: 	0
+			knuddel: 	0,
 			interval:	PaymentInterval.Weekly,
 			profit:		0
 		}
