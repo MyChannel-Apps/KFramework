@@ -52,8 +52,14 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_newLine
 	*/
-	this.newLine = function() {
-		_buffer.push('°#°');
+	this.newLine = function(dotted) {
+		_buffer.push('°#');
+		
+		if(dotted == undefined ? false : dotted) {
+			_buffer.push('!');
+		}
+		
+		_buffer.push('°');
 		
 		// DEPRECATED!
 		_buffer.push('#');
@@ -64,6 +70,10 @@ function KCode() {
 	*/
 	this.newHr = function() {
 		_buffer.push('°-°');
+	};
+	
+	this.addDots = function() {
+		_buffer.push('.........');
 	};
 	
 	/*
