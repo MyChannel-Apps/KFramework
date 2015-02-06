@@ -25,6 +25,43 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/user
 */
 
+var Status = {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Newbie
+	*/
+	Newbie:		0,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Family
+	*/
+	Family:		1,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Stammi
+	*/
+	Stammi:		2,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Ehrenz
+	*/
+	Ehrenz:		3,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Admin
+	*/
+	Admin:		6,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Sysadmin
+	*/
+	Sysadmin:	11,
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Status_Bot
+	*/
+	Bot:		-1
+};
+
 var Users = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/User_get

@@ -24,32 +24,35 @@
 	@author		Adrian Preuß <Bizarrus>
 */
 
-var VERSION		= '1.0.3';
-
-// Defaults
-require('framework/Constants.js');
-
-// Tools
-require('framework/tools/String.js');
-require('framework/tools/Object.js');
-require('framework/tools/Array.js');
-require('framework/tools/StringBuffer.js');
-
-// Core
-require('framework/core/Hash.js');
-require('framework/core/Hooks.js');
-require('framework/core/Database.js');
-require('framework/core/Logger.js');
-require('framework/core/Cronjob.js');
-require('framework/core/Bot.js');
-require('framework/core/KCode.js');
-require('framework/core/KBank.js');
-require('framework/core/Channel.js');
-require('framework/core/User.js');
-require('framework/core/AppStore.js');
-//require('framework/core/KConfig.js');
+var VERSION		= '1.0.4';
 
 var KFramework = (new function() {
+	this.load = [
+		/* Tools */
+		'tools/String',
+		'tools/Object',
+		'tools/Array',
+		'tools/StringBuffer',
+		
+		/* Core */
+		'core/Hash',
+		'core/Hooks',
+		'core/Database',
+		'core/Logger',
+		'core/Cronjob',
+		'core/Bot',
+		'core/KCode',
+		'core/KBank',
+		'core/Channel',
+		'core/User',
+		'core/AppStore'
+		/* 'core/KConfig' */
+	];
+	
+	this.load.each(function(name) {
+		require('framework/' + name + '.js');
+	});
+	
 	this.startUp = function() {
 		KBank.loadData();
 	};

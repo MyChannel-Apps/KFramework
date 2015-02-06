@@ -25,14 +25,47 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/kcode
 */
 
-require('framework/ui/KButton.js');
-require('framework/ui/KLink.js');
-require('framework/ui/KCountdown.js');
-require('framework/ui/KFont.js');
-require('framework/ui/KImage.js');
-require('framework/ui/KColor.js');
-require('framework/ui/KTable.js');
-require('framework/ui/KGroup.js');
+var load = [
+	'KButton',
+	'KLink',
+	'KCountdown',
+	'KFont',
+	'KImage',
+	'KColor',
+	'KTable',
+	'KGroup'
+];
+
+load.each(function(name) {
+	require('framework/ui/' + name + '.js');
+});
+
+var Alignment = {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Alignment_LEFT
+	*/
+	LEFT:		'°>LEFT<°',
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Alignment_MIDDLE
+	*/
+	MIDDLE:		'°>CENTER<°',
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Alignment_CENTER
+	*/
+	CENTER:		'°>CENTER<°',
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Alignment_RIGHT
+	*/
+	RIGHT:		'°>RIGHT<°',
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Alignment_JUSTIFY
+	*/
+	JUSTIFY:	'°>JUSTIFY<°'
+};
 
 /*
 	@docs	http://www.mychannel-apps.de/documentation/KCode_constructor
