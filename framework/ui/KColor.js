@@ -195,6 +195,18 @@ function KColor(red, green, blue) {
 		return '';
 	};
 	
+	this.getRGB = function() {
+		var buffer = new StringBuffer();
+		
+		buffer.append(_red);
+		buffer.append(',');
+		buffer.append(_green);
+		buffer.append(',');
+		buffer.append(_blue);
+		
+		return buffer.toString();
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KColor_decode
 	*/
