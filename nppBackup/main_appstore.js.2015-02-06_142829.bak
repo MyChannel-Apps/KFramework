@@ -27,37 +27,24 @@
 require('framework/KFramework.js');
 
 AppStore.setSettings({
-	allowed_commands:	[ 'tester' ],
-	tier:				Payment.TIER_0
+	allowed_commands:	[],
+	knuddel:			5
 });
 
-var App = AppStore.app(function() {
-	/* App Events */
-	this.onAppStart = function() {};
-	this.onPrepareShutdown = function(secondsTillShutdown) {};
-	this.onShutdown = function() {
-		/* Required if you using Cronjobs! */
-		Cron.onShutdown();
-	};
+var App = (new function() {
+	this.onAppStart = AppStore.onAppStart(function() {
+		
+	});
 	
-	/* User Events */
-	this.onUserJoined = function(user) {};
-	this.onUserLeft = function(user) {};
+	this.onShutdown = AppStore.onShutdown(function() {
+		
+	});
 	
-	/* Access Events */
-	this.mayJoinChannel = function(user) {};
+	this.onKnuddelReceived = AppStore.onKnuddelReceived(function(sender, receiver, amount) {
 	
-	/* Message Events */
-	this.maySendPublicMessage = function(publicMessage) {};
-	this.onPrivateMessage = function(privateMessage) {};
-	this.onPublicMessage = function(publicMessage) {};
+	});
 	
-	/* Knuddel Events */
-	this.onKnuddelReceived = function(sender, receiver, knuddelAmount) {};
-	
-	/* DICE Events */
-	this.onUserDiced = function(diceEvent) {};
-	
-	/* Chat Commands */
-	this.chatCommands = {};
-});
+	this.chatCommands = AppStore.chatCommands({
+		
+	});
+}());
