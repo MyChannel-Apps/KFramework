@@ -129,6 +129,10 @@ function KImage(image) {
 		_properties.labelcolor = color;
 	};
 	
+	this.setLabelSize = function(size) {
+		_properties.labelfontsize = size;
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KImage_enableLabelBorder
 	*/
