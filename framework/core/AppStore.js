@@ -26,19 +26,61 @@
 */
 
 var Payment = {
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_0
+	*/
 	TIER_0:		0x01,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_1
+	*/
 	TIER_1:		0x02,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_2
+	*/
 	TIER_2:		0x03,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_3
+	*/
 	TIER_3:		0x04,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_4
+	*/
 	TIER_4:		0x05,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_5
+	*/
 	TIER_5:		0x06,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_6
+	*/
 	TIER_6:		0x07,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_7
+	*/
 	TIER_7:		0x08
 };
 
 var PaymentInterval = {
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/PaymentInterval_Daily
+	*/
 	Daily:		0x01,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/PaymentInterval_Weekly
+	*/
 	Weekly:		0x02,
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/PaymentInterval_Monthly
+	*/
 	Monthly:	0x03
 };
 
