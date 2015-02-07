@@ -91,7 +91,7 @@ var DB	= (new function() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_save
+		@docs	http://www.mychannel-apps.de/documentation/DB_save
 	*/
 	this.save = function(key, data, user) {
 		if(key === undefined) {
@@ -165,6 +165,115 @@ var DB	= (new function() {
 		if(_db.hasObject(key)) {
 			_db.deleteObject(key);
 		}
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_sum
+	*/
+	this.sum = function(key) {
+		if(key === undefined) {
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			return false;
+		}
+		return UserPersistenceNumbers.getSum(key);
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_count
+	*/
+	this.count = function(key, from, to) {
+		if(key === undefined) {
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			return false;
+		}
+		var options = {};
+		
+		if(from != undefined && typeof(from) == 'number') {
+			options['minimumValue'] = from;
+		}
+		
+		if(to != undefined && typeof(to) == 'number') {
+			options['maximumValue'] = to;
+		}
+		
+		return UserPersistenceNumbers.getCount(key, options);
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_sorted
+	*/
+	this.sorted = function(key, sortBy, count, page) {
+		if(key === undefined) {
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			return false;
+		}
+		var options = {};
+		
+		if(sortBy != undefined) {
+			options['ascending'] = (sortBy == 'ASC') ? true : false;
+		}
+		
+		if(count != undefined && typeof(count) == 'number') {
+			options['count'] = count;
+		}
+
+		if(page != undefined && typeof(page) == 'number') {
+			options['page'] = page;
+		}
+				
+		return UserPersistenceNumbers.getSortedEntries(key, options);
+	};
+	
+	// getSortedEntriesAdjacent
+
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_each
+	*/	
+	this.each = function(key, callback, sortBy, from, to) {
+		if(key === undefined) {
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No key submitted');
+			} else {
+				Logger.error('No key submitted');
+			}
+			return false;
+		}
+		
+		if(callback === undefined) {
+			if(Logger == undefined) {
+				KnuddelsServer.getDefaultLogger().error('No callback submitted');
+			} else {
+				Logger.error('No callback submitted');
+			}
+			return false;
+		}
+		var options = {};
+		
+		if(sortBy != undefined) {
+			options['ascending'] = (sortBy == 'ASC') ? true : false;
+		}
+		
+		if(from != undefined && typeof(from) == 'number') {
+			options['minimumValue'] = from;
+		}
+		
+		if(to != undefined && typeof(to) == 'number') {
+			options['maximumValue'] = to;
+		}
+				
+		return UserPersistenceNumbers.each(key, callback, options);
 	};
 	
 	/*
