@@ -53,7 +53,7 @@ var DB	= (new function() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_load
+		@docs	http://www.mychannel-apps.de/documentation/DB_load
 	*/
 	this.load = function(key, defaultValue, user) {
 		if(key === undefined) {
