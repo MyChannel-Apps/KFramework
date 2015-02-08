@@ -25,6 +25,68 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/channel
 */
 
+var Background = {
+	/* Strecken */
+	SCALED:							0,
+	
+	/* Skaliert (Füllend, Zentriert, Mode1) */
+	SCALE_FILLED_MODE1:				6,
+	
+	/* Skaliert (Füllend, Zentriert, Mode2) */
+	SCALE_FILLED_MODE2:				10,
+	
+	/* Skaliert (Füllend, Zentriert, Mode3) */
+	SCALE_FILLED_MODE3:				54,
+	
+	/* Skaliert (Komplett sichtbar, Zentriert) */
+	SCALE_COMPLETE_CENTERED:		7,
+	
+	/* Skaliert auf Höhe (Rechts) */
+	SCALE_HEIGHT_RIGHT:				61,
+	
+	/* Skaliert auf Breite (Oben) */
+	SCALE_HEIGHT_TOP:				40,
+	
+	/* Skaliert auf Breite (Unten) */
+	SCALE_HEIGHT_BOTTOM:			56,
+	
+	/* Gekachelt */
+	TILED:							17,
+	
+	/* Gekachelt (2fache Größe) */
+	TILED_ZOOM_X2:					33,
+	
+	/* Gekachelt (3fache Größe) */
+	TILED_ZOOM_X3:					59,
+		
+	/* Gekachelt (Zeilenweise versetzt) */
+	TILED_OFFSET_HORIZONTAL:		18,
+	
+	/* Gekachelt (Zeilenweise, 2fache Größe) */
+	TILED_OFFSET_ZOOM_X2:			34,
+	
+	/* Gekachelt (Zeilenweise, 3fache Größe) */
+	TILED_OFFSET_ZOOM_X3:			50,
+	
+	/* Gekachelt (Spaltenweise) */
+	TILED_OFFSET_VERTICAL:			19,
+	
+	/* Gekachelt (Spaltenweise, 2fache Größe) */
+	TILED_OFFSET_VERTICAL_ZOOM_X2:	34,
+	
+	/* Gekachelt (Spaltenweise, 3fache Größe) */
+	TILED_OFFSET_VERTICAL_ZOOM_X3:	50,
+	
+	/* Zentriert */
+	CENTERED:						20,
+	
+	/* Zentriert (2fache Größe) */
+	CENTERED_ZOOM_X2:				36,
+	
+	/* Zentriert (3fache Größe) */
+	CENTERED_ZOOM_X3:				52
+};
+
 var Channel = (new function() {
 	var _channel		= KnuddelsServer.getChannel();
 	var _configuration	= _channel.getChannelConfiguration();
@@ -53,6 +115,10 @@ var Channel = (new function() {
 		});
 		
 		return owner;
+	};
+	
+	this.setBackground = function(image, style, user, text) {
+		Bot.private(user, '°>{bgimage}' + image + '|' + (style == undefined ? Background.SCALED) + '<°' + (text == undefined ? 'Das Hintergrundbild wird geändert' : text));
 	};
 	
 	/*
