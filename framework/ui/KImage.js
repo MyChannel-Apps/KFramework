@@ -106,8 +106,6 @@ function KImage(image) {
 			_name	= _name.substring(1);
 			_path	= KnuddelsServer.getFullImagePath('');
 		}
-		
-		console.log(_name, _path, _extension);
 	}
 	
 	this.alwaysCopy = function(state) {
