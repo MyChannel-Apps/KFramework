@@ -100,6 +100,10 @@ var Channel = (new function() {
 		return _channel.getChannelName();
 	};
 	
+	this.usersOnline = function(filter) {
+		return Channel.getUsers(filter).size();
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwner
 	*/
