@@ -63,6 +63,10 @@ var Status = {
 };
 
 var Users = (new function() {
+	this.getProfilePicture = function(user) {
+		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.get(user.getNick != undefined ? user.getNick() : user).getNick().urlencode();
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/User_get
 	*/
