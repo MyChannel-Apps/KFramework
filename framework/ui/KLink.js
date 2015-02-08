@@ -28,15 +28,17 @@
 /*
 	@docs	http://www.mychannel-apps.de/documentation/KLink_constructor
 */
-function KLink(text) {
+function KLink(text, command_left, command_right) {
 	var _text			= '';
 	var _command_left	= undefined;
 	var _command_right	= undefined;
 	var _hover			= true;
 	var _hover_image	= undefined;
 	
-	function KLink(text) {
-		_text = text || '';
+	function KLink(text, command_left, command_right) {
+		_text			= text || '';
+		_command_left	= command_left;
+		_command_right	= command_right;
 	}
 	
 	function prepareLink(string) {
@@ -73,10 +75,18 @@ function KLink(text) {
 		var string = '°>';
 		
 		if(_text instanceof KImage) {
+			if(_hover == false) {
+				_text.noPush(true);
+				_hover_image.noPush(true);
+			}
+			
 			string += _text.toString(true);
 			
-			// @ToDo The Hover
-			string += '|' + (_hover_image == undefined ? _text.toString(true) : _hover_image.toString(true)) + '<>--<>';
+			if(_hover_image != undefined) {
+				string += '|' + _hover_image.toString(true);
+			}
+			
+			string += '<>--<>';
 		} else {
 			if(_hover == false) {
 				string += '_h';
@@ -97,5 +107,5 @@ function KLink(text) {
 		return string;
 	};
 	
-	KLink(text);
+	KLink(text, command_left, command_right);
 };
