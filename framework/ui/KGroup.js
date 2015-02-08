@@ -85,6 +85,10 @@ function KGroup() {
 		return buffer.toString();
 	};
 	
+	this.getTabCommand = function(index) {
+		return '/tp-showgrp ' + index;
+	};
+	
 	this.toString = function() {
 		var buffer = new StringBuffer();
 		
