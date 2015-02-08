@@ -85,7 +85,7 @@ function KImage(image) {
 					var split				= name.split('_');
 					_properties[split[0]]	= split[1];
 				} else {
-					_properties[name]	= 0x01;
+					_properties[name]	= null;
 				}
 			});
 		}
@@ -109,11 +109,11 @@ function KImage(image) {
 	}
 	
 	this.alwaysCopy = function(state) {
-		_properties.alwayscopy = (state == true ? 0x01 : 0x00);
+		_properties.alwayscopy = (state == true ? null : undefined);
 	};
 	
 	this.noPush = function(state) {
-		_properties.nopush = (state == true ? 0x01 : 0x00);
+		_properties.nopush = (state == true ? null : undefined);
 	};
 	
 	/*
@@ -212,22 +212,36 @@ function KImage(image) {
 		@docs	http://www.mychannel-apps.de/documentation/KImage_setMirror
 	*/
 	this.setMirror = function(state) {
-		_properties.mirror = (state == true ? 0x01 : 0x00);
+		_properties.mirror = (state == true ? null : undefined);
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KImage_setGreyscale
 	*/
 	this.setGreyscale = function(state) {
-		_properties.gray = (state == true ? 0x01 : 0x00);
+		_properties.gray = (state == true ? null : undefined);
 	};
 	
 	this.addCustom = function(name, value) {
 		_properties[name] = value;
 	};
 	
+	this.setTransparency = function(value) {
+		_properties.opacity = value;
+	};
+	
 	this.setVersion = function(version) {
 		_version = version;
+	};
+	
+	this.setMouseSize = function(width, height) {
+		_properties.mousew = width;
+		_properties.mouseh = height;
+	};
+	
+	this.setMousePosition = function(x, y) {
+		_properties.mousex = x;
+		_properties.mousey = y;
 	};
 	
 	/*
@@ -242,11 +256,11 @@ function KImage(image) {
 			properties += '..';
 			
 			_properties.each(function(value, name) {
-				if(value == 0x00) {
+				if(value == undefined) {
 					return;
 				}
 				
-				properties += '.' + name + (value == 0x01 ? '' : '_' + value);
+				properties += '.' + name + (value == null ? '' : '_' + value);
 			});
 		}
 		
