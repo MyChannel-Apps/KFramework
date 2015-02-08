@@ -27,6 +27,7 @@
 
 var load = [
 	'KButton',
+	'KTooltip',
 	'KLink',
 	'KCountdown',
 	'KFont',
