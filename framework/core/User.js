@@ -64,7 +64,15 @@ var Status = {
 
 var Users = (new function() {
 	this.getProfilePicture = function(user) {
-		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.get(user.getNick != undefined ? user.getNick() : user).getNick().urlencode();
+		var nickname = '';
+		
+		if(user.getNick == undefined) {
+			user		= Users.get(user);
+		}
+		
+		nickname	= user.getNick();
+		
+		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + nickname.urlencode();
 	};
 	
 	/*
