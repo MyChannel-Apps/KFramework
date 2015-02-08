@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KCode :: KImage</title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="virtual.js"></script>
+		<script type="text/javascript" src="../framework/KFramework.js"></script>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<script type="text/javascript">
+			InvokeLater(function() {
+				var text	= new KCode();
+				
+				text.append(new KImage('gt.gif'));
+				text.append(new KImage('/abc...alwayscopy.dh_1.gif'));
+				text.append(new KImage('http://chat.knuddels.de/pics/ct-xmas-2014.gif'));
+				text.append(new KImage('http://chat.knuddels.de/pics/fotos/knuddels.de?n=Bizarrus'));
+				text.append(new KImage('http://chat.knuddels.de/pics/fotos/knuddels.de?n=Bizarrus&...nopush.w_1.png'));
+				
+				document.getElementById('debug').innerHTML = text;
+			});
+		</script>
+	</body>
+</html>

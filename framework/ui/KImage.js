@@ -42,8 +42,8 @@ function KImage(image) {
 	var _name			= '';
 	var _extension		= '';
 	var _properties		= {};
-	var _use_direct		= false;
 	var _version		= '';
+	var _url			= false;
 	
 	function KImage(image) {
 		// HTTP(S) Links
@@ -56,18 +56,67 @@ function KImage(image) {
 				_path += split[index];
 				_path += '/';
 			}
+			
+			// Fix profile pictures
+			if(_path == 'http://chat.knuddels.de/pics/fotos/') {
+				_url		= true;
+			}
 		}
 		
-		var split	= image.split('.');
-		_name		= split[0];
-		_extension	= split[1];
-		var first	= _name.substring(0, 1);
+		// Contains properties
+		if(image.indexOf('..') > -1) {
+			var properties	= image.split('..');
+			var split		= image.split('.');
+			var length		= split.length;
+			image			= properties[0];
+			image			+= '.';
+			image			+= split[length - 1];
+			
+			split.each(function(name, index) {
+				if(name.length == 0 || index == 0 || index == length - 1) {
+					return;
+				}
+				
+				if(name.search(/[^a-zA-Z0-9_]+/gi) != -1) {
+					return;
+				}
+				
+				if(name.indexOf('_') != -1) {
+					var split				= name.split('_');
+					_properties[split[0]]	= split[1];
+				} else {
+					_properties[name]	= 0x01;
+				}
+			});
+		}
+		
+		var split		= image.split('.');
+		
+		if(['png', 'jpg', 'jpeg', 'bmp', 'gif'].indexOf(split[1].toLowerCase()) != -1) {
+			_name		= split[0];
+			_extension	= split[1];
+		} else {
+			_name		= image;
+		}
+		
+		_name			= _name.replace(/&\.(png|jpeg|gif|jpg|bmp)/gi, '');
+		var first		= _name.substring(0, 1);
 		
 		if(first == '/' || first == '~') {
 			_name	= _name.substring(1);
 			_path	= KnuddelsServer.getFullImagePath('');
 		}
+		
+		console.log(_name, _path, _extension);
 	}
+	
+	this.alwaysCopy = function(state) {
+		_properties.alwayscopy = (state == true ? 0x01 : 0x00);
+	};
+	
+	this.noPush = function(state) {
+		_properties.nopush = (state == true ? 0x01 : 0x00);
+	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KImage_setContainerSize
@@ -187,22 +236,24 @@ function KImage(image) {
 		@docs	http://www.mychannel-apps.de/documentation/KImage_toString
 	*/
 	this.toString = function(only_path) {
-		only_path	= only_path || false;
-		var output	= (only_path == true ? '' : '°>') + _path + _name;
+		only_path		= only_path || false;
+		var output		= (only_path == true ? '' : '°>') + _path + _name;
+		var properties	= '';
 		
 		if(_properties.size() > 0) {
-			output += '..';
+			properties += '..';
 			
 			_properties.each(function(value, name) {
 				if(value == 0x00) {
 					return;
 				}
 				
-				output += '.' + name + (value == 0x01 ? '' : '_' + value);
+				properties += '.' + name + (value == 0x01 ? '' : '_' + value);
 			});
 		}
-				
-		return output + '.' + _extension + (_version == '' ? '' : '?' + _version + '&.' + _extension) + (only_path == true ? '' : '<°');
+		
+		
+		return output + (_extension.length == 0 ? '&' + properties + '.png' : properties + '.' + _extension) + (only_path == true ? '' : '<°');
 	};
 	
 	KImage(image);
