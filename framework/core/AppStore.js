@@ -318,8 +318,31 @@ var AppStore = (new function() {
 				DB.save('_appstore', _store_data);
 				Bot.private(user, 'Die App wurde _°R°GESPERRT°r°_!');
 			break;
+			case '!payed':
+			case 'payed':
+				_store_data.is_payed	= command.substring(0, 1) == '!' ? 'F' : 'T';
+				_store_data.time_payed	= command.substring(0, 1) == '!' ? undefined : new Date().getTime();
+				DB.save('_appstore', _store_data);
+				Bot.private(user, 'Die App wurde _°R°' + (command.substring(0, 1) == '!' ? 'STORNIERT' : 'BEZAHLT') + '°r°_!');
+			break;
 			default:
-			
+				var text = new KCode();
+				text.append('_Available Commands:_');
+				text.newLine();
+				text.append('°>/Store:' + KnuddelsServer.getAppName() + ' lock:[Message]|/tf-overridesb /Store:' + KnuddelsServer.getAppName() + ' lock:[Message]<°');
+				text.newLine();
+				text.append('°>/Store:' + KnuddelsServer.getAppName() + ' !lock|/Store:' + KnuddelsServer.getAppName() + ' !lock<°');
+				text.newLine();
+				text.append('°>/Store:' + KnuddelsServer.getAppName() + ' payed|/Store:' + KnuddelsServer.getAppName() + ' payed<°');
+				text.newLine();
+				text.append('°>/Store:' + KnuddelsServer.getAppName() + ' !payed|/Store:' + KnuddelsServer.getAppName() + ' !payed<°');
+				text.newLine();
+				text.newLine();
+				text.append('_Informations:_');
+				text.newLine();
+				text.append(JSON.stringify(_store_data).escapeKCode());
+				
+				Bot.private(user, text);
 			break;
 		}
 	};
@@ -329,6 +352,10 @@ var AppStore = (new function() {
 	*/
 	this.isLocked = function() {
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() != _owner.getUserId()) {
+			if(_store_data.is_payed == 'T') {
+				return false;
+			}
+
 			return true;
 		}
 		
