@@ -86,11 +86,11 @@ function KLink(text) {
 		}
 		
 		if(_command_left != undefined) {
-			string += '|' + _command_left;
+			string += '|' + _command_left.replace(/\|/g, '\\\\\\\\\\|');
 		}
 		
 		if(_command_right != undefined) {
-			string += '|' + _command_right;
+			string += '|' + _command_right.replace(/\|/g, '\\\\\\\\\\|');
 		}
 		
 		string += '<°';
