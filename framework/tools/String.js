@@ -25,6 +25,17 @@
 	@docs		http://www.mychannel-apps.de/documentation/tools/string
 */
 
+if(!String.prototype.urlencode) {
+	Object.defineProperty(String.prototype, 'urlencode', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function() {
+			return encodeURIComponent(this);
+		}
+	});
+}
+
 /*
 	@docs	http://www.mychannel-apps.de/documentation/String_format
 */
