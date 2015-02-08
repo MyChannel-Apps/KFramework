@@ -118,7 +118,7 @@ var Channel = (new function() {
 	};
 	
 	this.setBackground = function(image, style, user, text) {
-		Bot.private(user, '°>{bgimage}' + image + '|' + (style == undefined ? Background.SCALED) + '<°' + (text == undefined ? 'Das Hintergrundbild wird geändert' : text));
+		Bot.private(user, '°>{bgimage}' + image + '|' + (style == undefined ? Background.SCALED : style) + '<°' + (text == undefined ? 'Das Hintergrundbild wird geändert' : text));
 	};
 	
 	/*
