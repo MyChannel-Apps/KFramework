@@ -53,6 +53,20 @@ if(!String.prototype.format) {
 	});
 }
 
+
+if(!String.prototype.formater) {
+	Object.defineProperty(String.prototype, 'formater', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function(data) {
+			return this.replace(/\$[a-zA-Z]+/gi, function(match, number) {
+				return (typeof(data[match.substring(1)]) != 'undefined') ? data[match.substring(1)] : match;
+			});
+		}
+	});
+}
+
 /*
 	@docs	http://www.mychannel-apps.de/documentation/String_contains
 */
