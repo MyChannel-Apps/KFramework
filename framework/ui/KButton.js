@@ -249,7 +249,7 @@ function KButton(text, command) {
 	this.toString = function() {
 		var string = '°>{button}';
 		if(_text.length > 0) {
-			string += _text + '|' + _id + '|';
+			string += _text + '|' + (_id > 0 ? _id : '') + '|';
 		}
 		
 		if(_command.length > 0) {
