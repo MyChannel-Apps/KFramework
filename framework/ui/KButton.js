@@ -27,6 +27,7 @@
 
 function KButton(text, command) {
 	var _text		= '';
+	var _id			= -1;
 	var _command	= '';
 	var _properties	= {};
 	
@@ -44,6 +45,14 @@ function KButton(text, command) {
 		}
 		
 		_command = command;
+	};
+	
+	this.setID = function(id) {
+		_id = id;
+	};
+	
+	this.getID = function() {
+		return _id;
 	};
 	
 	/* COMMAND */
@@ -240,11 +249,11 @@ function KButton(text, command) {
 	this.toString = function() {
 		var string = '°>{button}';
 		if(_text.length > 0) {
-			string += _text + '||';
+			string += _text + '|' + _id + '|';
 		}
 		
 		if(_command.length > 0) {
-			string += 'call|' + _command;
+			string += 'call|' + _command.replace(/\|/g, '\\\\\\\\\\|');
 		}
 		
 		_properties.each(function(value, name) {
@@ -260,3 +269,7 @@ function KButton(text, command) {
 	// Call the Constructor
 	KButton(text, command);
 }
+
+/*
+	color: modernGray
+*/
