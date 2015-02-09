@@ -81,7 +81,7 @@ var Users = (new function() {
 	this.get = function(nickname) {
 		if(typeof(nickname) == 'number') {
 			if(KnuddelsServer.canAccessUser(nickname)) {
-				nickname	= KnuddelsServer.getUser(nickname);
+				return KnuddelsServer.getUser(nickname);
 			}
 		}
 		
