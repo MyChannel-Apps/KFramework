@@ -37,7 +37,18 @@
 		'core/Channel',
 		'core/User',
 		'core/AppStore',
-		'KFramework'
+		'KFramework',
+		
+		/* UI */
+		'ui/KButton',
+		'ui/KTooltip',
+		'ui/KLink',
+		'ui/KCountdown',
+		'ui/KFont',
+		'ui/KImage',
+		'ui/KColor',
+		'ui/KTable',
+		'ui/KGroup'
 	);
 	print('Remove old files');
 	if(file_exists($path . 'KFramework.min.js')) {
