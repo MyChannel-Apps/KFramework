@@ -18,7 +18,27 @@
 	}
 	
 	$path 		= dirname(__DIR__) . '/framework/';
-	
+	$static		= array(
+		/* Tools */
+		'tools/String',
+		'tools/Object',
+		'tools/Array',
+		'tools/StringBuffer',
+		
+		/* Core */
+		'core/Hash',
+		'core/Hooks',
+		'core/Database',
+		'core/Logger',
+		'core/Cronjob',
+		'core/Bot',
+		'core/KCode',
+		'core/KBank',
+		'core/Channel',
+		'core/User',
+		'core/AppStore',
+		'KFramework'
+	);
 	print('Remove old files');
 	if(file_exists($path . 'KFramework.min.js')) {
 		unlink($path . 'KFramework.min.js');
@@ -27,11 +47,20 @@
 	print(PHP_EOL);
 	
 	$ignore		= [ 'bak' ];
-	$directory	= new RecursiveDirectoryIterator($path);
+	//$directory	= new RecursiveDirectoryIterator($path);
 	$bytes		= 0;
 	$files		= 0;
 	$content	= '';
 	
+	foreach($static AS $name) {
+		$bytes		+= filesize($path . $name . '.js');
+		$content	.= replacer(file_get_contents($path . $name . '.js'));
+		$content	.= 'EOF();';
+		printf('[%d] %s (%s bytes)', $files, $name . '.js', number_format(filesize($path . $name . '.js')));
+		print(PHP_EOL);
+		++$files;
+	}
+	/*
 	foreach(new RecursiveIteratorIterator($directory) AS $name => $file) {
 		if($file->getFilename() == '.' || $file->getFilename() == '..' || in_array($file->getExtension(), $ignore)) {
 			continue;
@@ -43,7 +72,7 @@
 		printf('[%d] %s (%s bytes)', $files, $file->getFilename(), number_format($file->getSize()));
 		print(PHP_EOL);
 		++$files;
-	}
+	}*/
 
 	print(PHP_EOL);
 	printf('Total: %d, Bytes: %s', $files, number_format($bytes));
