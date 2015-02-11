@@ -72,7 +72,7 @@ if(!Array.prototype.exists) {
 		configurable:	false,
 		writable:		false,
 		value:			function(value) {
-			return (this.indexOf(value) > -1);
+			return (this.indexOf(value) != -1);
 		}
 	});
 }
