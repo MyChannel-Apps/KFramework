@@ -122,6 +122,10 @@ if(!Object.prototype.exists) {
 		configurable:	false,
 		writable:		false,
 		value:			function(value) {
+			if(this.indexOf != undefined) {
+				return (this.indexOf(value) > -1);
+			}
+			
 			return (this[value] != undefined);
 		}
 	});
