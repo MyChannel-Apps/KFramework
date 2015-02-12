@@ -30,8 +30,9 @@ var KFramework = (new function() {
 	this.load = [
 		/* Tools */
 		'tools/String',
-		'tools/Object',
 		'tools/Array',
+		'tools/Object',
+		'tools/User',
 		'tools/StringBuffer',
 		
 		/* Core */

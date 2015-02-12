@@ -21,8 +21,9 @@
 	$static		= array(
 		/* Tools */
 		'tools/String',
-		'tools/Object',
 		'tools/Array',
+		'tools/Object',
+		'tools/User',
 		'tools/StringBuffer',
 		
 		/* Core */

@@ -29,64 +29,40 @@
 	@docs	http://www.mychannel-apps.de/documentation/Array_each
 */
 if(!Array.prototype.each) {
-	Object.defineProperty(Array.prototype, 'each', {
-		enumerable:		false,
-		configurable:	false,
-		writable:		false,
-		value:			function(callback) {
-			for(var index = 0; index < this.length; index++) {
-				if(callback.apply(this[index], index) === false) {
-					break;
-				}
+	Array.prototype.each = function(callback) {
+		for(var index = 0; index < this.length; index++) {
+			if(callback.apply(this[index], index) === false) {
+				break;
 			}
 		}
-	});
+	};
 }
 
 /*
 	@docs	http://www.mychannel-apps.de/documentation/Array_random
 */
 if(!Array.prototype.random) {
-	Object.defineProperty(Array.prototype, 'random', {
-		enumerable:		false,
-		configurable:	false,
-		writable:		false,
-		value:			function() {
-			var random = RandomOperations.nextInt(this.length);
-			
-			if(this.length <= 0 || random >= this.length) {
-				return undefined;
-			}
-			
-			return this[random];
+	Array.prototype.random = function() {
+		var random = RandomOperations.nextInt(this.length);
+		
+		if(this.length <= 0 || random >= this.length) {
+			return undefined;
 		}
-	});
+		return this[random];
+	};
 }
 
 /*
 	@docs	http://www.mychannel-apps.de/documentation/Array_exists
 */
 if(!Array.prototype.exists) {
-	Object.defineProperty(Array.prototype, 'exists', {
-		enumerable:		false,
-		configurable:	false,
-		writable:		false,
-		value:			function(value) {
-			return (this.indexOf(value) != -1);
-		}
-	});
+	Array.prototype.exists = function(value) {
+		return (this.indexOf(value) > -1);
+	};
 }
 
-/*
-	@docs	http://www.mychannel-apps.de/documentation/Array_size
-*/
 if(!Array.prototype.size) {
-	Object.defineProperty(Array.prototype, 'size', {
-		enumerable:		false,
-		configurable:	false,
-		writable:		false,
-		value:			function() {
-			return this.length;
-		}
-	});
+	Array.prototype.size = function() {
+		return this.length;
+	};
 }
