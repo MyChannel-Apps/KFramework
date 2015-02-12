@@ -89,6 +89,10 @@ function KGroup() {
 		return '/tp-showgrp ' + index;
 	};
 	
+	this.switchTab = function(index) {
+		return '°>{setdisplaygroup}' + index + '<°';
+	};
+	
 	this.toString = function() {
 		var buffer = new StringBuffer();
 		
