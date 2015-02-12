@@ -31,7 +31,11 @@
 if(!Array.prototype.each) {
 	Array.prototype.each = function(callback) {
 		for(var index = 0; index < this.length; index++) {
-			if(callback.apply(this[index], index) === false) {
+			if(typeof(this[index]) == 'object') {
+				if(callback.call(this, this[index], index) === false) {
+					break;
+				}
+			} else if(callback.apply(this, [this[index], index]) === false) {
 				break;
 			}
 		}
