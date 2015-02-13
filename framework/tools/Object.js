@@ -22,14 +22,18 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
+	@docs		http://www.mychannel-apps.de/documentation/
 */
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_each
+*/
 if(!Object.prototype.each) {
 	Object.defineProperty(Object.prototype, 'each', {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value:			function(callback) {
+		value: function(callback) {
 			for(var index in this) {
 				if(!this.hasOwnProperty(index)) {
 					continue;
@@ -47,20 +51,23 @@ if(!Object.prototype.each) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_sort
+*/
 if(!Object.prototype.sort) {
 	Object.defineProperty(Object.prototype, 'sort', {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value:			function(byKey, order) {
+		value: function(byKey, order) {
 			if(byKey === undefined) {
 				byKey == 'index';
 			}
-
+	
 			if(order === undefined) {
 				order == 'ASC'; // Highest value
 			}
-
+	
 			var keys = [];
 			for(var index in this) {
 				var sortby = 0;
@@ -76,10 +83,10 @@ if(!Object.prototype.sort) {
 				keys.push({
 					index:	index,
 					value:	this[index],
-					sortby:	sortBy
+					sortby:	sortby
 				});
 			}
-
+	
 			if(order == 'ASC') {
 				keys.sort(function(a, b) {
 					return a.sortby - b.sortby;
@@ -89,14 +96,14 @@ if(!Object.prototype.sort) {
 					return b.sortby - a.sortby;
 				});
 			}
-
-
+	
+	
 			var newObj = {};
 			for(var k in keys) {
 				newObj[keys[k].index] = this[keys[k].index];
 				delete this[keys[k].index];
 			}
-
+	
 			for(var key in newObj) {
 				this[key] = newObj[key];
 			}
@@ -106,33 +113,39 @@ if(!Object.prototype.sort) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_exists
+*/
 if(!Object.prototype.exists) {
 	Object.defineProperty(Object.prototype, 'exists', {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value:			function(value) {
+		value: function(value) {
 			return (this[value] != undefined);
 		}
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Object_compare
+*/
 if(!Object.prototype.compare) {
-  Object.defineProperty(Object.prototype, 'compare', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function(defaultObj) {
-		for(var property in defaultObj) {
-			if(this[property] && (typeof(this[property]) == 'object') && (this[property].toString() == '[object Object]') && defaultObj[property]) {
-				this[property].compare(defaultObj[property]);
-			} else if(typeof this[property] == 'undefined') {
-				this[property] = defaultObj[property];
+	Object.defineProperty(Object.prototype, 'compare', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(defaultObj) {
+			for(var property in defaultObj) {
+				if(this[property] && (typeof(this[property]) == 'object') && (this[property].toString() == '[object Object]') && defaultObj[property]) {
+					this[property].compare(defaultObj[property]);
+				} else if(typeof this[property] == 'undefined') {
+					this[property] = defaultObj[property];
+				}
 			}
+			return this;
 		}
-		return this;
-    }
-  });
+	});
 }
 
 if(!Object.prototype.size) {
@@ -140,7 +153,7 @@ if(!Object.prototype.size) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value:			function() {
+		value: function() {
 			return Object.keys(this).length;
 		}
 	});
