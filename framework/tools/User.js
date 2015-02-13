@@ -12,3 +12,9 @@ if(!User.prototype.post) {
 		this.sendPostMessage(topic, text);		
 	};
 }
+
+if(!User.prototype.getProfilePicture) {
+	User.prototype.getProfilePicture = function() {
+		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.getNick().urlencode();
+	};
+}
