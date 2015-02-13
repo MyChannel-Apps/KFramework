@@ -22,51 +22,52 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/tools/array
 */
 
-/*
-	@docs	http://www.mychannel-apps.de/documentation/Array_each
-*/
 if(!Array.prototype.each) {
-	Array.prototype.each = function(callback) {
-		for(var index = 0; index < this.length; index++) {
-			if(typeof(this[index]) == 'object') {
-				if(callback.call(this, this[index], index) === false) {
+	Object.defineProperty(Array.prototype, 'each', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function(callback) {
+			for(var index = 0; index < this.length; index++) {
+				if(callback.apply(this, [this[index], index]) === false) {
 					break;
 				}
-			} else if(callback.apply(this, [this[index], index]) === false) {
-				break;
 			}
 		}
-	};
+	});
 }
 
-/*
-	@docs	http://www.mychannel-apps.de/documentation/Array_random
-*/
 if(!Array.prototype.random) {
-	Array.prototype.random = function() {
-		var random = RandomOperations.nextInt(this.length);
-		
-		if(this.length <= 0 || random >= this.length) {
-			return undefined;
+	Object.defineProperty(Array.prototype, 'random', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function() {
+			return this[RandomOperations.nextInt(this.length)];
 		}
-		return this[random];
-	};
+	});
 }
 
-/*
-	@docs	http://www.mychannel-apps.de/documentation/Array_exists
-*/
 if(!Array.prototype.exists) {
-	Array.prototype.exists = function(value) {
-		return (this.indexOf(value) > -1);
-	};
+	Object.defineProperty(Array.prototype, 'exists', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function(value) {
+			return (this.indexOf(value) > -1);
+		}
+	});
 }
 
 if(!Array.prototype.size) {
-	Array.prototype.size = function() {
-		return this.length;
-	};
+	Object.defineProperty(Array.prototype, 'size', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value:			function() {
+			return this.length;
+		}
+	});
 }
