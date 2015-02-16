@@ -239,9 +239,9 @@ var DB	= (new function() {
 	// getSortedEntriesAdjacent
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_each
+		@docs	http://www.mychannel-apps.de/documentation/DB_users
 	*/	
-	this.each = function(key, callback, sortBy, from, to) {
+	this.users = function(key, callback, sortBy, from, to) {
 		if(key === undefined) {
 			if(Logger == undefined) {
 				KnuddelsServer.getDefaultLogger().error('No key submitted');
