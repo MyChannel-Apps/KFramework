@@ -29,6 +29,7 @@ var VERSION		= '1.0.4';
 var KFramework = (new function() {
 	this.load = [
 		/* Tools */
+		'tools/Functions',
 		'tools/String',
 		'tools/Array',
 		'tools/Object',
