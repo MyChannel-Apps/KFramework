@@ -40,7 +40,6 @@ function KImage(image) {
 	var _name			= '';
 	var _extension		= '';
 	var _properties		= {};
-	var _version		= '';
 	var _url			= false;
 	
 	function KImage(image) {
@@ -106,14 +105,20 @@ function KImage(image) {
 		}
 	}
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_alwaysCopy
+	*/
 	this.alwaysCopy = function(state) {
 		_properties.alwayscopy = (state == true ? null : undefined);
 		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_noPush
+	*/
 	this.noPush = function(state) {
 		_properties.nopush = (state == true ? null : undefined);
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -122,7 +127,7 @@ function KImage(image) {
 	this.setContainerSize = function(width, height) {
 		_properties.w = width;
 		_properties.h = height;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -131,7 +136,7 @@ function KImage(image) {
 	this.setSize = function(width, height) {
 		_properties.mw = width;
 		_properties.mh = height;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -140,7 +145,7 @@ function KImage(image) {
 	this.setPosition = function(x, y) {
 		_properties.mx = x;
 		_properties.my = y;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -148,7 +153,7 @@ function KImage(image) {
 	*/
 	this.setX = function(x) {
 		_properties.mx = x;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -156,7 +161,7 @@ function KImage(image) {
 	*/
 	this.setY = function(y) {
 		_properties.my = y;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -164,7 +169,7 @@ function KImage(image) {
 	*/
 	this.setLabel = function(text) {
 		_properties.label = text;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -173,7 +178,7 @@ function KImage(image) {
 	this.setLabelPosition = function(x, y) {
 		_properties.lmx = x;
 		_properties.lmy = y;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -181,12 +186,15 @@ function KImage(image) {
 	*/
 	this.setLabelColor = function(color) {
 		_properties.labelcolor = color;
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelSize
+	*/
 	this.setLabelSize = function(size) {
 		_properties.labelfontsize = size;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -194,7 +202,7 @@ function KImage(image) {
 	*/
 	this.enableLabelBorder = function(bool) {
 		_properties.labelborder = (bool == true ? '1' : '0');
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -202,7 +210,7 @@ function KImage(image) {
 	*/
 	this.setBorder = function(size) {
 		_properties.border = size;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -210,7 +218,7 @@ function KImage(image) {
 	*/
 	this.setQuadcut = function(size) {
 		_properties.quadcut = size;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -218,7 +226,7 @@ function KImage(image) {
 	*/
 	this.setShadow = function(position) {
 		_properties.shadow = position;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -226,7 +234,7 @@ function KImage(image) {
 	*/
 	this.setMirror = function(state) {
 		_properties.mirror = (state == true ? null : undefined);
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -234,34 +242,41 @@ function KImage(image) {
 	*/
 	this.setGreyscale = function(state) {
 		_properties.gray = (state == true ? null : undefined);
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_addCustom
+	*/
 	this.addCustom = function(name, value) {
 		_properties[name] = value;
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setTransparency
+	*/
 	this.setTransparency = function(value) {
 		_properties.opacity = value;
-		return this;		
+		return this;
 	};
 	
-	this.setVersion = function(version) {
-		_version = version;
-		return this;		
-	};
-	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setMouseSize
+	*/
 	this.setMouseSize = function(width, height) {
 		_properties.mousew = width;
 		_properties.mouseh = height;
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KImage_setMousePosition
+	*/
 	this.setMousePosition = function(x, y) {
 		_properties.mousex = x;
 		_properties.mousey = y;
-		return this;		
+		return this;
 	};
 	
 	/*
