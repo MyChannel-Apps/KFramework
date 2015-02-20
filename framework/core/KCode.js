@@ -129,11 +129,7 @@ function KCode() {
 		@docs	http://www.mychannel-apps.de/documentation/KCode_addImage
 	*/
 	this.addImage = function(file) {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('KCode.addImage(file) is DEPRECATED');
-		} else {
-			Logger.info('KCode.addImage(file) is DEPRECATED');
-		}
+		Logger.info('KCode.addImage(file) is DEPRECATED');
 		
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
 		return this;		
