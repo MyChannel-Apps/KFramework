@@ -22,12 +22,15 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/kcode/button
+	@docs		http://www.mychannel-apps.de/documentation/ui/tooltip
 */
 
 var KCODE_TOOLTIPS_INSTANCES = 0;
 
-function KTooltip(content) {
+/*
+	@docs		http://www.mychannel-apps.de/documentation/KTooltip_constructor
+*/
+function KTooltip(content) 	{
 	var _content	= new KCode();
 	var _instance	= 0;
 	var _width		= 100;
@@ -41,32 +44,50 @@ function KTooltip(content) {
 		_instance	= KCODE_TOOLTIPS_INSTANCES++;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setSize
+	*/
 	this.setSize = function(width, height) {
 		_width	= width;
 		_height	= height;
 		return this;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setWidth
+	*/
 	this.setWidth = function(width) {
 		_width	= width;
-		return this;		
+		return this;
 	};
-		
+	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setHeight
+	*/
 	this.setHeight = function(height) {
 		_height	= height;
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_append
+	*/
 	this.append = function(content) {
 		_content.append(content);
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_newLine
+	*/
 	this.newLine = function() {
 		_content.newLine();
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_getCommand
+	*/
 	this.getCommand = function(text) {
 		if(!(text instanceof KLink)) {
 			text = new KLink(text);
@@ -76,6 +97,9 @@ function KTooltip(content) {
 		return text;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KTooltip_
+	*/
 	this.toString = function() {
 		var output = new KCode();
 		
