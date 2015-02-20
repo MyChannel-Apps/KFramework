@@ -25,6 +25,9 @@
 	@docs		http://www.mychannel-apps.de/documentation/tools/string
 */
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/String_urlencode
+*/
 if(!String.prototype.urlencode) {
 	Object.defineProperty(String.prototype, 'urlencode', {
 		enumerable:		false,
@@ -53,14 +56,16 @@ if(!String.prototype.format) {
 	});
 }
 
-
+/*
+	@docs	http://www.mychannel-apps.de/documentation/String_formater
+*/
 if(!String.prototype.formater) {
 	Object.defineProperty(String.prototype, 'formater', {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
 		value:			function(data) {
-			return this.replace(/\$[a-zA-Z]+/gi, function(match, number) {
+			return this.replace(/\$[a-zA-Z]+/gi, function(match) {
 				return (typeof(data[match.substring(1)]) != 'undefined') ? data[match.substring(1)] : match;
 			});
 		}
