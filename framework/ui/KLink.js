@@ -59,16 +59,20 @@ function KLink(text, command_left, command_right) {
 	*/
 	this.enableHover = function(state) {
 		_hover = state;
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KLink_setHoverImage
+	*/
 	this.setHoverImage = function(image) {
 		if(_text instanceof KImage) {
 			_hover_image = image;
 		} else {
 			Logger.warn('You can only use KImage.setHoverImage(image) when you bind a KImage!');
 		}
-		return this;		
+		
+		return this;
 	};
 	
 	/*
