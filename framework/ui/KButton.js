@@ -48,11 +48,17 @@ function KButton(text, command) {
 		return this;		
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_setID
+	*/
 	this.setID = function(id) {
 		_id = id;
-		return this;		
+		return this;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KButton_getID
+	*/
 	this.getID = function() {
 		return _id;
 	};
@@ -70,7 +76,7 @@ function KButton(text, command) {
 	*/
 	this.setCommand = function(command) {
 		_command = command;
-		return this;		
+		return this;
 	};
 	
 	/* TEXT */
@@ -86,7 +92,7 @@ function KButton(text, command) {
 	*/
 	this.setText = function(text) {
 		_text = text;
-		return this;		
+		return this;
 	};
 	
 	/* ICON */
@@ -99,7 +105,7 @@ function KButton(text, command) {
 		}
 		
 		_properties.icon = icon;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -107,7 +113,7 @@ function KButton(text, command) {
 	*/
 	this.removeIcon = function() {
 		delete _properties.icon;
-		return this;		
+		return this;
 	};
 	
 	/* COLOR */
@@ -117,7 +123,7 @@ function KButton(text, command) {
 	this.setColor = function(color) {
 		// @ToDo can be gradient like "120,230,90~60,170,25~24,96,1"
 		_properties.color = color;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -125,7 +131,7 @@ function KButton(text, command) {
 	*/
 	this.removeColor = function() {
 		delete _properties.color;
-		return this;		
+		return this;
 	};
 	
 	/* HEIGHT */
@@ -149,7 +155,7 @@ function KButton(text, command) {
 	*/
 	this.removeHeight = function() {
 		delete _properties.height;
-		return this;		
+		return this;
 	};
 	
 	/* WIDTH */
@@ -165,7 +171,7 @@ function KButton(text, command) {
 	*/
 	this.setWidth = function(width) {
 		_properties.width = width;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -173,7 +179,7 @@ function KButton(text, command) {
 	*/
 	this.removeWidth = function() {
 		delete _properties.width;
-		return this;		
+		return this;
 	};
 	
 	/* SIZE */
@@ -208,7 +214,7 @@ function KButton(text, command) {
 	*/
 	this.setX = function(x) {
 		_properties.mx = x;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -216,7 +222,7 @@ function KButton(text, command) {
 	*/
 	this.getY = function() {
 		return _properties.my;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -224,7 +230,7 @@ function KButton(text, command) {
 	*/
 	this.setY = function(y) {
 		_properties.my = y;
-		return this;		
+		return this;
 	};
 	
 	/*
@@ -233,7 +239,7 @@ function KButton(text, command) {
 	this.setPosition = function(x, y) {
 		this.setX(x);
 		this.setY(y);
-		return this;		
+		return this;
 	};
 	
 	/* TEXTBORDER */
@@ -246,7 +252,8 @@ function KButton(text, command) {
 		} else {
 			delete _properties.textborder;
 		}
-		return this;		
+		
+		return this;
 	};
 	
 	/* DISABLED */
