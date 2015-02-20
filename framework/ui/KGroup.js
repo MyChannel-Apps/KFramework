@@ -17,7 +17,8 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Adrian Preuß, Bizarrus
+	@author		Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/ui/group
 */
 
 var KCODE_GROUPS_INSTANCES = 0;
@@ -27,31 +28,49 @@ function KGroup() {
 	var _show			= 0;
 	var _layout_box		= false;
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_add
+	*/
 	this.add = function(content) {
 		_groups.push(content);
 		return this;		
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_remove
+	*/
 	this.remove = function(index) {
 		delete _groups[index];
 		return this;		
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_update
+	*/
 	this.update = function(index, content) {
 		_groups[index] = content;
 		return this;		
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_show
+	*/
 	this.show = function(index) {
 		_show = index;
 		return this;		
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_enableBoxLayout
+	*/
 	this.enableBoxLayout = function(state) {
 		_layout_box = state;
 		return this;		
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_getNavigation
+	*/
 	this.getNavigation = function(titles) {
 		titles		= (titles == undefined ? [] : titles);
 		var buffer	= new StringBuffer();
@@ -89,14 +108,23 @@ function KGroup() {
 		return buffer.toString();
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_getTabCommand
+	*/
 	this.getTabCommand = function(index) {
 		return '/tp-showgrp ' + index;
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_switchTab
+	*/
 	this.switchTab = function(index) {
 		return '°>{setdisplaygroup}' + index + '<°';
 	};
 	
+	/*
+		@docs		http://www.mychannel-apps.de/documentation/KGroup_
+	*/
 	this.toString = function() {
 		var buffer = new StringBuffer();
 		
