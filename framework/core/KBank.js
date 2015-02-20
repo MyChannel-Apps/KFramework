@@ -239,6 +239,7 @@ var KBank = (new function() {
 	};
 	
 	/*
+		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/KBank_dataMigration
 		This works full automated, dont call this in Your App!!!
 	*/
@@ -283,10 +284,16 @@ var KBank = (new function() {
 		return false;
 	};
 	
+	/*
+		@ToDo
+	*/
 	this.getData = function() {
 		Logger.info('KBank.getData() is DEPRECATED, you dont need this all any more!');
 	};
 	
+	/*
+		@ToDo
+	*/
 	this.loadData = function() {
 		Logger.info('KBank.loadData() is DEPRECATED, you dont need this all any more!');
 	};
