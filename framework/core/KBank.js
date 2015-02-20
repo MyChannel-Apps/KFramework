@@ -191,7 +191,7 @@ var KBank = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getUsers
 	*/
 	this.getUsers = function(callback) {
-		if(typeof callback === 'function') {
+		if(typeof callback !== 'function') {
 			Logger.info('KBank.getUsers() is DEPRECATED, use it like this KBank.getUsers(function(userIds, total){ });');
 			return false;
 		}
