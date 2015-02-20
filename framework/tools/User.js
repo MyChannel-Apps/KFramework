@@ -31,7 +31,7 @@ User.prototype	= User.prototype || {};
 /*
 	@docs	http://www.mychannel-apps.de/documentation/User_getID
 */
-if(!User.prototype.private) {
+if(!User.prototype.getID) {
 	Object.defineProperty(User.prototype, 'getID', {
 		enumerable:		false,
 		configurable:	false,
@@ -136,6 +136,26 @@ if(!User.prototype.subKn) {
 		writable:		false,
 		value: function(kn) {
 			return KBank.subKn(this.getUserId(), kn);
+		}
+	});
+}
+
+if(!User.prototype.knuddel) {
+	Object.defineProperty(User.prototype, 'knuddel', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(amount, message) {
+			if(amount === undefined) {
+				return false;
+			}
+			
+			if(message === undefined) {
+				Bot.knuddel(this, amount);
+			} else {
+				Bot.knuddel(this, amount, message);
+			}
+			return true;
 		}
 	});
 }
