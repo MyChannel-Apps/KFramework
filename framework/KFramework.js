@@ -24,7 +24,7 @@
 	@author		Adrian Preuß <Bizarrus>
 */
 
-var VERSION		= '1.0.5';
+var VERSION		= '1.0.6';
 
 var KFramework = (new function() {
 	this.load = [
