@@ -176,7 +176,6 @@ var DB	= (new function() {
 	};
 	
 	/*
-		@ToDo	Method conflict on Docs
 		@docs	http://www.mychannel-apps.de/documentation/DB_sum
 	*/
 	this.sum = function(key) {
@@ -189,7 +188,6 @@ var DB	= (new function() {
 	};
 	
 	/*
-		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/DB_count
 	*/
 	this.count = function(key, from, to) {
@@ -197,6 +195,7 @@ var DB	= (new function() {
 			Logger.error('No key submitted');
 			return false;
 		}
+		
 		var options = {};
 		
 		if(from != undefined && typeof(from) == 'number') {
@@ -211,7 +210,6 @@ var DB	= (new function() {
 	};
 	
 	/*
-		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/DB_sorted
 	*/
 	this.sorted = function(key, sortBy, count, page) {
@@ -219,6 +217,7 @@ var DB	= (new function() {
 			Logger.error('No key submitted');
 			return false;
 		}
+		
 		var options = {};
 		
 		if(sortBy != undefined) {
@@ -239,7 +238,6 @@ var DB	= (new function() {
 	// getSortedEntriesAdjacent
 
 	/*
-		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/DB_users
 	*/	
 	this.users = function(key, callback, sortBy, from, to) {
@@ -252,6 +250,7 @@ var DB	= (new function() {
 			Logger.error('No callback submitted');
 			return false;
 		}
+		
 		var options = {};
 		
 		if(sortBy != undefined) {
