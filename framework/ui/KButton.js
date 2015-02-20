@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/kcode/button
+	@docs	http://www.mychannel-apps.de/documentation/ui/button
 */
 
 function KButton(text, command) {

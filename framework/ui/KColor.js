@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/kcode/color
+	@docs	http://www.mychannel-apps.de/documentation/ui/color
 */
 
 var Color = {

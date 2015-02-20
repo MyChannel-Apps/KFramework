@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/kcode/font
+	@docs		http://www.mychannel-apps.de/documentation/ui/font
 */
 
 /*

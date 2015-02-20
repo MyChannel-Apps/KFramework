@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/kcode/countdown
+	@docs	http://www.mychannel-apps.de/documentation/ui/countdown
 */
 
 /*
