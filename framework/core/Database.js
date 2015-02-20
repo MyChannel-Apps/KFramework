@@ -30,11 +30,7 @@ var DB	= (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/DB_getUser
 	*/
 	this.getUser = function(user) {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('DB.getUser(user) is DEPRECATED');
-		} else {
-			Logger.info('DB.getUser(user) is DEPRECATED');
-		}
+		Logger.info('DB.getUser(user) is DEPRECATED');
 		
 		return user.getPersistence();
 	};
@@ -43,11 +39,7 @@ var DB	= (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/DB_getChannel
 	*/
 	this.getChannel = function() {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('DB.getChannel() is DEPRECATED');
-		} else {
-			Logger.info('DB.getChannel() is DEPRECATED');	
-		}
+		Logger.info('DB.getChannel() is DEPRECATED');	
 		
 		return KnuddelsServer.getPersistence();
 	};
@@ -57,11 +49,7 @@ var DB	= (new function() {
 	*/
 	this.load = function(key, defaultValue, user) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
+			Logger.error('No key submitted');
 			
 			return false;
 		}
@@ -188,6 +176,7 @@ var DB	= (new function() {
 	};
 	
 	/*
+		@ToDo	Method conflict on Docs
 		@docs	http://www.mychannel-apps.de/documentation/DB_sum
 	*/
 	this.sum = function(key) {
@@ -195,10 +184,12 @@ var DB	= (new function() {
 			Logger.error('No key submitted');
 			return false;
 		}
+		
 		return UserPersistenceNumbers.getSum(key);
 	};
 	
 	/*
+		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/DB_count
 	*/
 	this.count = function(key, from, to) {
@@ -220,6 +211,7 @@ var DB	= (new function() {
 	};
 	
 	/*
+		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/DB_sorted
 	*/
 	this.sorted = function(key, sortBy, count, page) {
@@ -247,6 +239,7 @@ var DB	= (new function() {
 	// getSortedEntriesAdjacent
 
 	/*
+		@ToDo
 		@docs	http://www.mychannel-apps.de/documentation/DB_users
 	*/	
 	this.users = function(key, callback, sortBy, from, to) {
