@@ -51,6 +51,7 @@ function KLink(text, command_left, command_right) {
 	this.setCommand = function(command_left, command_right) {
 		_command_left	= command_left;
 		_command_right	= command_right;
+		return this;
 	};
 	
 	/*
@@ -58,6 +59,7 @@ function KLink(text, command_left, command_right) {
 	*/
 	this.enableHover = function(state) {
 		_hover = state;
+		return this;		
 	};
 	
 	this.setHoverImage = function(image) {
@@ -66,13 +68,14 @@ function KLink(text, command_left, command_right) {
 		} else {
 			Logger.warn('You can only use KImage.setHoverImage(image) when you bind a KImage!');
 		}
+		return this;		
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_toString
 	*/
 	this.toString = function() {
-		var string = '°>';
+		var buffer = new StringBuffer('°>');
 		
 		if(_text instanceof KImage) {
 			if(_hover == false) {
@@ -80,31 +83,31 @@ function KLink(text, command_left, command_right) {
 				_hover_image.noPush(true);
 			}
 			
-			string += _text.toString(true);
+			buffer.append(_text.toString(true));
 			
 			if(_hover_image != undefined) {
-				string += '|' + _hover_image.toString(true);
+				buffer.append('|' + _hover_image.toString(true));
 			}
 			
-			string += '<>--<>';
+			buffer.append('<>--<>');
 		} else {
 			if(_hover == false) {
-				string += '_h';
+				buffer.append('_h');
 			}
 			
-			string += prepareLink(_text);
+			buffer.append(prepareLink(_text));
 		}
 		
 		if(_command_left != undefined) {
-			string += '|' + _command_left.replace(/\|/g, '\\\\\\\\\\|');
+			buffer.append('|' + _command_left.replace(/\|/g, '\\\\\\\\\\|'));
 		}
 		
 		if(_command_right != undefined) {
-			string += '|' + _command_right.replace(/\|/g, '\\\\\\\\\\|');
+			buffer.append('|' + _command_right.replace(/\|/g, '\\\\\\\\\\|'));
 		}
 		
-		string += '<°';
-		return string;
+		buffer.append('<°');
+		return buffer.toString();
 	};
 	
 	KLink(text, command_left, command_right);

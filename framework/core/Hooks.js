@@ -34,6 +34,7 @@ var Hooks = (new function() {
 	*/
 	this.addFilter = function(name, callback, priority) {
 		this.add(name, callback, priority, true);
+		return this;
 	};
 	
 	/*
@@ -41,6 +42,7 @@ var Hooks = (new function() {
 	*/
 	this.addAction = function(name, callback, priority) {
 		this.add(name, callback, priority);
+		return this;		
 	};
 	
 	/*
@@ -67,6 +69,7 @@ var Hooks = (new function() {
 			callback:	callback,
 			is_filter:	is_filter
 		});
+		return this;		
 	};
 	
 	/*
@@ -98,6 +101,7 @@ var Hooks = (new function() {
 				}
 			});
 		}
+		return this;		
 	};
 	
 	/*

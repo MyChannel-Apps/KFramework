@@ -112,6 +112,7 @@ var AppStore = (new function() {
 	*/
 	this.setSettings = function(options) {
 		_options = options.compare(_options);
+		return this;		
 	};
 	
 	/*

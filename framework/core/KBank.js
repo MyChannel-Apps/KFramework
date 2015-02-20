@@ -26,22 +26,6 @@
 */
 
 var KBank = (new function() {
-	var _data = {};
-	
-	this.create = function(uid) {
-		if(uid === undefined) {
-			return;
-		}
-		
-		if(_data[uid] === undefined) {
-			_data[uid] = {
-				knuddel:	0.00,
-				buyin:		0.00,
-				payout:		0.00,
-			};
-		}
-	};
-	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getKn
 	*/
@@ -50,9 +34,8 @@ var KBank = (new function() {
 			return;
 		}
 		
-		this.create(uid);
-		
-		return parseFloat(_data[uid].knuddel.toFixed(2));
+		var _db = Users.get(parseInt(uid)).getPersistence();
+		return parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2));
 	};
 	
 	/*
@@ -63,9 +46,13 @@ var KBank = (new function() {
 			return;
 		}
 		
-		this.create(uid);
+		var _db = Users.get(parseInt(uid)).getPersistence();
 		
-		return _data[uid];
+		return {
+			knuddel: parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2)),
+			buyin: parseFloat(_db.getNumber('KBank_buyin', 0.00).toFixed(2)),
+			payout: parseFloat(_db.getNumber('KBank_payout', 0.00).toFixed(2))
+		};
 	};
 
 	/*
@@ -80,13 +67,12 @@ var KBank = (new function() {
 			return;
 		}
 		
-		this.create(uid);
-		
 		if(kn <= 0.00) {
 			return false;
 		}
 
-		_data[uid].knuddel = kn;
+		var _db = Users.get(parseInt(uid)).getPersistence();
+		_db.setNumber('KBank_knuddel', kn);
 	};
 	
 	/*
@@ -101,22 +87,20 @@ var KBank = (new function() {
 			return;
 		}
 		
-		this.create(uid);
+		if(kn <= 0.00) {
+			return false;
+		}
 		
-		_data[uid].knuddel += kn;
-		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
+		var _db = Users.get(parseInt(uid)).getPersistence();
+		_db.addNumber('KBank_knuddel', kn);
+		return true;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_delKn
 	*/
 	this.delKn = function(uid, kn) {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
-		} else {
-			Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
-		}
-		
+		Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
 		return this.subKn(uid, kn);
 	};
 	
@@ -131,20 +115,17 @@ var KBank = (new function() {
 		if(kn === undefined) {
 			return;
 		}
-		
-		this.create(uid);
-		
+	
 		if(kn <= 0.00) {
-			// return false;
-		}
-		
-		if(_data[uid].knuddel < kn) {
 			return false;
 		}
-		
-		_data[uid].knuddel -= kn;
-		_data[uid].knuddel = parseFloat(_data[uid].knuddel.toFixed(2));
-		
+	
+		if(kn > this.getKn(uid)) {
+			return false;
+		}
+
+		var _db = Users.get(parseInt(uid)).getPersistence();		
+		_db.addNumber('KBank_knuddel', -kn);
 		return true;
 	};
 	
@@ -164,24 +145,23 @@ var KBank = (new function() {
 			return false;
 		}
 		
-		if(kn > _data[uid].knuddel) {
+		if(kn > this.getKn(uid)) {
 			return false;
 		}
 		
-		this.create(uid);
-		
-		_data[uid].knuddel	-= kn;
-		_data[uid].payout	+= kn;
-		_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
-		_data[uid].payout	= parseFloat(_data[uid].payout.toFixed(2));
-
-		// @ToDo Chris, pls check if Bot has knuddel available!
-		if(Bot == undefined) {
-			KnuddelsServer.getDefaultBotUser().transferKnuddel(KnuddelsServer.getUser(uid), kn, reason);
-		} else {
-			Bot.knuddel(KnuddelsServer.getUser(uid), kn, reason);
+		if(kn > Bot.getKnuddels()) {
+			return false;
 		}
 		
+		if(kn >= 1000000) {
+			return false;
+		}
+		
+		var _user = Users.get(parseInt(uid));
+		var _db = _user.getPersistence();
+		_db.addNumber('KBank_knuddel', -kn);
+		_db.addNumber('KBank_payout', kn);
+		Bot.knuddel(_user, kn, reason);
 		return true;
 	};
 
@@ -197,135 +177,58 @@ var KBank = (new function() {
 			return;
 		}
 
-		if(kn < 0) {
+		if(kn <= 0.00) {
 			return false;
 		}
 		
-		this.create(uid);
-		
-		_data[uid].knuddel	+= kn;
-		_data[uid].buyin	+= kn;
-		_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
-		_data[uid].buyin	= parseFloat(_data[uid].buyin.toFixed(2));
-		
+		var _db = Users.get(parseInt(uid)).getPersistence();
+		_db.addNumber('KBank_knuddel', kn);
+		_db.addNumber('KBank_buyin', kn);
 		return true;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_loadData
-	*/
-	this.loadData = function() {
-		if(DB == undefined) {
-			_data = KnuddelsServer.getPersistence().getObject('_bank', _data);
-		} else {
-			_data = DB.load('_bank', _data);
-		}
-		
-		this.fixData();
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_saveData
-	*/
-	this.saveData = function() {
-		this.cleanData();
-		
-		if(DB == undefined) {
-			KnuddelsServer.getPersistence().setObject('_bank', _data);
-		} else {
-			DB.save('_bank', _data);
-		}
-	};
-
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_resetData
-	*/
-	this.resetData = function() {
-		_data = {};
-		
-		if(DB == undefined) {
-			KnuddelsServer.getPersistence().setObject('_bank', _data);
-		} else {
-			DB.save('_bank', _data);
-		}
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_fixData
-	*/
-	this.fixData = function() {
-		if(!Object.prototype.each) {
-			for(var uid in _data) {
-				_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
-				_data[uid].buyin	= parseFloat(_data[uid].buyin.toFixed(2));
-				_data[uid].payout	= parseFloat(_data[uid].payout.toFixed(2));
-			}
-		} else {
-			_data.each(function(konto, uid) {
-				_data[uid].knuddel	= parseFloat(_data[uid].knuddel.toFixed(2));
-				_data[uid].buyin	= parseFloat(_data[uid].buyin.toFixed(2));
-				_data[uid].payout	= parseFloat(_data[uid].payout.toFixed(2));
-			});
-		}
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_cleanData
-	*/
-	this.cleanData = function() {
-		var newDB = {};
-		
-		if(!Object.prototype.each) {
-			for(var uid in _data) {
-				var konto = _data[uid];
-				
-				if(konto.knuddel > 0.00 || konto.buyin > 0.00 || konto.payout > 0.00) {
-					newDB[uid] = konto;
-				}
-			}
-		} else {
-			_data.each(function(konto, uid) {
-				if(konto.knuddel > 0.00 || konto.buyin > 0.00 || konto.payout > 0.00) {
-					newDB[uid] = konto;
-				}
-			});
-		}
-		
-		_data = newDB;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getData
-	*/
-	this.getData = function() {
-		return _data;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getUsers
 	*/
-	this.getUsers = function() {
-		return Object.keys(_data);
+	this.getUsers = function(callback) {
+		if(typeof callback === 'function') {
+			Logger.info('KBank.getUsers() is DEPRECATED, use it like this KBank.getUsers(function(userIds, total){ });');
+			return false;
+		}
+		
+		var _users = [];
+		
+		UserPersistenceNumbers.each('KBank_knuddel', function(user, value, index, total, key) {
+			_users.push(user.getUserId());
+		}, {
+			ascending:false,
+			onStart: function(totalCount) {
+				_users = [];
+			},
+			onEnd: function(totalCount) {
+				callback.call(this, _users, totalCount);
+			}
+		});
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_getStats
+	*/
+	this.getStats = function() {
+		return {
+			users: DB.count('KBank_knuddel'),
+			knusers: DB.count('KBank_knuddel', 0.01),
+			knuddel: parseFloat(DB.sum('KBank_knuddel')),
+			buyin: parseFloat(DB.sum('KBank_buyin')),
+			payout: parseFloat(DB.sum('KBank_payout'))
+		};
+	};
+
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getTransit
 	*/
 	this.getTransit = function() {
-		var transit = 0.00;
-		
-		if(!Object.prototype.each) {
-			for(var entry in _data) {
-				var konto	= _data[entry];
-				transit		+= konto.knuddel;
-			}
-		} else {
-			_data.each(function(konto) {
-				transit += konto.knuddel;
-			});
-		}
-		
-		return parseFloat(transit.toFixed(2));;
+		return parseFloat(DB.sum('KBank_knuddel'));
 	};
 	
 	/*
@@ -335,5 +238,85 @@ var KBank = (new function() {
 		return '[KFramework KBank]';
 	};
 	
-	this.fixData();
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_dataMigration
+		This works full automated, dont call this in Your App!!!
+	*/
+	this.dataMigration = function() {
+		if(DB.check('_bank', {}) == false) {
+			return true;
+		}
+		
+		var migrate = DB.load('_bank', {});
+		
+		if(!migrate.size()) {
+			DB.delete('_bank');
+			Logger.info('KBank fully migrated! You can now delete all "KBank.saveData()" and "KBank.loadData()" calls from your AppCode');
+			return false;
+		};
+
+		var _db = null;
+		var migrated = [];
+		var start = new Date().getTime();
+		migrate.each(function(konto, uid) {
+			_db = Users.get(parseInt(uid)).getPersistence();
+			_db.setNumber('KBank_knuddel', parseFloat(konto.knuddel.toFixed(2)));
+			_db.setNumber('KBank_buyin', parseFloat(konto.buyin.toFixed(2)));
+			_db.setNumber('KBank_payout', parseFloat(konto.payout.toFixed(2)));
+			migrated.push(uid);
+			
+			if((new Date().getTime()-start) > 9000) {
+				return false;
+			}
+		});
+		
+		if(migrate.size() == migrated.size()) {
+			DB.delete('_bank');
+			Logger.info('KBank fully migrated! You can now delete all "KBank.loadData()" and "KBank.saveData()" calls from your AppCode');
+		} else {
+			migrated.each(function(uid) {
+				delete migrate[uid];
+			});
+			DB.save('_bank', migrate);			
+			Logger.info('KBank can´t migrate all data at once ('+migrated.size()+' of '+migrate.size()+' finish). Please restart this App to migrate the last '+(migrate.size()-migrated.size())+' KBank Entrys');
+		}
+		return false;
+	};
+	
+	this.getData = function() {
+		Logger.info('KBank.getData() is DEPRECATED, you dont need this all any more!');
+	};
+	
+	this.loadData = function() {
+		Logger.info('KBank.loadData() is DEPRECATED, you dont need this all any more!');
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_saveData
+	*/
+	this.saveData = function() {
+		Logger.info('KBank.saveData() is DEPRECATED, you dont need this all any more!');
+	};
+
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_resetData
+	*/
+	this.resetData = function() {
+		Logger.info('KBank.resetData() is DEPRECATED, you dont need this all any more!');
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_fixData
+	*/
+	this.fixData = function() {
+		Logger.info('KBank.fixData() is DEPRECATED, you dont need this all any more!');
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/KBank_cleanData
+	*/
+	this.cleanData = function() {
+		Logger.info('KBank.cleanData() is DEPRECATED, you dont need this all any more!');
+	};
+
 }());

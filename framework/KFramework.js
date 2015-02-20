@@ -24,7 +24,7 @@
 	@author		Adrian Preuß <Bizarrus>
 */
 
-var VERSION		= '1.0.4';
+var VERSION		= '1.0.5';
 
 var KFramework = (new function() {
 	this.load = [
@@ -56,16 +56,14 @@ var KFramework = (new function() {
 	}
 	
 	this.startUp = function() {
-		KBank.loadData();
+		KBank.dataMigration();
 	};
 	
 	this.store = function() {
-		KBank.saveData();
 		Cron.saveData();
 	};
 	
 	this.shutDown = function() {
-		KBank.saveData();
 		Cron.onShutdown();
 	};
 	

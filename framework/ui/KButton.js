@@ -45,10 +45,12 @@ function KButton(text, command) {
 		}
 		
 		_command = command;
+		return this;		
 	};
 	
 	this.setID = function(id) {
 		_id = id;
+		return this;		
 	};
 	
 	this.getID = function() {
@@ -68,6 +70,7 @@ function KButton(text, command) {
 	*/
 	this.setCommand = function(command) {
 		_command = command;
+		return this;		
 	};
 	
 	/* TEXT */
@@ -83,6 +86,7 @@ function KButton(text, command) {
 	*/
 	this.setText = function(text) {
 		_text = text;
+		return this;		
 	};
 	
 	/* ICON */
@@ -95,6 +99,7 @@ function KButton(text, command) {
 		}
 		
 		_properties.icon = icon;
+		return this;		
 	};
 	
 	/*
@@ -102,6 +107,7 @@ function KButton(text, command) {
 	*/
 	this.removeIcon = function() {
 		delete _properties.icon;
+		return this;		
 	};
 	
 	/* COLOR */
@@ -111,6 +117,7 @@ function KButton(text, command) {
 	this.setColor = function(color) {
 		// @ToDo can be gradient like "120,230,90~60,170,25~24,96,1"
 		_properties.color = color;
+		return this;		
 	};
 	
 	/*
@@ -118,6 +125,7 @@ function KButton(text, command) {
 	*/
 	this.removeColor = function() {
 		delete _properties.color;
+		return this;		
 	};
 	
 	/* HEIGHT */
@@ -133,6 +141,7 @@ function KButton(text, command) {
 	*/
 	this.setHeight = function(height) {
 		_properties.height = height;
+		return this;		
 	};
 	
 	/*
@@ -140,6 +149,7 @@ function KButton(text, command) {
 	*/
 	this.removeHeight = function() {
 		delete _properties.height;
+		return this;		
 	};
 	
 	/* WIDTH */
@@ -155,6 +165,7 @@ function KButton(text, command) {
 	*/
 	this.setWidth = function(width) {
 		_properties.width = width;
+		return this;		
 	};
 	
 	/*
@@ -162,6 +173,7 @@ function KButton(text, command) {
 	*/
 	this.removeWidth = function() {
 		delete _properties.width;
+		return this;		
 	};
 	
 	/* SIZE */
@@ -171,6 +183,7 @@ function KButton(text, command) {
 	this.setSize = function(width, height) {
 		this.setWidth(width);
 		this.setHeight(height);
+		return this;		
 	};
 	
 	/*
@@ -179,6 +192,7 @@ function KButton(text, command) {
 	this.removeSize = function() {
 		this.removeWidth();
 		this.removeHeight();
+		return this;		
 	};
 	
 	/* POSITION */
@@ -194,6 +208,7 @@ function KButton(text, command) {
 	*/
 	this.setX = function(x) {
 		_properties.mx = x;
+		return this;		
 	};
 	
 	/*
@@ -201,6 +216,7 @@ function KButton(text, command) {
 	*/
 	this.getY = function() {
 		return _properties.my;
+		return this;		
 	};
 	
 	/*
@@ -208,6 +224,7 @@ function KButton(text, command) {
 	*/
 	this.setY = function(y) {
 		_properties.my = y;
+		return this;		
 	};
 	
 	/*
@@ -216,6 +233,7 @@ function KButton(text, command) {
 	this.setPosition = function(x, y) {
 		this.setX(x);
 		this.setY(y);
+		return this;		
 	};
 	
 	/* TEXTBORDER */
@@ -228,6 +246,7 @@ function KButton(text, command) {
 		} else {
 			delete _properties.textborder;
 		}
+		return this;		
 	};
 	
 	/* DISABLED */
@@ -240,6 +259,7 @@ function KButton(text, command) {
 		} else {
 			delete _properties.enabled;
 		}
+		return this;		
 	};
 	
 	/* @ToDo TEXTCOLOR */
@@ -247,24 +267,23 @@ function KButton(text, command) {
 		@docs	http://www.mychannel-apps.de/documentation/KButton_toString
 	*/
 	this.toString = function() {
-		var string = '°>{button}';
+		var buffer = new StringBuffer('°>{button}');
 		if(_text.length > 0) {
-			string += _text + '|' + (_id > 0 ? _id : '') + '|';
+			buffer.append(_text + '|' + (_id > 0 ? _id : '') + '|');
 		}
 		
 		if(_command.length > 0) {
-			string += 'call|' + _command.replace(/\|/g, '\\\\\\\\\\|');
+			buffer.append('call|' + _command.replace(/\|/g, '\\\\\\\\\\|'));
 		}
 		
 		_properties.each(function(value, name) {
-			string += '|' + name + '|' + value;
+			buffer.append('|' + name + '|' + value);
 		});
 		
-		string += '<°';
+		buffer.append('<°');
 		
-		return string;
+		return buffer.toString();
 	};
-	
 	
 	// Call the Constructor
 	KButton(text, command);

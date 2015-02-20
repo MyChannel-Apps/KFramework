@@ -41,13 +41,14 @@
 	@docs	http://www.mychannel-apps.de/documentation/KTable_constructor
 */
 function KTable() {
-	var _rows = new Array();
+	var _rows = [];
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KTable_add
 	*/
 	this.add = function(element) {
 		_rows.push(element);
+		return this;
 	};
 	
 	/*
@@ -64,8 +65,7 @@ function KTable() {
 		
 		_rows.each(function(row, row_index) {
 			row.getCells().each(function(cell, cell_index) {
-				output.append('|');
-				output.append(cell.getSize());
+				output.append('|').append(cell.getSize());
 			});
 			
 			return false;
@@ -98,6 +98,7 @@ function KRow() {
 	*/
 	this.add = function(cell) {
 		_cells.push(cell);
+		return this;		
 	};
 	
 	/*
@@ -152,8 +153,7 @@ function KCell(size, content) {
 	*/
 	this.toString	= function() {
 		var output = new KCode();
-		output.append('°>{tc}<°');
-		output.append(_content);
+		output.append('°>{tc}<°').append(_content);
 		
 		return output;
 	};

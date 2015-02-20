@@ -27,9 +27,7 @@
 
 /*
 	Example:
-	var image = new KImage('gt.gif');
-	image.setPosition(100, -50);
-	image.setLabel('Hallo Welt!');
+	var image = new KImage('gt.gif').setPosition(100, -50).setLabel('Hallo Welt!');
 	
 	// with Link
 	var link = new KLink(image);
@@ -110,10 +108,12 @@ function KImage(image) {
 	
 	this.alwaysCopy = function(state) {
 		_properties.alwayscopy = (state == true ? null : undefined);
+		return this;
 	};
 	
 	this.noPush = function(state) {
 		_properties.nopush = (state == true ? null : undefined);
+		return this;		
 	};
 	
 	/*
@@ -122,6 +122,7 @@ function KImage(image) {
 	this.setContainerSize = function(width, height) {
 		_properties.w = width;
 		_properties.h = height;
+		return this;		
 	};
 	
 	/*
@@ -130,6 +131,7 @@ function KImage(image) {
 	this.setSize = function(width, height) {
 		_properties.mw = width;
 		_properties.mh = height;
+		return this;		
 	};
 	
 	/*
@@ -138,6 +140,7 @@ function KImage(image) {
 	this.setPosition = function(x, y) {
 		_properties.mx = x;
 		_properties.my = y;
+		return this;		
 	};
 	
 	/*
@@ -145,6 +148,7 @@ function KImage(image) {
 	*/
 	this.setX = function(x) {
 		_properties.mx = x;
+		return this;		
 	};
 	
 	/*
@@ -152,6 +156,7 @@ function KImage(image) {
 	*/
 	this.setY = function(y) {
 		_properties.my = y;
+		return this;		
 	};
 	
 	/*
@@ -159,6 +164,7 @@ function KImage(image) {
 	*/
 	this.setLabel = function(text) {
 		_properties.label = text;
+		return this;		
 	};
 	
 	/*
@@ -167,6 +173,7 @@ function KImage(image) {
 	this.setLabelPosition = function(x, y) {
 		_properties.lmx = x;
 		_properties.lmy = y;
+		return this;		
 	};
 	
 	/*
@@ -174,10 +181,12 @@ function KImage(image) {
 	*/
 	this.setLabelColor = function(color) {
 		_properties.labelcolor = color;
+		return this;		
 	};
 	
 	this.setLabelSize = function(size) {
 		_properties.labelfontsize = size;
+		return this;		
 	};
 	
 	/*
@@ -185,6 +194,7 @@ function KImage(image) {
 	*/
 	this.enableLabelBorder = function(bool) {
 		_properties.labelborder = (bool == true ? '1' : '0');
+		return this;		
 	};
 	
 	/*
@@ -192,6 +202,7 @@ function KImage(image) {
 	*/
 	this.setBorder = function(size) {
 		_properties.border = size;
+		return this;		
 	};
 	
 	/*
@@ -199,6 +210,7 @@ function KImage(image) {
 	*/
 	this.setQuadcut = function(size) {
 		_properties.quadcut = size;
+		return this;		
 	};
 	
 	/*
@@ -206,6 +218,7 @@ function KImage(image) {
 	*/
 	this.setShadow = function(position) {
 		_properties.shadow = position;
+		return this;		
 	};
 	
 	/*
@@ -213,6 +226,7 @@ function KImage(image) {
 	*/
 	this.setMirror = function(state) {
 		_properties.mirror = (state == true ? null : undefined);
+		return this;		
 	};
 	
 	/*
@@ -220,28 +234,34 @@ function KImage(image) {
 	*/
 	this.setGreyscale = function(state) {
 		_properties.gray = (state == true ? null : undefined);
+		return this;		
 	};
 	
 	this.addCustom = function(name, value) {
 		_properties[name] = value;
+		return this;		
 	};
 	
 	this.setTransparency = function(value) {
 		_properties.opacity = value;
+		return this;		
 	};
 	
 	this.setVersion = function(version) {
 		_version = version;
+		return this;		
 	};
 	
 	this.setMouseSize = function(width, height) {
 		_properties.mousew = width;
 		_properties.mouseh = height;
+		return this;		
 	};
 	
 	this.setMousePosition = function(x, y) {
 		_properties.mousex = x;
 		_properties.mousey = y;
+		return this;		
 	};
 	
 	/*
@@ -250,22 +270,21 @@ function KImage(image) {
 	this.toString = function(only_path) {
 		only_path		= only_path || false;
 		var output		= (only_path == true ? '' : '°>') + _path + _name;
-		var properties	= '';
+		var buffer = new StringBuffer();
 		
 		if(_properties.size() > 0) {
-			properties += '..';
+			buffer.append('..');
 			
 			_properties.each(function(value, name) {
 				if(value == undefined) {
 					return;
 				}
 				
-				properties += '.' + name + (value == null ? '' : '_' + value);
+				buffer.append('.' + name + (value == null ? '' : '_' + value));
 			});
 		}
 		
-		
-		return output + (_extension.length == 0 ? '&' + properties + '.png' : properties + '.' + _extension) + (only_path == true ? '' : '<°');
+		return output + (_extension.length == 0 ? '&' + buffer.toString() + '.png' : buffer.toString() + '.' + _extension) + (only_path == true ? '' : '<°');
 	};
 	
 	KImage(image);

@@ -29,22 +29,27 @@ function KGroup() {
 	
 	this.add = function(content) {
 		_groups.push(content);
+		return this;		
 	};
 	
 	this.remove = function(index) {
 		delete _groups[index];
+		return this;		
 	};
 	
 	this.update = function(index, content) {
 		_groups[index] = content;
+		return this;		
 	};
 	
 	this.show = function(index) {
 		_show = index;
+		return this;		
 	};
 	
 	this.enableBoxLayout = function(state) {
 		_layout_box = state;
+		return this;		
 	};
 	
 	this.getNavigation = function(titles) {
@@ -67,8 +72,7 @@ function KGroup() {
 				var middle	= 'layout/tab_i_c...label_' + title + '.mw_' + (title.length * 1.12) + '.png'; // xrepeat
 				var right	= 'layout/tab_i_r.png';
 				
-				buffer.append('°>' + left + '<°');
-				buffer.append('°>' + middle + '|' + middle + '<>--<>|/tp-showgrp ' + entry + '<°');
+				buffer.append('°>' + left + '<°').append('°>' + middle + '|' + middle + '<>--<>|/tp-showgrp ' + entry + '<°');
 				// >{noxrep}<
 				buffer.append('°>' + right + '<°');
 			} else {
@@ -96,20 +100,14 @@ function KGroup() {
 	this.toString = function() {
 		var buffer = new StringBuffer();
 		
-		buffer.append('°>{addDisplayGroup}');
-		buffer.append(_show);
-		buffer.append('<°');
+		buffer.append('°>{addDisplayGroup}').append(_show).append('<°');
 
 		_groups.each(function(content, index) {
 			if(content == undefined) {
 				return;
 			}
 			
-			buffer.append('°>{displayGroup}');
-			buffer.append(parseInt(index));
-			buffer.append('<°');
-			buffer.append(content);
-			buffer.append('°>{displayGroupEnd}<°');
+			buffer.append('°>{displayGroup}').append(parseInt(index)).append('<°').append(content).append('°>{displayGroupEnd}<°');
 		});
 		
 		return buffer.toString();

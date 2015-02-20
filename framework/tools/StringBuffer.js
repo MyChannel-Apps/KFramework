@@ -24,14 +24,15 @@
 	@author		Adrian Preuß <Bizarrus>
 	@docs		http://www.mychannel-apps.de/documentation/tools/stringbuffer
 */
-function StringBuffer() {
-	var _data = '';
+function StringBuffer(startText) {
+	var _data = startText || '';
 	
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_append
 	*/
 	this.append = function(data) {
 		_data += data;
+		return this;		
 	};
 	
 	/*

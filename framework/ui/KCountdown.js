@@ -37,6 +37,7 @@ function KCountdown() {
 	*/
 	this.setTime = function(time) {
 		_properties.time = time;
+		return this;		
 	};
 	
 	/*
@@ -44,32 +45,34 @@ function KCountdown() {
 	*/
 	this.setFormat = function(format) {
 		_properties.format = format;
+		return this;		
 	};
 	
 	this.setText = function(text) {
 		_properties.timeUpText = text;
+		return this;		
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCountdown_toString
 	*/
 	this.toString = function() {
-		var string	= '°>{countdown}';
+		var buffer = new StringBuffer('°>{countdown}');
 		var index	= 0;
 		var length	= _properties.size();
 		
 		_properties.each(function(value, name) {
-			string += name + '=' + value;
+			buffer.append(name + '=' + value);
 			
 			if(index + 1 < length) {
-				string += '|';
+				buffer.append('|');
 			}
 			
 			index++;
 		});
 		
-		string += '<°';
+		buffer.append('<°');
 		
-		return string;
+		return buffer.toString();
 	};
 }

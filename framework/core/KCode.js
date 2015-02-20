@@ -81,6 +81,7 @@ function KCode() {
 	*/
 	this.append = function(component) {
 		_buffer.push(component);
+		return this;
 	};
 	
 	/*
@@ -97,6 +98,7 @@ function KCode() {
 		
 		// DEPRECATED!
 		_buffer.push('#');
+		return this;		
 	};
 	
 	/*
@@ -104,6 +106,7 @@ function KCode() {
 	*/
 	this.newHr = function() {
 		_buffer.push('°-°');
+		return this;		
 	};
 	
 	/*
@@ -111,6 +114,7 @@ function KCode() {
 	*/
 	this.addDots = function() {
 		_buffer.push('.........');
+		return this;		
 	};
 	
 	/*
@@ -118,6 +122,7 @@ function KCode() {
 	*/
 	this.setAlignment = function(alignment) {
 		_buffer.push(alignment);
+		return this;		
 	};	
 	
 	/*
@@ -131,6 +136,7 @@ function KCode() {
 		}
 		
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
+		return this;		
 	};
 	
 	/*
@@ -138,6 +144,7 @@ function KCode() {
 	*/
 	this.disableOptimization = function(state) {
 		_minify = state;
+		return this;		
 	};
 	
 	/*

@@ -44,22 +44,27 @@ function KTooltip(content) {
 	this.setSize = function(width, height) {
 		_width	= width;
 		_height	= height;
+		return this;
 	};
 	
 	this.setWidth = function(width) {
 		_width	= width;
+		return this;		
 	};
 		
 	this.setHeight = function(height) {
 		_height	= height;
+		return this;		
 	};
 	
 	this.append = function(content) {
 		_content.append(content);
+		return this;		
 	};
 	
 	this.newLine = function() {
 		_content.newLine();
+		return this;		
 	};
 	
 	this.getCommand = function(text) {
@@ -68,20 +73,14 @@ function KTooltip(content) {
 			text.setCommand('/openpulldown id_' + _instance + '.w_' + _width + '.h_' + _height);
 		}
 		
-		return text
+		return text;
 	};
 	
 	this.toString = function() {
 		var output = new KCode();
 		
-		output.append('°>{definetext|');
-		output.append(_instance);
-		output.append('}<°');
-		output.append(_content);
-		output.append('°>{definetext|');
-		output.append(_instance);
-		output.append('}<°');
-		
+		output.append('°>{definetext|').append(_instance).append('}<°').append(_content).append('°>{definetext|').append(_instance).append('}<°');
+
 		return output;
 	};
 	

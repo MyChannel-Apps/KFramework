@@ -198,11 +198,7 @@ function KColor(red, green, blue) {
 	this.getRGB = function() {
 		var buffer = new StringBuffer();
 		
-		buffer.append(_red);
-		buffer.append(',');
-		buffer.append(_green);
-		buffer.append(',');
-		buffer.append(_blue);
+		buffer.append(_red).append(',').append(_green).append(',').append(_blue);
 		
 		return buffer.toString();
 	};
@@ -227,13 +223,7 @@ function KColor(red, green, blue) {
 		if(isConstant()) {
 			output.append(getConstant());
 		} else {
-			output.append('°[');
-			output.append(_red);
-			output.append(',');
-			output.append(_green);
-			output.append(',');
-			output.append(_blue);
-			output.append(']°');
+			output.append('°[').append(_red).append(',').append(_green).append(',').append(_blue).append(']°');
 		}
 		
 		return output;
@@ -266,9 +256,7 @@ function ColorInstance(key, rgb) {
 	this.toString = function() {
 		var output = new KCode();
 		
-		output.append('°');
-		output.append(key);
-		output.append('°');
+		output.append('°').append(key).append('°');
 		
 		return output;
 	};
