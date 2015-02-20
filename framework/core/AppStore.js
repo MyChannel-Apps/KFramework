@@ -111,6 +111,7 @@ var AppStore = (new function() {
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_setSettings
 	*/
 	this.setSettings = function(options) {
+		Logger.info('AppStore.setSettings(options) is DEPRECATED');
 		_options = options.compare(_options);
 		return this;		
 	};
@@ -119,6 +120,7 @@ var AppStore = (new function() {
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_app
 	*/
 	this.app = function(container) {
+		Logger.info('AppStore.app(container) is DEPRECATED');
 		_container	= new container();
 		_app		= new container();
 
@@ -352,6 +354,8 @@ var AppStore = (new function() {
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_isLocked
 	*/
 	this.isLocked = function() {
+		Logger.info('AppStore.isLocked() is DEPRECATED');
+		
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() != _owner.getUserId()) {
 			if(_store_data.is_payed == 'T') {
 				return false;
@@ -371,6 +375,8 @@ var AppStore = (new function() {
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_hasPayed
 	*/
 	this.hasPayed = function() {
+		Logger.info('AppStore.hasPayed() is DEPRECATED');
+		
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() == _owner.getUserId()) {
 			return true;
 		}
