@@ -89,21 +89,15 @@ var Logger = (new function() {
 	};
 	
 	function sendLog(prefix, message) {
-		if(!Object.prototype.each) {
-			for(var uid in _watcher) {
-				var value = _watcher[uid];
-				
-				if(value == prefix || value == 'E_ALL') {
-					Users.get(uid).sendPrivateMessage(prefix + ': ' + message);
-				}
-			}
-		} else {
-			_watcher.each(function(value, uid) {
-				if(value.contains(prefix) || value == 'E_ALL') {
-					Users.get(uid).sendPrivateMessage(prefix + ': ' + message);
-				}
-			});
+		if(_watcher.size() > 0) {
+			Logger.info('Logger.sendLog(prefix, message) is DEPRECATED - Don\'t use Logger.addLogUser(uid, types) or Logger.delLogUser(uid)!');
 		}
+		
+		_watcher.each(function(value, uid) {
+			if(value.contains(prefix) || value == 'E_ALL') {
+				Users.get(uid).sendPrivateMessage(prefix + ': ' + message);
+			}
+		});
 	};
 
 	/*
