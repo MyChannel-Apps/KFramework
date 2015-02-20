@@ -46,6 +46,13 @@ function KLink(text, command_left, command_right) {
 	}
 	
 	/*
+		@docs	http://www.mychannel-apps.de/documentation/KLink_getText
+	*/
+	this.getText = function() {
+		return _text;
+	};
+	
+	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_setCommand
 	*/
 	this.setCommand = function(command_left, command_right) {
