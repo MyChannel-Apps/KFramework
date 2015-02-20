@@ -95,22 +95,12 @@ var DB	= (new function() {
 	*/
 	this.save = function(key, data, user) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
-			
+			Logger.error('No key submitted');
 			return false;
 		}
 
 		if(data === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No Data submitted');
-			} else {
-				Logger.error('No Data submitted');
-			}
-			
+			Logger.error('No Data submitted');
 			return false;
 		}
 		
@@ -135,16 +125,46 @@ var DB	= (new function() {
 	};
 	
 	/*
+		@docs	http://www.mychannel-apps.de/documentation/DB_check
+	*/
+	this.check = function(key, data, user) {
+		if(key === undefined) {
+			Logger.error('No key submitted');
+			return false;
+		}
+		
+		if(data === undefined) {
+			Logger.error('No Data submitted');
+			return false;
+		}
+		
+		var _db = KnuddelsServer.getPersistence();
+		
+		if(user != undefined) {
+			_db = user.getPersistence();
+		}
+		
+		switch(typeof data) {
+			case 'string':
+				return _db.hasString(key);
+			break;
+			case 'number':
+				return _db.hasNumber(key);
+			break;
+			case 'object':
+				return _db.hasObject(key);
+			break;
+		}
+		
+		return false;
+	};
+	
+	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_delete
 	*/
 	this.delete = function(key, user) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
-			
+			Logger.error('No key submitted');
 			return false;
 		}
 		
@@ -172,11 +192,7 @@ var DB	= (new function() {
 	*/
 	this.sum = function(key) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
+			Logger.error('No key submitted');
 			return false;
 		}
 		return UserPersistenceNumbers.getSum(key);
@@ -187,11 +203,7 @@ var DB	= (new function() {
 	*/
 	this.count = function(key, from, to) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
+			Logger.error('No key submitted');
 			return false;
 		}
 		var options = {};
@@ -212,11 +224,7 @@ var DB	= (new function() {
 	*/
 	this.sorted = function(key, sortBy, count, page) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
+			Logger.error('No key submitted');
 			return false;
 		}
 		var options = {};
@@ -243,20 +251,12 @@ var DB	= (new function() {
 	*/	
 	this.users = function(key, callback, sortBy, from, to) {
 		if(key === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No key submitted');
-			} else {
-				Logger.error('No key submitted');
-			}
+			Logger.error('No key submitted');
 			return false;
 		}
 		
 		if(callback === undefined) {
-			if(Logger == undefined) {
-				KnuddelsServer.getDefaultLogger().error('No callback submitted');
-			} else {
-				Logger.error('No callback submitted');
-			}
+			Logger.error('No callback submitted');
 			return false;
 		}
 		var options = {};
