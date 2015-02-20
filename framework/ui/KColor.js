@@ -232,27 +232,48 @@ function KColor(red, green, blue) {
 	KColor(this, red, green, blue);
 };
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/ColorInstance_constructor
+*/
 function ColorInstance(key, rgb) {
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getColorKey
+	*/
 	this.getColorKey = function() {
 		return key;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getRGB
+	*/
 	this.getRGB = function() {
 		return rgb;
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getRed
+	*/
 	this.getRed = function() {
 		return rgb[0];
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getGreen
+	*/
 	this.getGreen = function() {
 		return rgb[1];
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getBlue
+	*/
 	this.getBlue = function() {
 		return rgb[2];
 	};
 	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_toString
+	*/
 	this.toString = function() {
 		var output = new KCode();
 		
