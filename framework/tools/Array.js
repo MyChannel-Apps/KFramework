@@ -80,6 +80,9 @@ if(!Array.prototype.exists) {
 	});
 }
 
+/*
+	@docs	http://www.mychannel-apps.de/documentation/Array_size
+*/
 if(!Array.prototype.size) {
 	Object.defineProperty(Array.prototype, 'size', {
 		enumerable:		false,
