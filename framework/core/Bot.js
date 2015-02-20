@@ -29,154 +29,161 @@ var Bot = (new function() {
 	var _user = KnuddelsServer.getDefaultBotUser();
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getAge
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getAge
 	*/
 	this.getAge = function() { 
 		return _user.getAge();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getGender
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getGender
 	*/
 	this.getGender = function() { 
 		return _user.getGender();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getKnuddelAmount
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getKnuddelAmount
 	*/
 	this.getKnuddelAmount = function() {
-		return _user.getKnuddelAmount()
+		return _user.getKnuddelAmount();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getNick
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getNick
 	*/
 	this.getNick = function() {
 		return _user.getNick();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getOnlineMinutes
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getOnlineMinutes
 	*/
 	this.getOnlineMinutes = function() {
 		return _user.getOnlineMinutes();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getProfileLink
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getProfileLink
 	*/
 	this.getProfileLink	= function(displayText) {
 		return _user.getProfileLink(displayText == undefined ? this.getNick() : displayText);
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getReadme
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getProfilePicture
+	*/
+	this.getProfilePicture	= function() {
+		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + _user.getNick().urlencode();
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getReadme
 	*/
 	this.getReadme = function() {
 		return _user.getReadme();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getRegDate
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getRegDate
 	*/
 	this.getRegDate = function() {
 		return _user.getRegDate();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getUserId
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserId
 	*/
 	this.getUserId = function() {
 		return _user.getUserId();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getUserStatus
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserStatus
 	*/
 	this.getUserStatus = function() {
 		return _user.getUserStatus();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getUserType
+		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserType
 	*/
 	this.getUserType = function() {
 		return _user.getUserType();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isAppDeveloper
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isAppDeveloper
 	*/
 	this.isAppDeveloper = function() {
 		return _user.isAppDeveloper();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isAppManager
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isAppManager
 	*/
 	this.isAppManager = function() {
 		return _user.isAppManager();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isAway
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isAway
 	*/
 	this.isAway = function() {
 		return _user.isAway();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isChannelModerator
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isChannelModerator
 	*/
 	this.isChannelModerator = function() {
 		return _user.isChannelModerator();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isChannelOwner
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isChannelOwner
 	*/
 	this.isChannelOwner = function() {
 		return _user.isChannelOwner();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isColorMuted
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isColorMuted
 	*/
 	this.isColorMuted = function() {
 		return _user.isColorMuted();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isEventModerator
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isEventModerator
 	*/
 	this.isEventModerator = function() {
 		return _user.isEventModerator();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isLocked
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isLocked
 	*/
 	this.isLocked = function() {
 		return _user.isLocked();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isMuted
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isMuted
 	*/
 	this.isMuted = function() {
 		return _user.isMuted();
 	};	
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isOnline
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isOnline
 	*/
 	this.isOnline = function() {
 		return _user.isOnline();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_isOnlineInChannel
+		@docs	http://www.mychannel-apps.de/documentation/Bot_isOnlineInChannel
 	*/
 	this.isOnlineInChannel = function() {
 		return _user.isOnlineInChannel();
@@ -200,6 +207,10 @@ var Bot = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_knuddel
 	*/
 	this.knuddel = function(user, amount, message) {
+		if(!isTypeOf(amount, 'KnuddelAmount')) {
+			amount = new KnuddelAmount(amount);
+		}
+		
 		if(message === undefined) {
 			_user.transferKnuddel(user, amount);
 		} else {
@@ -225,11 +236,7 @@ var Bot = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_publicMessage
 	*/
 	this.publicMessage = function(message) {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('Bot.publicMessage(message) is DEPRECATED');
-		} else {
-			Logger.info('Bot.publicMessage(message) is DEPRECATED');
-		}
+		Logger.info('Bot.publicMessage(message) is DEPRECATED');
 		
 		this.public(message);
 	}
@@ -238,11 +245,7 @@ var Bot = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_postMessage
 	*/
 	this.postMessage = function(user, message, topic) {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('Bot.postMessage(user, message, topic) is DEPRECATED');
-		} else {
-			Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
-		}
+		Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
 		
 		this.post(user, message, topic);
 	}
@@ -251,11 +254,7 @@ var Bot = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_privateMessage
 	*/
 	this.privateMessage = function(user, message) {
-		if(Logger == undefined) {
-			KnuddelsServer.getDefaultLogger().info('Bot.privateMessage(user, message) is DEPRECATED');
-		} else {
-			Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
-		}
+		Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
 		
 		this.private(user, message);
 	}
@@ -267,6 +266,7 @@ var Bot = (new function() {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
+		
 		_user.sendPublicMessage(message);
 	};
 	
@@ -278,13 +278,25 @@ var Bot = (new function() {
 			message = message.toString();
 		}
 		
+		if(topic == undefined) {
+			topic = '';
+		}
+		
 		// send to online users
 		if(nick == undefined) {
 			Channel.getUsers().each(function(user) {
 				user.sendPostMessage(topic, message);
 			});
 		} else {
-			nick.sendPostMessage(topic, message);
+			if(isTypeOf(nick, 'User')) {
+				nick.sendPostMessage(topic, message);
+			} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
+				nick.each(function(n) {
+					Bot.post(n, message, topic);
+				});
+			} else {
+				Users.get(nick).sendPostMessage(topic, message);
+			}
 		}
 	};
 	
@@ -298,24 +310,19 @@ var Bot = (new function() {
 		
 		// send to online users
 		if(nick == undefined) {
-			if(Channel == undefined && !Object.prototype.each) {
-				var users	= KnuddelsServer.getChannel().getOnlineUsers(UserType.Human);
-				var size	= users.length;
-				
-				for(var index = 0; index < size; ++index) {
-					users[index].sendPrivateMessage(message);
-				}
-			} else if(Channel != undefined && Object.prototype.each) {
-				KnuddelsServer.getChannel().getOnlineUsers(UserType.Human).each(function(user) {
-					user.sendPrivateMessage(message);
+			Channel.getUsers().each(function(user) {
+				user.sendPrivateMessage(message);
+			});
+		} else {
+			if(isTypeOf(nick, 'User')) {
+				nick.sendPrivateMessage(message);
+			} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
+				nick.each(function(n) {
+					Bot.private(n, message);
 				});
 			} else {
-				Channel.getUsers().each(function(user) {
-					user.sendPrivateMessage(message);
-				});
+				Users.get(nick).sendPrivateMessage(message);
 			}
-		} else {
-			nick.sendPrivateMessage(message);
 		}
 	};
 	
@@ -327,7 +334,7 @@ var Bot = (new function() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_toString
+		@docs	http://www.mychannel-apps.de/documentation/Bot_toString
 	*/
 	this.toString = function() {
 		return '[KFramework Bot]';
