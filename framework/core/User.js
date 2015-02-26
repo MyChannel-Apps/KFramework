@@ -100,6 +100,7 @@ var Users = (new function() {
 				var _nickname			= nickname;
 				var _uid 				= userId;
 				this.virtual			= true;
+				this.isVirtual			= function() { return true; };
 				this.getPersistence		= function(_uid) {
 					return (new function VirtualPersistence(uid) {
 						_uid = uid;
@@ -162,9 +163,11 @@ var Users = (new function() {
 				this.getKnuddelAmount	= function() { return new KnuddelAmount(0); };
 				this.getNick			= function() { return _nickname; };
 				this.getOnlineMinutes	= function() { return -1; };
+				this.getProfilePicture	= function() { return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + _nickname.urlencode(); };
 				this.getProfileLink		= function() { return '°>_h' + _nickname.escapeKCode() + '|/w "|/serverpp "<°'; };
 				this.getReadme			= function() { return ''; };
 				this.getRegDate			= function() { return new Date(0); };
+				this.getID				= function() { return _uid; };
 				this.getUserId			= function() { return _uid; };
 				this.getUserStatus		= function() { return UserStatus.Newbie; };
 				this.getUserType		= function() { return UserType.Human; };
@@ -179,13 +182,17 @@ var Users = (new function() {
 				this.isMuted			= function() { return false; };
 				this.isOnline			= function() { return false; };
 				this.isOnlineInChannel	= function() { return false; };
-				this.sendPostMessage	= function(topic, message) {
+				this.getKnuddels		= function() { return 0; };
+				this.sendPostMessage	= send;
+				this.sendPrivateMessage	= send;
+				this.private			= send;
+				this.post				= send;
+				
+				function send() {
 					Logger.error('Can\t send message to a virtual User-Object!');
 				};
 				
-				this.sendPrivateMessage	= function(message) {
-					Logger.error('Can\t send message to a virtual User-Object!');
-				};
+				_nickname				= KnuddelsServer.getNickCorrectCase(_uid);
 			}());
 		}
 		

@@ -159,3 +159,25 @@ if(!User.prototype.knuddel) {
 		}
 	});
 }
+
+if(!User.prototype.getKnuddels) {
+	Object.defineProperty(User.prototype, 'getKnuddels', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			return this.getKnuddelAmount().asNumber();
+		}
+	});
+}
+
+if(!User.prototype.isVirtual) {
+	Object.defineProperty(User.prototype, 'isVirtual', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			return false;
+		}
+	});
+}

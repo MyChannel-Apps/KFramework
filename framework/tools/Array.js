@@ -35,7 +35,7 @@ if(!Array.prototype.each) {
 		writable:		false,
 		value: function(callback) {
 			for(var index = 0; index < this.length; index++) {
-				if(typeof(this[index]) == 'object') {
+				if(isTypeOf(this[index], 'object')) {
 					if(callback.call(this, this[index], index) === false) {
 						break;
 					}
@@ -62,6 +62,19 @@ if(!Array.prototype.random) {
 				return undefined;
 			}
 			return this[random];
+		}
+	});
+}
+
+if(!Array.prototype.shuffle) {
+	Object.defineProperty(Array.prototype, 'shuffle', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			this.sort(function(a, b) {
+				return (0.5 - Math.random());
+			});
 		}
 	});
 }

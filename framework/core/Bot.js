@@ -321,7 +321,10 @@ var Bot = (new function() {
 					Bot.private(n, message);
 				});
 			} else {
-				Users.get(nick).sendPrivateMessage(message);
+				var nick = Users.get(nick);
+				if(nick != undefined) {
+					nick.sendPrivateMessage(message);
+				}
 			}
 		}
 	};
