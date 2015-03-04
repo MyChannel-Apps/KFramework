@@ -171,7 +171,14 @@ var Channel = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Channel_onDev
 	*/
 	this.onDev = function() {
-		return KnuddelsServer.isTestSystem();
+		return KnuddelsServer.getChatServerInfo().isTestSystem();
+	};
+
+	/*
+		@docs	TODO
+	*/
+	this.getServer = function() {
+		return KnuddelsServer.getChatServerInfo().getServerId();
 	};
 	
 	/*
