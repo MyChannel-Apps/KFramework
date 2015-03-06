@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KCode :: KTooltip</title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="virtual.js"></script>
+		<script type="text/javascript" src="../framework/KFramework.js"></script>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<script type="text/javascript">
+			InvokeLater(function() {
+				var text	= new KCode();
+				
+				var tooltip = new KTooltip();
+				tooltip.append('Testinhalt');
+				
+				text.append(tooltip);
+				text.append('<br>');
+				text.append('<br>');
+				text.append(tooltip.getCommand());
+				text.append('<br>');
+				text.append('<br>');
+				text.append(tooltip.getCommand('Text 1'));
+				text.append('<br>');
+				text.append('<br>');
+				text.append(tooltip.getCommand('Text 2', '/kiss James'));
+				
+				
+				tooltip.disableHover(true);
+				text.append('<br>');
+				text.append('<br>');
+				text.append(tooltip.getCommand('Text 2', '/kiss James'));
+				
+				document.getElementById('debug').innerHTML = text;
+			});
+		</script>
+	</body>
+</html>

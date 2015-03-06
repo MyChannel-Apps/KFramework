@@ -31,10 +31,11 @@ var KCODE_TOOLTIPS_INSTANCES = 0;
 	@docs		http://www.mychannel-apps.de/documentation/KTooltip_constructor
 */
 function KTooltip(content) 	{
-	var _content	= new KCode();
-	var _instance	= 0;
-	var _width		= 100;
-	var _height		= 100;
+	var _content		= new KCode();
+	var _instance		= 0;
+	var _hover_disabled	= false;
+	var _width			= 100;
+	var _height			= 100;
 	
 	function KTooltip(content) {
 		if(content != undefined) {
@@ -85,13 +86,22 @@ function KTooltip(content) 	{
 		return this;
 	};
 	
+	this.disableHover = function(state) {
+		_hover_disabled = state;
+	};
+	
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_getCommand
 	*/
-	this.getCommand = function(text) {
+	this.getCommand = function(text, command) {
 		if(!(text instanceof KLink)) {
 			text = new KLink(text);
-			text.setCommand('/openpulldown id_' + _instance + '.w_' + _width + '.h_' + _height);
+			
+			if(_hover_disabled) {
+				text.setCommand((command == undefined ? '' : '/doubleaction ' + command + '|') + '/openpulldown id_' + _instance + '.w_' + _width + '.h_' + _height);
+			} else {
+				text.setCommand((command == undefined ? '/void' : command) + '{{onEnter=/openpulldown id_' + _instance + '.w_' + _width + '.h_' + _height + '}}{{onExit=/closepulldown id_' + _instance + '}}');
+			}
 		}
 		
 		return text;
