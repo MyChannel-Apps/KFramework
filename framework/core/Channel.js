@@ -190,8 +190,6 @@ var Channel = (new function() {
 			cm:			true,
 			owner:		true,
 			event:		true,
-			online:		true,
-			inChannel:	true,
 			away:		true,
 			developer:	true,
 			status:		[
@@ -225,39 +223,12 @@ var Channel = (new function() {
 		var _users	= _channel.getOnlineUsers(types);
 		
 		// Return users if no other filters available
-		if(
-			!filter.exists('online') &&
-			!filter.exists('inChannel') &&
-			!filter.exists('away') &&
-			!filter.exists('cmute') &&
-			!filter.exists('mute') &&
-			!filter.exists('cl') &&						
-			!filter.exists('developer') &&
-			!filter.exists('owner') &&
-			!filter.exists('event') &&
-			!filter.exists('cm') &&
-			!filter.exists('status') &&
-			!filter.exists('gender') &&
-			!filter.exists('age') &&
-			!filter.exists('nickname') &&
-			!filter.exists('minutes') &&
-			!filter.exists('readme')
-		) {
+		if(!filter.size()) {
 			return _users;
 		}
 
 		//_users.each(function(user, index) {
 		for(var index = 0; index < _users.length; index++) {
-			// Is Online
-			if(filter.online != undefined && filter.online != _users[index].isOnline()) {
-				continue;
-			}
-			
-			// Is Online in Channel
-			if(filter.inChannel != undefined && filter.inChannel != _users[index].isOnlineInChannel()) {
-				continue;
-			}
-			
 			// Is Away
 			if(filter.away != undefined && filter.away != _users[index].isAway()) {
 				continue;
