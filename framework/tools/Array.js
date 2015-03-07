@@ -106,3 +106,46 @@ if(!Array.prototype.size) {
 		}
 	});
 }
+
+/*
+	@docs	TODO
+*/
+if(!Array.prototype.first) {
+	Object.defineProperty(Array.prototype, 'first', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			return this[0];
+		}
+	});
+}
+
+/*
+	@docs	TODO
+*/
+if(!Array.prototype.last) {
+	Object.defineProperty(Array.prototype, 'last', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			return this[this.length - 1];
+		}
+	});
+}
+
+/*
+	@docs	TODO
+*/
+if(!Array.prototype.clear) {
+	Object.defineProperty(Array.prototype, 'clear', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			this.length = 0;
+			return this;
+		}
+	});
+}

@@ -21,54 +21,35 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Adrian Preuß <Bizarrus>
+	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/tools/number
 */
 
-var VERSION		= '1.0.6';
 
-var KFramework = (new function() {
-	this.load = [
-		/* Tools */
-		'tools/Functions',
-		'tools/Number',
-		'tools/String',
-		'tools/Array',
-		'tools/Object',
-		'tools/User',
-		'tools/StringBuffer',
-		
-		/* Core */
-		'core/Hash',
-		'core/Hooks',
-		'core/Database',
-		'core/Logger',
-		'core/Cronjob',
-		'core/Bot',
-		'core/KCode',
-		'core/KBank',
-		'core/Channel',
-		'core/User',
-		'core/AppStore'
-		/* 'core/KConfig' */
-	];
-	
-	for(var entry in this.load) {
-		require('framework/' + this.load[entry] + '.js');
-	}
-	
-	this.startUp = function() {
-		KBank.dataMigration();
-	};
-	
-	this.store = function() {
-		Cron.saveData();
-	};
-	
-	this.shutDown = function() {
-		Cron.onShutdown();
-	};
-	
-	this.toString = function() {
-		return '[KFramework Core]';
-	};
-}());
+/*
+	@docs	TODO
+*/
+if(!Number.prototype.fix) {
+	Object.defineProperty(Number.prototype, 'fix', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(count) {
+			return parseFloat(this.toFixed(parseInt(count) || 2));
+		}
+	});
+}
+
+/*
+	@docs	TODO
+*/
+if(!Number.prototype.format) {
+	Object.defineProperty(Number.prototype, 'format', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(n, x) {
+			return this.toFixed(Math.max(0, ~~n)).replace(new RegExp('\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')', 'g'), '$&,');
+		}
+	});
+}

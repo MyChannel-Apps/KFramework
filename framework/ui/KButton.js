@@ -94,6 +94,22 @@ function KButton(text, command) {
 		_text = text;
 		return this;
 	};
+
+	/* Properties */
+	/*
+		@docs	TODO
+	*/
+	this.getProperties = function() {
+		return _properties;
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.setProperties = function(properties) {
+		_properties = properties;
+		return this;
+	};
 	
 	/* ICON */
 	/*
