@@ -116,8 +116,8 @@ function KButton(text, command) {
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setIcon
 	*/
 	this.setIcon = function(icon) {
-		if(icon.indexOf('https://') == 0 || icon.indexOf('http://') == 0) {
-			Logger.info("Can\t use http:// or https:// URL\'s on Buttons because the Path is implemented on the Client side!");
+		if(icon.startsWith('https://') || icon.startsWith('http://')) {
+			icon = '../' + icon;
 		}
 		
 		_properties.icon = icon;
