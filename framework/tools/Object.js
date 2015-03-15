@@ -100,7 +100,10 @@ if(!Object.prototype.sort) {
 	
 			var newObj = {};
 			for(var k in keys) {
-				newObj[keys[k].index] = this[keys[k].index];
+				if(keys[k] != undefined) {
+					newObj[keys[k].index] = this[keys[k].index];
+				}
+				
 				delete this[keys[k].index];
 			}
 	
