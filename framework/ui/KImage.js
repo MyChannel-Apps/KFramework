@@ -35,262 +35,80 @@
 	Bot.public(link);
 	@docs	http://www.mychannel-apps.de/documentation/KImage_constructor
 */
-function KImage(image) {
-	var _path			= '';
-	var _name			= '';
-	var _extension		= '';
-	var _properties		= {};
-	var _url			= false;
+var KImage			= KImage || (function(image) {
+	this._path			= '';
+	this._name			= '';
+	this._extension		= '';
+	this._properties	= {};
 	
-	function KImage(image) {
-		// HTTP(S) Links
-		if(image.substring(0, 7) == 'http://' || image.substring(0, 8) == 'https://') {
-			var split	= image.split('/');
-			var length	= split.length;
-			image		= split[length - 1];
-			
-			for(var index = 0; index < length - 1; ++index) {
-				_path += split[index];
-				_path += '/';
-			}
-			
-			// Fix profile pictures
-			if(_path == 'http://chat.knuddels.de/pics/fotos/') {
-				_url		= true;
-			}
-		}
+	// HTTP(S) Links
+	if(image.substring(0, 7) == 'http://' || image.substring(0, 8) == 'https://') {
+		var split	= image.split('/');
+		var length	= split.length;
+		image		= split[length - 1];
 		
-		// Contains properties
-		if(image.indexOf('..') > -1) {
-			var properties	= image.split('..');
-			var split		= image.split('.');
-			var length		= split.length;
-			image			= properties[0];
-			image			+= '.';
-			image			+= split[length - 1];
-			
-			split.each(function(name, index) {
-				if(name.length == 0 || index == 0 || index == length - 1) {
-					return;
-				}
-				
-				if(name.search(/[^a-zA-Z0-9_]+/gi) != -1) {
-					return;
-				}
-				
-				if(name.indexOf('_') != -1) {
-					var split				= name.split('_');
-					_properties[split[0]]	= split[1];
-				} else {
-					_properties[name]	= null;
-				}
-			});
-		}
-		
-		var split		= image.split('.');
-		
-		if(['png', 'jpg', 'jpeg', 'bmp', 'gif'].indexOf(split[1].toLowerCase()) != -1) {
-			_name		= split[0];
-			_extension	= split[1];
-		} else {
-			_name		= image;
-		}
-		
-		_name			= _name.replace(/&\.(png|jpeg|gif|jpg|bmp)/gi, '');
-		var first		= _name.substring(0, 1);
-		
-		if(first == '/' || first == '~') {
-			_name	= _name.substring(1);
-			_path	= KnuddelsServer.getFullImagePath('');
+		for(var index = 0; index < length - 1; ++index) {
+			this._path += split[index];
+			this._path += '/';
 		}
 	}
 	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_alwaysCopy
-	*/
-	this.alwaysCopy = function(state) {
-		_properties.alwayscopy = (state == true ? null : undefined);
-		return this;
-	};
+	// Contains properties
+	if(image.indexOf('..') > -1) {
+		var properties	= image.split('..');
+		var instance	= this;
+		var split		= image.split('.');
+		var length		= split.length;
+		image			= properties[0];
+		image			+= '.';
+		image			+= split[length - 1];
+		
+		split.each(function(name, index) {
+			if(name.length == 0 || index == 0 || index == length - 1) {
+				return;
+			}
+			
+			if(name.search(/[^a-zA-Z0-9_]+/gi) != -1) {
+				return;
+			}
+			if(name.indexOf('_') != -1) {
+				var split						= name.split('_');
+				instance._properties[split[0]]	= split[1];
+			} else {
+				instance._properties[name]		= null;
+			}
+		});
+	}
 	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_noPush
-	*/
-	this.noPush = function(state) {
-		_properties.nopush = (state == true ? null : undefined);
-		return this;
-	};
+	var split		= image.split('.');
 	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setContainerSize
-	*/
-	this.setContainerSize = function(width, height) {
-		_properties.w = width;
-		_properties.h = height;
-		return this;
-	};
+	if(['png', 'jpg', 'jpeg', 'bmp', 'gif'].indexOf(split[1].toLowerCase()) != -1) {
+		this._name		= split[0];
+		this._extension	= split[1];
+	} else {
+		this._name		= image;
+	}
 	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setSize
-	*/
-	this.setSize = function(width, height) {
-		_properties.mw = width;
-		_properties.mh = height;
-		return this;
-	};
+	this._name		= this._name.replace(/&\.(png|jpeg|gif|jpg|bmp)/gi, '');
+	var first		= this._name.substring(0, 1);
 	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setPosition
-	*/
-	this.setPosition = function(x, y) {
-		_properties.mx = x;
-		_properties.my = y;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setX
-	*/
-	this.setX = function(x) {
-		_properties.mx = x;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setY
-	*/
-	this.setY = function(y) {
-		_properties.my = y;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabel
-	*/
-	this.setLabel = function(text) {
-		_properties.label = text;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelPosition
-	*/
-	this.setLabelPosition = function(x, y) {
-		_properties.lmx = x;
-		_properties.lmy = y;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelColor
-	*/
-	this.setLabelColor = function(color) {
-		_properties.labelcolor = color;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelSize
-	*/
-	this.setLabelSize = function(size) {
-		_properties.labelfontsize = size;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_enableLabelBorder
-	*/
-	this.enableLabelBorder = function(bool) {
-		_properties.labelborder = (bool == true ? '1' : '0');
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setBorder
-	*/
-	this.setBorder = function(size) {
-		_properties.border = size;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setQuadcut
-	*/
-	this.setQuadcut = function(size) {
-		_properties.quadcut = size;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setShadow
-	*/
-	this.setShadow = function(position) {
-		_properties.shadow = position;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setMirror
-	*/
-	this.setMirror = function(state) {
-		_properties.mirror = (state == true ? null : undefined);
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setGreyscale
-	*/
-	this.setGreyscale = function(state) {
-		_properties.gray = (state == true ? null : undefined);
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_addCustom
-	*/
-	this.addCustom = function(name, value) {
-		_properties[name] = value;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setTransparency
-	*/
-	this.setTransparency = function(value) {
-		_properties.opacity = value;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setMouseSize
-	*/
-	this.setMouseSize = function(width, height) {
-		_properties.mousew = width;
-		_properties.mouseh = height;
-		return this;
-	};
-	
-	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_setMousePosition
-	*/
-	this.setMousePosition = function(x, y) {
-		_properties.mousex = x;
-		_properties.mousey = y;
-		return this;
-	};
+	if(first == '/' || first == '~') {
+		this._name	= this._name.substring(1);
+		this._path	= KnuddelsServer.getFullImagePath('');
+	}
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KImage_toString
 	*/
 	this.toString = function(only_path) {
 		only_path		= only_path || false;
-		var output		= (only_path == true ? '' : '°>') + _path + _name;
-		var buffer = new StringBuffer();
+		var output		= (only_path == true ? '' : '°>') + this._path + this._name;
+		var buffer		= new StringBuffer();
 		
-		if(_properties.size() > 0) {
+		if(this._properties.size() > 0) {
 			buffer.append('..');
 			
-			_properties.each(function(value, name) {
+			this._properties.each(function(value, name) {
 				if(value == undefined) {
 					return;
 				}
@@ -299,8 +117,331 @@ function KImage(image) {
 			});
 		}
 		
-		return output + (_extension.length == 0 ? '&' + buffer.toString() + '.png' : buffer.toString() + '.' + _extension) + (only_path == true ? '' : '<°');
+		return output + (this._extension.length == 0 ? '&' + buffer.toString() + '.png' : buffer.toString() + '.' + this._extension) + (only_path == true ? '' : '<°');
 	};
 	
-	KImage(image);
+	return this;
+});
+
+KImage.prototype	= KImage.prototype || {};
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_addCustom
+*/
+if(!KImage.prototype.addCustom) {
+	Object.defineProperty(KImage.prototype, 'addCustom', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(name, value) {
+			this._properties[name] = value;
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_alwaysCopy
+*/
+if(!KImage.prototype.alwaysCopy) {
+	Object.defineProperty(KImage.prototype, 'alwaysCopy', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(state) {
+			this.addCustom('alwayscopy', (state ? null : undefined));
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_noPush
+*/
+if(!KImage.prototype.noPush) {
+	Object.defineProperty(KImage.prototype, 'noPush', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(state) {
+			this.addCustom('nopush', (state ? null : undefined));
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setContainerSize
+*/
+if(!KImage.prototype.setContainerSize) {
+	Object.defineProperty(KImage.prototype, 'setContainerSize', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(width, height) {
+			this.addCustom('w', width);
+			this.addCustom('h', height);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setSize
+*/
+if(!KImage.prototype.setSize) {
+	Object.defineProperty(KImage.prototype, 'setSize', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(width, height) {
+			this.addCustom('mw', width);
+			this.addCustom('mh', height);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setPosition
+*/
+if(!KImage.prototype.setPosition) {
+	Object.defineProperty(KImage.prototype, 'setPosition', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(x, y) {
+			this.addCustom('mx', x);
+			this.addCustom('my', y);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setX
+*/
+if(!KImage.prototype.setX) {
+	Object.defineProperty(KImage.prototype, 'setX', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(x) {
+			this.addCustom('mx', x);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setY
+*/
+if(!KImage.prototype.setY) {
+	Object.defineProperty(KImage.prototype, 'setY', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(y) {
+			this.addCustom('my', y);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabel
+*/
+if(!KImage.prototype.setLabel) {
+	Object.defineProperty(KImage.prototype, 'setLabel', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(text) {
+			this.addCustom('label', text);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelPosition
+*/
+if(!KImage.prototype.setLabelPosition) {
+	Object.defineProperty(KImage.prototype, 'setLabelPosition', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(x, y) {
+			this.addCustom('lmx', x);
+			this.addCustom('lmy', y);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelColor
+*/
+if(!KImage.prototype.setLabelColor) {
+	Object.defineProperty(KImage.prototype, 'setLabelColor', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(color) {
+			this.addCustom('labelcolor', color);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelSize
+*/
+if(!KImage.prototype.setLabelSize) {
+	Object.defineProperty(KImage.prototype, 'setLabelSize', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(size) {
+			this.addCustom('labelfontsize', size);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_enableLabelBorder
+*/
+if(!KImage.prototype.enableLabelBorder) {
+	Object.defineProperty(KImage.prototype, 'enableLabelBorder', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(bool) {
+			this.addCustom('labelborder', (bool ? '1' : '0'));
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setBorder
+*/
+if(!KImage.prototype.setBorder) {
+	Object.defineProperty(KImage.prototype, 'setBorder', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(size) {
+			this.addCustom('border', size);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setQuadcut
+*/
+if(!KImage.prototype.setQuadcut) {
+	Object.defineProperty(KImage.prototype, 'setQuadcut', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(size) {
+			this.addCustom('quadcut', size);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setShadow
+*/
+if(!KImage.prototype.setShadow) {
+	Object.defineProperty(KImage.prototype, 'setShadow', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(position) {
+			this.addCustom('shadow', position);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setMirror
+*/
+if(!KImage.prototype.setMirror) {
+	Object.defineProperty(KImage.prototype, 'setMirror', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(state) {
+			this.addCustom('mirror', (state ? null : undefined));
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setGreyscale
+*/
+if(!KImage.prototype.setGreyscale) {
+	Object.defineProperty(KImage.prototype, 'setGreyscale', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(state) {
+			this.addCustom('gray', (state ? null : undefined));
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setTransparency
+*/
+if(!KImage.prototype.setTransparency) {
+	Object.defineProperty(KImage.prototype, 'setTransparency', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(value) {
+			this.addCustom('opacity', value);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setMouseSize
+*/
+if(!KImage.prototype.setMouseSize) {
+	Object.defineProperty(KImage.prototype, 'setMouseSize', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(width, height) {
+			this.addCustom('mousew', width);
+			this.addCustom('mouseh', height);
+			return this;
+		}
+	});
+}
+
+/*
+	@docs	http://www.mychannel-apps.de/documentation/KImage_setMousePosition
+*/
+if(!KImage.prototype.setMousePosition) {
+	Object.defineProperty(KImage.prototype, 'setMousePosition', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(x, y) {
+			this.addCustom('mousex', x);
+			this.addCustom('mousey', y);
+			return this;
+		}
+	});
 }
