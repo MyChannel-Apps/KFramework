@@ -21,6 +21,31 @@
 				text.append(new KImage('http://chat.knuddels.de/pics/fotos/knuddels.de?n=Bizarrus'));
 				text.append('<br /><br />');
 				text.append(new KImage('http://chat.knuddels.de/pics/fotos/knuddels.de?n=Bizarrus&...nopush.w_1.png'));
+				text.append('<br /><br />');
+				
+				var test = new KImage('test.png');
+				test.addCustom('A', 'B');
+				test.alwaysCopy(true);
+				test.noPush(true);
+				test.setContainerSize(10, 10);
+				test.setSize(10, 10);
+				test.setPosition(10, 10);
+				test.setX(11);
+				test.setY(11);
+				test.setLabel('Hallo Welt!');
+				test.setLabelPosition(10, 10);
+				test.setLabelColor('255,0,0');
+				test.setLabelSize(12);
+				test.enableLabelBorder(true);
+				test.setBorder(2);
+				test.setQuadcut(10);
+				test.setShadow(2);
+				test.setMirror(true);
+				test.setGreyscale(true);
+				test.setTransparency(255);
+				test.setMouseSize(10, 10);
+				test.setMousePosition(0, 0);
+				text.append(test);
 				
 				document.getElementById('debug').innerHTML = text;
 			});
