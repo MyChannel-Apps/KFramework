@@ -25,9 +25,6 @@
 	@docs		http://www.mychannel-apps.de/documentation/tools/user
 */
 
-var User		= User || {};
-User.prototype	= User.prototype || {};
-
 /*
 	@docs	http://www.mychannel-apps.de/documentation/User_getID
 */
@@ -79,7 +76,7 @@ if(!User.prototype.getProfilePicture) {
 		configurable:	false,
 		writable:		false,
 		value: function() {
-			return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.getNick().urlencode();
+			return (this.hasProfilePhoto()) ? 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.getNick().urlencode() : '';
 		}
 	});
 }
