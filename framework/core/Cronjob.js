@@ -178,9 +178,9 @@ function Cronjob(name, cycle, callback) {
 		
 	function Cronjob(instance, name, cycle, callback) {
 		_name			= name;
-		_cycle			= cycle;
 		_callback		= callback;
-		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
+		
+		this.changeCycle(cycle);
 		
 		if(DB == undefined) {
 			_crondb		= KnuddelsServer.getPersistence().getObject('_cron_' + _name, {run:0, check:0});
@@ -190,6 +190,17 @@ function Cronjob(name, cycle, callback) {
 		
 		_last_run		= new Date(parseInt(_crondb.run));
 		_last_check		= new Date(parseInt(_crondb.check));
+		
+		Cron.add(instance);
+		instance.start();
+	}
+	
+	/*
+		@ToDo add to docs: change the cycle on runtime
+	*/
+	this.changeCycle = function(cycle) {
+		_cycle			= cycle;
+		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
 		_time_data		= {
 			minute:	Cron.parse(_cycle_data[1]),
 			hour:	Cron.parse(_cycle_data[2]),
@@ -197,9 +208,7 @@ function Cronjob(name, cycle, callback) {
 			month:	Cron.parse(_cycle_data[4]),
 			day:	Cron.parse(_cycle_data[5])			
 		};
-		Cron.add(instance);
-		instance.start();
-	}
+	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastRun
