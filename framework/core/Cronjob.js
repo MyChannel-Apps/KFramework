@@ -180,7 +180,7 @@ function Cronjob(name, cycle, callback) {
 		_name			= name;
 		_callback		= callback;
 		
-		this.changeCycle(cycle);
+		instance.changeCycle(cycle);
 		
 		if(DB == undefined) {
 			_crondb		= KnuddelsServer.getPersistence().getObject('_cron_' + _name, {run:0, check:0});

@@ -35,6 +35,7 @@ var KFramework = (new function() {
 		'tools/Array',
 		'tools/Object',
 		'tools/User',
+		'tools/Dice',
 		'tools/StringBuffer',
 		
 		/* Core */
