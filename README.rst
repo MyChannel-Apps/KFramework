@@ -18,7 +18,7 @@ Check out the `Examples <https://github.com/MyChannel-Apps/Examples>`_
     Adrian Preuß,
     Christoph Kühl
 
-:Version: 1.0.4
+:Version: 1.0.7
 
 :Website: http://www.MyChannel-Apps.de/
 
