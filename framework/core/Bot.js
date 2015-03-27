@@ -205,16 +205,29 @@ var Bot = (new function() {
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_knuddel
+		@TODO	UPDATE DOCS
 	*/
-	this.knuddel = function(user, amount, message) {
+	this.knuddel = function(user, amount, arg1, arg2) {
 		if(!isTypeOf(amount, 'KnuddelAmount')) {
 			amount = new KnuddelAmount(amount);
 		}
 		
-		if(message === undefined) {
-			_user.transferKnuddel(user, amount);
+		var params = {};
+		
+		if(arg1 !== undefined) {
+			if(isTypeOf(arg1, 'string')) { params['displayReasonText'] = arg1; }
+			if(isTypeOf(arg1, 'boolean')) { params['hidePublicMessage'] = (arg1); }
+		}
+
+		if(arg2 !== undefined) {
+			if(isTypeOf(arg2, 'string')) { params['displayReasonText'] = arg2; }
+			if(isTypeOf(arg2, 'boolean')) { params['hidePublicMessage'] = (arg2); }
+		}		
+		
+		if(params.size()) {
+			_user.transferKnuddel(user, amount, params);
 		} else {
-			_user.transferKnuddel(user, amount, message);
+			_user.transferKnuddel(user, amount);
 		}
 	};
 	
