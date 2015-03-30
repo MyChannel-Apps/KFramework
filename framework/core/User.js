@@ -64,6 +64,8 @@ var Status = {
 
 var Users = (new function() {
 	this.getProfilePicture = function(user) {
+		Logger.info('Users.getProfilePicture(user) is DEPRECATED, use user.getProfilePicture(width, height)');
+		
 		var nickname = '';
 		
 		if(user.getNick == undefined) {

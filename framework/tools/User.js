@@ -75,8 +75,28 @@ if(!User.prototype.getProfilePicture) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
-			return (this.hasProfilePhoto()) ? 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.getNick().urlencode() : '';
+		value: function(width, height) {
+			if(width == undefined) {
+				width = 200;
+			}
+			
+			if(height == undefined) {
+				height = width;
+			}
+			
+			if(this.hasProfilePhoto()) {
+				if(this.getProfilePhoto != undefined) {
+					return this.getProfilePhoto(width, height);
+				}
+				
+				return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + this.getNick().urlencode();
+			}
+			
+			if(this.getGender() == Gender.Female) {
+				return 'nopic_79x79_f.jpg';
+			}
+			
+			return 'nopic_79x79_m.jpg';
 		}
 	});
 }
