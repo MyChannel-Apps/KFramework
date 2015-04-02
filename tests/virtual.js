@@ -1,3 +1,6 @@
+function User() {};
+function DiceEvent() {};
+
 function VirtualChannel() {
 	var _config			= new VirtualChannelConfiguration();
 	var _restrictions	= new VirtualChannelRestrictions();

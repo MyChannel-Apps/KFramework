@@ -33,18 +33,45 @@ if(!Object.prototype.each) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(callback) {
-			for(var index in this) {
-				if(!this.hasOwnProperty(index)) {
-					continue;
+		value: function(callback, reverse) {
+			if(reverse == undefined) {
+				reverse = false;
+			}
+			
+			if(reverse) {
+				var keys = [];
+				for(var index in this) {
+					keys.push(index);
 				}
 				
-				if(typeof(this[index]) == 'object') {
-					if(callback.call(this, this[index], index) === false) {
+				for(var key_index = keys.length - 1; key_index >= 0; key_index--) {
+					var index = keys[key_index];
+					
+					if(!this.hasOwnProperty(index)) {
+						continue;
+					}
+					
+					if(typeof(this[index]) == 'object') {
+						if(callback.call(this, this[index], index) === false) {
+							break;
+						}
+					} else if(callback.apply(this, [this[index], index]) === false) {
 						break;
 					}
-				} else if(callback.apply(this, [this[index], index]) === false) {
-					break;
+				}
+			} else {
+				for(var index in this) {
+					if(!this.hasOwnProperty(index)) {
+						continue;
+					}
+					
+					if(typeof(this[index]) == 'object') {
+						if(callback.call(this, this[index], index) === false) {
+							break;
+						}
+					} else if(callback.apply(this, [this[index], index]) === false) {
+						break;
+					}
 				}
 			}
 		}

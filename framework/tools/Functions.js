@@ -29,11 +29,13 @@
 	@docs	http://www.mychannel-apps.de/documentation/Functions_isTypeOf
 */
 function isTypeOf(object, toCheck) {
-	var type = object.javaClassName
+	var type = undefined;
 	
-	if(type === undefined) {
-		type = typeof(object);
-	}
+	try {
+		if(object.javaClassName == undefined) {
+			type = typeof(object);
+		}
+	} catch(e) {}
 	
 	return (toCheck === undefined) ? type : (toCheck == type);
 }

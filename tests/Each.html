@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KCode :: KImage</title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="virtual.js"></script>
+		<script type="text/javascript" src="../framework/KFramework.js"></script>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<script type="text/javascript">
+			InvokeLater(function() {
+				var array = [1,2,3,4,5];
+				
+				console.info('Arrays');
+				
+				array.each(function(value, index) {
+					console.log('default', 'index', index, 'value', value);
+				});
+				
+				array.each(function(value, index) {
+					console.log('reversed', 'index', index, 'value', value);
+				}, true);
+				
+				console.info('Objects');
+				var object = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5};
+				
+				object.each(function(value, index) {
+					console.log('default', 'index', index, 'value', value);
+				});
+				
+				object.each(function(value, index) {
+					console.log('reversed', 'index', index, 'value', value);
+				}, true);
+			});
+		</script>
+	</body>
+</html>

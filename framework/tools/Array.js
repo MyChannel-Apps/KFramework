@@ -33,14 +33,30 @@ if(!Array.prototype.each) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(callback) {
-			for(var index = 0; index < this.length; index++) {
-				if(isTypeOf(this[index], 'object')) {
-					if(callback.call(this, this[index], index) === false) {
+		value: function(callback, reverse) {
+			if(reverse == undefined) {
+				reverse = false;
+			}
+			
+			if(reverse) {
+				for(var index = this.length - 1; index >= 0; index--) {
+					if(isTypeOf(this[index], 'object')) {
+						if(callback.call(this, this[index], index) === false) {
+							break;
+						}
+					} else if(callback.apply(this, [this[index], index]) === false) {
 						break;
 					}
-				} else if(callback.apply(this, [this[index], index]) === false) {
-					break;
+				}
+			} else {
+				for(var index = 0; index < this.length; index++) {
+					if(isTypeOf(this[index], 'object')) {
+						if(callback.call(this, this[index], index) === false) {
+							break;
+						}
+					} else if(callback.apply(this, [this[index], index]) === false) {
+						break;
+					}
 				}
 			}
 		}
