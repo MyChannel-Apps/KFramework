@@ -100,6 +100,9 @@ var Channel = (new function() {
 		return _channel.getChannelName();
 	};
 	
+	/*
+		@docs	TODO
+	*/
 	this.usersOnline = function(filter) {
 		return Channel.getUsers(filter).size();
 	};
@@ -121,8 +124,23 @@ var Channel = (new function() {
 		return owner;
 	};
 	
+	/*
+		@docs	TODO
+	*/
 	this.setBackground = function(image, style, user, text) {
 		Bot.private(user, '°>{bgimage}' + image + '|' + (style == undefined ? Background.SCALED : style) + '<°' + (text == undefined ? 'Das Hintergrundbild wird geändert' : text));
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.getTopic = function() {
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.setTopic = function(text, showLive) {
 	};
 	
 	/*
