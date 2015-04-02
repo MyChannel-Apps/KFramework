@@ -92,6 +92,7 @@ var Channel = (new function() {
 	var _configuration	= _channel.getChannelConfiguration();
 	var _restrictions	= _channel.getChannelRestrictions();
 	var _rights			= _configuration.getChannelRights();
+	var _info			= _configuration.getChannelInformation();
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getChannel
@@ -135,12 +136,14 @@ var Channel = (new function() {
 		@docs	TODO
 	*/
 	this.getTopic = function() {
+		return _info.getTopic();
 	};
 	
 	/*
 		@docs	TODO
 	*/
 	this.setTopic = function(text, showLive) {
+		_info.setTopic(text || '', showLive || true);
 	};
 	
 	/*
