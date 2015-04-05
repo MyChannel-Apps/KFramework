@@ -67,7 +67,7 @@ var KBank = (new function() {
 			return;
 		}
 		
-		if(kn <= 0.00) {
+		if(kn < 0.00) {
 			return false;
 		}
 
