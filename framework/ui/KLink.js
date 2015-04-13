@@ -34,6 +34,7 @@ function KLink(text, command_left, command_right) {
 	var _command_right	= undefined;
 	var _hover			= true;
 	var _hover_image	= undefined;
+	var _connected_icon	= undefined;
 	
 	function KLink(text, command_left, command_right) {
 		_text			= text || '';
@@ -44,6 +45,10 @@ function KLink(text, command_left, command_right) {
 	function prepareLink(string) {
 		return string.replace(/(<|>|\||°)/g, '\\$1');
 	}
+	
+	this.connectAsIcon = function(image) {
+		_connected_icon = image;
+	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_getText
@@ -102,6 +107,14 @@ function KLink(text, command_left, command_right) {
 			
 			buffer.append('<>--<>');
 		} else {
+			if(_connected_icon != undefined && _connected_icon instanceof KImage) {
+				buffer.append('°>');
+				buffer.append(_connected_icon.toString(true));
+				buffer.append('<>--<>');
+			} else {
+				buffer.append('°>');
+			}
+			
 			if(_hover == false) {
 				buffer.append('_h');
 			}
