@@ -107,12 +107,11 @@ function KLink(text, command_left, command_right) {
 			
 			buffer.append('<>--<>');
 		} else {
+			buffer.append('°>');
+			
 			if(_connected_icon != undefined && _connected_icon instanceof KImage) {
-				buffer.append('°>');
 				buffer.append(_connected_icon.toString(true));
 				buffer.append('<>--<>');
-			} else {
-				buffer.append('°>');
 			}
 			
 			if(_hover == false) {
