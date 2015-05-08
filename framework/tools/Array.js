@@ -165,3 +165,16 @@ if(!Array.prototype.clear) {
 		}
 	});
 }
+
+if(!Array.prototype.remove) {
+	Object.defineProperty(Array.prototype, 'remove', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function(removeElement) {
+			this.splice(this.indexOf(removeElement), 1);
+			
+			return this;
+		}
+	});
+}
