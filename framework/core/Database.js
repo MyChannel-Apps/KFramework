@@ -31,8 +31,8 @@ var DB	= (new function() {
 	
 	function synchronizeSchema(db, save) {
 		var schema = db.getObject('INFORMATION_SCHEMA', {
-			user: 	[],
-			global: []
+			user:	_fields_user,
+			global:	_fields_global
 		});
 		
 		_fields_user	= schema.user;
