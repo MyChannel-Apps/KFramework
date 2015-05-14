@@ -26,6 +26,26 @@
 */
 
 var DB	= (new function() {
+	var _fields_global	= [];
+	var _fields_user	= [];
+	
+	function synchronizeSchema(db, save) {
+		var schema = db.getObject('INFORMATION_SCHEMA', {
+			user: 	[],
+			global: []
+		});
+		
+		_fields_user	= schema.user;
+		_fields_global	= schema.global;
+		
+		if(save) {
+			db.setObject('INFORMATION_SCHEMA', {
+				user: 	_fields_user,
+				global: _fields_global
+			});
+		}
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_getUser
 	*/
@@ -56,8 +76,18 @@ var DB	= (new function() {
 		
 		var _db = KnuddelsServer.getPersistence();
 		
-		if(user != undefined) { 
+		synchronizeSchema(_db, false);
+		
+		if(user != undefined) {
 			_db = user.getPersistence();
+			
+			if(_fields_user.indexOf(key) == -1) {
+				_fields_user.push(key);
+			}
+		} else {
+			if(_fields_global.indexOf(key) == -1) {
+				_fields_global.push(key);
+			}
 		}
 		
 		switch(typeof defaultValue) {
@@ -94,8 +124,18 @@ var DB	= (new function() {
 		
 		var _db = KnuddelsServer.getPersistence();
 		
-		if(user != undefined) { 
+		synchronizeSchema(_db, true);
+		
+		if(user != undefined) {
 			_db = user.getPersistence();
+			
+			if(_fields_user.indexOf(key) == -1) {
+				_fields_user.push(key);
+			}
+		} else {
+			if(_fields_global.indexOf(key) == -1) {
+				_fields_global.push(key);
+			}
 		}
 		
 		switch(typeof data) {
@@ -266,6 +306,13 @@ var DB	= (new function() {
 		}
 				
 		return UserPersistenceNumbers.each(key, callback, options);
+	};
+	
+	this.getFields = function() {
+		return {
+			global:	_fields_global,
+			user:	_fields_user
+		};
 	};
 	
 	/*
