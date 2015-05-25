@@ -65,7 +65,7 @@ if(!String.prototype.formater) {
 		configurable:	false,
 		writable:		false,
 		value:			function(data) {
-			return this.replace(/\$[a-zA-Z]+/gi, function(match) {
+			return this.replace(/\$[a-zA-Z0-9_\-]+/gi, function(match) {
 				return (typeof(data[match.substring(1)]) != 'undefined') ? data[match.substring(1)] : match;
 			});
 		}
