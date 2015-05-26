@@ -213,6 +213,8 @@ var Channel = (new function() {
 			event:		true,
 			away:		true,
 			developer:	true,
+			include:	[], //array of uid´s or User-Objects
+			exclude:	[], //array of uid´s or User-Objects
 			status:		[
 							Status.Newbie,
 							Status.Family,
@@ -293,6 +295,36 @@ var Channel = (new function() {
 			// Status
 			if(filter.status != undefined && !filter.status.exists(_users[index].getUserStatus())) {
 				continue;
+			}
+
+			// Blacklist Filter
+			if(filter.exclude != undefined && filter.exclude.size()) {
+				var result = filter.exclude.each(function(entry) {
+					if(isTypeOf(entry) == 'User' && _users[index].equals(entry)) {
+						return false;
+					} else if(_users[index].getUserId() == entry) {
+						return false;
+					}
+				});
+				
+				if(!result) {
+					continue;
+				}
+			}
+			
+			// Whitelist Filter
+			if(filter.include != undefined && filter.include.size()) {
+				filter.include.each(function(entry) {
+					if(isTypeOf(entry) == 'User' && _users[index].equals(entry)) {
+						return false;
+					} else if(_users[index].getUserId() == entry) {
+						return false;
+					}
+				});
+				
+				if(result) {
+					continue;
+				}
 			}
 			
 			// Gender
