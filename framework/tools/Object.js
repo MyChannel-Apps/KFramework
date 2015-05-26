@@ -38,6 +38,8 @@ if(!Object.prototype.each) {
 				reverse = false;
 			}
 			
+			var result = true;
+			
 			if(reverse) {
 				var keys = [];
 				for(var index in this) {
@@ -53,9 +55,11 @@ if(!Object.prototype.each) {
 					
 					if(typeof(this[index]) == 'object') {
 						if(callback.call(this, this[index], index) === false) {
+							result = false;
 							break;
 						}
 					} else if(callback.apply(this, [this[index], index]) === false) {
+						result = false;
 						break;
 					}
 				}
@@ -67,13 +71,16 @@ if(!Object.prototype.each) {
 					
 					if(typeof(this[index]) == 'object') {
 						if(callback.call(this, this[index], index) === false) {
+							result = false;
 							break;
 						}
 					} else if(callback.apply(this, [this[index], index]) === false) {
+						result = false;
 						break;
 					}
 				}
 			}
+			return result;
 		}
 	});
 }

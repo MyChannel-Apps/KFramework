@@ -38,13 +38,17 @@ if(!Array.prototype.each) {
 				reverse = false;
 			}
 			
+			var result = true;
+			
 			if(reverse) {
 				for(var index = this.length - 1; index >= 0; index--) {
 					if(isTypeOf(this[index], 'object')) {
 						if(callback.call(this, this[index], index) === false) {
+							result = false;
 							break;
 						}
 					} else if(callback.apply(this, [this[index], index]) === false) {
+						result = false;
 						break;
 					}
 				}
@@ -52,13 +56,16 @@ if(!Array.prototype.each) {
 				for(var index = 0; index < this.length; index++) {
 					if(isTypeOf(this[index], 'object')) {
 						if(callback.call(this, this[index], index) === false) {
+							result = false;
 							break;
 						}
 					} else if(callback.apply(this, [this[index], index]) === false) {
+						result = false;
 						break;
 					}
 				}
 			}
+			return result;
 		}
 	});
 }
