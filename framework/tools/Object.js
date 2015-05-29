@@ -198,3 +198,21 @@ if(!Object.prototype.size) {
 		}
 	});
 }
+
+if(!Object.prototype.random) {
+	Object.defineProperty(Object.prototype, 'random', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function() {
+			var keys	= Object.keys(this);
+			var random	= RandomOperations.nextInt(keys.length);
+			
+			if(keys.length <= 0 || random >= keys.length) {
+				return undefined;
+			}
+			
+			return this[keys[random]];
+		}
+	});
+}
