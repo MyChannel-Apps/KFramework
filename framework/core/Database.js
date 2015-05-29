@@ -190,7 +190,9 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_delete
 	*/
-	this.delete = function(key, user) {
+	this.delete = function(key, user, subdata) {
+		subdata = (typeof(subdata) == 'undefined' ? true : subdata);
+		
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -212,6 +214,15 @@ var DB	= (new function() {
 		
 		if(_db.hasObject(key)) {
 			_db.deleteObject(key);
+		}
+		
+		/* Delete multiple entries */
+		if(subdata) {
+			DB.loop(key, function(entry, index, totalCount, subkey) {
+				DB.delete('_' + key + '_' + index, undefined, false);
+			});
+			
+			DB.delete('_indexes_' + key, undefined, false);
 		}
 	};
 	
@@ -320,5 +331,33 @@ var DB	= (new function() {
 	*/
 	this.toString = function() {
 		return '[KFramework Database]';
+	};
+	
+	this.loop = function(key, callback) {
+		var name		= '_indexes_' + key;
+		var id			= DB.load(name, 0);
+		var totalCount	= id;
+		
+		for(var index = 1; index <= id; ++index) {
+			var entry = DB.load('_' + key + '_' + index, undefined);
+			callback.call(this, entry, index, totalCount, '_' + key + '_' + index);
+		}
+	};
+	
+	this.add = function(key, data) {
+		var id		= DB.load('_indexes_' + key, 0);
+		
+		DB.save('_indexes_' + key,		++id);
+		DB.save('_' + key + '_' + id,	data);
+		
+		return id;
+	};
+	
+	this.update = function(key, id, data) {
+		DB.save('_' + key + '_' + id, data);
+	};
+	
+	this.remove = function(key, id, data) {
+		DB.delete('_' + key + '_' + id);
 	};
 }());
