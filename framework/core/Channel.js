@@ -194,6 +194,13 @@ var Channel = (new function() {
 	this.onDev = function() {
 		return KnuddelsServer.getChatServerInfo().isTestSystem();
 	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.isVideoChannel = function() {
+		return _channel.isVideoChannel();
+	};
 
 	/*
 		@docs	TODO
@@ -204,7 +211,7 @@ var Channel = (new function() {
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getUsers
-		
+		@docs	TODO
 		Example Filter:
 		{
 			bot:		true,		// AppBot or SystemBot
@@ -229,9 +236,15 @@ var Channel = (new function() {
 							Gender.Female,
 							Gender.Unknown
 						]
+			video:		true,
+			appContent: AppContent.overlayContent,
+			clientType:	[ClientType.Applet],
+			costum:		function(user) {
+				return user.getNick().startsWith('Penis');
+			}
 		}
 	*/
-	this.getUsers = function(filter) {
+	this.getUsers = function(filter, randomOne) {
 		filter 		= filter || {};
 		var types	= [UserType.Human];
 		
@@ -247,7 +260,7 @@ var Channel = (new function() {
 		
 		// Return users if no other filters available
 		if(!filter.size()) {
-			return _users;
+			return (randomOne) ? RandomOperations.getRandomObject(_users) : _users;
 		}
 
 		//_users.each(function(user, index) {
@@ -274,6 +287,11 @@ var Channel = (new function() {
 			
 			// App Developer
 			if(filter.developer != undefined && filter.developer != _users[index].isAppDeveloper()) {
+				continue;
+			}
+			
+			// App Manager
+			if(filter.manager != undefined && filter.manager != _users[index].isAppManager()) {
 				continue;
 			}
 			
@@ -329,31 +347,31 @@ var Channel = (new function() {
 			
 			// Gender
 			if(filter.gender != undefined && !filter.gender.exists(_users[index].getGender())) {
+				continue;
+			}
+
+			// isStreamingVideo
+			if(filter.video != undefined && filter.video != _users[index].isStreamingVideo()) {
+				continue;
 			}
 			
-			// Age
-			if(filter.age != undefined) {
-				// user.getAge()
+			//getClientType 
+			if(filter.clientType != undefined && !filter.clientType.exists(_users[index].getClientType())) {
+				continue;
 			}
 			
-			// Nickname
-			if(filter.nickname != undefined) {
-				// user.getNick();
-			}				
-			
-			// Minutes
-			if(filter.minutes != undefined) {
-				// user.getOnlineMinutes();
+			// canSendAppContent
+			if(filter.appContent != undefined && !_users[index].canSendAppContent(filter.appContent)) {
+				continue;
 			}
 			
-			// Readme
-			if(filter.readme != undefined) {
-				// user.getReadme();
+			if(filter.custom != undefined && typeof(filter.custom) == 'function' && !filter.custom.call(_users[index], [_users[index]])) {
+				continue;
 			}
 
 			users.push(_users[index]);
 		}
-		return users;
+		return (randomOne) ? RandomOperations.getRandomObject(users) : users;
 	};
 	
 	/*
