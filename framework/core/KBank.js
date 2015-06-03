@@ -54,6 +54,21 @@ var KBank = (new function() {
 			payout: parseFloat(_db.getNumber('KBank_payout', 0.00).toFixed(2))
 		};
 	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.resetKonto = function(uid) {
+		if(uid === undefined) {
+			return;
+		}
+		
+		var _db = Users.get(parseInt(uid)).getPersistence();
+		
+		_db.deleteNumber('KBank_knuddel');
+		_db.deleteNumber('KBank_buyin');
+		_db.deleteNumber('KBank_payout');
+	};
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_setKn
