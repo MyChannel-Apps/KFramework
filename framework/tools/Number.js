@@ -53,3 +53,17 @@ if(!Number.prototype.format) {
 		}
 	});
 }
+
+/*
+	@docs	TODO
+*/
+if(!Number.prototype.zero) {
+  Object.defineProperty(Number.prototype, 'zero', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function() {
+		return (this>10) ? ''+this : '0'+this;
+    }
+  });
+}
