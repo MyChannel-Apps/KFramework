@@ -26,10 +26,11 @@
 */
 
 function KButton(text, command) {
-	var _text		= '';
-	var _id			= -1;
-	var _command	= '';
-	var _properties	= {};
+	var _text			= '';
+	var _id				= -1;
+	var _command		= '';
+	var _properties		= {};
+	var _fix_escaping	= false;
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_constructor
@@ -46,6 +47,10 @@ function KButton(text, command) {
 		
 		_command = command;
 		return this;		
+	};
+	
+	this.fixEscaping = function(state) {
+		_fix_escaping = state;
 	};
 	
 	/*
@@ -296,7 +301,11 @@ function KButton(text, command) {
 		}
 		
 		if(_command.length > 0) {
-			buffer.append('call|' + _command.replace(/\|/g, '\\\\\\\\\\|'));
+			if(_fix_escaping) {
+				buffer.append('call|' + _command.replace(/\|/g, '\\\\\\|'));
+			} else {
+				buffer.append('call|' + _command.replace(/\|/g, '\\\\\\\\\\|'));
+			}
 		}
 		
 		_properties.each(function(value, name) {
