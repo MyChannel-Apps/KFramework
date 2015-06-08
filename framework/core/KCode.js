@@ -37,7 +37,7 @@ var load = [
 	'KGroup'
 ];
 
-load.each(function(name) {
+load.each(function LoadEach(name) {
 	require('framework/ui/' + name + '.js');
 });
 
@@ -72,14 +72,15 @@ var Alignment = {
 	@docs	http://www.mychannel-apps.de/documentation/KCode_constructor
 */
 function KCode() {
-	var _buffer = [];
-	var _debug	= false;
-	var _minify	= true;
+	var _buffer 	= [];
+	var _debug		= false;
+	var _minify		= true;
+	var _mobilefix	= false;
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_append
 	*/
-	this.append = function(component) {
+	this.append = function append(component) {
 		_buffer.push(component);
 		return this;
 	};
@@ -87,24 +88,37 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_newLine
 	*/
-	this.newLine = function(dotted) {
+	this.newLine = function newLine(dotted) {
 		_buffer.push('°#');
 		
 		if(dotted == undefined ? false : dotted) {
-			_buffer.push('!');
+			if(!_mobilefix) {
+				_buffer.push('!');
+			}
+		}
+		
+		if(_mobilefix) {
+			_buffer.push('r');
 		}
 		
 		_buffer.push('°');
 		
 		// DEPRECATED!
-		_buffer.push('#');
+		if(!_mobilefix) {
+			_buffer.push('#');
+		}
+		
 		return this;		
+	};
+	
+	this.fixMobile = function fixMobile(state) {
+		_mobilefix = state;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_newHr
 	*/
-	this.newHr = function() {
+	this.newHr = function newHr() {
 		_buffer.push('°-°');
 		return this;		
 	};
@@ -112,7 +126,7 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_addDots
 	*/
-	this.addDots = function() {
+	this.addDots = function addDots() {
 		_buffer.push('.........');
 		return this;		
 	};
@@ -120,7 +134,7 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_setAlignment
 	*/
-	this.setAlignment = function(alignment) {
+	this.setAlignment = function setAlignment(alignment) {
 		_buffer.push(alignment);
 		return this;		
 	};	
@@ -128,7 +142,7 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_addImage
 	*/
-	this.addImage = function(file) {
+	this.addImage = function addImage(file) {
 		Logger.info('KCode.addImage(file) is DEPRECATED');
 		
 		_buffer.push('°>' + KnuddelsServer.getFullImagePath(file) + '<°');
@@ -138,7 +152,7 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_disableOptimization
 	*/
-	this.disableOptimization = function(state) {
+	this.disableOptimization = function disableOptimization(state) {
 		_minify = state;
 		return this;		
 	};
@@ -146,10 +160,10 @@ function KCode() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCode_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var string = '';
 		
-		_buffer.each(function(component) {
+		_buffer.each(function BufferEach(component) {
 			if(typeof(component) == 'string' || typeof(component) == 'number') {
 				string		+= component;
 			} else if(component != undefined && component != null) {

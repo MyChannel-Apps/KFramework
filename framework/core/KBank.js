@@ -25,11 +25,11 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/bank
 */
 
-var KBank = (new function() {
+var KBank = (new function KBank() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getKn
 	*/
-	this.getKn = function(uid) {
+	this.getKn = function getKn(uid) {
 		if(uid === undefined) {
 			return;
 		}
@@ -41,7 +41,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getKonto
 	*/
-	this.getKonto = function(uid) {
+	this.getKonto = function getKonto(uid) {
 		if(uid === undefined) {
 			return;
 		}
@@ -58,7 +58,7 @@ var KBank = (new function() {
 	/*
 		@docs	TODO
 	*/
-	this.resetKonto = function(uid) {
+	this.resetKonto = function resetKonto(uid) {
 		if(uid === undefined) {
 			return;
 		}
@@ -73,7 +73,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_setKn
 	*/
-	this.setKn = function(uid, kn) {
+	this.setKn = function setKn(uid, kn) {
 		if(uid === undefined) {
 			return;
 		}
@@ -93,7 +93,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_addKn
 	*/
-	this.addKn = function(uid, kn) {
+	this.addKn = function addKn(uid, kn) {
 		if(uid === undefined) {
 			return;
 		}
@@ -114,7 +114,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_delKn
 	*/
-	this.delKn = function(uid, kn) {
+	this.delKn = function delKn(uid, kn) {
 		Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
 		return this.subKn(uid, kn);
 	};
@@ -122,7 +122,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_subKn
 	*/
-	this.subKn = function(uid, kn) {
+	this.subKn = function subKn(uid, kn) {
 		if(uid === undefined) {
 			return;
 		}
@@ -147,7 +147,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_payout
 	*/
-	this.payout = function(uid, kn, reason) {
+	this.payout = function payout(uid, kn, reason) {
 		if(uid === undefined) {
 			return false;
 		}
@@ -183,7 +183,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_payin
 	*/
-	this.payin = function(uid, kn) {
+	this.payin = function payin(uid, kn) {
 		if(uid === undefined) {
 			return;
 		}
@@ -205,7 +205,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getUsers
 	*/
-	this.getUsers = function(callback) {
+	this.getUsers = function getUsers(callback) {
 		if(typeof callback !== 'function') {
 			Logger.info('KBank.getUsers() is DEPRECATED, use it like this KBank.getUsers(function(userIds, total){ });');
 			return false;
@@ -213,14 +213,14 @@ var KBank = (new function() {
 		
 		var _users = [];
 		
-		UserPersistenceNumbers.each('KBank_knuddel', function(user, value, index, total, key) {
+		UserPersistenceNumbers.each('KBank_knuddel', function UserPersistenceNumbersEach(user, value, index, total, key) {
 			_users.push(user.getUserId());
 		}, {
 			ascending:false,
-			onStart: function(totalCount) {
+			onStart: function onStart(totalCount) {
 				_users = [];
 			},
-			onEnd: function(totalCount) {
+			onEnd: function onEnd(totalCount) {
 				callback.call(this, _users, totalCount);
 			}
 		});
@@ -229,7 +229,7 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getStats
 	*/
-	this.getStats = function() {
+	this.getStats = function getStats() {
 		return {
 			users: DB.count('KBank_knuddel'),
 			knusers: DB.count('KBank_knuddel', 0.01),
@@ -242,14 +242,14 @@ var KBank = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getTransit
 	*/
-	this.getTransit = function() {
+	this.getTransit = function getTransit() {
 		return parseFloat(DB.sum('KBank_knuddel'));
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework KBank]';
 	};
 	
@@ -258,7 +258,7 @@ var KBank = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/KBank_dataMigration
 		This works full automated, dont call this in Your App!!!
 	*/
-	this.dataMigration = function() {
+	this.dataMigration = function dataMigration() {
 		if(DB.check('_bank', {}) == false) {
 			return true;
 		}
@@ -274,7 +274,7 @@ var KBank = (new function() {
 		var _db = null;
 		var migrated = [];
 		var start = new Date().getTime();
-		migrate.each(function(konto, uid) {
+		migrate.each(function MigrateEach(konto, uid) {
 			_db = Users.get(parseInt(uid)).getPersistence();
 			_db.setNumber('KBank_knuddel', parseFloat(konto.knuddel.toFixed(2)));
 			_db.setNumber('KBank_buyin', parseFloat(konto.buyin.toFixed(2)));
@@ -290,7 +290,7 @@ var KBank = (new function() {
 			DB.delete('_bank');
 			Logger.info('KBank fully migrated! You can now delete all "KBank.loadData()" and "KBank.saveData()" calls from your AppCode');
 		} else {
-			migrated.each(function(uid) {
+			migrated.each(function MigratedEach(uid) {
 				delete migrate[uid];
 			});
 			DB.save('_bank', migrate);			
@@ -302,43 +302,42 @@ var KBank = (new function() {
 	/*
 		@ToDo
 	*/
-	this.getData = function() {
+	this.getData = function getData() {
 		Logger.info('KBank.getData() is DEPRECATED, you dont need this all any more!');
 	};
 	
 	/*
 		@ToDo
 	*/
-	this.loadData = function() {
+	this.loadData = function loadData() {
 		Logger.info('KBank.loadData() is DEPRECATED, you dont need this all any more!');
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_saveData
 	*/
-	this.saveData = function() {
+	this.saveData = function saveData() {
 		Logger.info('KBank.saveData() is DEPRECATED, you dont need this all any more!');
 	};
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_resetData
 	*/
-	this.resetData = function() {
+	this.resetData = function resetData() {
 		Logger.info('KBank.resetData() is DEPRECATED, you dont need this all any more!');
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_fixData
 	*/
-	this.fixData = function() {
+	this.fixData = function fixData() {
 		Logger.info('KBank.fixData() is DEPRECATED, you dont need this all any more!');
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_cleanData
 	*/
-	this.cleanData = function() {
+	this.cleanData = function cleanData() {
 		Logger.info('KBank.cleanData() is DEPRECATED, you dont need this all any more!');
 	};
-
 }());

@@ -29,7 +29,7 @@ var Hash = {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/Hash_decodeForm
 	*/
-	decodeForm: function(string) {
+	decodeForm: function decodeForm(string) {
 		var chars	= string.split('');
 		var output	= [];
 		
@@ -51,7 +51,7 @@ var Hash = {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/Hash_toString
 	*/
-	toString: function() {
+	toString: function toString() {
 		return '[KFramework Hash]';
 	}
 };

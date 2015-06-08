@@ -24,37 +24,37 @@
 	@author		Christoph Kühl <djchrisnet>
 */
 
-var KConfig = (new function() {
+var KConfig = (new function KConfig() {
 	var _data = DB.load('_config', {});
 	var _defaults = {};
 	var _puffer = {};
 	var _useChangesPuffer = false;
 	
-	this.setDefaults = function(defaults) {
+	this.setDefaults = function setDefaults(defaults) {
 		_defaults = defaults;
 		_data.compare(_defaults);
 	};
 	
-	this.saveData = function() {
+	this.saveData = function saveData() {
 		//this.cleanData();
 		DB.save('_config', _data);
 	};
 	
-	this.resetData = function() {
+	this.resetData = function resetData() {
 		DB.save('_config', {});
 		_data = {};
 	};
 	
-	this.applyChanges = function() {
+	this.applyChanges = function applyChanges() {
 		_useChangesPuffer = true;
 		
-		_puffer.each(function(newvalue, key) {
+		_puffer.each(function PufferEach(newvalue, key) {
 			_data[key] = newvalue;
 		});
 		_puffer = {};
 	};
 	
-	this.get = function(key) {
+	this.get = function get(key) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return undefined;
@@ -68,7 +68,7 @@ var KConfig = (new function() {
 		return _data[key];
 	};
 
-	this.set = function(key, value) {
+	this.set = function set(key, value) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -95,11 +95,11 @@ var KConfig = (new function() {
 		}
 	};
 	
-	this.check = function() {
+	this.check = function check() {
 		return true;
 	};
 	
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework KConfig]';
 	};
 }());

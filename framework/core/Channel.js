@@ -87,7 +87,7 @@ var Background = {
 	CENTERED_ZOOM_X3:				52
 };
 
-var Channel = (new function() {
+var Channel = (new function Channel() {
 	var _channel		= KnuddelsServer.getChannel();
 	var _configuration	= _channel.getChannelConfiguration();
 	var _restrictions	= _channel.getChannelRestrictions();
@@ -97,25 +97,25 @@ var Channel = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getChannel
 	*/
-	this.getName = function() {
+	this.getName = function getName() {
 		return _channel.getChannelName();
 	};
 	
 	/*
 		@docs	TODO
 	*/
-	this.usersOnline = function(filter) {
+	this.usersOnline = function usersOnline(filter) {
 		return Channel.getUsers(filter).size();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwner
 	*/
-	this.getOwner = function() {
+	this.getOwner = function getOwner() {
 		var owners	= this.getOwners();
 		var owner	= undefined;
 		
-		owners.each(function(user, index) {
+		owners.each(function OwnersEach(user, index) {
 			if(user.isOnlineInChannel()) {
 				owner = user;
 				return;
@@ -128,84 +128,84 @@ var Channel = (new function() {
 	/*
 		@docs	TODO
 	*/
-	this.setBackground = function(image, style, user, text) {
+	this.setBackground = function setBackground(image, style, user, text) {
 		Bot.private(user, '°>{bgimage}' + image + '|' + (style == undefined ? Background.SCALED : style) + '<°' + (text == undefined ? 'Das Hintergrundbild wird geändert' : text));
 	};
 	
 	/*
 		@docs	TODO
 	*/
-	this.getTopic = function() {
+	this.getTopic = function getTopic() {
 		return _info.getTopic();
 	};
 	
 	/*
 		@docs	TODO
 	*/
-	this.setTopic = function(text, showLive) {
+	this.setTopic = function setTopic(text, showLive) {
 		_info.setTopic(text || '', showLive || true);
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getModerators
 	*/
-	this.getModerators = function() {
+	this.getModerators = function getModerators() {
 		return _rights.getChannelModerators();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwners
 	*/
-	this.getOwners = function() {
+	this.getOwners = function getOwners() {
 		return _rights.getChannelOwners();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getMods
 	*/
-	this.getMods = function() {
+	this.getMods = function getMods() {
 		return _rights.getEventModerators();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getCMutes
 	*/
-	this.getCMutes = function() {
+	this.getCMutes = function getCMutes() {
 		return _restrictions.getColorMutedUsers();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getMutes
 	*/
-	this.getMutes = function() {
+	this.getMutes = function getMutes() {
 		return _restrictions.getMutedUsers();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getCLs
 	*/
-	this.getCLs = function() {
+	this.getCLs = function getCLs() {
 		return _restrictions.getLockedUsers();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_onDev
 	*/
-	this.onDev = function() {
+	this.onDev = function onDev() {
 		return KnuddelsServer.getChatServerInfo().isTestSystem();
 	};
 	
 	/*
 		@docs	TODO
 	*/
-	this.isVideoChannel = function() {
+	this.isVideoChannel = function isVideoChannel() {
 		return _channel.isVideoChannel();
 	};
 
 	/*
 		@docs	TODO
 	*/
-	this.getServer = function() {
+	this.getServer = function getServer() {
 		return KnuddelsServer.getChatServerInfo().getServerId();
 	};
 	
@@ -244,7 +244,7 @@ var Channel = (new function() {
 			}
 		}
 	*/
-	this.getUsers = function(filter, randomOne) {
+	this.getUsers = function getUsers(filter, randomOne) {
 		filter 		= filter || {};
 		var types	= [UserType.Human];
 		
@@ -317,7 +317,7 @@ var Channel = (new function() {
 
 			// Blacklist Filter
 			if(filter.exclude != undefined && filter.exclude.size()) {
-				var result = filter.exclude.each(function(entry) {
+				var result = filter.exclude.each(function FilterExcludeEach(entry) {
 					if(isTypeOf(entry) == 'User' && _users[index].equals(entry)) {
 						return false;
 					} else if(_users[index].getUserId() == entry) {
@@ -332,7 +332,7 @@ var Channel = (new function() {
 			
 			// Whitelist Filter
 			if(filter.include != undefined && filter.include.size()) {
-				filter.include.each(function(entry) {
+				filter.include.each(function FilterIncludeEach(entry) {
 					if(isTypeOf(entry) == 'User' && _users[index].equals(entry)) {
 						return false;
 					} else if(_users[index].getUserId() == entry) {
@@ -377,7 +377,7 @@ var Channel = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Channel]';
 	};
 }());

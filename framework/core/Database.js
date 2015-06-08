@@ -25,7 +25,7 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/database
 */
 
-var DB	= (new function() {
+var DB	= (new function DB() {
 	var _fields_global	= [];
 	var _fields_user	= [];
 	
@@ -49,7 +49,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_getUser
 	*/
-	this.getUser = function(user) {
+	this.getUser = function getUser(user) {
 		Logger.info('DB.getUser(user) is DEPRECATED');
 		
 		return user.getPersistence();
@@ -58,7 +58,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_getChannel
 	*/
-	this.getChannel = function() {
+	this.getChannel = function getChannel() {
 		Logger.info('DB.getChannel() is DEPRECATED');	
 		
 		return KnuddelsServer.getPersistence();
@@ -67,7 +67,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_load
 	*/
-	this.load = function(key, defaultValue, user) {
+	this.load = function load(key, defaultValue, user) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			
@@ -111,7 +111,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_save
 	*/
-	this.save = function(key, data, user) {
+	this.save = function save(key, data, user) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -155,7 +155,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_check
 	*/
-	this.check = function(key, data, user) {
+	this.check = function check(key, data, user) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -190,7 +190,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_delete
 	*/
-	this.delete = function(key, user, subdata) {
+	this.delete = function Delete(key, user, subdata) {
 		subdata = (typeof(subdata) == 'undefined' ? true : subdata);
 		
 		if(key === undefined) {
@@ -218,7 +218,7 @@ var DB	= (new function() {
 		
 		/* Delete multiple entries */
 		if(subdata) {
-			DB.loop(key, function(entry, index, totalCount, subkey) {
+			DB.loop(key, function DBLoop(entry, index, totalCount, subkey) {
 				DB.delete('_' + key + '_' + index, undefined, false);
 			});
 			
@@ -229,7 +229,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_sum
 	*/
-	this.sum = function(key) {
+	this.sum = function sum(key) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -241,7 +241,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_count
 	*/
-	this.count = function(key, from, to) {
+	this.count = function count(key, from, to) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -263,7 +263,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_sorted
 	*/
-	this.sorted = function(key, sortBy, count, page) {
+	this.sorted = function sorted(key, sortBy, count, page) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -291,7 +291,7 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_users
 	*/	
-	this.users = function(key, callback, sortBy, from, to) {
+	this.users = function users(key, callback, sortBy, from, to) {
 		if(key === undefined) {
 			Logger.error('No key submitted');
 			return false;
@@ -319,7 +319,7 @@ var DB	= (new function() {
 		return UserPersistenceNumbers.each(key, callback, options);
 	};
 	
-	this.getFields = function() {
+	this.getFields = function getFields() {
 		return {
 			global:	_fields_global,
 			user:	_fields_user
@@ -329,11 +329,11 @@ var DB	= (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/DB_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Database]';
 	};
 	
-	this.loop = function(key, callback) {
+	this.loop = function loop(key, callback) {
 		var name		= '_indexes_' + key;
 		var id			= DB.load(name, 0);
 		var totalCount	= id;
@@ -344,7 +344,7 @@ var DB	= (new function() {
 		}
 	};
 	
-	this.add = function(key, data) {
+	this.add = function add(key, data) {
 		var id		= DB.load('_indexes_' + key, 0);
 		
 		DB.save('_indexes_' + key,		++id);
@@ -353,11 +353,11 @@ var DB	= (new function() {
 		return id;
 	};
 	
-	this.update = function(key, id, data) {
+	this.update = function update(key, id, data) {
 		DB.save('_' + key + '_' + id, data);
 	};
 	
-	this.remove = function(key, id, data) {
+	this.remove = function remove(key, id, data) {
 		DB.delete('_' + key + '_' + id);
 	};
 }());

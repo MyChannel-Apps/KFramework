@@ -25,14 +25,14 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/hooks
 */
 
-var Hooks = (new function() {
+var Hooks = (new function Hooks() {
 	var _hooks	= {};
 	var _debug	= false;
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_addFilter
 	*/
-	this.addFilter = function(name, callback, priority) {
+	this.addFilter = function addFilter(name, callback, priority) {
 		this.add(name, callback, priority, true);
 		return this;
 	};
@@ -40,7 +40,7 @@ var Hooks = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_addAction
 	*/
-	this.addAction = function(name, callback, priority) {
+	this.addAction = function addAction(name, callback, priority) {
 		this.add(name, callback, priority);
 		return this;		
 	};
@@ -48,7 +48,7 @@ var Hooks = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_add
 	*/
-	this.add = function(name, callback, priority, is_filter) {
+	this.add = function add(name, callback, priority, is_filter) {
 		priority	= (priority == undefined ? 10 : priority); // default Priority is 10
 		is_filter	= (is_filter == undefined ? false : is_filter);
 		
@@ -75,7 +75,7 @@ var Hooks = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_remove
 	*/
-	this.remove = function(name, priority) {
+	this.remove = function remove(name, priority) {
 		priority = (priority == undefined ? 10 : priority); // default Priority is 10
 		
 		if(_debug) {
@@ -95,7 +95,7 @@ var Hooks = (new function() {
 				}
 			}
 		} else {
-			_hooks[priority].each(function(hook, index) {
+			_hooks[priority].each(function HooksPriorityEach(hook, index) {
 				if(hook.name == name) {
 					delete _hooks[priority][index];
 				}
@@ -107,7 +107,7 @@ var Hooks = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_applyFilter
 	*/
-	this.applyFilter = function(name) {
+	this.applyFilter = function applyFilter(name) {
 		var args		= [];
 		var args_length	= arguments.size();
 		
@@ -129,7 +129,7 @@ var Hooks = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_do
 	*/
-	this.do = function(name, is_filter) {
+	this.do = function Do(name, is_filter) {
 		if(_debug) {
 			if(Logger == undefined) {
 				KnuddelsServer.getDefaultLogger().info('[Hooks] ' + JSON.stringify(arguments));
@@ -206,7 +206,7 @@ var Hooks = (new function() {
 				}
 			}
 		} else {
-			_hooks.each(function(hooks, priority) {
+			_hooks.each(function HooksEach(hooks, priority) {
 				if(_debug) {
 					if(Logger == undefined) {
 						KnuddelsServer.getDefaultLogger().info('[Hooks] Each: PRIORITY ' + priority);
@@ -215,7 +215,7 @@ var Hooks = (new function() {
 					}
 				}
 				
-				hooks.each(function(hook) {
+				hooks.each(function HooksEach(hook) {
 					if(hook.name == name) {
 						if(typeof(output) != 'array') {
 							output = [ output ];
@@ -233,7 +233,7 @@ var Hooks = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Hooks_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Hooks]';
 	};
 }());

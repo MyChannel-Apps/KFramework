@@ -84,7 +84,7 @@ var PaymentInterval = {
 	Monthly:	0x03
 };
 
-var AppStore = (new function() {
+var AppStore = (new function AppStore() {
 	var _container	= undefined;
 	var _app		= undefined;
 	var _developer	= KnuddelsServer.getAppDeveloper();
@@ -110,7 +110,7 @@ var AppStore = (new function() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_setSettings
 	*/
-	this.setSettings = function(options) {
+	this.setSettings = function setSettings(options) {
 		Logger.info('AppStore.setSettings(options) is DEPRECATED');
 		_options = options.compare(_options);
 		return this;		
@@ -119,13 +119,13 @@ var AppStore = (new function() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_app
 	*/
-	this.app = function(container) {
+	this.app = function app(container) {
 		Logger.info('AppStore.app(container) is DEPRECATED');
 		_container	= new container();
 		_app		= new container();
 
 		if(_app.onAppStart != undefined && !AppStore.hasPayed()) {
-			_app.onAppStart = function() {
+			_app.onAppStart = function onAppStart() {
 				try {
 					var test = new Date(_store_data.time_first_installed);
 				} catch(e) {
@@ -151,7 +151,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onPrepareShutdown != undefined && !AppStore.hasPayed()) {
-			_app.onPrepareShutdown = function(secondsTillShutdown,shutdownType) {
+			_app.onPrepareShutdown = function onPrepareShutdown(secondsTillShutdown,shutdownType) {
 				if(!AppStore.hasPayed()) {
 					return;
 				}
@@ -161,7 +161,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onShutdown != undefined && !AppStore.hasPayed()) {
-			_app.onShutdown = function() {
+			_app.onShutdown = function onShutdown() {
 				DB.save('_appstore', _store_data);
 				
 				if(!AppStore.hasPayed()) {
@@ -173,7 +173,7 @@ var AppStore = (new function() {
 		}
 
 		if(_app.onUserJoined != undefined && !AppStore.hasPayed()) {
-			_app.onUserJoined = function(user) {
+			_app.onUserJoined = function onUserJoined(user) {
 				if(!AppStore.hasPayed()) {
 					return;
 				}
@@ -183,7 +183,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onUserLeft != undefined && !AppStore.hasPayed()) {
-			_app.onUserLeft = function(user) {
+			_app.onUserLeft = function onUserLeft(user) {
 				if(!AppStore.hasPayed()) {
 					return;
 				}
@@ -193,7 +193,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.mayJoinChannel != undefined && !AppStore.hasPayed()) {
-			_app.mayJoinChannel = function(user) {
+			_app.mayJoinChannel = function mayJoinChannel(user) {
 				if(!AppStore.hasPayed()) {
 					return ChannelJoinPermission.accepted();
 				}
@@ -203,7 +203,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.maySendPublicMessage != undefined && !AppStore.hasPayed()) {
-			_app.maySendPublicMessage = function(publicMessage) {
+			_app.maySendPublicMessage = function maySendPublicMessage(publicMessage) {
 				if(!AppStore.hasPayed()) {
 					return true;
 				}
@@ -213,7 +213,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onPrivateMessage != undefined && !AppStore.hasPayed()) {
-			_app.onPrivateMessage = function(privateMessage) {
+			_app.onPrivateMessage = function onPrivateMessage(privateMessage) {
 				if(!AppStore.hasPayed()) {
 					return;
 				}
@@ -223,7 +223,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onPublicMessage != undefined && !AppStore.hasPayed()) {
-			_app.onPublicMessage = function(publicMessage) {
+			_app.onPublicMessage = function onPublicMessage(publicMessage) {
 				if(!AppStore.hasPayed()) {
 					return;
 				}
@@ -233,7 +233,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onKnuddelReceived != undefined && !AppStore.hasPayed()) {
-			_app.onKnuddelReceived = function(sender, receiver, knuddelAmount) {
+			_app.onKnuddelReceived = function onKnuddelReceived(sender, receiver, knuddelAmount) {
 				if(AppStore.hasPayed()) {
 					_container.onKnuddelReceived(sender, receiver, knuddelAmount);
 					return;
@@ -244,7 +244,7 @@ var AppStore = (new function() {
 		}
 		
 		if(_app.onUserDiced != undefined && !AppStore.hasPayed()) {
-			_app.onUserDiced = function(diceEvent) {
+			_app.onUserDiced = function onUserDiced(diceEvent) {
 				if(!AppStore.hasPayed()) {
 					return;
 				}
@@ -258,7 +258,7 @@ var AppStore = (new function() {
 		}
 		
 		for(var name in _app.chatCommands) {
-			_app.chatCommands[name] = function(user, params, command) {
+			_app.chatCommands[name] = function chatCommands(user, params, command) {
 				if(AppStore.isLocked()) {
 					Bot.private(user, 'Die App ist derzeit °R°_GESPERRT°r°_!');
 					return;
@@ -278,7 +278,7 @@ var AppStore = (new function() {
 		return _app;
 	};
 	
-	this.handleCommand = function(user, params, command) {
+	this.handleCommand = function handleCommand(user, params, command) {
 		if(!user.isAppDeveloper()) {
 			Bot.private(user, 'Diese Funktion steht dir nicht zur verfügung.');
 			return;
@@ -353,7 +353,7 @@ var AppStore = (new function() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_isLocked
 	*/
-	this.isLocked = function() {
+	this.isLocked = function isLocked() {
 		Logger.info('AppStore.isLocked() is DEPRECATED');
 		
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() != _owner.getUserId()) {
@@ -374,7 +374,7 @@ var AppStore = (new function() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_hasPayed
 	*/
-	this.hasPayed = function() {
+	this.hasPayed = function hasPayed() {
 		Logger.info('AppStore.hasPayed() is DEPRECATED');
 		
 		if(_options.tier == Payment.TIER_0 && _developer.getUserId() == _owner.getUserId()) {
@@ -384,7 +384,7 @@ var AppStore = (new function() {
 		return _store_data.is_payed == 'T';
 	};
 	
-	this.askForPayment = function() {
+	this.askForPayment = function askForPayment() {
 		var text			= new KCode();
 		var knuddel_button	= new KButton(_options.knuddel + ' Knuddel bezahlen*', '/knuddel ' + Bot.getNick() + ':' + _options.knuddel);
 		
@@ -419,7 +419,7 @@ var AppStore = (new function() {
 		Bot.private(_owner, text);
 	};
 	
-	this.appIsLocked = function() {
+	this.appIsLocked = function appIsLocked() {
 		var text			= new KCode();
 		text.append('Diese App ist °R°_GESPERRT_°r°!');
 		
@@ -451,7 +451,7 @@ var AppStore = (new function() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/AppStore_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework AppStore]';
 	};
 });

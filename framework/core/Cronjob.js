@@ -25,12 +25,12 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/cronjob
 */
 
-var Cron = (new function() {
+var Cron = (new function Cron() {
 	var _cronjobs	= [];
 	var _watcher;
 	var _offlineCheck = false;
 	
-	this.init = function() {
+	this.init = function init() {
 		if(_watcher != undefined) {
 			clearInterval(_watcher);
 		}
@@ -41,11 +41,11 @@ var Cron = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_enableOfflineRunCheck
 	*/
-	this.enableOfflineRunCheck = function() {
+	this.enableOfflineRunCheck = function enableOfflineRunCheck() {
 		_offlineCheck = true;
 	};
 	
-	this.checkOfflineRun = function(job) {
+	this.checkOfflineRun = function checkOfflineRun(job) {
 		if(job.getLastCheck() == 0) {
 			return;
 		}
@@ -61,10 +61,10 @@ var Cron = (new function() {
 		}
 	};
 	
-	this.run = function() {
+	this.run = function run() {
 		var time = new Date();
 		
-		_cronjobs.each(function(job) {
+		_cronjobs.each(function CronjobsEach(job) {
 			if(!job.isRunning()) {
 				return;
 			}
@@ -78,7 +78,7 @@ var Cron = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_add
 	*/
-	this.add = function(cronjob) {
+	this.add = function add(cronjob) {
 		_cronjobs.push(cronjob);
 		
 		if(_offlineCheck) {
@@ -86,7 +86,7 @@ var Cron = (new function() {
 		}
 	};
 	
-	this.match = function(a, b) {
+	this.match = function match(a, b) {
 		var index	= 0;
 		var length	= a.length;
 		
@@ -106,8 +106,8 @@ var Cron = (new function() {
 		return  false;
 	};
 	
-	this.parse = function(entry) {
-		return entry.split(',').map(function(index) {
+	this.parse = function parse(entry) {
+		return entry.split(',').map(function ParseEntryEach(index) {
 			var z = index.split('/');
 			var x = z[0].split('-');
 
@@ -131,8 +131,8 @@ var Cron = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_saveData
 	*/
-	this.saveData = function() {
-		_cronjobs.each(function(cron) {
+	this.saveData = function saveData() {
+		_cronjobs.each(function CronjobsEach(cron) {
 			cron.save();
 		});
 	};
@@ -140,8 +140,8 @@ var Cron = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_onShutdown
 	*/
-	this.onShutdown = function() {
-		_cronjobs.each(function(cron) {
+	this.onShutdown = function onShutdown() {
+		_cronjobs.each(function CronjobsEach(cron) {
 			cron.onShutdown();
 		});
 		
@@ -153,7 +153,7 @@ var Cron = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Cron]';
 	};
 	
@@ -198,7 +198,7 @@ function Cronjob(name, cycle, callback) {
 	/*
 		@ToDo add to docs: change the cycle on runtime
 	*/
-	this.changeCycle = function(cycle) {
+	this.changeCycle = function changeCycle(cycle) {
 		_cycle			= cycle;
 		_cycle_data		= _cycle.match(/^([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s+([0-9,\-\/]+|\*{1}|\*{1}\/[0-9]+)\s*$/);
 		_time_data		= {
@@ -213,79 +213,79 @@ function Cronjob(name, cycle, callback) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastRun
 	*/
-	this.getLastRun = function() {
+	this.getLastRun = function getLastRun() {
 		return _last_run.getTime();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_getName
 	*/
-	this.getName = function() {
+	this.getName = function getName() {
 		return _name;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastCheck
 	*/
-	this.getLastCheck = function() {
+	this.getLastCheck = function getLastCheck() {
 		return _last_check.getTime();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_SetLastCheck
 	*/
-	this.setLastCheck = function(time) {
+	this.setLastCheck = function setLastCheck(time) {
 		_last_check = time;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_isRunning
 	*/
-	this.isRunning = function() {
+	this.isRunning = function isRunning() {
 		return _is_running;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_start
 	*/
-	this.start = function() {
+	this.start = function start() {
 		_is_running	= true;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_stop
 	*/
-	this.stop = function() {
+	this.stop = function stop() {
 		_is_running	= false;
 	};
 	
-	this.run = function(time) {
+	this.run = function run(time) {
 		_last_check	= time;
 		_last_run	= time;
 		_callback(time);
 	};
 	
-	this.getMinutes = function() {
+	this.getMinutes = function getMinutes() {
 		return _time_data.minute;
 	};
 
-	this.getHours = function() {
+	this.getHours = function getHours() {
 		return _time_data.hour;
 	};
 
-	this.getDate = function() {
+	this.getDate = function getDate() {
 		return _time_data.date;
 	};
 	
-	this.getMonth = function() {
+	this.getMonth = function getMonth() {
 		return _time_data.month;
 	};
 	
-	this.getDay = function() {
+	this.getDay = function getDay() {
 		return _time_data.day;
 	};
 	
-	this.save = function() {
+	this.save = function save() {
 		if(DB == undefined) {
 			KnuddelsServer.getPersistence().setObject('_cron_' + _name, {
 				run:	this.getLastRun(),
@@ -303,7 +303,7 @@ function Cronjob(name, cycle, callback) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cron_onShutdown
 	*/
-	this.onShutdown = function() {
+	this.onShutdown = function onShutdown() {
 		this.stop();
 		this.save();
 	};
@@ -311,7 +311,7 @@ function Cronjob(name, cycle, callback) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Cronjob_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Cronjob]';
 	};
 	

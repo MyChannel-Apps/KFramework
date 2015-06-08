@@ -24,7 +24,7 @@
 	@author		Adrian Preuß <Bizarrus>
 */
 
-var Logger = (new function() {
+var Logger = (new function Logger() {
 	var _logger;
 	var _watcher;
 	
@@ -36,7 +36,7 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_addLogUser
 	*/
-	this.addLogUser = function(uid, types) {
+	this.addLogUser = function addLogUser(uid, types) {
 		Logger.info('Logger.addLogUser(uid, types) is DEPRECATED');
 		
 		_watcher[uid] = types || 'E_ALL';
@@ -45,7 +45,7 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_delLogUser
 	*/
-	this.delLogUser = function(uid) {
+	this.delLogUser = function delLogUser(uid) {
 		Logger.info('Logger.delLogUser(uid) is DEPRECATED');
 		if(_watcher[uid] != undefined) {
 			
@@ -76,7 +76,7 @@ var Logger = (new function() {
 				output += '\n' + lines[index];
 			}
 		} else {
-			lines.each(function(line, index) {
+			lines.each(function LinesEach(line, index) {
 				if(index <= 1) {
 					return;
 				}
@@ -93,7 +93,7 @@ var Logger = (new function() {
 			Logger.info('Logger.sendLog(prefix, message) is DEPRECATED - Don\'t use Logger.addLogUser(uid, types) or Logger.delLogUser(uid)!');
 		}
 		
-		_watcher.each(function(value, uid) {
+		_watcher.each(function WatcherEach(value, uid) {
 			if(value.contains(prefix) || value == 'E_ALL') {
 				Users.get(uid).sendPrivateMessage(prefix + ': ' + message);
 			}
@@ -103,7 +103,7 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_debug
 	*/
-	this.debug = function(message) {
+	this.debug = function debug(message) {
 		_logger.debug(message + getStrackTrace());
 		sendLog('DEBUG', message);
 	};
@@ -111,7 +111,7 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_info
 	*/
-	this.info = function(message) {
+	this.info = function info(message) {
 		_logger.info(message + getStrackTrace());
 		sendLog('INFO', message);
 	};
@@ -119,7 +119,7 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_error
 	*/
-	this.error = function(message) {
+	this.error = function error(message) {
 		_logger.error(message + getStrackTrace());
 		sendLog('ERROR', message);
 	};
@@ -127,7 +127,7 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_fatal
 	*/
-	this.fatal = function(message) {
+	this.fatal = function fatal(message) {
 		_logger.fatal(message + getStrackTrace());
 		sendLog('FATAL', message);
 	};
@@ -135,12 +135,12 @@ var Logger = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Logger_warn
 	*/
-	this.warn = function(message) {
+	this.warn = function warn(message) {
 		_logger.warn(message + getStrackTrace());
 		sendLog('WARN', message);
 	};
 	
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Logger]';
 	};
 	

@@ -25,181 +25,181 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/bot
 */
 
-var Bot = (new function() {
+var Bot = (new function Bot() {
 	var _user = KnuddelsServer.getDefaultBotUser();
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getAge
 	*/
-	this.getAge = function() { 
+	this.getAge = function getAge() { 
 		return _user.getAge();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getGender
 	*/
-	this.getGender = function() { 
+	this.getGender = function getGender() { 
 		return _user.getGender();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getKnuddelAmount
 	*/
-	this.getKnuddelAmount = function() {
+	this.getKnuddelAmount = function getKnuddelAmount() {
 		return _user.getKnuddelAmount();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getNick
 	*/
-	this.getNick = function() {
+	this.getNick = function getNick() {
 		return _user.getNick();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getOnlineMinutes
 	*/
-	this.getOnlineMinutes = function() {
+	this.getOnlineMinutes = function getOnlineMinutes() {
 		return _user.getOnlineMinutes();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getProfileLink
 	*/
-	this.getProfileLink	= function(displayText) {
+	this.getProfileLink	= function getProfileLink(displayText) {
 		return _user.getProfileLink(displayText == undefined ? this.getNick() : displayText);
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getProfilePicture
 	*/
-	this.getProfilePicture	= function() {
+	this.getProfilePicture	= function getProfilePicture() {
 		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + _user.getNick().urlencode();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getReadme
 	*/
-	this.getReadme = function() {
+	this.getReadme = function getReadme() {
 		return _user.getReadme();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getRegDate
 	*/
-	this.getRegDate = function() {
+	this.getRegDate = function getRegDate() {
 		return _user.getRegDate();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserId
 	*/
-	this.getUserId = function() {
+	this.getUserId = function getUserId() {
 		return _user.getUserId();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserStatus
 	*/
-	this.getUserStatus = function() {
+	this.getUserStatus = function getUserStatus() {
 		return _user.getUserStatus();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserType
 	*/
-	this.getUserType = function() {
+	this.getUserType = function getUserType() {
 		return _user.getUserType();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isAppDeveloper
 	*/
-	this.isAppDeveloper = function() {
+	this.isAppDeveloper = function isAppDeveloper() {
 		return _user.isAppDeveloper();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isAppManager
 	*/
-	this.isAppManager = function() {
+	this.isAppManager = function isAppManager() {
 		return _user.isAppManager();
 	};
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isAway
 	*/
-	this.isAway = function() {
+	this.isAway = function isAway() {
 		return _user.isAway();
 	};
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isChannelModerator
 	*/
-	this.isChannelModerator = function() {
+	this.isChannelModerator = function isChannelModerator() {
 		return _user.isChannelModerator();
 	};
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isChannelOwner
 	*/
-	this.isChannelOwner = function() {
+	this.isChannelOwner = function isChannelOwner() {
 		return _user.isChannelOwner();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isColorMuted
 	*/
-	this.isColorMuted = function() {
+	this.isColorMuted = function isColorMuted() {
 		return _user.isColorMuted();
 	};
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isEventModerator
 	*/
-	this.isEventModerator = function() {
+	this.isEventModerator = function isEventModerator() {
 		return _user.isEventModerator();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isLocked
 	*/
-	this.isLocked = function() {
+	this.isLocked = function isLocked() {
 		return _user.isLocked();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isMuted
 	*/
-	this.isMuted = function() {
+	this.isMuted = function isMuted() {
 		return _user.isMuted();
 	};	
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isOnline
 	*/
-	this.isOnline = function() {
+	this.isOnline = function isOnline() {
 		return _user.isOnline();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_isOnlineInChannel
 	*/
-	this.isOnlineInChannel = function() {
+	this.isOnlineInChannel = function isOnlineInChannel() {
 		return _user.isOnlineInChannel();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_join
 	*/
-	this.join = function() {
+	this.join = function join() {
 		_user.joinChannel();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_leave
 	*/
-	this.leave = function() {
+	this.leave = function leave() {
 		_user.leaveChannel();
 	};
 	
@@ -207,7 +207,7 @@ var Bot = (new function() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_knuddel
 		@TODO	UPDATE DOCS
 	*/
-	this.knuddel = function(user, amount, arg1, arg2) {
+	this.knuddel = function knuddel(user, amount, arg1, arg2) {
 		if(!isTypeOf(amount, 'KnuddelAmount')) {
 			amount = new KnuddelAmount(amount);
 		}
@@ -234,21 +234,21 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getKnuddels
 	*/
-	this.getKnuddels = function() {
+	this.getKnuddels = function getKnuddels() {
 		return _user.getKnuddelAmount().asNumber();
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_exception
 	*/
-	this.exception = function(exception) {
+	this.exception = function exception(exception) {
 		_user.sendPublicMessage('°RR°_Exception:_°r°#' + (exception.message == undefined ? exception : exception.message));
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_publicMessage
 	*/
-	this.publicMessage = function(message) {
+	this.publicMessage = function publicMessage(message) {
 		Logger.info('Bot.publicMessage(message) is DEPRECATED');
 		
 		this.public(message);
@@ -257,7 +257,7 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_postMessage
 	*/
-	this.postMessage = function(user, message, topic) {
+	this.postMessage = function postMessage(user, message, topic) {
 		Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
 		
 		this.post(user, message, topic);
@@ -266,7 +266,7 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_privateMessage
 	*/
-	this.privateMessage = function(user, message) {
+	this.privateMessage = function privateMessage(user, message) {
 		Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
 		
 		this.private(user, message);
@@ -275,7 +275,7 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_public
 	*/
-	this.public = function(message) {
+	this.public = function Public(message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
@@ -286,7 +286,7 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_post
 	*/
-	this.post = function(nick, message, topic) {
+	this.post = function post(nick, message, topic) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
@@ -316,7 +316,7 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_private
 	*/
-	this.private = function(nick, message) {
+	this.private = function Private(nick, message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
@@ -345,14 +345,14 @@ var Bot = (new function() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_exec
 	*/
-	this.exec = function(command) {
+	this.exec = function exec(command) {
 		_user.sendToChannel(command);
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Bot]';
 	};
 }());

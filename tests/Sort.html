@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KCode :: KTooltip</title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="virtual.js"></script>
+		<script type="text/javascript" src="../framework/KFramework.js"></script>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<script type="text/javascript">
+			InvokeLater(function() {
+				var obj1 = {
+					a:	'Hello',
+					b:	'World'
+				};
+				
+				obj2 = obj1.sort('value', 'ASC');
+				
+				document.getElementById('debug').innerHTML = JSON.stringify(obj1) + '<br>' + JSON.stringify(obj2);
+			});
+		</script>
+	</body>
+</html>
