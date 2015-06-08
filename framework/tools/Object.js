@@ -123,11 +123,15 @@ if(!Object.prototype.sort) {
 	
 			if(order == 'ASC') {
 				keys.sort(function(a, b) {
-					return a.sortby - b.sortby;
+					if(a.sortby < b.sortby) return -1;
+					if(a.sortby > b.sortby) return 1;
+					return 0;
 				});
 			} else {
-				keys.sort(function(a, b) {
-					return b.sortby - a.sortby;
+				keys.sort(function(b, a) {
+					if(a.sortby < b.sortby) return -1;
+					if(a.sortby > b.sortby) return 1;
+					return 0;
 				});
 			}
 	
