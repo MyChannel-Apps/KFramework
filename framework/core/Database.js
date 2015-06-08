@@ -25,7 +25,7 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/database
 */
 
-var DB	= (new function DB() {
+var DB	= (new function Database() {
 	var _fields_global	= [];
 	var _fields_user	= [];
 	
