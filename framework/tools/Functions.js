@@ -32,10 +32,14 @@ function isTypeOf(object, toCheck) {
 	var type = undefined;
 	
 	try {
-		if(object.javaClassName == undefined) {
+		if(typeof(object.javaClassName) != 'undefined') {
+			type = object.javaClassName;
+		} else {
 			type = typeof(object);
 		}
-	} catch(e) {}
+	} catch(e) {
+		/* Do Nothing */
+	}
 	
 	return (toCheck === undefined) ? type : (toCheck == type);
 }
