@@ -25,7 +25,7 @@
 	@docs		http://www.mychannel-apps.de/documentation/core/cronjob
 */
 
-var Cron = (new function Cron() {
+var Cron = (new function() {
 	var _cronjobs	= [];
 	var _watcher;
 	var _offlineCheck = false;
