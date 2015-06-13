@@ -302,9 +302,9 @@ function KButton(text, command) {
 		
 		if(_command.length > 0) {
 			if(_fix_escaping) {
-				buffer.append('call|' + _command.replace(/\|/g, '\\\\\\|'));
+				buffer.append('call|' + _command.replace(/\|/g, '\\\\\\|').replace(/°/g,'\\\°'));
 			} else {
-				buffer.append('call|' + _command.replace(/\|/g, '\\\\\\\\\\|'));
+				buffer.append('call|' + _command.replace(/\|/g, '\\\\\\\\\\|').replace(/°/g,'\\\\\\\°'));
 			}
 		}
 		
