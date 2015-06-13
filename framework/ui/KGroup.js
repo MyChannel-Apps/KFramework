@@ -31,7 +31,7 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_add
 	*/
-	this.add = function(content) {
+	this.add = function add(content) {
 		_groups.push(content);
 		return this;		
 	};
@@ -39,7 +39,7 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_remove
 	*/
-	this.remove = function(index) {
+	this.remove = function remove(index) {
 		delete _groups[index];
 		return this;		
 	};
@@ -47,7 +47,7 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_update
 	*/
-	this.update = function(index, content) {
+	this.update = function update(index, content) {
 		_groups[index] = content;
 		return this;		
 	};
@@ -55,7 +55,7 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_show
 	*/
-	this.show = function(index) {
+	this.show = function show(index) {
 		_show = index;
 		return this;		
 	};
@@ -63,7 +63,7 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_enableBoxLayout
 	*/
-	this.enableBoxLayout = function(state) {
+	this.enableBoxLayout = function enableBoxLayout(state) {
 		_layout_box = state;
 		return this;		
 	};
@@ -71,7 +71,7 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_getNavigation
 	*/
-	this.getNavigation = function(titles) {
+	this.getNavigation = function getNavigation(titles) {
 		titles		= (titles == undefined ? [] : titles);
 		var buffer	= new StringBuffer();
 		var size	= _groups.size();
@@ -111,21 +111,21 @@ function KGroup() {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_getTabCommand
 	*/
-	this.getTabCommand = function(index) {
+	this.getTabCommand = function getTabCommand(index) {
 		return '/tp-showgrp ' + index;
 	};
 	
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_switchTab
 	*/
-	this.switchTab = function(index) {
+	this.switchTab = function switchTab(index) {
 		return '°>{setdisplaygroup}' + index + '<°';
 	};
 	
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KGroup_
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var buffer = new StringBuffer();
 		
 		buffer.append('°>{addDisplayGroup}').append(_show).append('<°');

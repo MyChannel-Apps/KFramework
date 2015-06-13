@@ -33,7 +33,7 @@ if (!DiceEvent.prototype.getTotal) {
     enumerable: false,
     configurable: false,
     writable: false,
-    value: function() {
+    value: function getTotal() {
 		return this.getDiceResult().totalSum();
     }
   });
@@ -47,7 +47,7 @@ if (!DiceEvent.prototype.checkUser) {
     enumerable: false,
     configurable: false,
     writable: false,
-    value: function(user) {
+    value: function checkUser(user) {
 		return this.getUser().equals(user);
     }
   });
@@ -61,7 +61,7 @@ if (!DiceEvent.prototype.checkConf) {
     enumerable: false,
     configurable: false,
     writable: false,
-    value: function(conf) {
+    value: function checkConf(conf) {
 		return this.getDiceResult().getDiceConfiguration().equals(conf);
     }
   });

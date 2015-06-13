@@ -35,7 +35,7 @@ function KCountdown() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setTime
 	*/
-	this.setTime = function(time) {
+	this.setTime = function setTime(time) {
 		_properties.time = time;
 		return this;		
 	};
@@ -43,12 +43,12 @@ function KCountdown() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setFormat
 	*/
-	this.setFormat = function(format) {
+	this.setFormat = function setFormat(format) {
 		_properties.format = format;
 		return this;		
 	};
 	
-	this.setText = function(text) {
+	this.setText = function setText(text) {
 		_properties.timeUpText = text;
 		return this;		
 	};
@@ -56,7 +56,7 @@ function KCountdown() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCountdown_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var buffer = new StringBuffer('°>{countdown}');
 		var index	= 0;
 		var length	= _properties.size();

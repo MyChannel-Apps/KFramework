@@ -275,7 +275,7 @@ var Bot = (new function Bot() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_public
 	*/
-	this.public = function Public(message) {
+	this.public = function public(message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
@@ -316,7 +316,7 @@ var Bot = (new function Bot() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_private
 	*/
-	this.private = function Private(nick, message) {
+	this.private = function private(nick, message) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}

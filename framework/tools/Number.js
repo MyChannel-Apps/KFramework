@@ -34,7 +34,7 @@ if(!Number.prototype.fix) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(count) {
+		value: function fix(count) {
 			return parseFloat(this.toFixed(parseInt(count) || 2));
 		}
 	});
@@ -48,8 +48,11 @@ if(!Number.prototype.format) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(n, x) {
-			return this.toFixed(Math.max(0, ~~n)).replace(new RegExp('\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')', 'g'), '$&,');
+		value: function format(n, x, fill) {
+			n = n || 3;
+			x = x || 2;
+			fill = fill || '.';
+			return this.toFixed(Math.max(0, ~~n)).replace(new RegExp('\\d(?=(\\d{'+x+'})+' + (n > 0 ? '\\.' : '$') + ')', 'g'), '$&'+fill);
 		}
 	});
 }
@@ -62,7 +65,7 @@ if(!Number.prototype.zero) {
     enumerable: false,
     configurable: false,
     writable: false,
-    value: function() {
+    value: function zero() {
 		return (this>10) ? ''+this : '0'+this;
     }
   });

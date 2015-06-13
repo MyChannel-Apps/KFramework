@@ -33,7 +33,7 @@ if(!User.prototype.getID) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function getID() {
 			return this.getUserId();
 		}
 	});
@@ -47,7 +47,7 @@ if(!User.prototype.private) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(msg) {
+		value: function private(msg) {
 			this.sendPrivateMessage(msg);
 		}
 	});
@@ -61,7 +61,7 @@ if(!User.prototype.post) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(topic, text) {
+		value: function post(topic, text) {
 			this.sendPostMessage(topic, text);
 		}
 	});
@@ -75,7 +75,7 @@ if(!User.prototype.getProfilePicture) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(width, height) {
+		value: function getProfilePicture(width, height) {
 			if(width == undefined) {
 				width = 200;
 			}
@@ -109,7 +109,7 @@ if(!User.prototype.getKonto) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function getKonto() {
 			return KBank.getKonto(this.getUserId());
 		}
 	});
@@ -123,7 +123,7 @@ if(!User.prototype.getKn) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function getKn() {
 			return KBank.getKn(this.getUserId());
 		}
 	});
@@ -137,7 +137,7 @@ if(!User.prototype.addKn) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(kn) {
+		value: function addKn(kn) {
 			return KBank.addKn(this.getUserId(), kn);
 		}
 	});
@@ -151,7 +151,7 @@ if(!User.prototype.subKn) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(kn) {
+		value: function subKn(kn) {
 			return KBank.subKn(this.getUserId(), kn);
 		}
 	});
@@ -162,7 +162,7 @@ if(!User.prototype.knuddel) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(amount, message) {
+		value: function knuddel(amount, message) {
 			if(amount === undefined) {
 				return false;
 			}
@@ -182,7 +182,7 @@ if(!User.prototype.getKnuddels) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function getKnuddels() {
 			return this.getKnuddelAmount().asNumber();
 		}
 	});
@@ -193,7 +193,7 @@ if(!User.prototype.isVirtual) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function isVirtual() {
 			return false;
 		}
 	});

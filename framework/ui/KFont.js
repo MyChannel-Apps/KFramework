@@ -74,7 +74,7 @@ function KFont(name, style, size) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KFont_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var output = '';
 		
 		if(_style & FontStyle.BOLD) {

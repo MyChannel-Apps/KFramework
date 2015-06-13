@@ -48,7 +48,7 @@ function KTooltip(content) 	{
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setSize
 	*/
-	this.setSize = function(width, height) {
+	this.setSize = function setSize(width, height) {
 		_width	= width;
 		_height	= height;
 		return this;
@@ -57,7 +57,7 @@ function KTooltip(content) 	{
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setWidth
 	*/
-	this.setWidth = function(width) {
+	this.setWidth = function setWidth(width) {
 		_width	= width;
 		return this;
 	};
@@ -65,7 +65,7 @@ function KTooltip(content) 	{
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setHeight
 	*/
-	this.setHeight = function(height) {
+	this.setHeight = function setHeight(height) {
 		_height	= height;
 		return this;
 	};
@@ -73,7 +73,7 @@ function KTooltip(content) 	{
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_append
 	*/
-	this.append = function(content) {
+	this.append = function append(content) {
 		_content.append(content);
 		return this;
 	};
@@ -81,19 +81,19 @@ function KTooltip(content) 	{
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_newLine
 	*/
-	this.newLine = function() {
+	this.newLine = function newLine() {
 		_content.newLine();
 		return this;
 	};
 	
-	this.disableHover = function(state) {
+	this.disableHover = function disableHover(state) {
 		_hover_disabled = state;
 	};
 	
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_getCommand
 	*/
-	this.getCommand = function(text, command) {
+	this.getCommand = function getCommand(text, command) {
 		if(!(text instanceof KLink)) {
 			text = new KLink(text);
 			
@@ -110,7 +110,7 @@ function KTooltip(content) 	{
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/KTooltip_
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var output = new KCode();
 		
 		output.append('°>{definetext|').append(_instance).append('}<°').append(_content).append('°>{definetext|').append(_instance).append('}<°');

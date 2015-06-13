@@ -33,7 +33,7 @@ if(!Object.prototype.each) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(callback, reverse) {
+		value: function each(callback, reverse) {
 			if(reverse == undefined) {
 				reverse = false;
 			}
@@ -93,7 +93,7 @@ if(!Object.prototype.sort) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(byKey, order) {
+		value: function sort(byKey, order) {
 			if(byKey === undefined) {
 				byKey == 'index';
 			}
@@ -162,7 +162,7 @@ if(!Object.prototype.exists) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(value) {
+		value: function exists(value) {
 			return (this[value] != undefined);
 		}
 	});
@@ -176,7 +176,7 @@ if(!Object.prototype.compare) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(defaultObj) {
+		value: function compare(defaultObj) {
 			for(var property in defaultObj) {
 				if(this[property] && (typeof(this[property]) == 'object') && (this[property].toString() == '[object Object]') && defaultObj[property]) {
 					this[property].compare(defaultObj[property]);
@@ -197,7 +197,7 @@ if(!Object.prototype.size) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function size() {
 			return Object.keys(this).length;
 		}
 	});
@@ -208,7 +208,7 @@ if(!Object.prototype.random) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function() {
+		value: function random() {
 			var keys	= Object.keys(this);
 			var random	= RandomOperations.nextInt(keys.length);
 			

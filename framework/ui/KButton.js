@@ -49,14 +49,14 @@ function KButton(text, command) {
 		return this;		
 	};
 	
-	this.fixEscaping = function(state) {
+	this.fixEscaping = function fixEscaping(state) {
 		_fix_escaping = state;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setID
 	*/
-	this.setID = function(id) {
+	this.setID = function setID(id) {
 		_id = id;
 		return this;
 	};
@@ -64,7 +64,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getID
 	*/
-	this.getID = function() {
+	this.getID = function getID() {
 		return _id;
 	};
 	
@@ -72,14 +72,14 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getCommand
 	*/
-	this.getCommand = function() {
+	this.getCommand = function getCommand() {
 		return _command;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setCommand
 	*/
-	this.setCommand = function(command) {
+	this.setCommand = function setCommand(command) {
 		_command = command;
 		return this;
 	};
@@ -88,14 +88,14 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getText
 	*/
-	this.getText = function() {
+	this.getText = function getText() {
 		return _text;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getText
 	*/
-	this.setText = function(text) {
+	this.setText = function setText(text) {
 		_text = text;
 		return this;
 	};
@@ -104,14 +104,14 @@ function KButton(text, command) {
 	/*
 		@docs	TODO
 	*/
-	this.getProperties = function() {
+	this.getProperties = function getProperties() {
 		return _properties;
 	};
 	
 	/*
 		@docs	TODO
 	*/
-	this.setProperties = function(properties) {
+	this.setProperties = function setProperties(properties) {
 		_properties = properties;
 		return this;
 	};
@@ -120,7 +120,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setIcon
 	*/
-	this.setIcon = function(icon) {
+	this.setIcon = function setIcon(icon) {
 		if(icon.startsWith('https://') || icon.startsWith('http://')) {
 			icon = '../' + icon;
 		}
@@ -132,7 +132,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_removeIcon
 	*/
-	this.removeIcon = function() {
+	this.removeIcon = function removeIcon() {
 		delete _properties.icon;
 		return this;
 	};
@@ -141,7 +141,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setColor
 	*/
-	this.setColor = function(color) {
+	this.setColor = function setColor(color) {
 		// @ToDo can be gradient like "120,230,90~60,170,25~24,96,1"
 		_properties.color = color;
 		return this;
@@ -150,7 +150,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_removeColor
 	*/
-	this.removeColor = function() {
+	this.removeColor = function removeColor() {
 		delete _properties.color;
 		return this;
 	};
@@ -159,14 +159,14 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setHeight
 	*/
-	this.getHeight = function() {
+	this.getHeight = function getHeight() {
 		return _properties.height;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setHeight
 	*/
-	this.setHeight = function(height) {
+	this.setHeight = function setHeight(height) {
 		_properties.height = height;
 		return this;		
 	};
@@ -174,7 +174,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_removeHeight
 	*/
-	this.removeHeight = function() {
+	this.removeHeight = function removeHeight() {
 		delete _properties.height;
 		return this;
 	};
@@ -183,14 +183,14 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getWidth
 	*/
-	this.getWidth = function() {
+	this.getWidth = function getWidth() {
 		return _properties.width;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setWidth
 	*/
-	this.setWidth = function(width) {
+	this.setWidth = function setWidth(width) {
 		_properties.width = width;
 		return this;
 	};
@@ -198,7 +198,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_removeWidth
 	*/
-	this.removeWidth = function() {
+	this.removeWidth = function removeWidth() {
 		delete _properties.width;
 		return this;
 	};
@@ -207,7 +207,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setSize
 	*/
-	this.setSize = function(width, height) {
+	this.setSize = function setSize(width, height) {
 		this.setWidth(width);
 		this.setHeight(height);
 		return this;		
@@ -216,7 +216,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_removeSize
 	*/
-	this.removeSize = function() {
+	this.removeSize = function removeSize() {
 		this.removeWidth();
 		this.removeHeight();
 		return this;		
@@ -226,14 +226,14 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getX
 	*/
-	this.getX = function() {
+	this.getX = function getX() {
 		return _properties.mx;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setX
 	*/
-	this.setX = function(x) {
+	this.setX = function setX(x) {
 		_properties.mx = x;
 		return this;
 	};
@@ -241,7 +241,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_getY
 	*/
-	this.getY = function() {
+	this.getY = function getY() {
 		return _properties.my;
 		return this;
 	};
@@ -249,7 +249,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setY
 	*/
-	this.setY = function(y) {
+	this.setY = function setY(y) {
 		_properties.my = y;
 		return this;
 	};
@@ -257,7 +257,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setPosition
 	*/
-	this.setPosition = function(x, y) {
+	this.setPosition = function setPosition(x, y) {
 		this.setX(x);
 		this.setY(y);
 		return this;
@@ -267,7 +267,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_useTextborder
 	*/
-	this.useTextborder = function(bool) {
+	this.useTextborder = function useTextborder(bool) {
 		if(bool) {
 			_properties.textborder = '1';
 		} else {
@@ -281,7 +281,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_setEnabled
 	*/
-	this.setEnabled = function(bool) {
+	this.setEnabled = function setEnabled(bool) {
 		if(bool == false) {
 			_properties.enabled = '0';
 		} else {
@@ -294,7 +294,7 @@ function KButton(text, command) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KButton_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var buffer = new StringBuffer('°>{button}');
 		if(_text.length > 0) {
 			buffer.append(_text + '|' + (_id > 0 ? _id : '') + '|');
@@ -320,7 +320,3 @@ function KButton(text, command) {
 	// Call the Constructor
 	KButton(text, command);
 }
-
-/*
-	color: modernGray
-*/

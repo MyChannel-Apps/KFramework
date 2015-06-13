@@ -26,7 +26,7 @@
 
 var VERSION		= '1.0.7';
 
-var KFramework = (new function() {
+var KFramework = (new function KFramework() {
 	this.load = [
 		/* Tools */
 		'tools/Functions',
@@ -57,19 +57,19 @@ var KFramework = (new function() {
 		require('framework/' + this.load[entry] + '.js');
 	}
 	
-	this.startUp = function() {
+	this.startUp = function startUp() {
 		KBank.dataMigration();
 	};
 	
-	this.store = function() {
+	this.store = function store() {
 		Cron.saveData();
 	};
 	
-	this.shutDown = function() {
+	this.shutDown = function shutDown() {
 		Cron.onShutdown();
 	};
 	
-	this.toString = function() {
+	this.toString = function toString() {
 		return '[KFramework Core]';
 	};
 }());

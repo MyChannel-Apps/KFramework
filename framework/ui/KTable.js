@@ -46,7 +46,7 @@ function KTable() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KTable_add
 	*/
-	this.add = function(element) {
+	this.add = function add(element) {
 		_rows.push(element);
 		return this;
 	};
@@ -54,7 +54,7 @@ function KTable() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KTable_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var output = new KCode();
 		output.append('°>{table');
 		
@@ -96,7 +96,7 @@ function KRow() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KRow_add
 	*/
-	this.add = function(cell) {
+	this.add = function add(cell) {
 		_cells.push(cell);
 		return this;		
 	};
@@ -104,14 +104,14 @@ function KRow() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KRow_getCells
 	*/
-	this.getCells = function() {
+	this.getCells = function getCells() {
 		return _cells;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KRow_toString
 	*/
-	this.toString	= function(display) {
+	this.toString	= function toString(display) {
 		display		= display || false;
 		var output	= new KCode();
 		
@@ -144,17 +144,18 @@ function KCell(size, content) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCell_getSize
 	*/
-	this.getSize = function() {
+	this.getSize = function getSize() {
 		return _size;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCell_toString
 	*/
-	this.toString	= function() {
+	this.toString	= function toString() {
 		var output = new KCode();
+
 		output.append('°>{tc}<°').append(_content);
-		
+
 		return output;
 	};
 	

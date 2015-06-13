@@ -46,21 +46,21 @@ function KLink(text, command_left, command_right) {
 		return string.replace(/(<|>|\||°)/g, '\\$1');
 	}
 	
-	this.connectAsIcon = function(image) {
+	this.connectAsIcon = function connectAsIcon(image) {
 		_connected_icon = image;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_getText
 	*/
-	this.getText = function() {
+	this.getText = function getText() {
 		return _text;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_setCommand
 	*/
-	this.setCommand = function(command_left, command_right) {
+	this.setCommand = function setCommand(command_left, command_right) {
 		_command_left	= command_left;
 		_command_right	= command_right;
 		return this;
@@ -69,7 +69,7 @@ function KLink(text, command_left, command_right) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_enableHover
 	*/
-	this.enableHover = function(state) {
+	this.enableHover = function enableHover(state) {
 		_hover = state;
 		return this;
 	};
@@ -77,7 +77,7 @@ function KLink(text, command_left, command_right) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_setHoverImage
 	*/
-	this.setHoverImage = function(image) {
+	this.setHoverImage = function setHoverImage(image) {
 		if(_text instanceof KImage) {
 			_hover_image = image;
 		} else {
@@ -90,7 +90,7 @@ function KLink(text, command_left, command_right) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KLink_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var buffer = new StringBuffer('°>');
 		
 		if(_text instanceof KImage) {

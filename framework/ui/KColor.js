@@ -195,7 +195,7 @@ function KColor(red, green, blue) {
 		return '';
 	};
 	
-	this.getRGB = function() {
+	this.getRGB = function getRGB() {
 		var buffer = new StringBuffer();
 		
 		buffer.append(_red).append(',').append(_green).append(',').append(_blue);
@@ -206,7 +206,7 @@ function KColor(red, green, blue) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KColor_decode
 	*/
-	this.decode = function(hex) {
+	this.decode = function decode(hex) {
 		var result	= /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 		_red		= parseInt(result[1], 16);
 		_green		= parseInt(result[2], 16);
@@ -216,7 +216,7 @@ function KColor(red, green, blue) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KColor_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var output = new KCode();
 		
 		// If RGB sounds like Color-Constants (°R°, °B°,..)
@@ -239,42 +239,42 @@ function ColorInstance(key, rgb) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getColorKey
 	*/
-	this.getColorKey = function() {
+	this.getColorKey = function getColorKey() {
 		return key;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getRGB
 	*/
-	this.getRGB = function() {
+	this.getRGB = function getRGB() {
 		return rgb;
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getRed
 	*/
-	this.getRed = function() {
+	this.getRed = function getRed() {
 		return rgb[0];
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getGreen
 	*/
-	this.getGreen = function() {
+	this.getGreen = function getGreen() {
 		return rgb[1];
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_getBlue
 	*/
-	this.getBlue = function() {
+	this.getBlue = function getBlue() {
 		return rgb[2];
 	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/ColorInstance_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		var output = new KCode();
 		
 		output.append('°').append(key).append('°');

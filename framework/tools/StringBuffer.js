@@ -30,7 +30,7 @@ function StringBuffer(startText) {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_append
 	*/
-	this.append = function(data) {
+	this.append = function append(data) {
 		_data += data;
 		return this;		
 	};
@@ -38,7 +38,7 @@ function StringBuffer(startText) {
 	/*
 		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_toString
 	*/
-	this.toString = function() {
+	this.toString = function toString() {
 		return _data;
 	};
 };

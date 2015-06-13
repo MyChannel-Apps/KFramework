@@ -87,7 +87,7 @@ var Background = {
 	CENTERED_ZOOM_X3:				52
 };
 
-var Channel = (new function() {
+var Channel = (new function KChannel() {
 	var _channel		= KnuddelsServer.getChannel();
 	var _configuration	= _channel.getChannelConfiguration();
 	var _restrictions	= _channel.getChannelRestrictions();

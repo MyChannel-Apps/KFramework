@@ -100,7 +100,7 @@ var KImage			= KImage || (function(image) {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KImage_toString
 	*/
-	this.toString = function(only_path) {
+	this.toString = function toString(only_path) {
 		only_path		= only_path || false;
 		var output		= (only_path == true ? '' : '°>') + this._path + this._name;
 		var buffer		= new StringBuffer();
@@ -133,7 +133,7 @@ if(!KImage.prototype.addCustom) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(name, value) {
+		value: function addCustom(name, value) {
 			this._properties[name] = value;
 			return this;
 		}
@@ -148,7 +148,7 @@ if(!KImage.prototype.alwaysCopy) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(state) {
+		value: function alwaysCopy(state) {
 			this.addCustom('alwayscopy', (state ? null : undefined));
 			return this;
 		}
@@ -163,7 +163,7 @@ if(!KImage.prototype.noPush) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(state) {
+		value: function noPush(state) {
 			this.addCustom('nopush', (state ? null : undefined));
 			return this;
 		}
@@ -178,7 +178,7 @@ if(!KImage.prototype.setContainerSize) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(width, height) {
+		value: function setContainerSize(width, height) {
 			this.addCustom('w', width);
 			this.addCustom('h', height);
 			return this;
@@ -194,7 +194,7 @@ if(!KImage.prototype.setSize) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(width, height) {
+		value: function setSize(width, height) {
 			this.addCustom('mw', width);
 			this.addCustom('mh', height);
 			return this;
@@ -210,7 +210,7 @@ if(!KImage.prototype.setPosition) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(x, y) {
+		value: function setPosition(x, y) {
 			this.addCustom('mx', x);
 			this.addCustom('my', y);
 			return this;
@@ -226,7 +226,7 @@ if(!KImage.prototype.setX) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(x) {
+		value: function setX(x) {
 			this.addCustom('mx', x);
 			return this;
 		}
@@ -241,7 +241,7 @@ if(!KImage.prototype.setY) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(y) {
+		value: function setY(y) {
 			this.addCustom('my', y);
 			return this;
 		}
@@ -256,7 +256,7 @@ if(!KImage.prototype.setLabel) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(text) {
+		value: function setLabel(text) {
 			this.addCustom('label', text);
 			return this;
 		}
@@ -271,7 +271,7 @@ if(!KImage.prototype.setLabelPosition) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(x, y) {
+		value: function setLabelPosition(x, y) {
 			this.addCustom('lmx', x);
 			this.addCustom('lmy', y);
 			return this;
@@ -287,7 +287,7 @@ if(!KImage.prototype.setLabelColor) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(color) {
+		value: function setLabelColor(color) {
 			this.addCustom('labelcolor', color);
 			return this;
 		}
@@ -302,7 +302,7 @@ if(!KImage.prototype.setLabelSize) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(size) {
+		value: function setLabelSize(size) {
 			this.addCustom('labelfontsize', size);
 			return this;
 		}
@@ -317,7 +317,7 @@ if(!KImage.prototype.enableLabelBorder) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(bool) {
+		value: function enableLabelBorder(bool) {
 			this.addCustom('labelborder', (bool ? '1' : '0'));
 			return this;
 		}
@@ -332,7 +332,7 @@ if(!KImage.prototype.setBorder) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(size) {
+		value: function setBorder(size) {
 			this.addCustom('border', size);
 			return this;
 		}
@@ -347,7 +347,7 @@ if(!KImage.prototype.setQuadcut) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(size) {
+		value: function setQuadcut(size) {
 			this.addCustom('quadcut', size);
 			return this;
 		}
@@ -362,7 +362,7 @@ if(!KImage.prototype.setShadow) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(position) {
+		value: function setShadow(position) {
 			this.addCustom('shadow', position);
 			return this;
 		}
@@ -377,7 +377,7 @@ if(!KImage.prototype.setMirror) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(state) {
+		value: function setMirror(state) {
 			this.addCustom('mirror', (state ? null : undefined));
 			return this;
 		}
@@ -392,7 +392,7 @@ if(!KImage.prototype.setGreyscale) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(state) {
+		value: function setGreyscale(state) {
 			this.addCustom('gray', (state ? null : undefined));
 			return this;
 		}
@@ -407,7 +407,7 @@ if(!KImage.prototype.setTransparency) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(value) {
+		value: function setTransparency(value) {
 			this.addCustom('opacity', value);
 			return this;
 		}
@@ -422,7 +422,7 @@ if(!KImage.prototype.setMouseSize) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(width, height) {
+		value: function setMouseSize(width, height) {
 			this.addCustom('mousew', width);
 			this.addCustom('mouseh', height);
 			return this;
@@ -438,7 +438,7 @@ if(!KImage.prototype.setMousePosition) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(x, y) {
+		value: function setMousePosition(x, y) {
 			this.addCustom('mousex', x);
 			this.addCustom('mousey', y);
 			return this;
