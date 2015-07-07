@@ -143,7 +143,11 @@ var Channel = (new function KChannel() {
 		@docs	TODO
 	*/
 	this.setTopic = function setTopic(text, showLive) {
-		_info.setTopic(text || '', showLive || true);
+		if(showLive === undefined) {
+			showLive = true;
+		}
+		
+		_info.setTopic(text || '', showLive);
 	};
 	
 	/*
