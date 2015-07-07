@@ -274,13 +274,20 @@ var Bot = (new function Bot() {
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_public
+		@docs	TODO		
 	*/
-	this.public = function public(message) {
+	this.public = function public(message, delay) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
 		
-		_user.sendPublicMessage(message);
+		if (delay) {
+            return setTimeout(function publicDelay() {
+                _user.sendPublicMessage(message);
+            }, delay);
+        } else {
+            _user.sendPublicMessage(message);
+        }
 	};
 	
 	/*
@@ -315,31 +322,56 @@ var Bot = (new function Bot() {
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_private
+		@docs	TODO
 	*/
-	this.private = function private(nick, message) {
+	this.private = function private(nick, message, delay) {
 		if(message instanceof KCode) {
 			message = message.toString();
 		}
 		
-		// send to online users
-		if(nick == undefined) {
-			Channel.getUsers().each(function(user) {
-				user.sendPrivateMessage(message);
-			});
-		} else {
-			if(isTypeOf(nick, 'User')) {
-				nick.sendPrivateMessage(message);
-			} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
-				nick.each(function(n) {
-					Bot.private(n, message);
+		if (delay) {
+            return setTimeout(function privateDelay() {
+				// send to online users
+				if(nick == undefined) {
+					Channel.getUsers().each(function(user) {
+						user.sendPrivateMessage(message);
+					});
+				} else {
+					if(isTypeOf(nick, 'User')) {
+						nick.sendPrivateMessage(message);
+					} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
+						nick.each(function(n) {
+							Bot.private(n, message);
+						});
+					} else {
+						var nick = Users.get(nick);
+						if(nick != undefined) {
+							nick.sendPrivateMessage(message);
+						}
+					}
+				}
+            }, delay);
+        } else {
+			// send to online users
+			if(nick == undefined) {
+				Channel.getUsers().each(function(user) {
+					user.sendPrivateMessage(message);
 				});
 			} else {
-				var nick = Users.get(nick);
-				if(nick != undefined) {
+				if(isTypeOf(nick, 'User')) {
 					nick.sendPrivateMessage(message);
+				} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
+					nick.each(function(n) {
+						Bot.private(n, message);
+					});
+				} else {
+					var nick = Users.get(nick);
+					if(nick != undefined) {
+						nick.sendPrivateMessage(message);
+					}
 				}
 			}
-		}
+        }
 	};
 	
 	/*

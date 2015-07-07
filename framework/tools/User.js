@@ -47,8 +47,8 @@ if(!User.prototype.private) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function private(msg) {
-			this.sendPrivateMessage(msg);
+		value: function private(msg, delay) {
+			Bot.private(this, msg, delay);
 		}
 	});
 }
