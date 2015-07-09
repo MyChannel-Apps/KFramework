@@ -133,7 +133,7 @@ if (!DiceConfiguration.prototype.getFakeDiceEvent) {
 			results.push(curDices.join(', '));
             _singleResults.push(new FakeSingleDiceResult(dice, curValues));
         });
-
+		
 		var infoLine = ((!_conf.isUsingPrivateThrow()) ? '°BB°> ' : '')+'_'+user.getProfileLink()+'_ rollt '+((count > 1) ? 'die' : 'einen')+' Würfel'+((_conf.isUsingOpenThrow()) ? ' (offener Wurf)' : '')+'...';
 		var resultLine = dices.join(' + ')+': '+results.join(' + ')+' = _'+_totalSum+'_';
 		
