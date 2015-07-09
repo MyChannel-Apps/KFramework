@@ -66,3 +66,92 @@ if (!DiceEvent.prototype.checkConf) {
     }
   });
 }
+
+/*
+	@docs	TODO
+*/
+if (!DiceConfiguration.prototype.getFakeDiceEvent) {
+  Object.defineProperty(DiceConfiguration.prototype, 'getFakeDiceEvent', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function getFakeDiceEvent(user) {
+		var _conf = this;
+		var _singleResults = [];
+		var _totalSum = 0;
+ 
+		function FakeSingleDiceResult(dice, values) {
+			var sum = 0;
+			values.each(function(val) {
+				sum += val;
+			});
+			
+			this.getDice = function getDice() { return dice; };
+			this.valuesRolled = function valuesRolled() { return values; };
+			this.sum = function sum() { return sum; };
+		}
+		
+		var confdices = _conf.getDices();
+		confdices.sort(function(a, b) {
+            return a.getNumerOfSides() - b.getNumerOfSides();
+        });
+
+		var dices = [];
+		var results = [];
+		var count = 0;
+		confdices.each(function(dice){
+            var curValues = [];
+			var curDices = [];
+
+			if(dice.getAmount() == 1) {
+				dices.push('W'+dice.getNumerOfSides());
+				count++;				
+			} else {
+				dices.push(dice.getAmount()+'W'+dice.getNumerOfSides());
+				count += dice.getAmount();
+			}
+ 
+            for(var w = 0; w < dice.getAmount(); w++) {
+				if(_conf.isUsingOpenThrow()) {
+					var tmpVal = 0;
+					var diceo = [];
+					do {
+						tmpVal = RandomOperations.nextInt(dice.getNumerOfSides())+1;
+						curValues.push(tmpVal);
+						diceo.push(tmpVal);
+						_totalSum += tmpVal;
+					} while(tmpVal == dice.getNumerOfSides())
+					
+					curDices.push(diceo.join('> '));
+				} else {
+					var tmpVal = RandomOperations.nextInt(dice.getNumerOfSides())+1;
+					curValues.push(tmpVal);
+					curDices.push(tmpVal);
+					_totalSum += tmpVal;
+				}
+            }
+			results.push(curDices.join(', '));
+            _singleResults.push(new FakeSingleDiceResult(dice, curValues));
+        });
+
+		var topLine = ((!_conf.isUsingPrivateThrow()) ? '°BB°> ' : '')+'_'+user.getProfileLink()+'_ rollt '+((count > 1) ? 'die' : 'einen')+' Würfel'+((_conf.isUsingOpenThrow()) ? ' (offener Wurf)' : '')+'...°#°';
+			
+		return (new function FakeDiceEvent() {
+			this.checkConf = function checkConf(conf) { return this.getDiceResult().getDiceConfiguration().equals(conf); };
+			this.checkUser = function checkUser(user) { return this.getUser().equals(user); };
+			this.getDiceResult = function getDiceResult() { 
+				return (new function FakeDiceResult() {
+					this.getDiceConfiguration = function getDiceConfiguration() { return _conf; };
+					this.getSingleDiceResults = function getSingleDiceResults() { return _singleResults; };
+					this.totalSum = function totalSum() { return _totalSum; };
+				});
+			};
+			this.getResultLine = function getText() { return dices.join(' + ')+': '+results.join(' + ')+' = _'+_totalSum+'_'; };			
+			this.getText = function getText() { return topLine + dices.join(' + ')+': '+results.join(' + ')+' = _'+_totalSum+'_'; };
+			this.getTopLine = function getText() { return topLine };
+			this.getTotal = function getTotal() { return this.getDiceResult().totalSum(); };
+			this.getUser = function getUser() { return user; };
+		});
+    }
+  });
+};

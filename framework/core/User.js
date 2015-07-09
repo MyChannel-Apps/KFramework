@@ -63,13 +63,15 @@ var Status = {
 };
 
 var Users = (new function Users() {
+	var UAC = KnuddelsServer.getUserAccess();
+	
 	this.getProfilePicture = function getProfilePicture(user) {
 		Logger.info('Users.getProfilePicture(user) is DEPRECATED, use user.getProfilePicture(width, height)');
 		
 		var nickname = '';
 		
 		if(user.getNick == undefined) {
-			user		= Users.get(user);
+			user		= this.get(user);
 		}
 		
 		nickname	= user.getNick();
@@ -78,23 +80,52 @@ var Users = (new function Users() {
 	};
 	
 	/*
+		@docs	TODO
+	*/
+	this.exists = function exists(nickname) {
+		return UAC.exists(nickname);
+	}
+	
+	/*
+		@docs	TODO
+	*/
+	this.canAccess = function canAccess(nickname) {
+		if(typeof(nickname) == 'number') {
+			return UAC.mayAccess(nickname);
+		}
+		
+		if(!UAC.exists(nickname)) {
+			return false;
+		}
+
+		var userId	= UAC.getUserId(nickname);
+		return UAC.mayAccess(userId);
+	}
+	
+	/*
+		@docs	TODO
+	*/
+	this.fixNick = function fixNick(nickname) {
+		return UAC.getNick(nickname);
+	}
+	
+	/*
 		@docs	http://www.mychannel-apps.de/documentation/User_get
 	*/
 	this.get = function get(nickname) {
 		if(typeof(nickname) == 'number') {
-			if(KnuddelsServer.canAccessUser(nickname)) {
-				return KnuddelsServer.getUser(nickname);
+			if(UAC.mayAccess(nickname)) {
+				return UAC.getUserById(nickname);
 			}
 		}
 		
-		if(KnuddelsServer.userExists(nickname)) {
-			var userId	= KnuddelsServer.getUserId(nickname);
-			
-			if(KnuddelsServer.canAccessUser(userId)) {
-				return KnuddelsServer.getUser(userId);
-			}
-		} else {
+		if(!UAC.exists(nickname)) {
 			return undefined;
+		}
+
+		var userId	= UAC.getUserId(nickname);
+		if(UAC.mayAccess(userId)) {
+			return UAC.getUserById(userId);
 		}
 		
 		if(typeof(nickname) == 'string') {
@@ -194,11 +225,11 @@ var Users = (new function Users() {
 					Logger.error('Can\t send message to a virtual User-Object!');
 				};
 				
-				_nickname				= KnuddelsServer.getNickCorrectCase(_uid);
+				_nickname				= UAC.getNick(_uid);
 			}());
 		}
 		
-		return nickname;
+		return UAC.getNick(nickname);
 	};
 	
 	/*
