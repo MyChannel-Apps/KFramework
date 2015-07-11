@@ -26,6 +26,13 @@
 */
 
 var KBank = (new function KBank() {
+	var UiKey = '';
+	var updateCallback = null;
+	
+	this.onKontoUpdate = function(call) {
+		updateCallback = call;
+	};		
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getKn
 	*/
@@ -68,6 +75,10 @@ var KBank = (new function KBank() {
 		_db.deleteNumber('KBank_knuddel');
 		_db.deleteNumber('KBank_buyin');
 		_db.deleteNumber('KBank_payout');
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
 	};
 
 	/*
@@ -88,6 +99,10 @@ var KBank = (new function KBank() {
 
 		var _db = Users.get(parseInt(uid)).getPersistence();
 		_db.setNumber('KBank_knuddel', kn);
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
 	};
 	
 	/*
@@ -108,6 +123,11 @@ var KBank = (new function KBank() {
 		
 		var _db = Users.get(parseInt(uid)).getPersistence();
 		_db.addNumber('KBank_knuddel', kn);
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
+		
 		return true;
 	};
 	
@@ -141,6 +161,11 @@ var KBank = (new function KBank() {
 
 		var _db = Users.get(parseInt(uid)).getPersistence();		
 		_db.addNumber('KBank_knuddel', -kn);
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
+		
 		return true;
 	};
 	
@@ -177,6 +202,11 @@ var KBank = (new function KBank() {
 		_db.addNumber('KBank_knuddel', -kn);
 		_db.addNumber('KBank_payout', kn);
 		Bot.knuddel(_user, kn, reason);
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
+		
 		return true;
 	};
 
@@ -199,6 +229,11 @@ var KBank = (new function KBank() {
 		var _db = Users.get(parseInt(uid)).getPersistence();
 		_db.addNumber('KBank_knuddel', kn);
 		_db.addNumber('KBank_buyin', kn);
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
+		
 		return true;
 	};
 	
