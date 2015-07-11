@@ -54,7 +54,7 @@ var Cron = (new function Cron() {
 			var time = new Date(job.getLastCheck()+500);
 			job.setLastCheck(time);
 			
-			if((time.getTime() - job.getLastRun() > 60000) && this.match(job.getMinutes(), time.getMinutes())&& this.match(job.getHours(), time.getHours()) && this.match(job.getDate(), time.getDate()) && this.match(job.getMonth(), time.getMonth()) && this.match(job.getDay(), time.getDay())) {
+			if((time.getTime() - job.getLastRun() > 60000) && this.checkMatch(job.getMinutes(), time.getMinutes())&& this.checkMatch(job.getHours(), time.getHours()) && this.checkMatch(job.getDate(), time.getDate()) && this.checkMatch(job.getMonth(), time.getMonth()) && this.checkMatch(job.getDay(), time.getDay())) {
 				job.run(time);
 				return;
 			}
@@ -69,7 +69,7 @@ var Cron = (new function Cron() {
 				return;
 			}
 			
-			if((time.getTime() - job.getLastRun() > 60000) && this.match(job.getMinutes(), time.getMinutes()) && this.match(job.getHours(), time.getHours()) && this.match(job.getDate(), time.getDate()) && this.match(job.getMonth(), time.getMonth()) && this.match(job.getDay(), time.getDay())) {
+			if((time.getTime() - job.getLastRun() > 60000) && this.checkMatch(job.getMinutes(), time.getMinutes()) && this.checkMatch(job.getHours(), time.getHours()) && this.checkMatch(job.getDate(), time.getDate()) && this.checkMatch(job.getMonth(), time.getMonth()) && this.checkMatch(job.getDay(), time.getDay())) {
 				job.run(time);
 			}
 		});
@@ -86,7 +86,7 @@ var Cron = (new function Cron() {
 		}
 	};
 	
-	this.match = function match(a, b) {
+	this.checkMatch = function checkMatch(a, b) {
 		var index	= 0;
 		var length	= a.length;
 		
