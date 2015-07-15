@@ -210,6 +210,11 @@ if(!Object.prototype.random) {
 		writable:		false,
 		value: function random() {
 			var keys	= Object.keys(this);
+			
+			if(keys.length <= 0) {
+				return undefined;
+			}
+			
 			var random	= RandomOperations.nextInt(keys.length);
 			
 			if(keys.length <= 0 || random >= keys.length) {
