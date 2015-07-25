@@ -35,7 +35,7 @@ var KBank = (new function KBank() {
 	
 	this.triggerKontoUpdate = function(uid) {
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 	};
 	
@@ -47,14 +47,26 @@ var KBank = (new function KBank() {
 			throw 'No UID submitted!';
 		}
 		
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		return parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2));
 	};
 	
 	/*
 		@docs	TODO
 	*/
-	this.reqKn = function requestKn(uid, kn, onSuccess, onError, reason) {
+	this.getTotalKn = function getTotalKn(uid) {
+		if(uid === undefined) {
+			throw 'No UID submitted!';
+		}
+		
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
+		return parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2))+Users.get(parseInt(uid, 10)).getKnuddelAccount().getKnuddelAmount().asNumber();
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.reqKn = function reqKn(uid, kn, onSuccess, onError, reason) {
 		if(kn === undefined) {
 			throw 'No Knuddel submitted!';
 		}
@@ -68,44 +80,44 @@ var KBank = (new function KBank() {
 		}
 				
 		if(kn <= 0.00) {
-			onError('KnNullOrNeg');
+			onError(Users.get(parseInt(uid, 10)), 'KnNullOrNeg');
 			return false;
 		}
 	
 		if(kn <= this.getKn(uid)) {
 			if(this.subKn(uid, kn)) {
-				onSuccess(kn);
+				onSuccess(Users.get(parseInt(uid, 10)), kn);
 				return true;
 			} else {
-				onError('CantGetKn');
+				onError(Users.get(parseInt(uid, 10)), 'CantGetKn');
 				return false;
 			}
 		}
 		
-		var knAcc = Users.get(parseInt(uid)).getKnuddelAccount();
+		var knAcc = Users.get(parseInt(uid, 10)).getKnuddelAccount();
 		var requestKn = new KnuddelAmount(kn-this.getKn(uid));
 		
 		if(!knAcc.hasEnough(requestKn)) {
-			onError('KnNotEnough');
+			onError(Users.get(parseInt(uid, 10)), 'KnNotEnough');
 			return false;
 		}
 		
 		knAcc.use(requestKn, reason || 'Einzahlung', {
 			transferReason: reason || 'Einzahlung',
-			onError: function onError() {
-				onError('KnuddelAccountError');
+			onError: function KnOnError() {
+				onError(Users.get(parseInt(uid, 10)), 'KnuddelAccountError');
 			},
-			onSuccess: function onSuccess() {
+			onSuccess: function KnOnSuccess() {
 				if(instance.subKn(uid, kn)) {
-					onSuccess(kn);
+					onSuccess(Users.get(parseInt(uid, 10)), kn);
 				} else {
 					setTimeout(function timeOutCheck() {
 						if(instance.subKn(uid, kn)) {
-							onSuccess(kn);
+							onSuccess(Users.get(parseInt(uid, 10)), kn);
 						} else {
-							onError('NoKnReceived');
+							onError(Users.get(parseInt(uid, 10)), 'NoKnReceived');
 						}
-					}, 100);
+					}, 500);
 				}
 			}	
 		});
@@ -119,7 +131,7 @@ var KBank = (new function KBank() {
 			throw 'No UID submitted!';
 		}
 		
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		
 		return {
 			knuddel: parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2)),
@@ -138,7 +150,7 @@ var KBank = (new function KBank() {
 			return;
 		}
 		
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		
 		_db.deleteNumber('KBank_knuddel');
 		_db.deleteNumber('KBank_buyin');
@@ -147,7 +159,7 @@ var KBank = (new function KBank() {
 		_db.deleteNumber('KBank_lock');
 		
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 	};
 
@@ -167,11 +179,11 @@ var KBank = (new function KBank() {
 			return false;
 		}
 		
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		_db.setNumber('KBank_knuddel', kn);
 		
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 	};
 	
@@ -191,11 +203,11 @@ var KBank = (new function KBank() {
 			return false;
 		}
 		
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		_db.addNumber('KBank_knuddel', kn);
 		
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 		
 		return true;
@@ -218,22 +230,22 @@ var KBank = (new function KBank() {
 		}
 		
 		if(kn === undefined) {
-			throw 'No UID submitted!';
+			throw 'No KN submitted!';
 		}
 	
 		if(kn <= 0.00) {
 			return false;
 		}
-	
+		
 		if(kn > this.getKn(uid)) {
 			return false;
 		}
 
-		var _db = Users.get(parseInt(uid)).getPersistence();		
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();		
 		_db.addNumber('KBank_knuddel', -kn);
 		
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 		
 		return true;
@@ -267,14 +279,14 @@ var KBank = (new function KBank() {
 			return false;
 		}
 		
-		var _user = Users.get(parseInt(uid));
+		var _user = Users.get(parseInt(uid, 10));
 		var _db = _user.getPersistence();
 		_db.addNumber('KBank_knuddel', -kn);
 		_db.addNumber('KBank_payout', kn);
 		Bot.knuddel(_user, kn, reason);
 		
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 		
 		return true;
@@ -296,12 +308,12 @@ var KBank = (new function KBank() {
 			throw 'KnNullOrNeg!';
 		}
 		
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		_db.addNumber('KBank_knuddel', kn);
 		_db.addNumber('KBank_buyin', kn);
 		
 		if(updateCallback) {
-			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
 		
 		return true;
@@ -311,7 +323,7 @@ var KBank = (new function KBank() {
 		@docs	TODO
 	*/
 	this.isLocked = function isLocked(uid) {
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		return (_db.getNumber('KBank_lock', 0));
 	};
 	
@@ -319,7 +331,7 @@ var KBank = (new function KBank() {
 		@docs	TODO
 	*/
 	this.setLock = function setLock(uid) {
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		_db.setNumber('KBank_lock', 1);
 	};
 	
@@ -327,7 +339,7 @@ var KBank = (new function KBank() {
 		@docs	TODO
 	*/
 	this.unLock = function unLock(uid) {
-		var _db = Users.get(parseInt(uid)).getPersistence();
+		var _db = Users.get(parseInt(uid, 10)).getPersistence();
 		_db.deleteNumber('KBank_lock');		
 	};
 	
@@ -405,7 +417,7 @@ var KBank = (new function KBank() {
 		var migrated = [];
 		var start = new Date().getTime();
 		migrate.each(function MigrateEach(konto, uid) {
-			_db = Users.get(parseInt(uid)).getPersistence();
+			_db = Users.get(parseInt(uid, 10)).getPersistence();
 			_db.setNumber('KBank_knuddel', parseFloat(konto.knuddel.toFixed(2)));
 			_db.setNumber('KBank_buyin', parseFloat(konto.buyin.toFixed(2)));
 			_db.setNumber('KBank_payout', parseFloat(konto.payout.toFixed(2)));
