@@ -26,8 +26,9 @@
 */
 
 var KBank = (new function KBank() {
+	var instance = this;
 	var updateCallback = null;
-	
+		
 	this.onKontoUpdate = function(call) {
 		updateCallback = call;
 	};
@@ -95,11 +96,11 @@ var KBank = (new function KBank() {
 				onError('KnuddelAccountError');
 			},
 			onSuccess: function onSuccess() {
-				if(this.subKn(uid, kn)) {
+				if(instance.subKn(uid, kn)) {
 					onSuccess(kn);
 				} else {
 					setTimeout(function timeOutCheck() {
-						if(this.subKn(uid, kn)) {
+						if(instance.subKn(uid, kn)) {
 							onSuccess(kn);
 						} else {
 							onError('NoKnReceived');
