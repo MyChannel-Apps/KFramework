@@ -26,19 +26,24 @@
 */
 
 var KBank = (new function KBank() {
-	var UiKey = '';
 	var updateCallback = null;
 	
 	this.onKontoUpdate = function(call) {
 		updateCallback = call;
-	};		
+	};
+	
+	this.triggerKontoUpdate = function(uid) {
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid)), this.getKn(uid));
+		}
+	};
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getKn
 	*/
 	this.getKn = function getKn(uid) {
 		if(uid === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		var _db = Users.get(parseInt(uid)).getPersistence();
@@ -46,11 +51,71 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
+		@docs	TODO
+	*/
+	this.reqKn = function requestKn(uid, kn, onSuccess, onError, reason) {
+		if(kn === undefined) {
+			throw 'No Knuddel submitted!';
+		}
+
+		if(onSuccess === undefined || typeof(onSuccess) !== 'function') {
+			throw 'no success Callback';
+		}
+
+		if(onError === undefined || typeof(onError) !== 'function') {
+			throw 'no error Callback';
+		}
+				
+		if(kn <= 0.00) {
+			onError('KnNullOrNeg');
+			return false;
+		}
+	
+		if(kn <= this.getKn(uid)) {
+			if(this.subKn(uid, kn)) {
+				onSuccess(kn);
+				return true;
+			} else {
+				onError('CantGetKn');
+				return false;
+			}
+		}
+		
+		var knAcc = Users.get(parseInt(uid)).getKnuddelAccount();
+		var requestKn = new KnuddelAmount(kn-this.getKn(uid));
+		
+		if(!knAcc.hasEnough(requestKn)) {
+			onError('KnNotEnough');
+			return false;
+		}
+		
+		knAcc.use(requestKn, reason || 'Einzahlung', {
+			transferReason: reason || 'Einzahlung',
+			onError: function onError() {
+				onError('KnuddelAccountError');
+			},
+			onSuccess: function onSuccess() {
+				if(this.subKn(uid, kn)) {
+					onSuccess(kn);
+				} else {
+					setTimeout(function timeOutCheck() {
+						if(this.subKn(uid, kn)) {
+							onSuccess(kn);
+						} else {
+							onError('NoKnReceived');
+						}
+					}, 100);
+				}
+			}	
+		});
+	};
+	
+	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getKonto
 	*/
 	this.getKonto = function getKonto(uid) {
 		if(uid === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		var _db = Users.get(parseInt(uid)).getPersistence();
@@ -59,6 +124,7 @@ var KBank = (new function KBank() {
 			knuddel: parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2)),
 			buyin: parseFloat(_db.getNumber('KBank_buyin', 0.00).toFixed(2)),
 			payout: parseFloat(_db.getNumber('KBank_payout', 0.00).toFixed(2)),
+			taxes: parseFloat(_db.getNumber('KBank_taxes', 0.00).toFixed(2)),
 			lock: (_db.getNumber('KBank_lock', 0))
 		};
 	};
@@ -76,6 +142,7 @@ var KBank = (new function KBank() {
 		_db.deleteNumber('KBank_knuddel');
 		_db.deleteNumber('KBank_buyin');
 		_db.deleteNumber('KBank_payout');
+		_db.deleteNumber('KBank_taxes');
 		_db.deleteNumber('KBank_lock');
 		
 		if(updateCallback) {
@@ -88,11 +155,11 @@ var KBank = (new function KBank() {
 	*/
 	this.setKn = function setKn(uid, kn) {
 		if(uid === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn < 0.00) {
@@ -112,11 +179,11 @@ var KBank = (new function KBank() {
 	*/
 	this.addKn = function addKn(uid, kn) {
 		if(uid === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn <= 0.00) {
@@ -146,11 +213,11 @@ var KBank = (new function KBank() {
 	*/
 	this.subKn = function subKn(uid, kn) {
 		if(uid === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 	
 		if(kn <= 0.00) {
@@ -176,11 +243,11 @@ var KBank = (new function KBank() {
 	*/
 	this.payout = function payout(uid, kn, reason) {
 		if(uid === undefined) {
-			return false;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn === undefined) {
-			return false;
+			throw 'No UID submitted!';
 		}
 
 		if(kn < 0) {
@@ -217,15 +284,15 @@ var KBank = (new function KBank() {
 	*/
 	this.payin = function payin(uid, kn) {
 		if(uid === undefined) {
-			return;
+			throw 'No UID submitted!';
 		}
 		
 		if(kn === undefined) {
-			return;
+			throw 'No Knuddel submitted!';
 		}
 
 		if(kn <= 0.00) {
-			return false;
+			throw 'KnNullOrNeg!';
 		}
 		
 		var _db = Users.get(parseInt(uid)).getPersistence();
@@ -268,7 +335,7 @@ var KBank = (new function KBank() {
 	*/
 	this.getUsers = function getUsers(callback) {
 		if(typeof callback !== 'function') {
-			Logger.info('KBank.getUsers() is DEPRECATED, use it like this KBank.getUsers(function(userIds, total){ });');
+			Logger.error('KBank.getUsers() is DEPRECATED, use it like this KBank.getUsers(function(userIds, total){ });');
 			return false;
 		}
 		
@@ -296,7 +363,8 @@ var KBank = (new function KBank() {
 			knusers: DB.count('KBank_knuddel', 0.01),
 			knuddel: parseFloat(DB.sum('KBank_knuddel')),
 			buyin: parseFloat(DB.sum('KBank_buyin')),
-			payout: parseFloat(DB.sum('KBank_payout'))
+			payout: parseFloat(DB.sum('KBank_payout')),
+			taxes: parseFloat(DB.sum('KBank_taxes')),
 		};
 	};
 

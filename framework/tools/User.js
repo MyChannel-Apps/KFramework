@@ -157,6 +157,17 @@ if(!User.prototype.subKn) {
 	});
 }
 
+if(!User.prototype.reqKn) {
+	Object.defineProperty(User.prototype, 'reqKn', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function reqKn(kn, onSuccess, onError, reason) {
+			return KBank.reqKn(this.getUserId(), kn, onSuccess, onError, reason);
+		}
+	});
+}
+
 if(!User.prototype.knuddel) {
 	Object.defineProperty(User.prototype, 'knuddel', {
 		enumerable:		false,
