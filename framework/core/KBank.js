@@ -30,13 +30,8 @@ var KBank = (new function KBank() {
 	var updateCallback	= null;
 	var _request_queue	= [];
 	
-	setInterval(function requestQueueInterval() {
+	setInterval(function() {
 		var entry	= _request_queue.shift();
-		
-		if(entry == undefined || entry == null) {
-			return;
-		}
-		
 		var user	= Users.get(parseInt(entry.user, 10));
 		
 		if(instance.subKn(entry.user, entry.knuddel)) {
