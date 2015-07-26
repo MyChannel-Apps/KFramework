@@ -66,56 +66,66 @@ var KBank = (new function KBank() {
 	/*
 		@docs	TODO
 	*/
-	this.reqKn = function reqKn(uid, kn, onSuccessCallback, onErrorCallback, reason) {
+	this.reqKn = function reqKn(uid, kn, callSuccess, callError, reason) {
+		if(uid === undefined) {
+			throw 'No UID submitted!';
+		}
+		
+		var user = Users.get(parseInt(uid, 10));
+		
+		if(!isTypeOf(user) == 'User') {
+			throw 'No User-Object found!';
+		}
+		
 		if(kn === undefined) {
 			throw 'No Knuddel submitted!';
 		}
 
-		if(onSuccessCallback === undefined || typeof(onSuccessCallback) !== 'function') {
+		if(callSuccess === undefined || typeof(callSuccess) !== 'function') {
 			throw 'no success Callback';
 		}
 
-		if(onErrorCallback === undefined || typeof(onErrorCallback) !== 'function') {
+		if(callError === undefined || typeof(callError) !== 'function') {
 			throw 'no error Callback';
 		}
 				
 		if(kn <= 0.00) {
-			onErrorCallback(Users.get(parseInt(uid, 10)), 'KnNullOrNeg');
+			callSuccess(user, 'KnNullOrNeg');
 			return false;
 		}
 	
 		if(kn <= this.getKn(uid)) {
 			if(this.subKn(uid, kn)) {
-				onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
+				callSuccess(user, kn);
 				return true;
 			} else {
-				onErrorCallback(Users.get(parseInt(uid, 10)), 'CantGetKn');
+				callError(user, 'CantGetKn');
 				return false;
 			}
 		}
 		
-		var knAcc = Users.get(parseInt(uid, 10)).getKnuddelAccount();
+		var knAcc = user.getKnuddelAccount();
 		var requestKn = new KnuddelAmount(kn-this.getKn(uid));
 		
 		if(!knAcc.hasEnough(requestKn)) {
-			onErrorCallback(Users.get(parseInt(uid, 10)), 'KnNotEnough');
+			callError(user, 'KnNotEnough');
 			return false;
 		}
 		
 		knAcc.use(requestKn, reason || 'Einzahlung', {
 			transferReason: reason || 'Einzahlung',
 			onError: function KnOnError() {
-				onErrorCallback(Users.get(parseInt(uid, 10)), 'KnuddelAccountError');
+				callError(user, 'KnuddelAccountError');
 			},
 			onSuccess: function KnOnSuccess() {
 				if(instance.subKn(uid, kn)) {
-					onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
+					callSuccess(user, kn);
 				} else {
 					setTimeout(function timeOutCheck() {
 						if(instance.subKn(uid, kn)) {
-							onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
+							callSuccess(user, kn);
 						} else {
-							onErrorCallback(Users.get(parseInt(uid, 10)), 'NoKnReceived');
+							callError(user, 'NoKnReceived');
 						}
 					}, 500);
 				}
@@ -137,7 +147,6 @@ var KBank = (new function KBank() {
 			knuddel: parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2)),
 			buyin: parseFloat(_db.getNumber('KBank_buyin', 0.00).toFixed(2)),
 			payout: parseFloat(_db.getNumber('KBank_payout', 0.00).toFixed(2)),
-			taxes: parseFloat(_db.getNumber('KBank_taxes', 0.00).toFixed(2)),
 			lock: (_db.getNumber('KBank_lock', 0))
 		};
 	};
@@ -155,7 +164,6 @@ var KBank = (new function KBank() {
 		_db.deleteNumber('KBank_knuddel');
 		_db.deleteNumber('KBank_buyin');
 		_db.deleteNumber('KBank_payout');
-		_db.deleteNumber('KBank_taxes');
 		_db.deleteNumber('KBank_lock');
 		
 		if(updateCallback) {
@@ -377,7 +385,6 @@ var KBank = (new function KBank() {
 			knuddel: parseFloat(DB.sum('KBank_knuddel')),
 			buyin: parseFloat(DB.sum('KBank_buyin')),
 			payout: parseFloat(DB.sum('KBank_payout')),
-			taxes: parseFloat(DB.sum('KBank_taxes')),
 		};
 	};
 

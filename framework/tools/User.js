@@ -130,6 +130,20 @@ if(!User.prototype.getKn) {
 }
 
 /*
+	@docs	TODO
+*/
+if(!User.prototype.getTotalKn) {
+	Object.defineProperty(User.prototype, 'getTotalKn', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function getTotalKn() {
+			return KBank.getTotalKn(this.getUserId());
+		}
+	});
+}
+
+/*
 	@docs	http://www.mychannel-apps.de/documentation/User_addKn
 */
 if(!User.prototype.addKn) {
