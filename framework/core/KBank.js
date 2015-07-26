@@ -66,30 +66,30 @@ var KBank = (new function KBank() {
 	/*
 		@docs	TODO
 	*/
-	this.reqKn = function reqKn(uid, kn, onSuccess, onError, reason) {
+	this.reqKn = function reqKn(uid, kn, onSuccessCallback, onErrorCallback, reason) {
 		if(kn === undefined) {
 			throw 'No Knuddel submitted!';
 		}
 
-		if(onSuccess === undefined || typeof(onSuccess) !== 'function') {
+		if(onSuccessCallback === undefined || typeof(onSuccessCallback) !== 'function') {
 			throw 'no success Callback';
 		}
 
-		if(onError === undefined || typeof(onError) !== 'function') {
+		if(onErrorCallback === undefined || typeof(onErrorCallback) !== 'function') {
 			throw 'no error Callback';
 		}
 				
 		if(kn <= 0.00) {
-			onError(Users.get(parseInt(uid, 10)), 'KnNullOrNeg');
+			onErrorCallback(Users.get(parseInt(uid, 10)), 'KnNullOrNeg');
 			return false;
 		}
 	
 		if(kn <= this.getKn(uid)) {
 			if(this.subKn(uid, kn)) {
-				onSuccess(Users.get(parseInt(uid, 10)), kn);
+				onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
 				return true;
 			} else {
-				onError(Users.get(parseInt(uid, 10)), 'CantGetKn');
+				onErrorCallback(Users.get(parseInt(uid, 10)), 'CantGetKn');
 				return false;
 			}
 		}
@@ -98,24 +98,24 @@ var KBank = (new function KBank() {
 		var requestKn = new KnuddelAmount(kn-this.getKn(uid));
 		
 		if(!knAcc.hasEnough(requestKn)) {
-			onError(Users.get(parseInt(uid, 10)), 'KnNotEnough');
+			onErrorCallback(Users.get(parseInt(uid, 10)), 'KnNotEnough');
 			return false;
 		}
 		
 		knAcc.use(requestKn, reason || 'Einzahlung', {
 			transferReason: reason || 'Einzahlung',
 			onError: function KnOnError() {
-				onError(Users.get(parseInt(uid, 10)), 'KnuddelAccountError');
+				onErrorCallback(Users.get(parseInt(uid, 10)), 'KnuddelAccountError');
 			},
 			onSuccess: function KnOnSuccess() {
 				if(instance.subKn(uid, kn)) {
-					onSuccess(Users.get(parseInt(uid, 10)), kn);
+					onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
 				} else {
 					setTimeout(function timeOutCheck() {
 						if(instance.subKn(uid, kn)) {
-							onSuccess(Users.get(parseInt(uid, 10)), kn);
+							onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
 						} else {
-							onError(Users.get(parseInt(uid, 10)), 'NoKnReceived');
+							onErrorCallback(Users.get(parseInt(uid, 10)), 'NoKnReceived');
 						}
 					}, 500);
 				}
