@@ -26,28 +26,9 @@
 */
 
 var KBank = (new function KBank() {
-	var instance		= this;
-	var updateCallback	= null;
-	var _request_queue	= [];
-	
-	setInterval(function() {
-		var entry	= _request_queue.shift();
-		var user	= Users.get(parseInt(entry.user, 10));
+	var instance = this;
+	var updateCallback = null;
 		
-		if(instance.subKn(entry.user, entry.knuddel)) {
-			entry.success(user, entry.knuddel);
-		} else {
-			++entry.count;
-			
-			if(entry.count >= 3) {
-				entry.error(user, 'NoKnReceived');
-				return;
-			}
-			
-			_request_queue.push(entry);
-		}
-	}, 500);
-	
 	this.onKontoUpdate = function(call) {
 		updateCallback = call;
 	};
@@ -84,7 +65,7 @@ var KBank = (new function KBank() {
 	
 	/*
 		@docs	TODO
-	*/	
+	*/
 	this.reqKn = function reqKn(uid, kn, onSuccessCallback, onErrorCallback, reason) {
 		if(kn === undefined) {
 			throw 'No Knuddel submitted!';
@@ -127,13 +108,17 @@ var KBank = (new function KBank() {
 				onErrorCallback(Users.get(parseInt(uid, 10)), 'KnuddelAccountError');
 			},
 			onSuccess: function KnOnSuccess() {
-				_request_queue.push({
-					user:		uid,
-					knuddel:	kn,
-					success:	onSuccessCallback,
-					error:		onErrorCallback,
-					count:		0
-				});
+				if(instance.subKn(uid, kn)) {
+					onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
+				} else {
+					setTimeout(function timeOutCheck() {
+						if(instance.subKn(uid, kn)) {
+							onSuccessCallback(Users.get(parseInt(uid, 10)), kn);
+						} else {
+							onErrorCallback(Users.get(parseInt(uid, 10)), 'NoKnReceived');
+						}
+					}, 500);
+				}
 			}	
 		});
 	};
