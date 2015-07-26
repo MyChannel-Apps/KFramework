@@ -90,7 +90,7 @@ var KBank = (new function KBank() {
 		}
 				
 		if(kn <= 0.00) {
-			callSuccess(user, 'KnNullOrNeg');
+			callError(user, 'KnNullOrNeg');
 			return false;
 		}
 	
