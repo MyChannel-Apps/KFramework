@@ -299,7 +299,48 @@ var KBank = (new function KBank() {
 		
 		return true;
 	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.payToAccount = function payout(uid, kn, reason) {
+		if(uid === undefined) {
+			throw 'No UID submitted!';
+		}
+		
+		if(kn === undefined) {
+			throw 'No UID submitted!';
+		}
 
+		if(kn < 0) {
+			return false;
+		}
+		
+		if(kn > this.getKn(uid)) {
+			return false;
+		}
+		
+		if(kn > Bot.getKnuddels()) {
+			return false;
+		}
+		
+		if(kn >= 1000000) {
+			return false;
+		}
+		
+		var _user = Users.get(parseInt(uid, 10));
+		var _db = _user.getPersistence();
+		_db.addNumber('KBank_knuddel', -kn);
+		_db.addNumber('KBank_payout', kn);
+		Bot.knuddel(_user.getKnuddelAccount(), kn, reason);
+		
+		if(updateCallback) {
+			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
+		}
+		
+		return true;
+	};
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_payin
 	*/
