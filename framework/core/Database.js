@@ -353,7 +353,11 @@ var DB	= (new function Database() {
 		return id;
 	};
 	
-	this.update = function update(key, id, data) {
+	this.update = function update(key, id, data, filter) {
+		if(typeof(filter) != 'undefined') {
+			data = filter.apply(this, [ data ]);
+		}
+		
 		DB.save('_' + key + '_' + id, data);
 	};
 	
