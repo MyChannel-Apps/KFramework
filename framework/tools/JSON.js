@@ -21,56 +21,20 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Adrian Preuß <Bizarrus>
+	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
+	@docs		http://www.mychannel-apps.de/documentation/tools/user
 */
 
-var VERSION		= '1.0.8';
-
-var KFramework = (new function KFramework() {
-	this.load = [
-		/* Tools */
-		'tools/JSON',
-		'tools/Functions',
-		'tools/Number',
-		'tools/String',
-		'tools/Array',
-		'tools/Object',
-		'tools/User',
-		'tools/Dice',
-		'tools/StringBuffer',
-		
-		/* Core */
-		'core/Hash',
-		'core/Hooks',
-		'core/Database',
-		'core/Logger',
-		'core/Cronjob',
-		'core/Bot',
-		'core/KCode',
-		'core/KBank',
-		'core/Channel',
-		'core/User',
-		'core/AppStore'
-		/* 'core/KConfig' */
-	];
-	
-	for(var entry in this.load) {
-		require('framework/' + this.load[entry] + '.js');
-	}
-	
-	this.startUp = function startUp() {
-		KBank.dataMigration();
-	};
-	
-	this.store = function store() {
-		Cron.saveData();
-	};
-	
-	this.shutDown = function shutDown() {
-		Cron.onShutdown();
-	};
-	
-	this.toString = function toString() {
-		return '[KFramework Core]';
-	};
-}());
+/*
+	@docs
+*/
+if(!JSON.prototype.format) {
+	Object.defineProperty(JSON.prototype, 'format', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function format(string) {
+			return JSON.stringify(string, 1, 4).escapeKCode().replace(/\n/g, '°#°');
+		}
+	});
+}
