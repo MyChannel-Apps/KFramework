@@ -28,13 +28,13 @@
 /*
 	@docs
 */
-if(!JSON.prototype.format) {
-	Object.defineProperty(JSON.prototype, 'format', {
+if(!JSON.format) {
+	Object.defineProperty(JSON, 'format', {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function format(string) {
-			return JSON.stringify(string, 1, 4).escapeKCode().replace(/\n/g, '°#°');
+		value: function format(object) {
+			return JSON.stringify(object, 1, 4).escapeKCode().replace(/\n/g, '°#°');
 		}
 	});
 }
