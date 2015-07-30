@@ -59,8 +59,8 @@ var KBank = (new function KBank() {
 			throw 'No UID submitted!';
 		}
 		
-		var _db = Users.get(parseInt(uid, 10)).getPersistence();
-		return parseFloat(_db.getNumber('KBank_knuddel', 0.00).toFixed(2))+Users.get(parseInt(uid, 10)).getKnuddelAccount().getKnuddelAmount().asNumber();
+		var _user = Users.get(parseInt(uid, 10));
+		return parseFloat((_user.getPersistence().getNumber('KBank_knuddel', 0.00)+_user.getKnuddelAccount().getKnuddelAmount().asNumber()).toFixed(2));
 	};
 	
 	/*
@@ -88,6 +88,12 @@ var KBank = (new function KBank() {
 		if(callError === undefined || typeof(callError) !== 'function') {
 			throw 'no error Callback';
 		}
+		
+		try {
+			kn = parseFloat(kn.toFixed(2));
+		} catch(e) {
+			throw e.message;
+		}
 				
 		if(kn <= 0.00) {
 			callError(user, 'KnNullOrNeg');
@@ -105,8 +111,14 @@ var KBank = (new function KBank() {
 		}
 		
 		var knAcc = user.getKnuddelAccount();
-		var requestKn = new KnuddelAmount(kn-this.getKn(uid));
+		var diffKn = parseFloat((kn-this.getKn(uid)).toFixed(2));
 		
+		if(diffKn < 0.01) {
+			diffKn = 0.01;
+		}
+		
+		var requestKn = new KnuddelAmount(diffKn);
+
 		if(!knAcc.hasEnough(requestKn)) {
 			callError(user, 'KnNotEnough');
 			return false;
