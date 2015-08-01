@@ -27,7 +27,27 @@
 
 var Bot = (new function Bot() {
 	var _user = KnuddelsServer.getDefaultBotUser();
+	var textFilter = '';
 	
+	/*
+		@docs	TODO
+	*/
+	this.setTextFilter = function setTextFilter(text) { 
+		var countBOLD = text.split("_").length-1;
+		
+		if(countBOLD % 2 !== 0){	
+			text = text.replace(/_/g, '');
+		}
+
+		var countKUGEL = text.split("°").length-1;
+		
+		if(countKUGEL % 2 !== 0){	
+			text = text.replace(/°/g, '');
+		}		
+		textFilter = text;
+		return text;
+	};
+
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getAge
 	*/
@@ -215,12 +235,12 @@ var Bot = (new function Bot() {
 		var params = {};
 		
 		if(arg1 !== undefined) {
-			if(isTypeOf(arg1, 'string')) { params['displayReasonText'] = arg1; }
+			if(isTypeOf(arg1, 'string')) { params['displayReasonText'] = textFilter+arg1+'§'; }
 			if(isTypeOf(arg1, 'boolean')) { params['hidePublicMessage'] = !(arg1); }
 		}
 
 		if(arg2 !== undefined) {
-			if(isTypeOf(arg2, 'string')) { params['displayReasonText'] = arg2; }
+			if(isTypeOf(arg2, 'string')) { params['displayReasonText'] = textFilter+arg2+'§'; }
 			if(isTypeOf(arg2, 'boolean')) { params['hidePublicMessage'] = !(arg2); }
 		}		
 		
@@ -242,7 +262,7 @@ var Bot = (new function Bot() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_exception
 	*/
 	this.exception = function exception(exception) {
-		_user.sendPublicMessage('°RR°_Exception:_°r°#' + (exception.message == undefined ? exception : exception.message));
+		_user.sendPublicMessage(textFilter+'°RR°_Exception:_°r°#' + (exception.message == undefined ? exception : exception.message));
 	};
 	
 	/*
@@ -283,10 +303,10 @@ var Bot = (new function Bot() {
 		
 		if (delay) {
             return setTimeout(function publicDelay() {
-                _user.sendPublicMessage(message);
+                _user.sendPublicMessage(textFilter+message);
             }, delay);
         } else {
-            _user.sendPublicMessage(message);
+            _user.sendPublicMessage(textFilter+message);
         }
 	};
 	
@@ -305,17 +325,17 @@ var Bot = (new function Bot() {
 		// send to online users
 		if(nick == undefined) {
 			Channel.getUsers().each(function(user) {
-				user.sendPostMessage(topic, message);
+				user.sendPostMessage(topic, textFilter+message);
 			});
 		} else {
 			if(isTypeOf(nick, 'User')) {
 				nick.sendPostMessage(topic, message);
 			} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
 				nick.each(function(n) {
-					Bot.post(n, message, topic);
+					Bot.post(n, textFilter+message, topic);
 				});
 			} else {
-				Users.get(nick).sendPostMessage(topic, message);
+				Users.get(nick).sendPostMessage(topic, textFilter+message);
 			}
 		}
 	};
@@ -334,19 +354,19 @@ var Bot = (new function Bot() {
 				// send to online users
 				if(nick == undefined) {
 					Channel.getUsers().each(function(user) {
-						user.sendPrivateMessage(message);
+						user.sendPrivateMessage(textFilter+message);
 					});
 				} else {
 					if(isTypeOf(nick, 'User')) {
-						nick.sendPrivateMessage(message);
+						nick.sendPrivateMessage(textFilter+message);
 					} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
 						nick.each(function(n) {
-							Bot.private(n, message);
+							Bot.private(n, textFilter+message);
 						});
 					} else {
 						var nick = Users.get(nick);
 						if(nick != undefined) {
-							nick.sendPrivateMessage(message);
+							nick.sendPrivateMessage(textFilter+message);
 						}
 					}
 				}
@@ -355,19 +375,19 @@ var Bot = (new function Bot() {
 			// send to online users
 			if(nick == undefined) {
 				Channel.getUsers().each(function(user) {
-					user.sendPrivateMessage(message);
+					user.sendPrivateMessage(textFilter+message);
 				});
 			} else {
 				if(isTypeOf(nick, 'User')) {
-					nick.sendPrivateMessage(message);
+					nick.sendPrivateMessage(textFilter+message);
 				} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
 					nick.each(function(n) {
-						Bot.private(n, message);
+						Bot.private(n, textFilter+message);
 					});
 				} else {
 					var nick = Users.get(nick);
 					if(nick != undefined) {
-						nick.sendPrivateMessage(message);
+						nick.sendPrivateMessage(textFilter+message);
 					}
 				}
 			}
