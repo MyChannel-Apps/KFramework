@@ -47,6 +47,13 @@ var Bot = (new function Bot() {
 		textFilter = text;
 		return text;
 	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.clearTextFilter = function clearTextFilter() { 
+		textFilter = '';
+	};	
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getAge
