@@ -28,15 +28,53 @@
 var KBank = (new function KBank() {
 	var instance = this;
 	var updateCallback = null;
-		
+	var payoutTaxRate = 0;
+	
+	/*
+		@docs	TODO
+	*/
 	this.onKontoUpdate = function(call) {
 		updateCallback = call;
 	};
 	
+	/*
+		@docs	TODO
+	*/
 	this.triggerKontoUpdate = function(uid) {
 		if(updateCallback) {
 			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.setPayoutTaxRate = function setPayoutTaxRate(taxRate) {
+		if(taxRate === undefined) {
+			throw 'No taxRate submitted!';
+		}
+		
+		if(isNaN(parseFloat(taxRate))) {
+			throw 'taxRate "'+taxRate+'" is non Numeric';
+			return false;
+		}
+		
+		taxRate = parseFloat(taxRate.toFixed(2));
+
+		if(taxRate>100) {
+			Logger.error('taxRate "'+taxRate+'" is higher as 100');
+			return false;
+		}
+		
+		payoutTaxRate = taxRate;
+		return true;
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.getPayoutTaxRate = function getPayoutTaxRate() {
+		return payoutTaxRate;
 	};
 	
 	/*
@@ -270,7 +308,7 @@ var KBank = (new function KBank() {
 		
 		return true;
 	};
-	
+
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_payout
 	*/
@@ -303,7 +341,12 @@ var KBank = (new function KBank() {
 		var _db = _user.getPersistence();
 		_db.addNumber('KBank_knuddel', -kn);
 		_db.addNumber('KBank_payout', kn);
-		Bot.knuddel(_user, kn, reason);
+
+		if(payoutTaxRate) {
+			Bot.knuddel(_user, kn/100*(100-payoutTaxRate), reason);
+		} else {
+			Bot.knuddel(_user, kn, reason);
+		}
 		
 		if(updateCallback) {
 			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
@@ -344,8 +387,13 @@ var KBank = (new function KBank() {
 		var _db = _user.getPersistence();
 		_db.addNumber('KBank_knuddel', -kn);
 		_db.addNumber('KBank_payout', kn);
-		Bot.knuddel(_user.getKnuddelAccount(), kn, reason);
 		
+		if(payoutTaxRate) {
+			Bot.knuddel(_user.getKnuddelAccount(), kn/100*(100-payoutTaxRate), reason);
+		} else {
+			Bot.knuddel(_user.getKnuddelAccount(), kn, reason);
+		}
+
 		if(updateCallback) {
 			updateCallback(Users.get(parseInt(uid, 10)), this.getKn(uid));
 		}
