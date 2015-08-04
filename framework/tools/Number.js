@@ -35,7 +35,7 @@ if(!Number.prototype.fix) {
 		configurable:	false,
 		writable:		false,
 		value: function fix(count) {
-			return parseFloat(this.toFixed(parseInt(count) || 2));
+			return parseFloat(this.toFixed(parseInt(count, 10) || 2));
 		}
 	});
 }

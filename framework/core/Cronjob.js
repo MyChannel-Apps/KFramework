@@ -121,9 +121,9 @@ var Cron = (new function Cron() {
 			}
 
 			x[2] = z.length === 1 ? -1 : z[1];
-			x[0] = parseInt(x[0]); // 0 - from
-			x[1] = parseInt(x[1]); // 1 - to
-			x[2] = parseInt(x[2]); // 2 modulus 
+			x[0] = parseInt(x[0], 10); // 0 - from
+			x[1] = parseInt(x[1], 10); // 1 - to
+			x[2] = parseInt(x[2], 10); // 2 modulus 
 
 			return x;
 		});
@@ -189,8 +189,8 @@ function Cronjob(name, cycle, callback) {
 			_crondb		= DB.load('_cron_' + _name, {run:0, check:0});
 		}
 		
-		_last_run		= new Date(parseInt(_crondb.run));
-		_last_check		= new Date(parseInt(_crondb.check));
+		_last_run		= new Date(parseInt(_crondb.run, 10));
+		_last_check		= new Date(parseInt(_crondb.check, 10));
 		
 		Cron.add(instance);
 		instance.start();

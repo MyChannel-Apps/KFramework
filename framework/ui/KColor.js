@@ -141,9 +141,9 @@ function KColor(red, green, blue) {
 			// First argument is RGB
 			} else if(isRGB(red)) {
 				var split	= red.split(',');
-				_red		= parseInt(split[0]);
-				_green		= parseInt(split[1]);
-				_blue		= parseInt(split[2]);
+				_red		= parseInt(split[0], 10);
+				_green		= parseInt(split[1], 10);
+				_blue		= parseInt(split[2], 10);
 				return;
 			}
 		}

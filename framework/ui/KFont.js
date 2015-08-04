@@ -57,8 +57,8 @@ function KFont(name, style, size) {
 	var _size		= 14;
 	var _style		= FontStyle.PLAIN;
 	var _available	= [
-		'RobotoBold',
-		'RobotoLight',
+		'Roboto-Bold',
+		'Roboto-Light',
 		'FinelinerScript',
 		'Arial',
 		'Impact'

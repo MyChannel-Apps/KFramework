@@ -82,7 +82,7 @@ function KGroup() {
 				return;
 			}
 			
-			var entry	= parseInt(index) + 1;
+			var entry	= parseInt(index, 10) + 1;
 			var title	= (titles[entry - 2] == undefined ? 'Tab ' + entry : titles[entry  - 2]);
 			
 			if(_layout_box) {
@@ -135,7 +135,7 @@ function KGroup() {
 				return;
 			}
 			
-			buffer.append('°>{displayGroup}').append(parseInt(index)).append('<°').append(content).append('°>{displayGroupEnd}<°');
+			buffer.append('°>{displayGroup}').append(parseInt(index, 10)).append('<°').append(content).append('°>{displayGroupEnd}<°');
 		});
 		
 		return buffer.toString();
