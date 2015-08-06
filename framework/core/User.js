@@ -236,7 +236,7 @@ var Users = (new function Users() {
 				this.post				= send;
 				
 				function send() {
-					Logger.error('Can\t send message to a virtual User-Object!');
+					Logger.error('Can\´t send message to a virtual User-Object!');
 				};
 				
 				_nickname				= UAC.getNick(_uid);
