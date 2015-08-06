@@ -102,6 +102,29 @@ if(!User.prototype.getProfilePicture) {
 }
 
 /*
+	@docs
+*/
+if(!User.prototype.getGenderString) {
+	Object.defineProperty(User.prototype, 'getGenderString', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function getGenderString() {
+			switch(this.getGender()) {
+				case Gender.Male:
+					return 'male';
+				break;
+				case Gender.Female:
+					return 'female';
+				break;
+			}
+			
+			return 'none';
+		}
+	});
+}
+
+/*
 	@docs	http://www.mychannel-apps.de/documentation/User_getKonto
 */
 if(!User.prototype.getKonto) {
