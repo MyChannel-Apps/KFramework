@@ -66,7 +66,7 @@ if(!Number.prototype.zero) {
     configurable: false,
     writable: false,
     value: function zero() {
-		return (this>10) ? ''+this : '0'+this;
+		return (this>=10) ? ''+this : '0'+this;
     }
   });
 }
