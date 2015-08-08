@@ -162,25 +162,30 @@ var KBank = (new function KBank() {
 			return false;
 		}
 		
-		knAcc.use(requestKn, reason || 'Einzahlung', {
-			transferReason: reason || 'Einzahlung',
-			onError: function KnOnError() {
-				callError(user, 'KnuddelAccountError');
-			},
-			onSuccess: function KnOnSuccess() {
-				if(instance.subKn(uid, kn)) {
-					callSuccess(user, kn);
-				} else {
-					setTimeout(function timeOutCheck() {
-						if(instance.subKn(uid, kn)) {
-							callSuccess(user, kn);
-						} else {
-							callError(user, 'NoKnReceived');
-						}
-					}, 500);
-				}
-			}	
-		});
+		try {
+			knAcc.use(requestKn, reason || 'Einzahlung', {
+				transferReason: reason || 'Einzahlung',
+				onError: function KnOnError() {
+					callError(user, 'KnuddelAccountError');
+				},
+				onSuccess: function KnOnSuccess() {
+					if(instance.subKn(uid, kn)) {
+						callSuccess(user, kn);
+					} else {
+						setTimeout(function timeOutCheck() {
+							if(instance.subKn(uid, kn)) {
+								callSuccess(user, kn);
+							} else {
+								callError(user, 'NoKnReceived');
+							}
+						}, 500);
+					}
+				}	
+			});
+		} catch(e) {
+			callError(user, 'KnuddelAccountError');
+			Logger.error(e.name + ' : ' + e.message);
+		}
 	};
 	
 	/*
