@@ -26,11 +26,12 @@
 */
 
 function View(name) {
-	var _name	= name;
-	var _width	= 100;
-	var _height	= 100;
-	var _mode	= AppViewMode.Overlay;
-	var _data	= {};
+	var _name			= name;
+	var _width			= 100;
+	var _height			= 100;
+	var _mode			= AppViewMode.Overlay;
+	var _data			= {};
+	var _send_callback	= undefined;
 	var _view;
 	var _file;
 	
@@ -51,7 +52,11 @@ function View(name) {
 		user.sendEvent('close', true);
 	};
 	
-	this.send = function send(user) {		
+	this.setCallback = function setCallback(callback) {
+		_send_callback = callback;
+	};
+	
+	this.send = function send(user) {
 		if(AppContent.popupContent == undefined) {
 			_mode	= AppViewMode.Overlay;
 		}
@@ -93,6 +98,10 @@ function View(name) {
 		}
 		
 		user.sendAppContent(_view);
+		
+		if(typeof(_send_callback) != 'undefined') {
+			_send_callback(this, user);
+		}
 	};
 	
 	/*
