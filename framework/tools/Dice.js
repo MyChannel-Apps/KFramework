@@ -42,6 +42,38 @@ if (!DiceEvent.prototype.getTotal) {
 /*
 	@docs	TODO
 */
+if (!DiceEvent.prototype.getSingleDices) {
+  Object.defineProperty(DiceEvent.prototype, 'getSingleDices', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function getSingleDices() {
+		return this.getDiceResult().getSingleDiceResults();
+    }
+  });
+}
+
+/*
+	@docs	TODO
+*/
+if (!DiceEvent.prototype.getSingleValues) {
+  Object.defineProperty(DiceEvent.prototype, 'getSingleValues', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function getSingleValues(diceCount) {
+		if(diceCount === undefined) {
+			diceCount = 0;
+		}
+		
+		return this.getDiceResult().getSingleDiceResults()[diceCount].valuesRolled();
+    }
+  });
+}
+
+/*
+	@docs	TODO
+*/
 if (!DiceEvent.prototype.checkUser) {
   Object.defineProperty(DiceEvent.prototype, 'checkUser', {
     enumerable: false,
