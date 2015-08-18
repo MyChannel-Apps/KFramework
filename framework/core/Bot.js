@@ -308,6 +308,10 @@ var Bot = (new function Bot() {
 			message = message.toString();
 		}
 		
+		if(isTypeOf(message, 'object')) {
+			message = JSON.format(message);
+		}
+		
 		if (delay) {
             return setTimeout(function publicDelay() {
                 _user.sendPublicMessage(textFilter+message);
@@ -354,6 +358,10 @@ var Bot = (new function Bot() {
 	this.private = function private(nick, message, delay) {
 		if(message instanceof KCode) {
 			message = message.toString();
+		}
+		
+		if(isTypeOf(message, 'object')) {
+			message = JSON.format(message);
 		}
 		
 		if (delay) {
