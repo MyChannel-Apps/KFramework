@@ -223,6 +223,7 @@ var Channel = (new function KChannel() {
 			owner:		true,
 			event:		true,
 			away:		true,
+			lmc:		true,
 			developer:	true,
 			include:	[], //array of uid´s or User-Objects
 			exclude:	[], //array of uid´s or User-Objects
@@ -311,6 +312,11 @@ var Channel = (new function KChannel() {
 			
 			// ChannelModerator
 			if(filter.cm != undefined && filter.cm != _users[index].isChannelModerator()) {
+				continue;
+			}
+			
+			// LMC
+			if(filter.lmc != undefined && filter.lmc != _users[index].isLikingChannel()) {
 				continue;
 			}
 			
