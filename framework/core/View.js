@@ -82,7 +82,7 @@ function View(name) {
 		if(user.getClientType() == ClientType.Applet && !user.canSendAppContent(_view)) {
 			var text = new KCode();
 			text.newLine();
-			text.append('°RR°_ACHTUNG:_°r° Achtung du benötigst mindestens _Java 8_ um _Ligatipps_ zu spielen.');
+			text.append('°RR°_ACHTUNG:_°r° Du benötigst mindestens _Java 8_ um _' + KnuddelsServer.getAppInfo().getAppName() + '_ zu spielen.');
 			text.newLine();
 			text.append('Um dieses Problem zu beheben bestehen 2 Möglichkeiten:');
 			text.newLine();
@@ -93,7 +93,7 @@ function View(name) {
 			return;
 		}
 		
-		if(!user.canSendAppContent(_view) || !user.canShowAppViewMode(_mode)) {
+		if(!user.isOnlineInChannel() || !user.canSendAppContent(_view) || !user.canShowAppViewMode(_mode)) {
 			return;
 		}
 		
