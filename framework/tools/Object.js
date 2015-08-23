@@ -225,3 +225,49 @@ if(!Object.prototype.random) {
 		}
 	});
 }
+
+/**
+	++++ Sample ++++
+	
+	var img		= 'http://chat.knuddels.de/pics/features/mosquito/mosquito_small.gif';
+	var shadow	= 'http://chat.knuddels.de/pics/features/mosquito/mosquito_shadow.png';
+	var props	= {
+		type:		0,
+		maxspeed:	100,
+		startpause:	500,
+		flytime:	10000,
+		imgfly:		img,
+		imgrest:	img,
+		imgshadow:	shadow,
+		w:			15,
+		h:			16,
+		click:		'/kiss James',
+		call:		'/kiss James'
+	};
+	
+	user.private('°>{sprite}' + props.join(':', '|') + '<°');
+*/
+if(!Object.prototype.join) {
+	Object.defineProperty(Object.prototype, 'join', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function join(a, b) {
+			var string	= '';
+			var length	= Object.keys(this).length;
+			var counter	= 0;
+			
+			for(var index in this) {
+				string += index + a + this[index];
+				
+				if(counter + 1 < length) {
+					string += b;
+				}
+				
+				++counter;
+			}
+			
+			return string;
+		}
+	});
+}
