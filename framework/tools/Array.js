@@ -173,6 +173,9 @@ if(!Array.prototype.clear) {
 	});
 }
 
+/*
+	@docs	TODO
+*/
 if(!Array.prototype.remove) {
 	Object.defineProperty(Array.prototype, 'remove', {
 		enumerable:		false,
