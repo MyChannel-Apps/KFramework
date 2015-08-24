@@ -104,6 +104,17 @@ var KBank = (new function KBank() {
 	/*
 		@docs	TODO
 	*/
+	this.getAccountKn = function getTotalKn(uid) {
+		if(uid === undefined) {
+			throw 'No UID submitted!';
+		}
+		
+		return parseFloat(_user.getKnuddelAccount().getKnuddelAmount().asNumber().toFixed(2));
+	};
+	
+	/*
+		@docs	TODO
+	*/
 	this.reqKn = function reqKn(uid, kn, callSuccess, callError, reason) {
 		if(uid === undefined) {
 			throw 'No UID submitted!';
