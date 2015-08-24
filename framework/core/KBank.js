@@ -109,6 +109,8 @@ var KBank = (new function KBank() {
 			throw 'No UID submitted!';
 		}
 		
+		var _user = Users.get(parseInt(uid, 10));
+		
 		return parseFloat(_user.getKnuddelAccount().getKnuddelAmount().asNumber().toFixed(2));
 	};
 	
