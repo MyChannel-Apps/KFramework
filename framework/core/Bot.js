@@ -84,6 +84,13 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
+		@docs	TODO
+	*/
+	this.getUser = function getUser() {
+		return _user;
+	};
+	
+	/*
 		@docs	http://www.mychannel-apps.de/documentation/Bot_getOnlineMinutes
 	*/
 	this.getOnlineMinutes = function getOnlineMinutes() {
@@ -308,9 +315,9 @@ var Bot = (new function Bot() {
 			message = message.toString();
 		}
 		
-		if(isTypeOf(message, 'object')) {
+		/*if(isTypeOf(message, 'object')) {
 			message = JSON.format(message);
-		}
+		}*/
 		
 		if (delay) {
             return setTimeout(function publicDelay() {
@@ -360,9 +367,9 @@ var Bot = (new function Bot() {
 			message = message.toString();
 		}
 		
-		if(isTypeOf(message, 'object')) {
+		/*if(isTypeOf(message, 'object')) {
 			message = JSON.format(message);
-		}
+		}*/
 		
 		if (delay) {
             return setTimeout(function privateDelay() {
@@ -375,9 +382,7 @@ var Bot = (new function Bot() {
 					if(isTypeOf(nick, 'User')) {
 						nick.sendPrivateMessage(textFilter+message);
 					} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
-						nick.each(function(n) {
-							Bot.private(n, textFilter+message);
-						});
+						_user.sendPrivateMessage(nick, textFilter+message);
 					} else {
 						var nick = Users.get(nick);
 						if(nick != undefined) {
@@ -396,9 +401,7 @@ var Bot = (new function Bot() {
 				if(isTypeOf(nick, 'User')) {
 					nick.sendPrivateMessage(textFilter+message);
 				} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
-					nick.each(function(n) {
-						Bot.private(n, textFilter+message);
-					});
+					_user.sendPrivateMessage(nick, textFilter+message);
 				} else {
 					var nick = Users.get(nick);
 					if(nick != undefined) {
