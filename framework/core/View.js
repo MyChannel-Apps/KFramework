@@ -74,7 +74,7 @@ function View(name) {
 			break;
 			default:
 				Logger.info('Bad AppContent Mode!');
-				return;
+				return false;
 			break;
 		}
 
@@ -90,11 +90,11 @@ function View(name) {
 			text.newLine();
 			text.append('_2._ Den Mini-Chat nutzen: _°BB>Zum Mini-Chat|http://www.knuddels.de/htmlchat<°_°r°');
 			user.sendPrivateMessage(text);
-			return;
+			return false;
 		}
 		
 		if(!user.isOnlineInChannel() || !user.canSendAppContent(_view) || !user.canShowAppViewMode(_mode)) {
-			return;
+			return false;
 		}
 		
 		user.sendAppContent(_view);
@@ -102,6 +102,8 @@ function View(name) {
 		if(typeof(_send_callback) != 'undefined') {
 			_send_callback(this, user);
 		}
+		
+		return true;
 	};
 	
 	/*
