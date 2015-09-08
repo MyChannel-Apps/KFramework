@@ -25,7 +25,7 @@
 	@docs	http://www.mychannel-apps.de/documentation/ui/color
 */
 
-var Color = {
+var Colors = {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Color_CHANNEL_RED
 	*/
@@ -162,12 +162,12 @@ function KColor(red, green, blue) {
 	};
 	
 	function isConstant() {
-		for(var name in Color) {
+		for(var name in Colors) {
 			if(name == 'decode') {
 				continue;
 			}
 			
-			var _color_instance = Color[name];
+			var _color_instance = Colors[name];
 			
 			if(_color_instance != undefined) {
 				if(_color_instance.getRed() == _red && _color_instance.getGreen() == _green && _color_instance.getBlue() == _blue) {
@@ -180,12 +180,12 @@ function KColor(red, green, blue) {
 	};
 	
 	function getConstant() {
-		for(var name in Color) {
+		for(var name in Colors) {
 			if(name == 'decode') {
 				continue;
 			}
 			
-			var _color_instance = Color[name];
+			var _color_instance = Colors[name];
 			
 			if(_color_instance.getRed() == _red && _color_instance.getGreen() == _green && _color_instance.getBlue() == _blue) {
 				return _color_instance;
