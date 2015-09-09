@@ -513,8 +513,6 @@ var KBank = (new function KBank() {
 	this.getTransit = function getTransit() {
 		return parseFloat(DB.sum('KBank_knuddel'));
 	};
-<<<<<<< HEAD
-=======
 
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_getTransit
@@ -525,7 +523,6 @@ var KBank = (new function KBank() {
 		}
 		return this.getTransit();
 	};
->>>>>>> origin/master
 	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KBank_toString
