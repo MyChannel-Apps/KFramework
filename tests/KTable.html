@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KCode :: KTable</title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="virtual.js"></script>
+		<script type="text/javascript" src="../framework/KFramework.js"></script>
+	</head>
+	<body>
+		<div id="debug"></div>
+		<script type="text/javascript">
+			InvokeLater(function() {
+				var text	= new KCode();
+				
+				var table	= new KTable();
+				
+				var row		= new KRow();
+				row.add(new KCell(100, 'Inhalt 1'));
+				row.add(new KCell(200, 'Inhalt 2'));
+				table.add(row);
+				
+				var row		= new KRow();
+				row.add(new KCell(200, 'Inhalt 3'));
+				table.add(row);
+				
+				text.append(table);
+				
+				document.getElementById('debug').innerHTML = text;
+			});
+		</script>
+	</body>
+</html>
