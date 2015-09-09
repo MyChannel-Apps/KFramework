@@ -93,6 +93,8 @@ function View(name) {
 			return false;
 		}
 		
+		this.setLoadingView();
+		
 		if(!user.isOnlineInChannel() || !user.canSendAppContent(_view) || !user.canShowAppViewMode(_mode)) {
 			return false;
 		}
@@ -104,6 +106,16 @@ function View(name) {
 		}
 		
 		return true;
+	};
+	
+	this.setLoadingView = function setLoadingView() {
+		var config = _view.getLoadConfiguration();
+		config.setEnabled(false);
+		// config.setBackgroundColor();
+		// config.setBackgroundImage();
+		// config.setText();
+		// config.setLoadingIndicatorImage();
+		// config.setForegroundColor();
 	};
 	
 	/*
