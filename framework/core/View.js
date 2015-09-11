@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/bot
+	@docs		http://www.mychannel-apps.de/documentation/core/view
 */
 
 function View(name) {
@@ -31,6 +31,14 @@ function View(name) {
 	var _height			= 100;
 	var _mode			= AppViewMode.Overlay;
 	var _data			= {};
+	var _loading		= {
+		enabled:	true,
+		text:		'Bitte warten...',
+		image:		'http://www.mychannel-apps.de/images/logo-kf.png',
+		foreground:	Color.fromRGB(255, 255, 255),
+		background:	Color.fromRGB(80, 0, 0)
+	};
+	var _document		= '';
 	var _send_callback	= undefined;
 	var _view;
 	var _file;
@@ -46,6 +54,18 @@ function View(name) {
 	
 	this.setMode = function setMode(mode) {
 		_mode = mode;
+	};
+	
+	this.setLoading = function setLoading(state) {
+		this.setLoadingData('enabled', state);
+	};
+	
+	this.setLoadingData = function setLoadingData(name, value) {
+		if(typeof(_loading[name]) == 'undefined') {
+			Logger.warn('Configuration "' + name + '" not exists.');
+		}
+		
+		_loading[name] = value;
 	};
 	
 	this.close = function close(user) {
@@ -64,13 +84,15 @@ function View(name) {
 		switch(_mode) {
 			case AppViewMode.Overlay:
 				this.addString('_view_mode', 'overlay');
-				_file = new HTMLFile(_name + '.html', _data);
-				_view = AppContent.overlayContent(_file, _width, _height);
+				_document	= _name + '.html';
+				_file		= new HTMLFile(_document, _data);
+				_view		= AppContent.overlayContent(_file, _width, _height);
 			break;
 			case AppViewMode.Popup:
 				this.addString('_view_mode', 'popup');
-				_file = new HTMLFile(_name + '.html', _data);
-				_view = AppContent.popupContent(_file, _width, _height);
+				_document	= _name + '.html';
+				_file		= new HTMLFile(_document, _data);
+				_view		= AppContent.popupContent(_file, _width, _height);
 			break;
 			default:
 				Logger.info('Bad AppContent Mode!');
@@ -110,12 +132,14 @@ function View(name) {
 	
 	this.setLoadingView = function setLoadingView() {
 		var config = _view.getLoadConfiguration();
-		config.setEnabled(false);
-		// config.setBackgroundColor();
-		// config.setBackgroundImage();
-		// config.setText();
-		// config.setLoadingIndicatorImage();
-		// config.setForegroundColor();
+		config.setEnabled(_loading.enabled);
+		
+		if(_loading.enabled) {
+			config.setText(_loading.text);
+			config.setBackgroundColor(_loading.background);
+			config.setForegroundColor(_loading.foreground);
+			config.setLoadingIndicatorImage(_loading.image);
+		}
 	};
 	
 	/*
@@ -177,6 +201,27 @@ function View(name) {
 	
 	this.hasObject = function hasObject(key) {
 		return (_data[key] != undefined);
+	};
+	
+	this.toJSON = function toJSON() {
+		return {
+			name:		_name,
+			loading:	_loading,
+			size:	{
+				width:	_width,
+				height:	_height
+			},
+			ui:		{
+				mode:		_mode,
+				view:		_view,
+				file:		_file,
+				document:	_document
+			},
+			data:	_data,
+			functions: {
+				send_callback:	_send_callback
+			}
+		};
 	};
 	
 	this.toString = function toString() {
