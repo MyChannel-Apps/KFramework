@@ -184,9 +184,9 @@ function Cronjob(name, cycle, callback) {
 		instance.changeCycle(cycle);
 		
 		if(DB == undefined) {
-			_crondb		= KnuddelsServer.getPersistence().getObject('_cron_' + _name, {run:0, check:0});
+			var _crondb		= KnuddelsServer.getPersistence().getObject('_cron_' + _name, {run:0, check:0});
 		} else {
-			_crondb		= DB.load('_cron_' + _name, {run:0, check:0});
+			var _crondb		= DB.load('_cron_' + _name, {run:0, check:0});
 		}
 		
 		_last_run		= new Date(parseInt(_crondb.run, 10));
