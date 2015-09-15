@@ -51,7 +51,8 @@ var KFramework = (new function KFramework() {
 		'core/Channel',
 		'core/User',
 		'core/AppStore',
-		'core/View'
+		'core/View',
+		'core/AppInfo'
 		/* 'core/KConfig' */
 	];
 	
