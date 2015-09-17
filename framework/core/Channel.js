@@ -111,18 +111,11 @@ var Channel = (new function KChannel() {
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwner
 	*/
-	this.getOwner = function getOwner() {
+	this.getOwner = function getOwner(index) {
+		index		= (typeof(index) == 'undefined' ? 0 : index);
 		var owners	= this.getOwners();
-		var owner	= undefined;
 		
-		owners.each(function OwnersEach(user, index) {
-			if(user.isOnlineInChannel()) {
-				owner = user;
-				return;
-			}
-		});
-		
-		return owner;
+		return owners[index];
 	};
 	
 	/*
