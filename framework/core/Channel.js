@@ -385,6 +385,14 @@ var Channel = (new function KChannel() {
 	};
 	
 	/*
+		Create a link to join a channel
+	*/
+	this.getLink = function getLink() {
+		var channelName = Channel.getName();
+		return "°>" + channelName + "|/go " + channelName + "|/go +" + channelName + "<°";
+	}
+	
+	/*
 		@docs	http://www.mychannel-apps.de/documentation/Channel_toString
 	*/
 	this.toString = function toString() {
