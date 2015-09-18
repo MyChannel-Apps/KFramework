@@ -24,77 +24,63 @@
 	@author		Florian Berger
 */
 
-var AppInfo = (new function AppInfo()
-{
+var AppInfo = (new function AppInfo() {
     var _info = KnuddelsServer.getAppInfo();
 
-    this.getAppDeveloper = function getAppDeveloper()
-    {
+    this.getAppDeveloper = function getAppDeveloper() {
         return _info.getAppDeveloper();
-    }
+    };
 
-    this.getAppId = function getAppId()
-    {
+    this.getAppId = function getAppId() {
         return _info.getAppId();
-    }
+    };
 
-    this.getAppKey = function getAppKey()
-    {
+    this.getAppKey = function getAppKey() {
         return _info.getAppKey();
-    }
+    };
 
-    this.getAppManagers = function getAppManagers()
-    {
+    this.getAppManagers = function getAppManagers() {
         return _info.getAppManagers();
-    }
+    };
 
-    this.getAppName = function getAppName()
-    {
+    this.getAppName = function getAppName() {
         return _info.getAppName();
-    }
+    };
 
-    this.getAppUid = function getAppUid()
-    {
+    this.getAppUid = function getAppUid() {
         return _info.getAppUid();
-    }
+    };
 
-    this.getAppVersion = function getAppVersion()
-    {
+    this.getAppVersion = function getAppVersion() {
         return _info.getAppVersion();
-    }
+    };
 
-    this.getMaxPayoutKnuddelAmount = function getMaxPayoutKnuddelAmount()
-    {
+    this.getMaxPayoutKnuddelAmount = function getMaxPayoutKnuddelAmount() {
         return _info.getMaxPayoutKnuddelAmount();
-    }
+    };
 
-    this.getRootAppUid = function getRootAppUid()
-    {
+    this.getRootAppUid = function getRootAppUid() {
         return _info.getRootAppUid();
-    }
+    };
 
-    this.getTaxRate = function getTaxRate()
-    {
+    this.getTaxRate = function getTaxRate() {
         return _info.getTaxRate();
-    }
+    };
 
-    this.getTotalTaxKnuddelAmount = function getTotalTaxKnuddelAmount()
-    {
+    this.getTotalTaxKnuddelAmount = function getTotalTaxKnuddelAmount() {
         return _info.getTotalTaxKnuddelAmount();
-    }
+    };
 
-    this.stopApp = function (message, logMessage)
-    {
+    this.stopApp = function (message, logMessage) {
         Logger.info('AppInfo.stopApp(message, logMessage) is DEPRECATED');
 
         KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance().stopApp(message, logMessage);
-    }
+    };
 
-    this.updateApp = function (message, logMessage)
-    {
+    this.updateApp = function (message, logMessage) {
         Logger.info('AppInfo.updateApp(message, logMessage) is DEPRECATED');
 
         KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance().updateApp(message, logMessage);
-    }
-
+    };
+	
 }());
