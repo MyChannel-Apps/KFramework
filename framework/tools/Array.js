@@ -181,10 +181,34 @@ if(!Array.prototype.remove) {
 		enumerable:		false,
 		configurable:	false,
 		writable:		false,
-		value: function(removeElement) {
+		value: function remove(removeElement) {
 			this.splice(this.indexOf(removeElement), 1);
-			
 			return this;
+		}
+	});
+}
+
+/*
+	@docs	TODO
+*/
+if(!Array.prototype.count) {
+	Object.defineProperty(Array.prototype, 'count', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function count(countElement) {
+			var cnt = 0;
+			
+			this.each(function countEach(element) {
+				if(element.equals && countElement.equals && element.equals(countElement)) {
+					++cnt;
+				}
+				
+				if(element === counteElement) {
+					++cnt;
+				}
+			});		
+			return cnt;
 		}
 	});
 }
