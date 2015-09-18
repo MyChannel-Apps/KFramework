@@ -204,7 +204,7 @@ if(!Array.prototype.count) {
 					++cnt;
 				}
 				
-				if(element === counteElement) {
+				if(element === countElement) {
 					++cnt;
 				}
 			});		
