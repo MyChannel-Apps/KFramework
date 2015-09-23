@@ -98,14 +98,14 @@ function KCode() {
 		}
 		
 		if(_mobilefix) {
-			_buffer.push('r');
+			//_buffer.push('r');
 		}
 		
 		_buffer.push('°');
 		
 		// DEPRECATED!
 		if(!_mobilefix) {
-			_buffer.push('#');
+			//_buffer.push('#');
 		}
 		
 		return this;		
