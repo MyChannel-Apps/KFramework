@@ -26,7 +26,7 @@
 
 var AppInfo = (new function AppInfo() {
     var _info			= KnuddelsServer.getAppInfo();
-	var _root_instance	= KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance();
+	var _root_instance	= undefined;
 	
     this.getAppDeveloper = function getAppDeveloper() {
         return _info.getAppDeveloper();
@@ -111,14 +111,24 @@ var AppInfo = (new function AppInfo() {
     this.stopApp = function stopApp(message, logMessage) {
         Logger.info('AppInfo.stopApp(message, logMessage) is DEPRECATED');
 
+		this.setRootInstance();
         _root_instance.stopApp(message, logMessage);
     };
 
     this.updateApp = function updateApp(message, logMessage) {
         Logger.info('AppInfo.updateApp(message, logMessage) is DEPRECATED');
 
+		this.setRootInstance();
         _root_instance.updateApp(message, logMessage);
     };
+	
+	this.setRootInstance = function setRootInstance() {
+		if(typeof(_root_instance) != 'undefined') {
+			return;
+		}
+		
+		_root_instance = KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance();
+	};
 	
 	this.toString = function toString() {
 		return '[KFramework AppInfo]';
