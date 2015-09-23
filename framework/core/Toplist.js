@@ -29,6 +29,15 @@ var Top = (new function Top() {
 	var _toplists	= [];
 	var _instance	= this;
 	var _events		= [];
+	var _size		= {
+		width:	476,
+		height:	522
+	};
+	
+	this.setSize = function setSize(width, height) {
+		_size.width		= width;
+		_size.height	= height;
+	};
 	
 	this.add = function add(toplist) {
 		_toplists.push(toplist);
@@ -94,7 +103,6 @@ var Top = (new function Top() {
 		}
 		
 		if(!block) {
-			Logger.info(JSON.stringify(data));
 			this.handleCommand(user, params, event);
 		}
 	};
@@ -173,7 +181,7 @@ var Top = (new function Top() {
 		var limit	= 20;
 		var entries	= toplist.getEntries(limit, page);
 		var view	= new View('KFToplist');
-		view.setSize(476, 522);
+		view.setSize(_size.width, _size.height);
 		//view.setMode(AppViewMode.Popup);
 
 		entries.getData().each(function(entry, index) {
