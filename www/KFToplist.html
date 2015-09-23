@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>KFramework Tipliste</title>
+		<meta charset="UTF-8" />
+		<style type="text/css">
+			::selection, ::-webkit-selection, *::selection {
+				background: transparent;
+				background: rgba(255, 255, 255, 0);
+			}
+			
+			* {
+				margin: 0;
+				box-sizing: border-box;
+				cursor: default;
+				outline: none !important;
+				-webkit-overflow-scrolling: touch;
+				-webkit-font-smoothing: antialiased;
+				user-select: none;
+			}
+
+			html, body {
+				font-family: Arial;
+				font-size: 14px;
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			body {
+				font-smoothing: antialiased;
+				font-smooth: always;
+				text-rendering: optimizeLegibility;
+				padding: 20px;
+			}
+			
+			section {
+				height: 100%;
+				padding: 0 0 75px 0;
+				background: #DEDEFF;
+				box-shadow: 0 0 5px #000000;
+				border-top: 1px solid #FFFFFF;
+				border-radius: 10px 10px 0 0;
+			}
+			
+			section header {
+				text-align: center;
+				font-weight: bold;
+				margin: 5px 20px 0 20px;
+				padding: 5px;
+				border-bottom: 1px solid #B2B2CC;
+			}
+			
+			section article {
+				height: 100%;
+				overflow-x: hidden;
+				overflow-y: auto;
+			}
+			
+			section article table {
+				width: 100%;
+				padding: 5px 20px 0 20px;
+			}
+			
+			section article table .left {
+				text-align: left;
+			}
+			
+			section article table .middle {
+				text-align: center;
+			}
+			
+			section article table .right {
+				text-align: right;
+			}
+			
+			section article table strong a[data-action="nickname"] {
+				color: #0000FF;
+			}
+			
+			section article table a[data-action="nickname"]:hover {
+				color: #FF0000;
+				text-decoration: underline;
+				cursor: pointer;
+			}
+			
+			footer {
+				position: fixed;
+				left: 0;
+				right: 0;
+				bottom: -30px;
+				height: 100px;
+				box-shadow: inset 0 -140px 15px -50px #FFFFFF;
+			}
+			
+			footer p {
+				display: block;
+				background: #FFFFFF;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 30px;
+				padding: 0 0 70px 0;
+				text-align: center;
+			}
+			
+			footer p span.hide {
+				visibility: hidden;
+			}
+			
+			footer p span {
+				font-weight: bold;
+				font-size: 20px;
+				color: #0000FF;
+				cursor: pointer;
+			}
+			
+			footer p button {
+				border: 1px solid #000000;
+				border-radius: 5px;
+				padding: 5px 20px 5px 20px;
+				font-size: 13px;
+				font-weight: bold;
+				background: #B1BDEF;
+				color: #FFFFFF;
+				text-shadow: 1px 1px 1px #000000, -1px -1px 1px #000000;
+				cursor: pointer;
+				text-decoration: none;
+				background: #BAC2FC;
+			}
+
+			footer p button:active {
+				background:				#2547B2;
+			}
+
+			footer p button {
+				background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pg0KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPg0KCTxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZC11Y2dnLWdlbmVyYXRlZCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4NCgkJPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2IxYmVmNiIgc3RvcC1vcGFjaXR5PSIxIi8+DQoJCTxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjNmU4NGRiIiBzdG9wLW9wYWNpdHk9IjEiLz4NCgkJPHN0b3Agb2Zmc2V0PSI1MSUiIHN0b3AtY29sb3I9IiMyNTQ3YjIiIHN0b3Atb3BhY2l0eT0iMSIvPg0KCQk8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNTQ3YjIiIHN0b3Atb3BhY2l0eT0iMSIvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4NCjwvc3ZnPg==');
+				background: -moz-linear-gradient(top, #b1bef6 0%, #6e84db 50%, #2547b2 51%, #2547b2 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b1bef6), color-stop(50%,#6e84db), color-stop(51%,#2547b2), color-stop(100%,#2547b2));
+				background: -webkit-linear-gradient(top, #b1bef6 0%,#6e84db 50%,#2547b2 51%,#2547b2 100%);
+				background: -o-linear-gradient(top, #b1bef6 0%,#6e84db 50%,#2547b2 51%,#2547b2 100%);
+				background: -ms-linear-gradient(top, #b1bef6 0%,#6e84db 50%,#2547b2 51%,#2547b2 100%);
+				background: linear-gradient(to bottom, #b1bef6 0%,#6e84db 50%,#2547b2 51%,#2547b2 100%);
+			}
+
+			footer p button:hover {
+				background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pg0KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPg0KCTxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZC11Y2dnLWdlbmVyYXRlZCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4NCgkJPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2JhYzJmYyIgc3RvcC1vcGFjaXR5PSIxIi8+DQoJCTxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjOGU5OWVjIiBzdG9wLW9wYWNpdHk9IjEiLz4NCgkJPHN0b3Agb2Zmc2V0PSI1MSUiIHN0b3AtY29sb3I9IiM0MDRmYzIiIHN0b3Atb3BhY2l0eT0iMSIvPg0KCQk8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MDRmYzIiIHN0b3Atb3BhY2l0eT0iMSIvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4NCjwvc3ZnPg==');
+				background: -moz-linear-gradient(top, #bac2fc 0%, #8e99ec 50%, #404fc2 51%, #404fc2 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bac2fc), color-stop(50%,#8e99ec), color-stop(51%,#404fc2), color-stop(100%,#404fc2));
+				background: -webkit-linear-gradient(top, #bac2fc 0%,#8e99ec 50%,#404fc2 51%,#404fc2 100%);
+				background: -o-linear-gradient(top, #bac2fc 0%,#8e99ec 50%,#404fc2 51%,#404fc2 100%);
+				background: -ms-linear-gradient(top, #bac2fc 0%,#8e99ec 50%,#404fc2 51%,#404fc2 100%);
+				background: linear-gradient(to bottom, #bac2fc 0%,#8e99ec 50%,#404fc2 51%,#404fc2 100%);
+			}
+
+			footer p button:active {
+				background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pg0KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPg0KCTxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZC11Y2dnLWdlbmVyYXRlZCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4NCgkJPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1NDdiMiIgc3RvcC1vcGFjaXR5PSIxIi8+DQoJCTxzdG9wIG9mZnNldD0iNDklIiBzdG9wLWNvbG9yPSIjMjU0N2IyIiBzdG9wLW9wYWNpdHk9IjEiLz4NCgkJPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM2ZTg0ZGIiIHN0b3Atb3BhY2l0eT0iMSIvPg0KCQk8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiMWJlZjYiIHN0b3Atb3BhY2l0eT0iMSIvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4NCjwvc3ZnPg==');
+				background: -moz-linear-gradient(top, #2547b2 0%, #2547b2 49%, #6e84db 50%, #b1bef6 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2547b2), color-stop(49%,#2547b2), color-stop(50%,#6e84db), color-stop(100%,#b1bef6));
+				background: -webkit-linear-gradient(top, #2547b2 0%,#2547b2 49%,#6e84db 50%,#b1bef6 100%);
+				background: -o-linear-gradient(top, #2547b2 0%,#2547b2 49%,#6e84db 50%,#b1bef6 100%);
+				background: -ms-linear-gradient(top, #2547b2 0%,#2547b2 49%,#6e84db 50%,#b1bef6 100%);
+				background: linear-gradient(to bottom, #2547b2 0%,#2547b2 49%,#6e84db 50%,#b1bef6 100%);
+			}
+		</style>
+		<!--[if gte IE 9]>
+			<style type="text/css">
+				footer p button, footer p button:hover, footer p button:active {
+					filter: none;
+				}
+			</style>
+		<![endif]-->
+	</head>
+	<body>
+		<section>
+			<header>
+				Topliste - <label></label>
+			</header>
+			<article>
+				<table>
+					<thead>
+						<tr>
+							<th class="left">Platz</th>
+							<th class="middle">Nickname</th>
+							<th class="right">Punkte</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</article>
+		</section>
+		<footer>
+			<p>
+				<span data-action="previous">◀◀</span> <button data-action="close">OK</button> <span data-action="next">▶▶</span>
+			</p>
+		</footer>
+		<script type="text/javascript">
+			Client.includeJS('/apps/api/jquery.min.js');
+			
+			var Toplist		= Toplist || {};
+			var _watcher	= setInterval(function InvokeLater() {
+				if(typeof(jQuery) != 'undefined') {
+					clearInterval(_watcher);
+					
+					Toplist = (new function($) {
+						var _instance			= this;
+						var _name				= 'Toplist';
+						var _table				= $('section article table tbody');
+						var _previous			= $('footer p span[data-action="previous"]');
+						var _next				= $('footer p span[data-action="next"]');
+						var _title				= $('section header label');
+						var _data				= {
+							data:	[],
+							limit:	20,
+							page:	1,
+							pages:	1
+						};
+						
+						this.getName = function getName() {
+							return _name;
+						};
+						
+						this.init = function init() {
+							document.addEventListener('eventReceived', _instance.onReceive);
+							
+							if(Client.pageData != undefined) {
+								for(var index in Client.pageData) {
+									var key		= index;
+									var value	= Client.pageData[index];
+									Client.onSendEventReceived(key, JSON.stringify(value));
+								}
+							}
+							
+							$(document.body).on('click', '[data-action]', function(event) {
+								var action	= $(this).data('action');
+								var value	= $(this).data('value');
+								
+								switch(action) {
+									case 'nickname':
+										Client.executeSlashCommand('/w ' + value);
+									break;
+									case 'close':
+										Client.sendEvent('toplist', {
+											action:	'close',
+											name:	_data.name,
+											page:	page
+										});
+									break;
+									case 'next':
+									case 'previous':
+										var page = _data.page;
+										
+										if(action == 'next') {
+											++page;
+										} else if(action == 'previous') {
+											--page;
+										}
+										
+										Client.sendEvent('toplist', {
+											action:	'view',
+											name:	_data.name,
+											page:	page
+										});
+									break;
+									default:
+										alert('Diese Funktion "' + action + '" steht derzeit noch nicht zur Verfügung.');
+									break;
+								}
+							});
+							
+							Client.sendEvent('toplist', {
+								action:		'init',
+								ClientType: Client.getClientType(),
+								AppID:		Client.getAppId(),
+								Version:	Client.version,
+								Class:		_name
+							});
+						};
+						
+						this.onReceive = function onReceive(event) {
+							try {
+								var key		= event.eventKey;
+								var data	= event.eventData;
+								
+								switch(key) {
+									case 'close':
+										Client.close();
+									break;
+									case 'data':
+										_data.data = data;
+										_instance.clearTable();
+										
+										for(var index in data) {
+											var entry = data[index];
+											
+											_instance.addRow([{
+												content:	entry.place,
+												class:		'left',
+												bold:		true
+											},{
+												content:	entry.nickname,
+												class:		'left',
+												bold:		entry.bolded,
+												nickname:	true
+											},{
+												content:	entry.points,
+												class:		'right'
+											}]);
+										}
+										
+										_instance.wasChanged();
+									break;
+									case 'name':
+										_data.name = data;
+										_instance.wasChanged();
+									break;
+									case 'limit':
+										_data.limit = data;
+										_instance.wasChanged();
+									break;
+									case 'page':
+										_data.page = data;
+										_instance.wasChanged();
+									break;
+									case 'pages':
+										_data.pages = data;
+										_instance.wasChanged();
+									break;
+								}
+							} catch(e) {
+								Client.sendEvent('exception', {
+									message:	e.message,
+									stack:		e.stack
+								});
+							}
+						};
+						
+						this.wasChanged = function wasChanged() {
+							if(_data.pages <= 1 || _data.page <= 1) {
+								_previous.addClass('hide');
+							} else {
+								_previous.removeClass('hide');							
+							}
+							
+							if(_data.pages <= 1 || _data.page > _data.pages) {
+								_next.addClass('hide');
+							} else {
+								_next.removeClass('hide');
+							}
+							
+							_title.html(_data.name);
+						};
+						
+						this.clearTable = function clearTable() {
+							_table.html('');
+						};
+						
+						this.addRow = function addRow(columns) {
+							var row = $('<tr />');
+							
+							for(var index in columns) {
+								var column	= columns[index];
+								var element	= $('<td />');
+								
+								if(typeof(column.class) != 'undefined') {
+									element.addClass(column.class);
+								}
+								
+								if(typeof(column.content) != 'undefined') {
+									if(typeof(column.nickname) != 'undefined' && column.nickname) {
+										column.content = '<a data-action="nickname" data-value="' + column.content + '">' + column.content + '</a>';
+									}
+									
+									if(typeof(column.bold) != 'undefined' && column.bold) {
+										column.content = '<strong>' + column.content + '</strong>';
+									}
+									
+									element.html(column.content);
+								}
+								
+								row.append(element);
+							}
+							
+							_table.append(row);
+						};
+						
+						this.zeroize = function zeroize(number) {
+							number = parseInt(number);
+							
+							if(number <= 9) {
+								return '0' + number;
+							}
+							
+							return number;
+						};
+						
+						this.toJSON = function toJSON() {
+							return {};
+						};
+						
+						this.toString = function toString() {
+							return this.getName();
+						};
+						
+						this.init();
+					}(jQuery));
+				}
+			}, 500);
+		</script>
+	</body>
+</html>
