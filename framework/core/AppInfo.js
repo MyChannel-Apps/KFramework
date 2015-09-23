@@ -32,36 +32,72 @@ var AppInfo = (new function AppInfo() {
         return _info.getAppDeveloper();
     };
 
-    this.getAppId = function getAppId() {
+    this.getID = function getID() {
         return _info.getAppId();
     };
+	
+    this.getAppId = function getAppId() {
+        Logger.info('AppInfo.getAppId() is DEPRECATED please use AppInfo.getID()');
+		
+        return this.getID();
+    };
 
-    this.getAppKey = function getAppKey() {
+    this.getKey = function getKey() {
         return _info.getAppKey();
+    };
+	
+    this.getAppKey = function getAppKey() {
+        Logger.info('AppInfo.getAppKey() is DEPRECATED please use AppInfo.getKey()');
+		
+        return this.getKey();
     };
 
     this.getAppManagers = function getAppManagers() {
         return _info.getAppManagers();
     };
 
-    this.getAppName = function getAppName() {
+    this.getName = function getName() {
         return _info.getAppName();
     };
 
-    this.getAppUid = function getAppUid() {
+    this.getAppName = function getAppName() {
+        Logger.info('AppInfo.getAppName() is DEPRECATED please use AppInfo.getName()');
+		
+        return this.getName();
+    };
+
+    this.getUID = function getUID() {
         return _info.getAppUid();
     };
 
-    this.getAppVersion = function getAppVersion() {
+    this.getAppUid = function getAppUid() {
+        Logger.info('AppInfo.getAppUid() is DEPRECATED please use AppInfo.getUID()');
+		
+        return this.getUID();
+    };
+
+    this.getVersion = function getVersion() {
         return _info.getAppVersion();
+    };
+
+    this.getAppVersion = function getAppVersion() {
+        Logger.info('AppInfo.getAppVersion() is DEPRECATED please use AppInfo.getVersion()');
+		
+        return this.getVersion();
     };
 
     this.getMaxPayoutKnuddelAmount = function getMaxPayoutKnuddelAmount() {
         return _info.getMaxPayoutKnuddelAmount();
     };
 
-    this.getRootAppUid = function getRootAppUid() {
+    this.getRootUID = function getRootUID() {
         return _info.getRootAppUid();
+    };
+
+    this.getRootAppUid = function getRootAppUid() {
+        Logger.info('AppInfo.getRootAppUid() is DEPRECATED please use AppInfo.getRootUID()');
+		
+        return _info.getRootUID();
     };
 
     this.getTaxRate = function getTaxRate() {
