@@ -25,8 +25,9 @@
 */
 
 var AppInfo = (new function AppInfo() {
-    var _info = KnuddelsServer.getAppInfo();
-
+    var _info			= KnuddelsServer.getAppInfo();
+	var _root_instance	= KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance();
+	
     this.getAppDeveloper = function getAppDeveloper() {
         return _info.getAppDeveloper();
     };
@@ -71,16 +72,19 @@ var AppInfo = (new function AppInfo() {
         return _info.getTotalTaxKnuddelAmount();
     };
 
-    this.stopApp = function (message, logMessage) {
+    this.stopApp = function stopApp(message, logMessage) {
         Logger.info('AppInfo.stopApp(message, logMessage) is DEPRECATED');
 
-        KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance().stopApp(message, logMessage);
+        _root_instance.stopApp(message, logMessage);
     };
 
-    this.updateApp = function (message, logMessage) {
+    this.updateApp = function updateApp(message, logMessage) {
         Logger.info('AppInfo.updateApp(message, logMessage) is DEPRECATED');
 
-        KnuddelsServer.getAppAccess().getOwnAppInstance().getRootInstance().updateApp(message, logMessage);
+        _root_instance.updateApp(message, logMessage);
     };
 	
+	this.toString = function toString() {
+		return '[KFramework AppInfo]';
+	};
 }());
