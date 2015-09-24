@@ -32,6 +32,8 @@
 function KCountdown() {
 	var _properties	= {};
 	
+	var timer = null;
+	
 	/*
 		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setTime
 	*/
@@ -50,6 +52,14 @@ function KCountdown() {
 	
 	this.setText = function setText(text) {
 		_properties.timeUpText = text;
+		return this;		
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.setCallback = function setCallback(callback) {
+		_properties.callback = callback;
 		return this;		
 	};
 	
@@ -73,6 +83,10 @@ function KCountdown() {
 		
 		buffer.append('<°');
 		
+		if(isTypeOf(_properties.callback, 'function') && timer === null) {
+			timer = setTimeout(_properties.callback, _properties.time);
+		}
+	
 		return buffer.toString();
 	};
 }
