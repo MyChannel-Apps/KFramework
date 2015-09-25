@@ -335,6 +335,7 @@ function Toplist(key, categorys) {
 		_payout_cron.changeCycle(_payout_cycle);*/
 	};
 	
+	/*
 	this.executeCron = function executeCron() {
 		var users = [];
 		
@@ -386,7 +387,7 @@ function Toplist(key, categorys) {
 							}
 
 							KBank.addKn(user.getID(), _prices[index]);
-						}*/
+						}*
 						
 						// @ToDo enable/disable deletion
 						DB.delete(_key, user);
@@ -395,7 +396,7 @@ function Toplist(key, categorys) {
 				}, 5000);
 			}
 		});
-	};
+	};*/
 	
 	this.getPrices = function getPrices() {
 		return _prices;
