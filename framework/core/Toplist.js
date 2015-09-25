@@ -191,7 +191,8 @@ var Top = (new function Top() {
 				place: 		place,
 				nickname:	entry.getUser().getNick(),
 				bolded:		entry.getUser().getID() == user.getID(),
-				points:		entry.getValue()
+				points:		entry.getValue(),
+				price:		(typeof(_prices[place]) != 'undefined' ? _prices[place] : {})
 			});
 		});
 		
@@ -233,6 +234,21 @@ var Top = (new function Top() {
 					}
 					
 					text.append('°>' + entry.nickname.escapeKCode() + '|/w "<°');
+					
+					if(typeof(_prices[place]) != 'undefined') {
+						var price = _prices[place];
+						
+						text.append(' (');
+						switch(price.type) {
+							case 'knuddel':
+								text.append('°>sm_classic_00.gif<° ' + price.value + ' Knuddel');
+							break;
+							case 'code':
+								text.append(price.value + ' °>features/codegenerator/code_001...mw_30.mh_15.png<°');
+							break;
+						}
+						text.append(')');
+					}
 					
 					if(entry.bolded) {
 						text.append('_°r°');
@@ -276,6 +292,7 @@ var Top = (new function Top() {
 function Toplist(key, categorys) {
 	var _key		= '';
 	var _categorys	= [];
+	var _prices		= [];
 	
 	this.init = function init(key, categorys) {
 		_key		= key;
@@ -295,6 +312,17 @@ function Toplist(key, categorys) {
 		});
 		
 		return name.trim();
+	};
+	
+	this.getPrices = function getPrices() {
+		return _prices;
+	};
+	
+	this.addPrice = function addPrice(type, value) {
+		_prices.push({
+			type:	type,
+			value:	value
+		});
 	};
 	
 	this.getCategorys = function getCategorys() {
@@ -322,7 +350,8 @@ function Toplist(key, categorys) {
 	this.toJSON = function toJSON() {
 		return {
 			key:		_key,
-			categorys:	_categorys
+			categorys:	_categorys,
+			prices:		_prices
 		};
 	};
 	
