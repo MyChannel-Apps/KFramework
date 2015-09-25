@@ -327,21 +327,21 @@ function Toplist(key, categorys) {
 	};
 	
 	this.createCron = function createCron() {
-		if(typeof(_payout_cron) == 'undefined') {
+		/*if(typeof(_payout_cron) == 'undefined') {
 			_payout_cron = new Cronjob('::Toplist:' + _key, _payout_cycle, this.executeCron);
 			return;
 		}
 		
-		_payout_cron.changeCycle(_payout_cycle);
+		_payout_cron.changeCycle(_payout_cycle);*/
 	};
 	
-	this.executeCron = function executeCron() {		
+	this.executeCron = function executeCron() {
 		var users = [];
 		
 		UserPersistenceNumbers.each(_key, function(user) {
 			users.push(user);
 		}, {
-			onEnd:			function() {
+			onEnd: function() {
 				var index = 0;
 				
 				var watcher = setInterval(function() {
