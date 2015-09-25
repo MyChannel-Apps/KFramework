@@ -394,6 +394,7 @@ function Toplist(key, categorys) {
 					}
 				}, 5000);
 			}
+		});
 	};
 	
 	this.getPrices = function getPrices() {
