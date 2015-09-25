@@ -65,6 +65,10 @@ function View(name) {
 			Logger.warn('Configuration "' + name + '" not exists.');
 		}
 		
+		if(value instanceof KImage) {
+			value = value.toString(true);
+		}
+		
 		_loading[name] = value;
 	};
 	
