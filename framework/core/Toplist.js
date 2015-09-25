@@ -290,14 +290,17 @@ var Top = (new function Top() {
 });
 
 function Toplist(key, categorys) {
-	var _key		= '';
-	var _categorys	= [];
-	var _prices		= [];
+	var _key			= '';
+	var _categorys		= [];
+	var _prices			= [];
+	var _payout_cycle	= undefined;
+	var _payout_cron	= undefined;
 	
 	this.init = function init(key, categorys) {
 		_key		= key;
 		_categorys	= categorys;
 		Top.add(this);
+		this.createCron();
 	};
 	
 	this.getKey = function getKey() {
@@ -312,6 +315,85 @@ function Toplist(key, categorys) {
 		});
 		
 		return name.trim();
+	};
+	
+	this.setPayout = function setPayout(cycle) {
+		_payout_cycle = cycle;
+		this.createCron();
+	};
+	
+	this.getPayout = function getPayout() {
+		return _payout_cycle;
+	};
+	
+	this.createCron = function createCron() {
+		if(typeof(_payout_cron) == 'undefined') {
+			_payout_cron = new Cronjob('::Toplist:' + _key, _payout_cycle, this.executeCron);
+			return;
+		}
+		
+		_payout_cron.changeCycle(_payout_cycle);
+	};
+	
+	this.executeCron = function executeCron() {		
+		var users = [];
+		
+		UserPersistenceNumbers.each(_key, function(user) {
+			users.push(user);
+		}, {
+			onEnd:			function() {
+				var index = 0;
+				
+				var watcher = setInterval(function() {
+					for(var i = 0; i < 100; ++i) {
+						var user	= users.shift();
+						var won		= 0;
+						var value	= DB.load(_key, 0, user);
+						var text	= new KCode();
+						
+						if(users.size() == 0 || typeof(user) == 'undefined') {
+							clearInterval(watcher);
+						}
+						
+						text.append('Hallo _' + user.getProfileLink() + '_,');
+						text.newLine();
+						/*
+						if(typeof(_prices[index]) == 'undefined') {
+							user.post('°BB°' + KnuddelsServer.getAppName() + ' Topliste°r°: ' + _instance.getName(),
+							
+							'Hallo _$NICKNAME,
+							
+							_°##°Du hast letze Woche _Platz $PLACE _bei MyCloud mit _$POINTS Litern_ gemacht.'.formater({
+								NICKNAME:	user.getNick(),
+								PLACE:		index + 1,
+								POINTS:		value
+							}));
+						} else {
+							if(index == 0) {
+								user.post('°BB°' + KnuddelsServer.getAppName() + ' Topliste°r°: ' + _instance.getName(), 'Hallo _$NICKNAME, _°##°Du hast letze Woche _Platz $PLACE _bei MyCloud mit _$POINTS Litern_ gemacht und erhälst dafür _°>sm_classic_00.gif<r° $KNUDDEL Knuddel_ und einen _SmileyCode_ als Gewinn.°#°Der SmileyCode wird in den nächsten Stunden an deinen Nicknamen übermittelt.°##°Glückwunsch!'.formater({
+									NICKNAME:	user.getNick(),
+									PLACE:		index + 1,
+									POINTS:		Format(value),
+									KNUDDEL:	Format(_prices[index], 0)
+								}));
+							} else {
+								user.post('°BB°' + KnuddelsServer.getAppName() + ' Topliste°r°: ' + _instance.getName(), 'Hallo _$NICKNAME, _°##°Du hast letze Woche _Platz $PLACE _bei MyCloud mit _$POINTS Litern_ gemacht und erhälst dafür _°>sm_classic_00.gif<r° $KNUDDEL Knuddel_ als Gewinn.°##°Glückwunsch!'.formater({
+									NICKNAME:	user.getNick(),
+									PLACE:		index + 1,
+									POINTS:		Format(value),
+									KNUDDEL:	Format(_prices[index], 0)
+								}));
+							}
+
+							KBank.addKn(user.getID(), _prices[index]);
+						}*/
+						
+						// @ToDo enable/disable deletion
+						DB.delete(_key, user);
+						++index;
+					}
+				}, 5000);
+			}
 	};
 	
 	this.getPrices = function getPrices() {
