@@ -91,14 +91,25 @@ var Top = (new function Top() {
 					user.sendEvent('close', block);
 					this.fireEvent('onClose', user, data);				
 				break;
+				case 'view':
+					if(typeof(data.name) != 'undefined') {
+						params += data.name;
+			
+						if(typeof(data.page) != 'undefined') {
+							params += ':';
+							params += data.page;
+							event = true;
+						}
+					}
+				break;				
 			}
 		} else if(typeof(data.name) != 'undefined') {
 			params += data.name;
 			
 			if(typeof(data.page) != 'undefined') {
-				params += ':';						
+				params += ':';
 				params += data.page;
-				event = true;						
+				event = true;
 			}
 		}
 		
@@ -181,6 +192,7 @@ var Top = (new function Top() {
 		var limit	= 20;
 		var entries	= toplist.getEntries(limit, page);
 		var view	= new View('KFToplist');
+		var prices	= toplist.getPrices();
 		view.setSize(_size.width, _size.height);
 		//view.setMode(AppViewMode.Popup);
 
@@ -192,7 +204,7 @@ var Top = (new function Top() {
 				nickname:	entry.getUser().getNick(),
 				bolded:		entry.getUser().getID() == user.getID(),
 				points:		entry.getValue(),
-				price:		(typeof(_prices[place]) != 'undefined' ? _prices[place] : {})
+				price:		(typeof(prices[place - 1]) != 'undefined' ? prices[place - 1] : {})
 			});
 		});
 		
@@ -235,8 +247,12 @@ var Top = (new function Top() {
 					
 					text.append('°>' + entry.nickname.escapeKCode() + '|/w "<°');
 					
-					if(typeof(_prices[place]) != 'undefined') {
-						var price = _prices[place];
+					if(entry.bolded) {
+						text.append('_°r°');
+					}
+					
+					if(typeof(prices[entry.place - 1]) != 'undefined') {
+						var price = prices[entry.place - 1];
 						
 						text.append(' (');
 						switch(price.type) {
@@ -250,12 +266,8 @@ var Top = (new function Top() {
 						text.append(')');
 					}
 					
-					if(entry.bolded) {
-						text.append('_°r°');
-					}
-					
 					text.append('     ');
-					text.append(entry.points);
+					text.append(entry.points.toFixed(2));
 				});
 			}
 			
@@ -291,10 +303,12 @@ var Top = (new function Top() {
 
 function Toplist(key, categorys) {
 	var _key			= '';
+	var _instance		= this;
 	var _categorys		= [];
 	var _prices			= [];
 	var _payout_cycle	= undefined;
 	var _payout_cron	= undefined;
+	var _payout_remove	= false;
 	
 	this.init = function init(key, categorys) {
 		_key		= key;
@@ -317,8 +331,9 @@ function Toplist(key, categorys) {
 		return name.trim();
 	};
 	
-	this.setPayout = function setPayout(cycle) {
-		_payout_cycle = cycle;
+	this.setPayout = function setPayout(cycle, remove) {
+		_payout_cycle	= cycle;
+		_payout_remove	= remove;
 		this.createCron();
 	};
 	
@@ -327,76 +342,110 @@ function Toplist(key, categorys) {
 	};
 	
 	this.createCron = function createCron() {
-		/*if(typeof(_payout_cron) == 'undefined') {
+		if(typeof(_payout_cron) == 'undefined' && typeof(_payout_cycle) != 'undefined') {
 			_payout_cron = new Cronjob('::Toplist:' + _key, _payout_cycle, this.executeCron);
 			return;
 		}
 		
-		_payout_cron.changeCycle(_payout_cycle);*/
+		if(typeof(_payout_cycle) != 'undefined') {
+			_payout_cron.changeCycle(_payout_cycle);
+		}
 	};
 	
-	/*
+	
 	this.executeCron = function executeCron() {
-		var users = [];
+		var entries = [];
 		
 		UserPersistenceNumbers.each(_key, function(user) {
-			users.push(user);
+			entries.push({
+				user:	user,
+				place:	UserPersistenceNumbers.getPosition(_key, user, {
+					ascending: false
+				})
+			});
 		}, {
 			onEnd: function() {
-				var index = 0;
-				
+				var index	= 0;
 				var watcher = setInterval(function() {
 					for(var i = 0; i < 100; ++i) {
-						var user	= users.shift();
-						var won		= 0;
+						var entry	= entries.shift();
+						
+						if(typeof(entry) == 'undefined') {
+							clearInterval(watcher);
+							return;
+						}
+						
+						var user	= entry.user;
+						var place	= entry.place;
+						
+						if(typeof(user) == 'undefined') {
+							clearInterval(watcher);
+							return;
+						}
+						
 						var value	= DB.load(_key, 0, user);
 						var text	= new KCode();
 						
-						if(users.size() == 0 || typeof(user) == 'undefined') {
-							clearInterval(watcher);
-						}
-						
 						text.append('Hallo _' + user.getProfileLink() + '_,');
 						text.newLine();
-						/*
-						if(typeof(_prices[index]) == 'undefined') {
-							user.post('°BB°' + KnuddelsServer.getAppName() + ' Topliste°r°: ' + _instance.getName(),
-							
-							'Hallo _$NICKNAME,
-							
-							_°##°Du hast letze Woche _Platz $PLACE _bei MyCloud mit _$POINTS Litern_ gemacht.'.formater({
-								NICKNAME:	user.getNick(),
-								PLACE:		index + 1,
-								POINTS:		value
-							}));
-						} else {
-							if(index == 0) {
-								user.post('°BB°' + KnuddelsServer.getAppName() + ' Topliste°r°: ' + _instance.getName(), 'Hallo _$NICKNAME, _°##°Du hast letze Woche _Platz $PLACE _bei MyCloud mit _$POINTS Litern_ gemacht und erhälst dafür _°>sm_classic_00.gif<r° $KNUDDEL Knuddel_ und einen _SmileyCode_ als Gewinn.°#°Der SmileyCode wird in den nächsten Stunden an deinen Nicknamen übermittelt.°##°Glückwunsch!'.formater({
-									NICKNAME:	user.getNick(),
-									PLACE:		index + 1,
-									POINTS:		Format(value),
-									KNUDDEL:	Format(_prices[index], 0)
-								}));
-							} else {
-								user.post('°BB°' + KnuddelsServer.getAppName() + ' Topliste°r°: ' + _instance.getName(), 'Hallo _$NICKNAME, _°##°Du hast letze Woche _Platz $PLACE _bei MyCloud mit _$POINTS Litern_ gemacht und erhälst dafür _°>sm_classic_00.gif<r° $KNUDDEL Knuddel_ als Gewinn.°##°Glückwunsch!'.formater({
-									NICKNAME:	user.getNick(),
-									PLACE:		index + 1,
-									POINTS:		Format(value),
-									KNUDDEL:	Format(_prices[index], 0)
-								}));
-							}
-
-							KBank.addKn(user.getID(), _prices[index]);
-						}*
+						text.newLine();
 						
-						// @ToDo enable/disable deletion
-						DB.delete(_key, user);
+						var price = _prices[place - 1];
+						
+						text.append('für die Topliste _\"');
+						text.append(_instance.getName());
+						text.append('\"_ im _°BB>Channel ');
+						text.append(Channel.getName());
+						text.append('|/go ');
+						text.append(Channel.getName());
+						text.append('<r°_ hast du _');
+						text.append(value.toFixed(2));
+						text.append(' Punkte_ erreicht');
+						text.newLine();
+						text.append('und machst somit den _');
+						text.append(place);
+						text.append('. Platz_.');
+						
+						if(typeof(price) != 'undefined') {
+							text.newLine();
+							text.newLine();
+							text.append('Für deine Platzierung erhälst du folgenden Gewinn:');
+							text.newLine();
+							
+							switch(price.type) {
+								case 'knuddel':
+									text.append(' - _');
+									text.append(new KImage('sm_classic_00.gif'));
+									text.append(' ');
+									text.append(price.value);
+									text.append(' Knuddel_');
+									Logger.info('Toplist: ' + user.getNick() + ', Place: ' + place + ', Kn: ' + price.value);
+									Bot.knuddel(user, price.value, 'Toplisten-Gewinn: ' + _instance.getName(), false);
+								break;
+								case 'code':
+									text.append(' - _');
+									text.append(price.value);
+									text.append(' ');
+									text.append(new KImage('features/codegenerator/code_001.png'));
+									text.append(' SmileyCode_');
+								break;
+							}
+						}
+
+						if(typeof(price) != 'undefined') {
+							user.post('°BB°' + KnuddelsServer.getAppName() + '°r°: Topliste - ' + _instance.getName(), text.toString());
+						}
+						
+						if(_payout_remove) {
+							DB.delete(_key, user);
+						}
+						
 						++index;
 					}
 				}, 5000);
 			}
 		});
-	};*/
+	};
 	
 	this.getPrices = function getPrices() {
 		return _prices;
