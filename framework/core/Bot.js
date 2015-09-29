@@ -248,14 +248,24 @@ var Bot = (new function Bot() {
 		
 		var params = {};
 		
-		if(arg1 !== undefined) {
-			if(isTypeOf(arg1, 'string')) { params['displayReasonText'] = textFilter+arg1+'§'; }
-			if(isTypeOf(arg1, 'boolean')) { params['hidePublicMessage'] = !(arg1); }
+		if(typeof(arg1) != 'undefined') {
+			if(isTypeOf(arg1, 'string')) {
+				params['displayReasonText'] = arg1;
+			}
+			
+			if(isTypeOf(arg1, 'boolean')) {
+				params['hidePublicMessage'] = !(arg1);
+			}
 		}
 
-		if(arg2 !== undefined) {
-			if(isTypeOf(arg2, 'string')) { params['displayReasonText'] = textFilter+arg2+'§'; }
-			if(isTypeOf(arg2, 'boolean')) { params['hidePublicMessage'] = !(arg2); }
+		if(typeof(arg2) != 'undefined') {
+			if(isTypeOf(arg2, 'string')) {
+				params['displayReasonText'] = arg2;
+			}
+			
+			if(isTypeOf(arg2, 'boolean')) {
+				params['hidePublicMessage'] = !(arg2);
+			}
 		}		
 		
 		if(params.size()) {
