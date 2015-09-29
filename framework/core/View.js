@@ -146,6 +146,10 @@ function View(name) {
 		}
 	};
 	
+	this.clearData = function clearData() {
+		_data = {};
+	};
+	
 	/*
 		Strings
 	*/
