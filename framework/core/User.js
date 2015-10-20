@@ -229,6 +229,7 @@ var Users = (new function Users() {
 				this.isMuted			= function isMuted() { return false; };
 				this.isOnline			= function isOnline() { return false; };
 				this.isOnlineInChannel	= function isOnlineInChannel() { return false; };
+				this.isProfilePhotoVerified	= function isProfilePhotoVerified() { return false; };
 				this.getKnuddels		= function getKnuddels() { return 0; };
 				this.sendPostMessage	= send;
 				this.sendPrivateMessage	= send;
