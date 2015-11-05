@@ -49,10 +49,10 @@ if(!Number.prototype.format) {
 		configurable:	false,
 		writable:		false,
 		value: function format(n, x, fill) {
-			n = n || 3;
-			x = x || 2;
-			fill = fill || '.';
-			return this.toFixed(Math.max(0, ~~n)).replace(new RegExp('\\d(?=(\\d{'+x+'})+' + (n > 0 ? '\\.' : '$') + ')', 'g'), '$&'+fill);
+			if(n === undefined) { n = 3; }
+			if(x === undefined) { x = 2; }
+			if(fill === undefined) { fill = '.'; }
+			return this.toFixed(Math.max(0, Math.floor(n))).replace(new RegExp('\\d(?=(\\d{'+x+'})+' + (n > 0 ? '\\.' : '$') + ')', 'g'), '$&'+fill);
 		}
 	});
 }
