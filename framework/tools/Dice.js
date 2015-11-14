@@ -56,6 +56,48 @@ if (!DiceEvent.prototype.getSingleDices) {
 /*
 	@docs	TODO
 */
+if (!DiceEvent.prototype.isOpenThrow) {
+  Object.defineProperty(DiceEvent.prototype, 'isOpenThrow', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function isPrivate() {
+		return this.getDiceResult().getDiceConfiguration().isUsingOpenThrow();
+    }
+  });
+}
+
+/*
+	@docs	TODO
+*/
+if (!DiceEvent.prototype.isPrivate) {
+  Object.defineProperty(DiceEvent.prototype, 'isPrivate', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function isPrivate() {
+		return this.getDiceResult().getDiceConfiguration().isUsingPrivateThrow();
+    }
+  });
+}
+
+/*
+	@docs	TODO
+*/
+if (!DiceEvent.prototype.getSingleDices) {
+  Object.defineProperty(DiceEvent.prototype, 'getSingleDices', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function getSingleDices() {
+		return this.getDiceResult().getSingleDiceResults();
+    }
+  });
+}
+
+/*
+	@docs	TODO
+*/
 if (!DiceEvent.prototype.getSingleValues) {
   Object.defineProperty(DiceEvent.prototype, 'getSingleValues', {
     enumerable: false,
@@ -80,6 +122,10 @@ if (!DiceEvent.prototype.checkUser) {
     configurable: false,
     writable: false,
     value: function checkUser(user) {
+		if(!isTypeOf(user, 'User')) {
+			user = Users.get(user);
+		}
+
 		return this.getUser().equals(user);
     }
   });
@@ -94,6 +140,10 @@ if (!DiceEvent.prototype.checkConf) {
     configurable: false,
     writable: false,
     value: function checkConf(conf) {
+		if(isTypeOf(conf, 'string')) {
+			conf = DiceConfigurationFactory.fromString(conf);	
+		}
+				
 		return this.getDiceResult().getDiceConfiguration().equals(conf);
     }
   });
