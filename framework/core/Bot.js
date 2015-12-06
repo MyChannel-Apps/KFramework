@@ -320,6 +320,28 @@ var Bot = (new function Bot() {
 		@docs	http://www.mychannel-apps.de/documentation/Bot_public
 		@docs	TODO		
 	*/
+	this.action = function action(message, delay) {
+		if(message instanceof KCode) {
+			message = message.toString();
+		}
+		
+		/*if(isTypeOf(message, 'object')) {
+			message = JSON.format(message);
+		}*/
+		
+		if (delay) {
+            return setTimeout(function actionDelay() {
+                _user.sendPublicActionMessage(textFilter+message);
+            }, delay);
+        } else {
+            _user.sendPublicActionMessage(textFilter+message);
+        }
+	};
+	
+	/*
+		@docs	http://www.mychannel-apps.de/documentation/Bot_public
+		@docs	TODO		
+	*/
 	this.public = function public(message, delay) {
 		if(message instanceof KCode) {
 			message = message.toString();
