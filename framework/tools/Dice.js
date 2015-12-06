@@ -231,7 +231,7 @@ if (!DiceConfiguration.prototype.getFakeDiceEvent) {
 			};
 			this.getResultLine = function getText() { return resultLine; };			
 			this.getText = function getText() { return infoLine + '°#°' + resultLine; };
-			this.getInfoLine = function getTopLine() { return infoLine };
+			this.getInfoLine = function getInfoLine() { return infoLine };
 			this.getTotal = function getTotal() { return this.getDiceResult().totalSum(); };
 			this.getUser = function getUser() { return user; };
 		});
