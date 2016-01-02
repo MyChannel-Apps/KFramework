@@ -255,7 +255,15 @@ var Bot = (new function Bot() {
 			}
 			
 			if(isTypeOf(arg1, 'boolean')) {
-				params['hidePublicMessage'] = !(arg1);
+				if(isTypeOf(KnuddelTransferDisplayType, 'KnuddelTransferDisplayType')) {
+					params['transferDisplayType'] = (arg1) ? KnuddelTransferDisplayType.Public : KnuddelTransferDisplayType.Post;
+				} else {
+					params['hidePublicMessage'] = !(arg1);
+				}
+			}
+
+			if(isTypeOf(arg1, 'KnuddelTransferDisplayType')) {
+				params['transferDisplayType'] = arg1;
 			}
 		}
 
@@ -265,7 +273,15 @@ var Bot = (new function Bot() {
 			}
 			
 			if(isTypeOf(arg2, 'boolean')) {
-				params['hidePublicMessage'] = !(arg2);
+				if(isTypeOf(KnuddelTransferDisplayType, 'KnuddelTransferDisplayType')) {
+					params['transferDisplayType'] = (arg2) ? KnuddelTransferDisplayType.Public : KnuddelTransferDisplayType.Post;
+				} else {
+					params['hidePublicMessage'] = !(arg2);
+				}
+			}
+			
+			if(isTypeOf(arg2, 'KnuddelTransferDisplayType')) {
+				params['transferDisplayType'] = arg2;
 			}
 		}		
 		
