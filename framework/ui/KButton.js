@@ -26,6 +26,7 @@
 */
 
 function KButton(text, command) {
+	this.javaClassName = 'KButton';	
 	var _text			= '';
 	var _id				= -1;
 	var _command		= '';

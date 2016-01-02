@@ -24,6 +24,7 @@
 var KCODE_GROUPS_INSTANCES = 0;
 
 function KGroup() {
+	this.javaClassName = 'KGroup';	
 	var _groups 		= [ undefined ];
 	var _show			= 0;
 	var _layout_box		= false;

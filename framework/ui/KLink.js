@@ -29,6 +29,7 @@
 	@docs	http://www.userapps.de/documentation/KLink_constructor
 */
 function KLink(text, command_left, command_right) {
+	this.javaClassName = 'KLink';	
 	var _text			= '';
 	var _command_left	= undefined;
 	var _command_right	= undefined;

@@ -25,11 +25,13 @@
 	@docs		http://www.userapps.de/documentation/core/hash
 */
 
-var Hash = {
+var Hash	= (new function Hash() {
+	this.javaClassName = 'Hash';
+	
 	/*
 		@docs		http://www.userapps.de/documentation/Hash_decodeForm
 	*/
-	decodeForm: function decodeForm(string) {
+	this.decodeForm = function decodeForm(string) {
 		var chars	= string.split('');
 		var output	= [];
 		
@@ -47,11 +49,11 @@ var Hash = {
 		}
 		
 		return output.join('');
-	},
+	};
 	/*
 		@docs		http://www.userapps.de/documentation/Hash_toString
 	*/
-	toString: function toString() {
+	this.toString = function toString() {
 		return '[KFramework Hash]';
-	}
-};
+	};
+});

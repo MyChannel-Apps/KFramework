@@ -26,6 +26,7 @@
 */
 
 function KInput(input, defaultValue, validateOptions) {
+	this.javaClassName = 'KInput';
 	var _input			= '';
 	var _default		= undefined;
 	var _validate		= {};

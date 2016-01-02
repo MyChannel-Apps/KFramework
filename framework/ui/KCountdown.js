@@ -30,6 +30,7 @@
 	@docs	http://www.userapps.de/documentation/KCountdown_constructor
 */
 function KCountdown() {
+	this.javaClassName = 'KCountdown';	
 	var _properties	= {};
 	
 	var timer = null;

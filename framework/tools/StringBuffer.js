@@ -25,6 +25,8 @@
 	@docs		http://www.userapps.de/documentation/tools/stringbuffer
 */
 function StringBuffer(startText) {
+	this.javaClassName = 'StringBuffer';
+	
 	var _data = startText || '';
 	
 	/*

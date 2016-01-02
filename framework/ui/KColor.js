@@ -125,6 +125,7 @@ var Colors = {
 	@docs	http://www.userapps.de/documentation/KColor_constructor
 */
 function KColor(red, green, blue) {
+	this.javaClassName = 'KColor';	
 	var _red	= -1;
 	var _green	= -1;
 	var _blue	= -1;
@@ -236,6 +237,7 @@ function KColor(red, green, blue) {
 	@docs	http://www.userapps.de/documentation/ColorInstance_constructor
 */
 function ColorInstance(key, rgb) {
+	this.javaClassName = 'ColorInstance';	
 	/*
 		@docs	http://www.userapps.de/documentation/ColorInstance_getColorKey
 	*/

@@ -36,6 +36,7 @@
 	@docs	http://www.userapps.de/documentation/KImage_constructor
 */
 var KImage			= KImage || (function(image) {
+	this.javaClassName = 'KImage';	
 	this._path			= '';
 	this._name			= '';
 	this._extension		= '';

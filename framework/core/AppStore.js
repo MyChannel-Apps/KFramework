@@ -85,6 +85,7 @@ var PaymentInterval = {
 };
 
 var AppStore = (new function AppStore() {
+	this.javaClassName = 'AppStore';	
 	var _container	= undefined;
 	var _app		= undefined;
 	var _developer	= KnuddelsServer.getAppDeveloper();

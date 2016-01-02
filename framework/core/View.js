@@ -26,6 +26,7 @@
 */
 
 function View(name) {
+	this.javaClassName = 'View';	
 	var _name			= name;
 	var _width			= 100;
 	var _height			= 100;
@@ -34,7 +35,7 @@ function View(name) {
 	var _loading		= {
 		enabled:	true,
 		text:		'Bitte warten...',
-		image:		'http://www.mychannel-apps.de/images/logo-kf.png',
+		image:		'http://www.userapps.de/images/logo-kf.png',
 		foreground:	Color.fromRGB(255, 255, 255),
 		background:	Color.fromRGB(80, 0, 0)
 	};

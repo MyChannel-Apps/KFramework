@@ -26,6 +26,7 @@
 */
 
 var DB	= (new function Database() {
+	this.javaClassName = 'Database';
 	var _fields_global	= [];
 	var _fields_user	= [];
 	

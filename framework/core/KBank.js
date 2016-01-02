@@ -26,6 +26,7 @@
 */
 
 var KBank = (new function KBank() {
+	this.javaClassName = 'KBank';
 	var instance = this;
 	var updateCallback = null;
 	var payoutTaxRate = 0;

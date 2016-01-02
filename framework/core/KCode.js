@@ -72,6 +72,7 @@ var Alignment = {
 	@docs	http://www.userapps.de/documentation/KCode_constructor
 */
 function KCode() {
+	this.javaClassName = 'KCode';
 	var _buffer 	= [];
 	var _debug		= false;
 	var _minify		= true;

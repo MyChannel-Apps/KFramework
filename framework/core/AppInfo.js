@@ -21,10 +21,11 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 	
-	@author		Florian Berger
+	@author		Florian Berger, Christoph Kühl <djchrisnet>
 */
 
 var AppInfo = (new function AppInfo() {
+	this.javaClassName = 'AppInfo';	
     var _info			= KnuddelsServer.getAppInfo();
 	var _root_instance	= undefined;
 	

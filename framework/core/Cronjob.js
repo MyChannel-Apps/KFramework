@@ -25,7 +25,8 @@
 	@docs		http://www.userapps.de/documentation/core/cronjob
 */
 
-var Cron = (new function Cron() {
+var Cron = (new function KCron() {
+	this.javaClassName = 'KCron';	
 	var _cronjobs	= [];
 	var _watcher;
 	var _offlineCheck = false;
@@ -162,6 +163,7 @@ var Cron = (new function Cron() {
 }());
 
 function Cronjob(name, cycle, callback) {
+	this.javaClassName = 'Cronjob';	
 	var _name		= '';
 	var _cycle		= '* * * * *';
 	var _cycle_data	= [];

@@ -26,6 +26,7 @@
 */
 
 var Hooks = (new function Hooks() {
+	this.javaClassName = 'Hooks';
 	var _hooks	= {};
 	var _debug	= false;
 	

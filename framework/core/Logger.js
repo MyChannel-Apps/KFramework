@@ -25,6 +25,7 @@
 */
 
 var Logger = (new function Logger() {
+	this.javaClassName = 'Logger';
 	var _logger;
 	var _watcher;
 	

@@ -41,6 +41,7 @@
 	@docs	http://www.userapps.de/documentation/KTable_constructor
 */
 function KTable() {
+	this.javaClassName = 'KTable';	
 	var _rows = [];
 	
 	/*
@@ -87,6 +88,7 @@ function KTable() {
 	@docs	http://www.userapps.de/documentation/KRow_constructor
 */
 function KRow() {
+	this.javaClassName = 'KRow';	
 	var _cells = [];
 	
 	function KRow() {
@@ -133,6 +135,7 @@ function KRow() {
 	@docs	http://www.userapps.de/documentation/KCell_constructor
 */
 function KCell(size, content) {
+	this.javaClassName = 'KCell';	
 	var _size		= 0;
 	var _content	= '';
 	

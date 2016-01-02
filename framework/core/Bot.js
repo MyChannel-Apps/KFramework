@@ -26,6 +26,7 @@
 */
 
 var Bot = (new function Bot() {
+	this.javaClassName = 'Bot';
 	var _user = KnuddelsServer.getDefaultBotUser();
 	var textFilter = '';
 	

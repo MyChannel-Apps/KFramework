@@ -63,6 +63,7 @@ var Status = {
 };
 
 var Users = (new function Users() {
+	this.javaClassName = 'Users';
 	var UAC = KnuddelsServer.getUserAccess();
 	
 	this.getProfilePicture = function getProfilePicture(user) {

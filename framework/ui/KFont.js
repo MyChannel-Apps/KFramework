@@ -53,6 +53,7 @@ var FontStyle = {
 	@docs	http://www.userapps.de/documentation/KFont_constructor
 */
 function KFont(name, style, size) {
+	this.javaClassName = 'KFont';	
 	var _name		= 'Arial';
 	var _size		= 14;
 	var _style		= FontStyle.PLAIN;

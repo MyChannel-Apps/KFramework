@@ -31,6 +31,7 @@ var KCODE_TOOLTIPS_INSTANCES = 0;
 	@docs		http://www.userapps.de/documentation/KTooltip_constructor
 */
 function KTooltip(content) 	{
+	this.javaClassName = 'KTooltip';	
 	var _content		= new KCode();
 	var _instance		= 0;
 	var _hover_disabled	= false;

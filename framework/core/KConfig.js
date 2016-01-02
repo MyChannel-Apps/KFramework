@@ -25,6 +25,7 @@
 */
 
 var KConfig = (new function KConfig() {
+	this.javaClassName = 'KConfig';
 	var _data = DB.load('_config', {});
 	var _defaults = {};
 	var _puffer = {};

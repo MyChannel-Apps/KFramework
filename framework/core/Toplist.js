@@ -26,6 +26,7 @@
 */
 
 var Top = (new function Top() {
+	this.javaClassName = 'Top';
 	var _toplists	= [];
 	var _instance	= this;
 	var _events		= [];
@@ -302,6 +303,7 @@ var Top = (new function Top() {
 });
 
 function Toplist(key, categorys) {
+	this.javaClassName = 'Toplist';
 	var _key			= '';
 	var _instance		= this;
 	var _categorys		= [];
