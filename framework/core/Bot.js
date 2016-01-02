@@ -30,6 +30,10 @@ var Bot = (new function Bot() {
 	var _user = KnuddelsServer.getDefaultBotUser();
 	var textFilter = '';
 	
+	if(typeof(KnuddelTransferDisplayType) === 'undefined') {
+		KnuddelTransferDisplayType = {Public:'Public', Post:'Post', Private:'Private'};
+	}
+	
 	/*
 		@docs	TODO
 	*/
