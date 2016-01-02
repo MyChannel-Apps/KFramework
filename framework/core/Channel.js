@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/core/channel
+	@docs		http://www.userapps.de/documentation/core/channel
 */
 
 var Background = {
@@ -95,7 +95,7 @@ var Channel = (new function KChannel() {
 	var _info			= _configuration.getChannelInformation();
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getChannel
+		@docs	http://www.userapps.de/documentation/Channel_getChannel
 	*/
 	this.getName = function getName() {
 		return _channel.getChannelName();
@@ -109,7 +109,7 @@ var Channel = (new function KChannel() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwner
+		@docs	http://www.userapps.de/documentation/Channel_getOwner
 	*/
 	this.getOwner = function getOwner(index) {
 		index		= (typeof(index) == 'undefined' ? 0 : index);
@@ -144,49 +144,49 @@ var Channel = (new function KChannel() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getModerators
+		@docs	http://www.userapps.de/documentation/Channel_getModerators
 	*/
 	this.getModerators = function getModerators() {
 		return _rights.getChannelModerators();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getOwners
+		@docs	http://www.userapps.de/documentation/Channel_getOwners
 	*/
 	this.getOwners = function getOwners() {
 		return _rights.getChannelOwners();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getMods
+		@docs	http://www.userapps.de/documentation/Channel_getMods
 	*/
 	this.getMods = function getMods() {
 		return _rights.getEventModerators();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getCMutes
+		@docs	http://www.userapps.de/documentation/Channel_getCMutes
 	*/
 	this.getCMutes = function getCMutes() {
 		return _restrictions.getColorMutedUsers();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getMutes
+		@docs	http://www.userapps.de/documentation/Channel_getMutes
 	*/
 	this.getMutes = function getMutes() {
 		return _restrictions.getMutedUsers();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getCLs
+		@docs	http://www.userapps.de/documentation/Channel_getCLs
 	*/
 	this.getCLs = function getCLs() {
 		return _restrictions.getLockedUsers();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_onDev
+		@docs	http://www.userapps.de/documentation/Channel_onDev
 	*/
 	this.onDev = function onDev() {
 		return KnuddelsServer.getChatServerInfo().isTestSystem();
@@ -207,7 +207,7 @@ var Channel = (new function KChannel() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_getUsers
+		@docs	http://www.userapps.de/documentation/Channel_getUsers
 		@docs	TODO
 		Example Filter:
 		{
@@ -386,7 +386,7 @@ var Channel = (new function KChannel() {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Channel_toString
+		@docs	http://www.userapps.de/documentation/Channel_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework Channel]';

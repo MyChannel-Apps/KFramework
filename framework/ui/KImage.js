@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/ui/image
+	@docs		http://www.userapps.de/documentation/ui/image
 */
 
 /*
@@ -33,7 +33,7 @@
 	var link = new KLink(image);
 	
 	Bot.public(link);
-	@docs	http://www.mychannel-apps.de/documentation/KImage_constructor
+	@docs	http://www.userapps.de/documentation/KImage_constructor
 */
 var KImage			= KImage || (function(image) {
 	this._path			= '';
@@ -98,7 +98,7 @@ var KImage			= KImage || (function(image) {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KImage_toString
+		@docs	http://www.userapps.de/documentation/KImage_toString
 	*/
 	this.toString = function toString(only_path) {
 		only_path		= only_path || false;
@@ -126,7 +126,7 @@ var KImage			= KImage || (function(image) {
 KImage.prototype	= KImage.prototype || {};
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_addCustom
+	@docs	http://www.userapps.de/documentation/KImage_addCustom
 */
 if(!KImage.prototype.addCustom) {
 	Object.defineProperty(KImage.prototype, 'addCustom', {
@@ -141,7 +141,7 @@ if(!KImage.prototype.addCustom) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_alwaysCopy
+	@docs	http://www.userapps.de/documentation/KImage_alwaysCopy
 */
 if(!KImage.prototype.alwaysCopy) {
 	Object.defineProperty(KImage.prototype, 'alwaysCopy', {
@@ -156,7 +156,7 @@ if(!KImage.prototype.alwaysCopy) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_noPush
+	@docs	http://www.userapps.de/documentation/KImage_noPush
 */
 if(!KImage.prototype.noPush) {
 	Object.defineProperty(KImage.prototype, 'noPush', {
@@ -171,7 +171,7 @@ if(!KImage.prototype.noPush) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setContainerSize
+	@docs	http://www.userapps.de/documentation/KImage_setContainerSize
 */
 if(!KImage.prototype.setContainerSize) {
 	Object.defineProperty(KImage.prototype, 'setContainerSize', {
@@ -187,7 +187,7 @@ if(!KImage.prototype.setContainerSize) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setSize
+	@docs	http://www.userapps.de/documentation/KImage_setSize
 */
 if(!KImage.prototype.setSize) {
 	Object.defineProperty(KImage.prototype, 'setSize', {
@@ -203,7 +203,7 @@ if(!KImage.prototype.setSize) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setPosition
+	@docs	http://www.userapps.de/documentation/KImage_setPosition
 */
 if(!KImage.prototype.setPosition) {
 	Object.defineProperty(KImage.prototype, 'setPosition', {
@@ -219,7 +219,7 @@ if(!KImage.prototype.setPosition) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setX
+	@docs	http://www.userapps.de/documentation/KImage_setX
 */
 if(!KImage.prototype.setX) {
 	Object.defineProperty(KImage.prototype, 'setX', {
@@ -234,7 +234,7 @@ if(!KImage.prototype.setX) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setY
+	@docs	http://www.userapps.de/documentation/KImage_setY
 */
 if(!KImage.prototype.setY) {
 	Object.defineProperty(KImage.prototype, 'setY', {
@@ -249,7 +249,7 @@ if(!KImage.prototype.setY) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabel
+	@docs	http://www.userapps.de/documentation/KImage_setLabel
 */
 if(!KImage.prototype.setLabel) {
 	Object.defineProperty(KImage.prototype, 'setLabel', {
@@ -264,7 +264,7 @@ if(!KImage.prototype.setLabel) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelPosition
+	@docs	http://www.userapps.de/documentation/KImage_setLabelPosition
 */
 if(!KImage.prototype.setLabelPosition) {
 	Object.defineProperty(KImage.prototype, 'setLabelPosition', {
@@ -280,7 +280,7 @@ if(!KImage.prototype.setLabelPosition) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelColor
+	@docs	http://www.userapps.de/documentation/KImage_setLabelColor
 */
 if(!KImage.prototype.setLabelColor) {
 	Object.defineProperty(KImage.prototype, 'setLabelColor', {
@@ -295,7 +295,7 @@ if(!KImage.prototype.setLabelColor) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setLabelSize
+	@docs	http://www.userapps.de/documentation/KImage_setLabelSize
 */
 if(!KImage.prototype.setLabelSize) {
 	Object.defineProperty(KImage.prototype, 'setLabelSize', {
@@ -310,7 +310,7 @@ if(!KImage.prototype.setLabelSize) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_enableLabelBorder
+	@docs	http://www.userapps.de/documentation/KImage_enableLabelBorder
 */
 if(!KImage.prototype.enableLabelBorder) {
 	Object.defineProperty(KImage.prototype, 'enableLabelBorder', {
@@ -325,7 +325,7 @@ if(!KImage.prototype.enableLabelBorder) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setBorder
+	@docs	http://www.userapps.de/documentation/KImage_setBorder
 */
 if(!KImage.prototype.setBorder) {
 	Object.defineProperty(KImage.prototype, 'setBorder', {
@@ -340,7 +340,7 @@ if(!KImage.prototype.setBorder) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setQuadcut
+	@docs	http://www.userapps.de/documentation/KImage_setQuadcut
 */
 if(!KImage.prototype.setQuadcut) {
 	Object.defineProperty(KImage.prototype, 'setQuadcut', {
@@ -355,7 +355,7 @@ if(!KImage.prototype.setQuadcut) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setShadow
+	@docs	http://www.userapps.de/documentation/KImage_setShadow
 */
 if(!KImage.prototype.setShadow) {
 	Object.defineProperty(KImage.prototype, 'setShadow', {
@@ -370,7 +370,7 @@ if(!KImage.prototype.setShadow) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setMirror
+	@docs	http://www.userapps.de/documentation/KImage_setMirror
 */
 if(!KImage.prototype.setMirror) {
 	Object.defineProperty(KImage.prototype, 'setMirror', {
@@ -385,7 +385,7 @@ if(!KImage.prototype.setMirror) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setGreyscale
+	@docs	http://www.userapps.de/documentation/KImage_setGreyscale
 */
 if(!KImage.prototype.setGreyscale) {
 	Object.defineProperty(KImage.prototype, 'setGreyscale', {
@@ -400,7 +400,7 @@ if(!KImage.prototype.setGreyscale) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setTransparency
+	@docs	http://www.userapps.de/documentation/KImage_setTransparency
 */
 if(!KImage.prototype.setTransparency) {
 	Object.defineProperty(KImage.prototype, 'setTransparency', {
@@ -415,7 +415,7 @@ if(!KImage.prototype.setTransparency) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setMouseSize
+	@docs	http://www.userapps.de/documentation/KImage_setMouseSize
 */
 if(!KImage.prototype.setMouseSize) {
 	Object.defineProperty(KImage.prototype, 'setMouseSize', {
@@ -431,7 +431,7 @@ if(!KImage.prototype.setMouseSize) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KImage_setMousePosition
+	@docs	http://www.userapps.de/documentation/KImage_setMousePosition
 */
 if(!KImage.prototype.setMousePosition) {
 	Object.defineProperty(KImage.prototype, 'setMousePosition', {

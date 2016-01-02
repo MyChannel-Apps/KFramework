@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/bot
+	@docs		http://www.userapps.de/documentation/core/bot
 */
 
 var Bot = (new function Bot() {
@@ -56,28 +56,28 @@ var Bot = (new function Bot() {
 	};	
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getAge
+		@docs	http://www.userapps.de/documentation/Bot_getAge
 	*/
 	this.getAge = function getAge() { 
 		return _user.getAge();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getGender
+		@docs	http://www.userapps.de/documentation/Bot_getGender
 	*/
 	this.getGender = function getGender() { 
 		return _user.getGender();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getKnuddelAmount
+		@docs	http://www.userapps.de/documentation/Bot_getKnuddelAmount
 	*/
 	this.getKnuddelAmount = function getKnuddelAmount() {
 		return _user.getKnuddelAmount();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getNick
+		@docs	http://www.userapps.de/documentation/Bot_getNick
 	*/
 	this.getNick = function getNick() {
 		return _user.getNick();
@@ -91,154 +91,154 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getOnlineMinutes
+		@docs	http://www.userapps.de/documentation/Bot_getOnlineMinutes
 	*/
 	this.getOnlineMinutes = function getOnlineMinutes() {
 		return _user.getOnlineMinutes();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getProfileLink
+		@docs	http://www.userapps.de/documentation/Bot_getProfileLink
 	*/
 	this.getProfileLink	= function getProfileLink(displayText) {
 		return _user.getProfileLink(displayText == undefined ? this.getNick() : displayText);
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getProfilePicture
+		@docs	http://www.userapps.de/documentation/Bot_getProfilePicture
 	*/
 	this.getProfilePicture	= function getProfilePicture() {
 		return 'http://chat.knuddels.de/pics/fotos/knuddels.de?n=' + _user.getNick().urlencode();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getReadme
+		@docs	http://www.userapps.de/documentation/Bot_getReadme
 	*/
 	this.getReadme = function getReadme() {
 		return _user.getReadme();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getRegDate
+		@docs	http://www.userapps.de/documentation/Bot_getRegDate
 	*/
 	this.getRegDate = function getRegDate() {
 		return _user.getRegDate();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserId
+		@docs	http://www.userapps.de/documentation/Bot_getUserId
 	*/
 	this.getUserId = function getUserId() {
 		return _user.getUserId();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserStatus
+		@docs	http://www.userapps.de/documentation/Bot_getUserStatus
 	*/
 	this.getUserStatus = function getUserStatus() {
 		return _user.getUserStatus();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getUserType
+		@docs	http://www.userapps.de/documentation/Bot_getUserType
 	*/
 	this.getUserType = function getUserType() {
 		return _user.getUserType();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isAppDeveloper
+		@docs	http://www.userapps.de/documentation/Bot_isAppDeveloper
 	*/
 	this.isAppDeveloper = function isAppDeveloper() {
 		return _user.isAppDeveloper();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isAppManager
+		@docs	http://www.userapps.de/documentation/Bot_isAppManager
 	*/
 	this.isAppManager = function isAppManager() {
 		return _user.isAppManager();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isAway
+		@docs	http://www.userapps.de/documentation/Bot_isAway
 	*/
 	this.isAway = function isAway() {
 		return _user.isAway();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isChannelModerator
+		@docs	http://www.userapps.de/documentation/Bot_isChannelModerator
 	*/
 	this.isChannelModerator = function isChannelModerator() {
 		return _user.isChannelModerator();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isChannelOwner
+		@docs	http://www.userapps.de/documentation/Bot_isChannelOwner
 	*/
 	this.isChannelOwner = function isChannelOwner() {
 		return _user.isChannelOwner();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isColorMuted
+		@docs	http://www.userapps.de/documentation/Bot_isColorMuted
 	*/
 	this.isColorMuted = function isColorMuted() {
 		return _user.isColorMuted();
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isEventModerator
+		@docs	http://www.userapps.de/documentation/Bot_isEventModerator
 	*/
 	this.isEventModerator = function isEventModerator() {
 		return _user.isEventModerator();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isLocked
+		@docs	http://www.userapps.de/documentation/Bot_isLocked
 	*/
 	this.isLocked = function isLocked() {
 		return _user.isLocked();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isMuted
+		@docs	http://www.userapps.de/documentation/Bot_isMuted
 	*/
 	this.isMuted = function isMuted() {
 		return _user.isMuted();
 	};	
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isOnline
+		@docs	http://www.userapps.de/documentation/Bot_isOnline
 	*/
 	this.isOnline = function isOnline() {
 		return _user.isOnline();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_isOnlineInChannel
+		@docs	http://www.userapps.de/documentation/Bot_isOnlineInChannel
 	*/
 	this.isOnlineInChannel = function isOnlineInChannel() {
 		return _user.isOnlineInChannel();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_join
+		@docs	http://www.userapps.de/documentation/Bot_join
 	*/
 	this.join = function join() {
 		_user.joinChannel();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_leave
+		@docs	http://www.userapps.de/documentation/Bot_leave
 	*/
 	this.leave = function leave() {
 		_user.leaveChannel();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_knuddel
+		@docs	http://www.userapps.de/documentation/Bot_knuddel
 		@TODO	UPDATE DOCS
 	*/
 	this.knuddel = function knuddel(user, amount, arg1, arg2) {
@@ -276,21 +276,21 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_getKnuddels
+		@docs	http://www.userapps.de/documentation/Bot_getKnuddels
 	*/
 	this.getKnuddels = function getKnuddels() {
 		return _user.getKnuddelAmount().asNumber();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_exception
+		@docs	http://www.userapps.de/documentation/Bot_exception
 	*/
 	this.exception = function exception(exception) {
 		_user.sendPublicMessage(textFilter+'°RR°_Exception:_°r°#' + (exception.message == undefined ? exception : exception.message));
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_publicMessage
+		@docs	http://www.userapps.de/documentation/Bot_publicMessage
 	*/
 	this.publicMessage = function publicMessage(message) {
 		Logger.info('Bot.publicMessage(message) is DEPRECATED');
@@ -299,7 +299,7 @@ var Bot = (new function Bot() {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_postMessage
+		@docs	http://www.userapps.de/documentation/Bot_postMessage
 	*/
 	this.postMessage = function postMessage(user, message, topic) {
 		Logger.info('Bot.postMessage(user, message, topic) is DEPRECATED');
@@ -308,7 +308,7 @@ var Bot = (new function Bot() {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_privateMessage
+		@docs	http://www.userapps.de/documentation/Bot_privateMessage
 	*/
 	this.privateMessage = function privateMessage(user, message) {
 		Logger.info('Bot.privateMessage(user, message) is DEPRECATED');
@@ -317,7 +317,7 @@ var Bot = (new function Bot() {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_public
+		@docs	http://www.userapps.de/documentation/Bot_public
 		@docs	TODO		
 	*/
 	this.action = function action(message, delay) {
@@ -339,7 +339,7 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_public
+		@docs	http://www.userapps.de/documentation/Bot_public
 		@docs	TODO		
 	*/
 	this.public = function public(message, delay) {
@@ -361,7 +361,7 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_post
+		@docs	http://www.userapps.de/documentation/Bot_post
 	*/
 	this.post = function post(nick, message, topic) {
 		if(message instanceof KCode) {
@@ -391,7 +391,7 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_private
+		@docs	http://www.userapps.de/documentation/Bot_private
 		@docs	TODO
 	*/
 	this.private = function private(nick, message, delay) {
@@ -445,14 +445,14 @@ var Bot = (new function Bot() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_exec
+		@docs	http://www.userapps.de/documentation/Bot_exec
 	*/
 	this.exec = function exec(command) {
 		_user.sendToChannel(command);
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Bot_toString
+		@docs	http://www.userapps.de/documentation/Bot_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework Bot]';

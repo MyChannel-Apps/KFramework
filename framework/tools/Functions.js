@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/tools/functions
+	@docs		http://www.userapps.de/documentation/tools/functions
 */
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Functions_isTypeOf
+	@docs	http://www.userapps.de/documentation/Functions_isTypeOf
 */
 function isTypeOf(object, toCheck) {
 	var type = undefined;

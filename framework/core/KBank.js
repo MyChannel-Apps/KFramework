@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/bank
+	@docs		http://www.userapps.de/documentation/core/bank
 */
 
 var KBank = (new function KBank() {
@@ -78,7 +78,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getKn
+		@docs	http://www.userapps.de/documentation/KBank_getKn
 	*/
 	this.getKn = function getKn(uid) {
 		if(uid === undefined) {
@@ -202,7 +202,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getKonto
+		@docs	http://www.userapps.de/documentation/KBank_getKonto
 	*/
 	this.getKonto = function getKonto(uid) {
 		if(uid === undefined) {
@@ -240,7 +240,7 @@ var KBank = (new function KBank() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_setKn
+		@docs	http://www.userapps.de/documentation/KBank_setKn
 	*/
 	this.setKn = function setKn(uid, kn) {
 		if(uid === undefined) {
@@ -264,7 +264,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_addKn
+		@docs	http://www.userapps.de/documentation/KBank_addKn
 	*/
 	this.addKn = function addKn(uid, kn) {
 		if(uid === undefined) {
@@ -290,7 +290,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_delKn
+		@docs	http://www.userapps.de/documentation/KBank_delKn
 	*/
 	this.delKn = function delKn(uid, kn) {
 		Logger.info('KBank.delKn(uid, kn) is DEPRECATED, use KBank.subKn(uid, kn)');
@@ -298,7 +298,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_subKn
+		@docs	http://www.userapps.de/documentation/KBank_subKn
 	*/
 	this.subKn = function subKn(uid, kn) {
 		if(uid === undefined) {
@@ -328,7 +328,7 @@ var KBank = (new function KBank() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_payout
+		@docs	http://www.userapps.de/documentation/KBank_payout
 	*/
 	this.payout = function payout(uid, kn, reason) {
 		if(uid === undefined) {
@@ -420,7 +420,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_payin
+		@docs	http://www.userapps.de/documentation/KBank_payin
 	*/
 	this.payin = function payin(uid, kn) {
 		if(uid === undefined) {
@@ -471,7 +471,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getUsers
+		@docs	http://www.userapps.de/documentation/KBank_getUsers
 	*/
 	this.getUsers = function getUsers(callback) {
 		if(typeof callback !== 'function') {
@@ -495,7 +495,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getStats
+		@docs	http://www.userapps.de/documentation/KBank_getStats
 	*/
 	this.getStats = function getStats() {
 		return {
@@ -508,14 +508,14 @@ var KBank = (new function KBank() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getTransit
+		@docs	http://www.userapps.de/documentation/KBank_getTransit
 	*/
 	this.getTransit = function getTransit() {
 		return parseFloat(DB.sum('KBank_knuddel'));
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_getTransit
+		@docs	http://www.userapps.de/documentation/KBank_getTransit
 	*/
 	this.getMaxPayout = function getTransit() {
 		if(payoutTaxRate) {
@@ -525,7 +525,7 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_toString
+		@docs	http://www.userapps.de/documentation/KBank_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework KBank]';
@@ -533,7 +533,7 @@ var KBank = (new function KBank() {
 	
 	/*
 		@ToDo
-		@docs	http://www.mychannel-apps.de/documentation/KBank_dataMigration
+		@docs	http://www.userapps.de/documentation/KBank_dataMigration
 		This works full automated, dont call this in Your App!!!
 	*/
 	this.dataMigration = function dataMigration() {
@@ -592,28 +592,28 @@ var KBank = (new function KBank() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_saveData
+		@docs	http://www.userapps.de/documentation/KBank_saveData
 	*/
 	this.saveData = function saveData() {
 		Logger.info('KBank.saveData() is DEPRECATED, you dont need this all any more!');
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_resetData
+		@docs	http://www.userapps.de/documentation/KBank_resetData
 	*/
 	this.resetData = function resetData() {
 		Logger.info('KBank.resetData() is DEPRECATED, you dont need this all any more!');
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_fixData
+		@docs	http://www.userapps.de/documentation/KBank_fixData
 	*/
 	this.fixData = function fixData() {
 		Logger.info('KBank.fixData() is DEPRECATED, you dont need this all any more!');
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KBank_cleanData
+		@docs	http://www.userapps.de/documentation/KBank_cleanData
 	*/
 	this.cleanData = function cleanData() {
 		Logger.info('KBank.cleanData() is DEPRECATED, you dont need this all any more!');

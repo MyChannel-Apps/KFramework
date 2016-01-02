@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/database
+	@docs		http://www.userapps.de/documentation/core/database
 */
 
 var DB	= (new function Database() {
@@ -47,7 +47,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_getUser
+		@docs	http://www.userapps.de/documentation/DB_getUser
 	*/
 	this.getUser = function getUser(user) {
 		Logger.info('DB.getUser(user) is DEPRECATED');
@@ -56,7 +56,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_getChannel
+		@docs	http://www.userapps.de/documentation/DB_getChannel
 	*/
 	this.getChannel = function getChannel() {
 		Logger.info('DB.getChannel() is DEPRECATED');	
@@ -65,7 +65,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_load
+		@docs	http://www.userapps.de/documentation/DB_load
 	*/
 	this.load = function load(key, defaultValue, user) {
 		if(key === undefined) {
@@ -109,7 +109,7 @@ var DB	= (new function Database() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_save
+		@docs	http://www.userapps.de/documentation/DB_save
 	*/
 	this.save = function save(key, data, user) {
 		if(key === undefined) {
@@ -153,7 +153,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_check
+		@docs	http://www.userapps.de/documentation/DB_check
 	*/
 	this.check = function check(key, data, user) {
 		if(key === undefined) {
@@ -188,7 +188,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_delete
+		@docs	http://www.userapps.de/documentation/DB_delete
 	*/
 	this.delete = function Delete(key, user, subdata) {
 		subdata = (typeof(subdata) == 'undefined' ? true : subdata);
@@ -227,7 +227,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_sum
+		@docs	http://www.userapps.de/documentation/DB_sum
 	*/
 	this.sum = function sum(key) {
 		if(key === undefined) {
@@ -239,7 +239,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_count
+		@docs	http://www.userapps.de/documentation/DB_count
 	*/
 	this.count = function count(key, from, to) {
 		if(key === undefined) {
@@ -261,7 +261,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_sorted
+		@docs	http://www.userapps.de/documentation/DB_sorted
 	*/
 	this.sorted = function sorted(key, sortBy, count, page) {
 		if(key === undefined) {
@@ -289,7 +289,7 @@ var DB	= (new function Database() {
 	// getSortedEntriesAdjacent
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_users
+		@docs	http://www.userapps.de/documentation/DB_users
 	*/	
 	this.users = function users(key, callback, sortBy, from, to) {
 		if(key === undefined) {
@@ -327,7 +327,7 @@ var DB	= (new function Database() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/DB_toString
+		@docs	http://www.userapps.de/documentation/DB_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework Database]';

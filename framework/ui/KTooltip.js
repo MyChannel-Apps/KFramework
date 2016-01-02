@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2015 MyChannel-Apps.de
+	Copyright (c) 2015 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,13 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/ui/tooltip
+	@docs		http://www.userapps.de/documentation/ui/tooltip
 */
 
 var KCODE_TOOLTIPS_INSTANCES = 0;
 
 /*
-	@docs		http://www.mychannel-apps.de/documentation/KTooltip_constructor
+	@docs		http://www.userapps.de/documentation/KTooltip_constructor
 */
 function KTooltip(content) 	{
 	var _content		= new KCode();
@@ -46,7 +46,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setSize
+		@docs		http://www.userapps.de/documentation/KTooltip_setSize
 	*/
 	this.setSize = function setSize(width, height) {
 		_width	= width;
@@ -55,7 +55,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setWidth
+		@docs		http://www.userapps.de/documentation/KTooltip_setWidth
 	*/
 	this.setWidth = function setWidth(width) {
 		_width	= width;
@@ -63,7 +63,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_setHeight
+		@docs		http://www.userapps.de/documentation/KTooltip_setHeight
 	*/
 	this.setHeight = function setHeight(height) {
 		_height	= height;
@@ -71,7 +71,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_append
+		@docs		http://www.userapps.de/documentation/KTooltip_append
 	*/
 	this.append = function append(content) {
 		_content.append(content);
@@ -79,7 +79,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_newLine
+		@docs		http://www.userapps.de/documentation/KTooltip_newLine
 	*/
 	this.newLine = function newLine() {
 		_content.newLine();
@@ -91,7 +91,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_getCommand
+		@docs		http://www.userapps.de/documentation/KTooltip_getCommand
 	*/
 	this.getCommand = function getCommand(text, command) {
 		if(!(text instanceof KLink)) {
@@ -108,7 +108,7 @@ function KTooltip(content) 	{
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KTooltip_
+		@docs		http://www.userapps.de/documentation/KTooltip_
 	*/
 	this.toString = function toString() {
 		var output = new KCode();

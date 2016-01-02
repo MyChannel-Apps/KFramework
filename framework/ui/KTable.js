@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/ui/table
+	@docs		http://www.userapps.de/documentation/ui/table
 */
 
 /*
@@ -38,13 +38,13 @@
 	var table	= new KTable();
 	table.add(new KRow(new KCell('100', 'Hallo Welt'), new KCell('w1', 'Sonstiges')));
 	Bot.public(table);
-	@docs	http://www.mychannel-apps.de/documentation/KTable_constructor
+	@docs	http://www.userapps.de/documentation/KTable_constructor
 */
 function KTable() {
 	var _rows = [];
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KTable_add
+		@docs	http://www.userapps.de/documentation/KTable_add
 	*/
 	this.add = function add(element) {
 		_rows.push(element);
@@ -52,7 +52,7 @@ function KTable() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KTable_toString
+		@docs	http://www.userapps.de/documentation/KTable_toString
 	*/
 	this.toString = function toString() {
 		var output = new KCode();
@@ -84,7 +84,7 @@ function KTable() {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KRow_constructor
+	@docs	http://www.userapps.de/documentation/KRow_constructor
 */
 function KRow() {
 	var _cells = [];
@@ -94,7 +94,7 @@ function KRow() {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KRow_add
+		@docs	http://www.userapps.de/documentation/KRow_add
 	*/
 	this.add = function add(cell) {
 		_cells.push(cell);
@@ -102,14 +102,14 @@ function KRow() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KRow_getCells
+		@docs	http://www.userapps.de/documentation/KRow_getCells
 	*/
 	this.getCells = function getCells() {
 		return _cells;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KRow_toString
+		@docs	http://www.userapps.de/documentation/KRow_toString
 	*/
 	this.toString	= function toString(display) {
 		display		= display || false;
@@ -130,7 +130,7 @@ function KRow() {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KCell_constructor
+	@docs	http://www.userapps.de/documentation/KCell_constructor
 */
 function KCell(size, content) {
 	var _size		= 0;
@@ -142,14 +142,14 @@ function KCell(size, content) {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCell_getSize
+		@docs	http://www.userapps.de/documentation/KCell_getSize
 	*/
 	this.getSize = function getSize() {
 		return _size;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCell_toString
+		@docs	http://www.userapps.de/documentation/KCell_toString
 	*/
 	this.toString	= function toString() {
 		var output = new KCode();

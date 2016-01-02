@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2015 MyChannel-Apps.de
+	Copyright (c) 2015 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/core/hooks
+	@docs		http://www.userapps.de/documentation/core/hooks
 */
 
 var Hooks = (new function Hooks() {
@@ -30,7 +30,7 @@ var Hooks = (new function Hooks() {
 	var _debug	= false;
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_addFilter
+		@docs	http://www.userapps.de/documentation/Hooks_addFilter
 	*/
 	this.addFilter = function addFilter(name, callback, priority) {
 		this.add(name, callback, priority, true);
@@ -38,7 +38,7 @@ var Hooks = (new function Hooks() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_addAction
+		@docs	http://www.userapps.de/documentation/Hooks_addAction
 	*/
 	this.addAction = function addAction(name, callback, priority) {
 		this.add(name, callback, priority);
@@ -46,7 +46,7 @@ var Hooks = (new function Hooks() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_add
+		@docs	http://www.userapps.de/documentation/Hooks_add
 	*/
 	this.add = function add(name, callback, priority, is_filter) {
 		priority	= (priority == undefined ? 10 : priority); // default Priority is 10
@@ -73,7 +73,7 @@ var Hooks = (new function Hooks() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_remove
+		@docs	http://www.userapps.de/documentation/Hooks_remove
 	*/
 	this.remove = function remove(name, priority) {
 		priority = (priority == undefined ? 10 : priority); // default Priority is 10
@@ -105,7 +105,7 @@ var Hooks = (new function Hooks() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_applyFilter
+		@docs	http://www.userapps.de/documentation/Hooks_applyFilter
 	*/
 	this.applyFilter = function applyFilter(name) {
 		var args		= [];
@@ -127,7 +127,7 @@ var Hooks = (new function Hooks() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_do
+		@docs	http://www.userapps.de/documentation/Hooks_do
 	*/
 	this.do = function Do(name, is_filter) {
 		if(_debug) {
@@ -231,7 +231,7 @@ var Hooks = (new function Hooks() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Hooks_toString
+		@docs	http://www.userapps.de/documentation/Hooks_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework Hooks]';

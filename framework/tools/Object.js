@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/
+	@docs		http://www.userapps.de/documentation/
 */
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Object_each
+	@docs	http://www.userapps.de/documentation/Object_each
 */
 if(!Object.prototype.each) {
 	Object.defineProperty(Object.prototype, 'each', {
@@ -86,7 +86,7 @@ if(!Object.prototype.each) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Object_sort
+	@docs	http://www.userapps.de/documentation/Object_sort
 */
 if(!Object.prototype.sort) {
 	Object.defineProperty(Object.prototype, 'sort', {
@@ -155,7 +155,7 @@ if(!Object.prototype.sort) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Object_exists
+	@docs	http://www.userapps.de/documentation/Object_exists
 */
 if(!Object.prototype.exists) {
 	Object.defineProperty(Object.prototype, 'exists', {
@@ -169,7 +169,7 @@ if(!Object.prototype.exists) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Object_compare
+	@docs	http://www.userapps.de/documentation/Object_compare
 */
 if(!Object.prototype.compare) {
 	Object.defineProperty(Object.prototype, 'compare', {
@@ -190,7 +190,7 @@ if(!Object.prototype.compare) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Object_size
+	@docs	http://www.userapps.de/documentation/Object_size
 */
 if(!Object.prototype.size) {
 	Object.defineProperty(Object.prototype, 'size', {

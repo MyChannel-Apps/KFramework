@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/ui/font
+	@docs		http://www.userapps.de/documentation/ui/font
 */
 
 /*
@@ -34,23 +34,23 @@
 */
 var FontStyle = {
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/FontStyle_PLAIN
+		@docs	http://www.userapps.de/documentation/FontStyle_PLAIN
 	*/
 	PLAIN:		0x00,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/FontStyle_BOLD
+		@docs	http://www.userapps.de/documentation/FontStyle_BOLD
 	*/
 	BOLD:		0x01,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/FontStyle_ITALIC
+		@docs	http://www.userapps.de/documentation/FontStyle_ITALIC
 	*/
 	ITALIC:		0x02
 };
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KFont_constructor
+	@docs	http://www.userapps.de/documentation/KFont_constructor
 */
 function KFont(name, style, size) {
 	var _name		= 'Arial';
@@ -72,7 +72,7 @@ function KFont(name, style, size) {
 	}
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KFont_toString
+		@docs	http://www.userapps.de/documentation/KFont_toString
 	*/
 	this.toString = function toString() {
 		var output = '';

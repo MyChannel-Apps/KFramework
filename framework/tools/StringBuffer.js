@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,13 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/tools/stringbuffer
+	@docs		http://www.userapps.de/documentation/tools/stringbuffer
 */
 function StringBuffer(startText) {
 	var _data = startText || '';
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_append
+		@docs		http://www.userapps.de/documentation/StringBuffer_append
 	*/
 	this.append = function append(data) {
 		_data += data;
@@ -36,7 +36,7 @@ function StringBuffer(startText) {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/StringBuffer_toString
+		@docs		http://www.userapps.de/documentation/StringBuffer_toString
 	*/
 	this.toString = function toString() {
 		return _data;

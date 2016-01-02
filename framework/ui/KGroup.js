@@ -1,6 +1,6 @@
 /**
 	The MIT License (MIT)
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
 	in the Software without restriction, including without limitation the rights
@@ -18,7 +18,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/ui/group
+	@docs		http://www.userapps.de/documentation/ui/group
 */
 
 var KCODE_GROUPS_INSTANCES = 0;
@@ -29,7 +29,7 @@ function KGroup() {
 	var _layout_box		= false;
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_add
+		@docs		http://www.userapps.de/documentation/KGroup_add
 	*/
 	this.add = function add(content) {
 		_groups.push(content);
@@ -37,7 +37,7 @@ function KGroup() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_remove
+		@docs		http://www.userapps.de/documentation/KGroup_remove
 	*/
 	this.remove = function remove(index) {
 		delete _groups[index];
@@ -45,7 +45,7 @@ function KGroup() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_update
+		@docs		http://www.userapps.de/documentation/KGroup_update
 	*/
 	this.update = function update(index, content) {
 		_groups[index] = content;
@@ -53,7 +53,7 @@ function KGroup() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_show
+		@docs		http://www.userapps.de/documentation/KGroup_show
 	*/
 	this.show = function show(index) {
 		_show = index;
@@ -61,7 +61,7 @@ function KGroup() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_enableBoxLayout
+		@docs		http://www.userapps.de/documentation/KGroup_enableBoxLayout
 	*/
 	this.enableBoxLayout = function enableBoxLayout(state) {
 		_layout_box = state;
@@ -69,7 +69,7 @@ function KGroup() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_getNavigation
+		@docs		http://www.userapps.de/documentation/KGroup_getNavigation
 	*/
 	this.getNavigation = function getNavigation(titles) {
 		titles		= (titles == undefined ? [] : titles);
@@ -109,21 +109,21 @@ function KGroup() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_getTabCommand
+		@docs		http://www.userapps.de/documentation/KGroup_getTabCommand
 	*/
 	this.getTabCommand = function getTabCommand(index) {
 		return '/tp-showgrp ' + index;
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_switchTab
+		@docs		http://www.userapps.de/documentation/KGroup_switchTab
 	*/
 	this.switchTab = function switchTab(index) {
 		return '°>{setdisplaygroup}' + index + '<°';
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/KGroup_
+		@docs		http://www.userapps.de/documentation/KGroup_
 	*/
 	this.toString = function toString() {
 		var buffer = new StringBuffer();

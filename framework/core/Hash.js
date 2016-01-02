@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2015 MyChannel-Apps.de
+	Copyright (c) 2015 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,12 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/core/hash
+	@docs		http://www.userapps.de/documentation/core/hash
 */
 
 var Hash = {
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Hash_decodeForm
+		@docs		http://www.userapps.de/documentation/Hash_decodeForm
 	*/
 	decodeForm: function decodeForm(string) {
 		var chars	= string.split('');
@@ -49,7 +49,7 @@ var Hash = {
 		return output.join('');
 	},
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Hash_toString
+		@docs		http://www.userapps.de/documentation/Hash_toString
 	*/
 	toString: function toString() {
 		return '[KFramework Hash]';

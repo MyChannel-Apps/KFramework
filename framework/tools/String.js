@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/tools/string
+	@docs		http://www.userapps.de/documentation/tools/string
 */
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/String_urlencode
+	@docs	http://www.userapps.de/documentation/String_urlencode
 */
 if(!String.prototype.urlencode) {
 	Object.defineProperty(String.prototype, 'urlencode', {
@@ -40,7 +40,7 @@ if(!String.prototype.urlencode) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/String_format
+	@docs	http://www.userapps.de/documentation/String_format
 */
 if(!String.prototype.format) {
 	Object.defineProperty(String.prototype, 'format', {
@@ -57,7 +57,7 @@ if(!String.prototype.format) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/String_formater
+	@docs	http://www.userapps.de/documentation/String_formater
 */
 if(!String.prototype.formater) {
 	Object.defineProperty(String.prototype, 'formater', {
@@ -73,7 +73,7 @@ if(!String.prototype.formater) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/String_contains
+	@docs	http://www.userapps.de/documentation/String_contains
 */
 if(!String.prototype.contains) {
 	Object.defineProperty(String.prototype, 'contains', {

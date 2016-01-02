@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/cronjob
+	@docs		http://www.userapps.de/documentation/core/cronjob
 */
 
 var Cron = (new function Cron() {
@@ -40,7 +40,7 @@ var Cron = (new function Cron() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_enableOfflineRunCheck
+		@docs	http://www.userapps.de/documentation/Cron_enableOfflineRunCheck
 	*/
 	this.enableOfflineRunCheck = function enableOfflineRunCheck() {
 		_offlineCheck = true;
@@ -77,7 +77,7 @@ var Cron = (new function Cron() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_add
+		@docs	http://www.userapps.de/documentation/Cron_add
 	*/
 	this.add = function add(cronjob) {
 		_cronjobs.push(cronjob);
@@ -130,7 +130,7 @@ var Cron = (new function Cron() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_saveData
+		@docs	http://www.userapps.de/documentation/Cron_saveData
 	*/
 	this.saveData = function saveData() {
 		_cronjobs.each(function CronjobsEach(cron) {
@@ -139,7 +139,7 @@ var Cron = (new function Cron() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_onShutdown
+		@docs	http://www.userapps.de/documentation/Cron_onShutdown
 	*/
 	this.onShutdown = function onShutdown() {
 		_cronjobs.each(function CronjobsEach(cron) {
@@ -152,7 +152,7 @@ var Cron = (new function Cron() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_toString
+		@docs	http://www.userapps.de/documentation/Cron_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework Cron]';
@@ -212,49 +212,49 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastRun
+		@docs	http://www.userapps.de/documentation/Cron_getLastRun
 	*/
 	this.getLastRun = function getLastRun() {
 		return _last_run.getTime();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_getName
+		@docs	http://www.userapps.de/documentation/Cron_getName
 	*/
 	this.getName = function getName() {
 		return _name;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_getLastCheck
+		@docs	http://www.userapps.de/documentation/Cron_getLastCheck
 	*/
 	this.getLastCheck = function getLastCheck() {
 		return _last_check.getTime();
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_SetLastCheck
+		@docs	http://www.userapps.de/documentation/Cron_SetLastCheck
 	*/
 	this.setLastCheck = function setLastCheck(time) {
 		_last_check = time;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_isRunning
+		@docs	http://www.userapps.de/documentation/Cron_isRunning
 	*/
 	this.isRunning = function isRunning() {
 		return _is_running;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_start
+		@docs	http://www.userapps.de/documentation/Cron_start
 	*/
 	this.start = function start() {
 		_is_running	= true;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_stop
+		@docs	http://www.userapps.de/documentation/Cron_stop
 	*/
 	this.stop = function stop() {
 		_is_running	= false;
@@ -302,7 +302,7 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cron_onShutdown
+		@docs	http://www.userapps.de/documentation/Cron_onShutdown
 	*/
 	this.onShutdown = function onShutdown() {
 		this.stop();
@@ -310,7 +310,7 @@ function Cronjob(name, cycle, callback) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Cronjob_toString
+		@docs	http://www.userapps.de/documentation/Cronjob_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework Cronjob]';

@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2015 MyChannel-Apps.de
+	Copyright (c) 2015 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,64 +22,64 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/core/store
+	@docs		http://www.userapps.de/documentation/core/store
 */
 
 var Payment = {
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_0
+		@docs		http://www.userapps.de/documentation/Payment_TIER_0
 	*/
 	TIER_0:		0x01,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_1
+		@docs		http://www.userapps.de/documentation/Payment_TIER_1
 	*/
 	TIER_1:		0x02,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_2
+		@docs		http://www.userapps.de/documentation/Payment_TIER_2
 	*/
 	TIER_2:		0x03,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_3
+		@docs		http://www.userapps.de/documentation/Payment_TIER_3
 	*/
 	TIER_3:		0x04,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_4
+		@docs		http://www.userapps.de/documentation/Payment_TIER_4
 	*/
 	TIER_4:		0x05,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_5
+		@docs		http://www.userapps.de/documentation/Payment_TIER_5
 	*/
 	TIER_5:		0x06,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_6
+		@docs		http://www.userapps.de/documentation/Payment_TIER_6
 	*/
 	TIER_6:		0x07,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/Payment_TIER_7
+		@docs		http://www.userapps.de/documentation/Payment_TIER_7
 	*/
 	TIER_7:		0x08
 };
 
 var PaymentInterval = {
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/PaymentInterval_Daily
+		@docs		http://www.userapps.de/documentation/PaymentInterval_Daily
 	*/
 	Daily:		0x01,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/PaymentInterval_Weekly
+		@docs		http://www.userapps.de/documentation/PaymentInterval_Weekly
 	*/
 	Weekly:		0x02,
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/PaymentInterval_Monthly
+		@docs		http://www.userapps.de/documentation/PaymentInterval_Monthly
 	*/
 	Monthly:	0x03
 };
@@ -108,7 +108,7 @@ var AppStore = (new function AppStore() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/AppStore_setSettings
+		@docs		http://www.userapps.de/documentation/AppStore_setSettings
 	*/
 	this.setSettings = function setSettings(options) {
 		Logger.info('AppStore.setSettings(options) is DEPRECATED');
@@ -117,7 +117,7 @@ var AppStore = (new function AppStore() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/AppStore_app
+		@docs		http://www.userapps.de/documentation/AppStore_app
 	*/
 	this.app = function app(container) {
 		Logger.info('AppStore.app(container) is DEPRECATED');
@@ -351,7 +351,7 @@ var AppStore = (new function AppStore() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/AppStore_isLocked
+		@docs		http://www.userapps.de/documentation/AppStore_isLocked
 	*/
 	this.isLocked = function isLocked() {
 		Logger.info('AppStore.isLocked() is DEPRECATED');
@@ -372,7 +372,7 @@ var AppStore = (new function AppStore() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/AppStore_hasPayed
+		@docs		http://www.userapps.de/documentation/AppStore_hasPayed
 	*/
 	this.hasPayed = function hasPayed() {
 		Logger.info('AppStore.hasPayed() is DEPRECATED');
@@ -449,7 +449,7 @@ var AppStore = (new function AppStore() {
 	};
 	
 	/*
-		@docs		http://www.mychannel-apps.de/documentation/AppStore_toString
+		@docs		http://www.userapps.de/documentation/AppStore_toString
 	*/
 	this.toString = function toString() {
 		return '[KFramework AppStore]';

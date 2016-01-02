@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/tools/user
+	@docs		http://www.userapps.de/documentation/tools/user
 */
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_getID
+	@docs	http://www.userapps.de/documentation/User_getID
 */
 if(!User.prototype.getID) {
 	Object.defineProperty(User.prototype, 'getID', {
@@ -40,7 +40,7 @@ if(!User.prototype.getID) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_private
+	@docs	http://www.userapps.de/documentation/User_private
 */
 if(!User.prototype.private) {
 	Object.defineProperty(User.prototype, 'private', {
@@ -54,7 +54,7 @@ if(!User.prototype.private) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_post
+	@docs	http://www.userapps.de/documentation/User_post
 */
 if(!User.prototype.post) {
 	Object.defineProperty(User.prototype, 'post', {
@@ -68,7 +68,7 @@ if(!User.prototype.post) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_getProfilePicture
+	@docs	http://www.userapps.de/documentation/User_getProfilePicture
 */
 if(!User.prototype.getProfilePicture) {
 	Object.defineProperty(User.prototype, 'getProfilePicture', {
@@ -125,7 +125,7 @@ if(!User.prototype.getGenderString) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_getKonto
+	@docs	http://www.userapps.de/documentation/User_getKonto
 */
 if(!User.prototype.getKonto) {
 	Object.defineProperty(User.prototype, 'getKonto', {
@@ -139,7 +139,7 @@ if(!User.prototype.getKonto) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_getKn
+	@docs	http://www.userapps.de/documentation/User_getKn
 */
 if(!User.prototype.getKn) {
 	Object.defineProperty(User.prototype, 'getKn', {
@@ -167,7 +167,7 @@ if(!User.prototype.getTotalKn) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_addKn
+	@docs	http://www.userapps.de/documentation/User_addKn
 */
 if(!User.prototype.addKn) {
 	Object.defineProperty(User.prototype, 'addKn', {
@@ -181,7 +181,7 @@ if(!User.prototype.addKn) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/User_subKn
+	@docs	http://www.userapps.de/documentation/User_subKn
 */
 if(!User.prototype.subKn) {
 	Object.defineProperty(User.prototype, 'subKn', {

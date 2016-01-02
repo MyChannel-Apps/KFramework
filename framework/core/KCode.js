@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/core/kcode
+	@docs		http://www.userapps.de/documentation/core/kcode
 */
 
 var load = [
@@ -43,33 +43,33 @@ load.each(function LoadEach(name) {
 
 var Alignment = {
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Alignment_LEFT
+		@docs	http://www.userapps.de/documentation/Alignment_LEFT
 	*/
 	LEFT:		'°>LEFT<°',
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Alignment_MIDDLE
+		@docs	http://www.userapps.de/documentation/Alignment_MIDDLE
 	*/
 	MIDDLE:		'°>CENTER<°',
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Alignment_CENTER
+		@docs	http://www.userapps.de/documentation/Alignment_CENTER
 	*/
 	CENTER:		'°>CENTER<°',
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Alignment_RIGHT
+		@docs	http://www.userapps.de/documentation/Alignment_RIGHT
 	*/
 	RIGHT:		'°>RIGHT<°',
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Alignment_JUSTIFY
+		@docs	http://www.userapps.de/documentation/Alignment_JUSTIFY
 	*/
 	JUSTIFY:	'°>JUSTIFY<°'
 };
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KCode_constructor
+	@docs	http://www.userapps.de/documentation/KCode_constructor
 */
 function KCode() {
 	var _buffer 	= [];
@@ -78,7 +78,7 @@ function KCode() {
 	var _mobilefix	= false;
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_append
+		@docs	http://www.userapps.de/documentation/KCode_append
 	*/
 	this.append = function append(component) {
 		_buffer.push(component);
@@ -86,7 +86,7 @@ function KCode() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_newLine
+		@docs	http://www.userapps.de/documentation/KCode_newLine
 	*/
 	this.newLine = function newLine(dotted) {
 		_buffer.push('°#');
@@ -116,7 +116,7 @@ function KCode() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_newHr
+		@docs	http://www.userapps.de/documentation/KCode_newHr
 	*/
 	this.newHr = function newHr() {
 		_buffer.push('°-°');
@@ -124,7 +124,7 @@ function KCode() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_addDots
+		@docs	http://www.userapps.de/documentation/KCode_addDots
 	*/
 	this.addDots = function addDots() {
 		_buffer.push('.........');
@@ -132,7 +132,7 @@ function KCode() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_setAlignment
+		@docs	http://www.userapps.de/documentation/KCode_setAlignment
 	*/
 	this.setAlignment = function setAlignment(alignment) {
 		_buffer.push(alignment);
@@ -140,7 +140,7 @@ function KCode() {
 	};	
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_addImage
+		@docs	http://www.userapps.de/documentation/KCode_addImage
 	*/
 	this.addImage = function addImage(file) {
 		Logger.info('KCode.addImage(file) is DEPRECATED');
@@ -150,7 +150,7 @@ function KCode() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_disableOptimization
+		@docs	http://www.userapps.de/documentation/KCode_disableOptimization
 	*/
 	this.disableOptimization = function disableOptimization(state) {
 		_minify = state;
@@ -158,7 +158,7 @@ function KCode() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCode_toString
+		@docs	http://www.userapps.de/documentation/KCode_toString
 	*/
 	this.toString = function toString() {
 		var string = '';

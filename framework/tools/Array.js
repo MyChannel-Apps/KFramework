@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@
 	THE SOFTWARE.
 	
 	@author		Christoph Kühl <djchrisnet>, Adrian Preuß <Bizarrus>
-	@docs		http://www.mychannel-apps.de/documentation/tools/array
+	@docs		http://www.userapps.de/documentation/tools/array
 */
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Array_each
+	@docs	http://www.userapps.de/documentation/Array_each
 */
 if(!Array.prototype.each) {
 	Object.defineProperty(Array.prototype, 'each', {
@@ -71,7 +71,7 @@ if(!Array.prototype.each) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Array_random
+	@docs	http://www.userapps.de/documentation/Array_random
 */
 if(!Array.prototype.random) {
 	Object.defineProperty(Array.prototype, 'random', {
@@ -103,7 +103,7 @@ if(!Array.prototype.shuffle) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Array_exists
+	@docs	http://www.userapps.de/documentation/Array_exists
 */
 if(!Array.prototype.exists) {
 	Object.defineProperty(Array.prototype, 'exists', {
@@ -117,7 +117,7 @@ if(!Array.prototype.exists) {
 }
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/Array_size
+	@docs	http://www.userapps.de/documentation/Array_size
 */
 if(!Array.prototype.size) {
 	Object.defineProperty(Array.prototype, 'size', {

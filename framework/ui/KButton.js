@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/ui/button
+	@docs	http://www.userapps.de/documentation/ui/button
 */
 
 function KButton(text, command) {
@@ -33,7 +33,7 @@ function KButton(text, command) {
 	var _fix_escaping	= false;
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_constructor
+		@docs	http://www.userapps.de/documentation/KButton_constructor
 	*/
 	function KButton(text, command) {
 		if(text === undefined) {
@@ -54,7 +54,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setID
+		@docs	http://www.userapps.de/documentation/KButton_setID
 	*/
 	this.setID = function setID(id) {
 		_id = id;
@@ -62,7 +62,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getID
+		@docs	http://www.userapps.de/documentation/KButton_getID
 	*/
 	this.getID = function getID() {
 		return _id;
@@ -70,14 +70,14 @@ function KButton(text, command) {
 	
 	/* COMMAND */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getCommand
+		@docs	http://www.userapps.de/documentation/KButton_getCommand
 	*/
 	this.getCommand = function getCommand() {
 		return _command;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setCommand
+		@docs	http://www.userapps.de/documentation/KButton_setCommand
 	*/
 	this.setCommand = function setCommand(command) {
 		_command = command;
@@ -86,14 +86,14 @@ function KButton(text, command) {
 	
 	/* TEXT */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getText
+		@docs	http://www.userapps.de/documentation/KButton_getText
 	*/
 	this.getText = function getText() {
 		return _text;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getText
+		@docs	http://www.userapps.de/documentation/KButton_getText
 	*/
 	this.setText = function setText(text) {
 		_text = text;
@@ -118,7 +118,7 @@ function KButton(text, command) {
 	
 	/* ICON */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setIcon
+		@docs	http://www.userapps.de/documentation/KButton_setIcon
 	*/
 	this.setIcon = function setIcon(icon) {
 		if(icon.startsWith('https://') || icon.startsWith('http://')) {
@@ -130,7 +130,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_removeIcon
+		@docs	http://www.userapps.de/documentation/KButton_removeIcon
 	*/
 	this.removeIcon = function removeIcon() {
 		delete _properties.icon;
@@ -139,7 +139,7 @@ function KButton(text, command) {
 	
 	/* COLOR */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setColor
+		@docs	http://www.userapps.de/documentation/KButton_setColor
 	*/
 	this.setColor = function setColor(color) {
 		// @ToDo can be gradient like "120,230,90~60,170,25~24,96,1"
@@ -148,7 +148,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_removeColor
+		@docs	http://www.userapps.de/documentation/KButton_removeColor
 	*/
 	this.removeColor = function removeColor() {
 		delete _properties.color;
@@ -157,14 +157,14 @@ function KButton(text, command) {
 	
 	/* HEIGHT */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setHeight
+		@docs	http://www.userapps.de/documentation/KButton_setHeight
 	*/
 	this.getHeight = function getHeight() {
 		return _properties.height;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setHeight
+		@docs	http://www.userapps.de/documentation/KButton_setHeight
 	*/
 	this.setHeight = function setHeight(height) {
 		_properties.height = height;
@@ -172,7 +172,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_removeHeight
+		@docs	http://www.userapps.de/documentation/KButton_removeHeight
 	*/
 	this.removeHeight = function removeHeight() {
 		delete _properties.height;
@@ -181,14 +181,14 @@ function KButton(text, command) {
 	
 	/* WIDTH */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getWidth
+		@docs	http://www.userapps.de/documentation/KButton_getWidth
 	*/
 	this.getWidth = function getWidth() {
 		return _properties.width;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setWidth
+		@docs	http://www.userapps.de/documentation/KButton_setWidth
 	*/
 	this.setWidth = function setWidth(width) {
 		_properties.width = width;
@@ -196,7 +196,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_removeWidth
+		@docs	http://www.userapps.de/documentation/KButton_removeWidth
 	*/
 	this.removeWidth = function removeWidth() {
 		delete _properties.width;
@@ -205,7 +205,7 @@ function KButton(text, command) {
 	
 	/* SIZE */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setSize
+		@docs	http://www.userapps.de/documentation/KButton_setSize
 	*/
 	this.setSize = function setSize(width, height) {
 		this.setWidth(width);
@@ -214,7 +214,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_removeSize
+		@docs	http://www.userapps.de/documentation/KButton_removeSize
 	*/
 	this.removeSize = function removeSize() {
 		this.removeWidth();
@@ -224,14 +224,14 @@ function KButton(text, command) {
 	
 	/* POSITION */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getX
+		@docs	http://www.userapps.de/documentation/KButton_getX
 	*/
 	this.getX = function getX() {
 		return _properties.mx;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setX
+		@docs	http://www.userapps.de/documentation/KButton_setX
 	*/
 	this.setX = function setX(x) {
 		_properties.mx = x;
@@ -239,7 +239,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_getY
+		@docs	http://www.userapps.de/documentation/KButton_getY
 	*/
 	this.getY = function getY() {
 		return _properties.my;
@@ -247,7 +247,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setY
+		@docs	http://www.userapps.de/documentation/KButton_setY
 	*/
 	this.setY = function setY(y) {
 		_properties.my = y;
@@ -255,7 +255,7 @@ function KButton(text, command) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setPosition
+		@docs	http://www.userapps.de/documentation/KButton_setPosition
 	*/
 	this.setPosition = function setPosition(x, y) {
 		this.setX(x);
@@ -265,7 +265,7 @@ function KButton(text, command) {
 	
 	/* TEXTBORDER */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_useTextborder
+		@docs	http://www.userapps.de/documentation/KButton_useTextborder
 	*/
 	this.useTextborder = function useTextborder(bool) {
 		if(bool) {
@@ -279,7 +279,7 @@ function KButton(text, command) {
 	
 	/* DISABLED */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_setEnabled
+		@docs	http://www.userapps.de/documentation/KButton_setEnabled
 	*/
 	this.setEnabled = function setEnabled(bool) {
 		if(bool == false) {
@@ -292,7 +292,7 @@ function KButton(text, command) {
 	
 	/* @ToDo TEXTCOLOR */
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KButton_toString
+		@docs	http://www.userapps.de/documentation/KButton_toString
 	*/
 	this.toString = function toString() {
 		var buffer = new StringBuffer('°>{button}');

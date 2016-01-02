@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ var Logger = (new function Logger() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_addLogUser
+		@docs	http://www.userapps.de/documentation/Logger_addLogUser
 	*/
 	this.addLogUser = function addLogUser(uid, types) {
 		Logger.info('Logger.addLogUser(uid, types) is DEPRECATED');
@@ -43,7 +43,7 @@ var Logger = (new function Logger() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_delLogUser
+		@docs	http://www.userapps.de/documentation/Logger_delLogUser
 	*/
 	this.delLogUser = function delLogUser(uid) {
 		Logger.info('Logger.delLogUser(uid) is DEPRECATED');
@@ -101,7 +101,7 @@ var Logger = (new function Logger() {
 	};
 
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_debug
+		@docs	http://www.userapps.de/documentation/Logger_debug
 	*/
 	this.debug = function debug(message) {
 		_logger.debug(message + getStrackTrace());
@@ -109,7 +109,7 @@ var Logger = (new function Logger() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_info
+		@docs	http://www.userapps.de/documentation/Logger_info
 	*/
 	this.info = function info(message) {
 		_logger.info(message + getStrackTrace());
@@ -117,7 +117,7 @@ var Logger = (new function Logger() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_error
+		@docs	http://www.userapps.de/documentation/Logger_error
 	*/
 	this.error = function error(message) {
 		_logger.error(message + getStrackTrace());
@@ -125,7 +125,7 @@ var Logger = (new function Logger() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_fatal
+		@docs	http://www.userapps.de/documentation/Logger_fatal
 	*/
 	this.fatal = function fatal(message) {
 		_logger.fatal(message + getStrackTrace());
@@ -133,7 +133,7 @@ var Logger = (new function Logger() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Logger_warn
+		@docs	http://www.userapps.de/documentation/Logger_warn
 	*/
 	this.warn = function warn(message) {
 		_logger.warn(message + getStrackTrace());

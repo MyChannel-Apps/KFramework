@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,11 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/ui/link
+	@docs	http://www.userapps.de/documentation/ui/link
 */
 
 /*
-	@docs	http://www.mychannel-apps.de/documentation/KLink_constructor
+	@docs	http://www.userapps.de/documentation/KLink_constructor
 */
 function KLink(text, command_left, command_right) {
 	var _text			= '';
@@ -51,14 +51,14 @@ function KLink(text, command_left, command_right) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KLink_getText
+		@docs	http://www.userapps.de/documentation/KLink_getText
 	*/
 	this.getText = function getText() {
 		return _text;
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KLink_setCommand
+		@docs	http://www.userapps.de/documentation/KLink_setCommand
 	*/
 	this.setCommand = function setCommand(command_left, command_right) {
 		_command_left	= command_left;
@@ -67,7 +67,7 @@ function KLink(text, command_left, command_right) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KLink_enableHover
+		@docs	http://www.userapps.de/documentation/KLink_enableHover
 	*/
 	this.enableHover = function enableHover(state) {
 		_hover = state;
@@ -75,7 +75,7 @@ function KLink(text, command_left, command_right) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KLink_setHoverImage
+		@docs	http://www.userapps.de/documentation/KLink_setHoverImage
 	*/
 	this.setHoverImage = function setHoverImage(image) {
 		if(_text instanceof KImage) {
@@ -88,7 +88,7 @@ function KLink(text, command_left, command_right) {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KLink_toString
+		@docs	http://www.userapps.de/documentation/KLink_toString
 	*/
 	this.toString = function toString() {
 		var buffer = new StringBuffer('°>');

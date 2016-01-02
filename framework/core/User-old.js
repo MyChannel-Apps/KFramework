@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,42 +22,42 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>, Christoph Kühl <djchrisnet>
-	@docs		http://www.mychannel-apps.de/documentation/core/user
+	@docs		http://www.userapps.de/documentation/core/user
 */
 
 var Status = {
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Newbie
+		@docs	http://www.userapps.de/documentation/Status_Newbie
 	*/
 	Newbie:		0,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Family
+		@docs	http://www.userapps.de/documentation/Status_Family
 	*/
 	Family:		1,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Stammi
+		@docs	http://www.userapps.de/documentation/Status_Stammi
 	*/
 	Stammi:		2,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Ehrenz
+		@docs	http://www.userapps.de/documentation/Status_Ehrenz
 	*/
 	Ehrenz:		3,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Admin
+		@docs	http://www.userapps.de/documentation/Status_Admin
 	*/
 	Admin:		6,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Sysadmin
+		@docs	http://www.userapps.de/documentation/Status_Sysadmin
 	*/
 	Sysadmin:	11,
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/Status_Bot
+		@docs	http://www.userapps.de/documentation/Status_Bot
 	*/
 	Bot:		-1
 };
@@ -78,7 +78,7 @@ var Users = (new function Users() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/User_get
+		@docs	http://www.userapps.de/documentation/User_get
 	*/
 	this.get = function get(nickname) {
 		if(typeof(nickname) == 'number') {
@@ -202,7 +202,7 @@ var Users = (new function Users() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/User_toString
+		@docs	http://www.userapps.de/documentation/User_toString
 	*/
 	this.toString = function toString(value) {
 		switch(value) {

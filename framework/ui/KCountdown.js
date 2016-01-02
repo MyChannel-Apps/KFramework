@@ -1,7 +1,7 @@
 /**
 	The MIT License (MIT)
 
-	Copyright (c) 2014 MyChannel-Apps.de
+	Copyright (c) 2014 UserApps.de
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,12 @@
 	THE SOFTWARE.
 	
 	@author		Adrian Preuß <Bizarrus>
-	@docs	http://www.mychannel-apps.de/documentation/ui/countdown
+	@docs	http://www.userapps.de/documentation/ui/countdown
 */
 
 /*
 	format=DE
-	@docs	http://www.mychannel-apps.de/documentation/KCountdown_constructor
+	@docs	http://www.userapps.de/documentation/KCountdown_constructor
 */
 function KCountdown() {
 	var _properties	= {};
@@ -35,7 +35,7 @@ function KCountdown() {
 	var timer = null;
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setTime
+		@docs	http://www.userapps.de/documentation/KCountdown_setTime
 	*/
 	this.setTime = function setTime(time) {
 		_properties.time = time;
@@ -43,7 +43,7 @@ function KCountdown() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCountdown_setFormat
+		@docs	http://www.userapps.de/documentation/KCountdown_setFormat
 	*/
 	this.setFormat = function setFormat(format) {
 		_properties.format = format;
@@ -64,7 +64,7 @@ function KCountdown() {
 	};
 	
 	/*
-		@docs	http://www.mychannel-apps.de/documentation/KCountdown_toString
+		@docs	http://www.userapps.de/documentation/KCountdown_toString
 	*/
 	this.toString = function toString() {
 		var buffer = new StringBuffer('°>{countdown}');
