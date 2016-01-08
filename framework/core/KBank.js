@@ -573,7 +573,7 @@ var KBank = (new function KBank() {
 				delete migrate[uid];
 			});
 			DB.save('_bank', migrate);			
-			Logger.info('KBank can´t migrate all data at once ('+migrated.size()+' of '+migrate.size()+' finish). Please restart this App to migrate the last '+(migrate.size()-migrated.size())+' KBank Entrys');
+			Logger.info('KBank cant migrate all data at once ('+migrated.size()+' of '+migrate.size()+' finish). Please restart this App to migrate the last '+(migrate.size()-migrated.size())+' KBank Entrys');
 		}
 		return false;
 	};

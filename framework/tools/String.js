@@ -71,27 +71,3 @@ if(!String.prototype.formater) {
 		}
 	});
 }
-
-/*
-	@docs	http://www.userapps.de/documentation/String_contains
-*/
-if(!String.prototype.contains) {
-	Object.defineProperty(String.prototype, 'contains', {
-		enumerable:		false,
-		configurable:	false,
-		writable:		false,
-		value:			function contains(args) {
-			if(typeof(args) == 'string') {
-				args = [args];
-			}
-			
-			for(var x in args) {
-				if(this.indexOf(args[x])> -1) {
-					return true;
-				}
-			}
-			
-			return false;
-		}
-	});
-}
