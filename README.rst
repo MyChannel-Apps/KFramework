@@ -1,4 +1,4 @@
-.. image:: http://www.mychannel-apps.de/images/logo.png
+.. image:: http://www.userapps.de/images/logo.png
     :alt: KFramework
     :width: 80
     :height: 80
@@ -10,7 +10,7 @@ KFramework
 
 This project provides basic and extended methods for the vanilla API from Knuddels.
 
-Please see our `Website <http://www.MyChannel-Apps.de/>`_ for Help, Documentation, Examples and Informations!
+Please see our `Website <http://www.userapps.de/>`_ for Help, Documentation, Examples and Informations!
 
 Check out the `Examples <https://github.com/MyChannel-Apps/Examples>`_
 
@@ -20,9 +20,9 @@ Check out the `Examples <https://github.com/MyChannel-Apps/Examples>`_
 
 :Version: 1.0.7
 
-:Website: http://www.MyChannel-Apps.de/
+:Website: http://www.userapps.de/
 
-:Documentation: http://www.MyChannel-Apps.de/documentation/
+:Documentation: http://www.userapps.de/documentation/
 
 :API Provider: http://www.knuddels.de/
 
