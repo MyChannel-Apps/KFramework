@@ -83,7 +83,7 @@ var Users = (new function Users() {
 	/*
 		@docs	TODO
 	*/
-	this.exists = function exists(nickname) {
+	this.nickExists = function nickExists(nickname) {
 		return UAC.exists(nickname);
 	};
 	
