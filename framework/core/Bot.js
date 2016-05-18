@@ -435,7 +435,7 @@ var Bot = (new function Bot() {
 					if(isTypeOf(nick, 'User')) {
 						nick.sendPrivateMessage(textFilter+message);
 					} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
-						_user.sendPrivateMessage(nick, textFilter+message);
+						_user.sendPrivateMessage(textFilter+message, nick);
 					} else {
 						nick = Users.get(nick);
 						if(nick != undefined) {
@@ -454,7 +454,7 @@ var Bot = (new function Bot() {
 				if(isTypeOf(nick, 'User')) {
 					nick.sendPrivateMessage(textFilter+message);
 				} else if(isTypeOf(nick, 'object') || isTypeOf(nick, 'array')) {
-					_user.sendPrivateMessage(nick, textFilter+message);
+					_user.sendPrivateMessage(textFilter+message, nick);
 				} else {
 					nick = Users.get(nick);
 					if(nick != undefined) {
