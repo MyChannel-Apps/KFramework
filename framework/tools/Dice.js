@@ -42,26 +42,12 @@ if (!DiceEvent.prototype.getTotal) {
 /*
 	@docs	TODO
 */
-if (!DiceEvent.prototype.getSingleDices) {
-  Object.defineProperty(DiceEvent.prototype, 'getSingleDices', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: function getSingleDices() {
-		return this.getDiceResult().getSingleDiceResults();
-    }
-  });
-}
-
-/*
-	@docs	TODO
-*/
 if (!DiceEvent.prototype.isOpenThrow) {
   Object.defineProperty(DiceEvent.prototype, 'isOpenThrow', {
     enumerable: false,
     configurable: false,
     writable: false,
-    value: function isPrivate() {
+    value: function isOpenThrow() {
 		return this.getDiceResult().getDiceConfiguration().isUsingOpenThrow();
     }
   });
