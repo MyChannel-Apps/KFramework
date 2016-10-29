@@ -92,6 +92,7 @@ var Channel = (new function Channel() {
 	var _channel		= KnuddelsServer.getChannel();
 	var _configuration	= _channel.getChannelConfiguration();
 	var _restrictions	= _channel.getChannelRestrictions();
+	var _design			= _channel.getChannelDesign();
 	var _rights			= _configuration.getChannelRights();
 	var _info			= _configuration.getChannelInformation();
 	
@@ -100,6 +101,13 @@ var Channel = (new function Channel() {
 	*/
 	this.getName = function getName() {
 		return _channel.getChannelName();
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.getRootName = function getRootName() {
+		return _channel.getRootChannelName();
 	};
 	
 	/*
@@ -199,6 +207,13 @@ var Channel = (new function Channel() {
 	this.isVideoChannel = function isVideoChannel() {
 		return _channel.isVideoChannel();
 	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.isVisible = function isVisible() {
+		return _channel.isVisible();
+	};
 
 	/*
 		@docs	TODO
@@ -206,6 +221,28 @@ var Channel = (new function Channel() {
 	this.getServer = function getServer() {
 		return KnuddelsServer.getChatServerInfo().getServerId();
 	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.getBackgroundColor = function getBackgroundColor() {
+		return _design.getBackgroundColor();
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.getDefaultFontColor = function getDefaultFontColor() {
+		return _design.getDefaultFontColor();
+	};
+	
+	/*
+		@docs	TODO
+	*/
+	this.getDefaultFontSize = function getDefaultFontSize() {
+		return _design.getDefaultFontSize();
+	};
+	
 	
 	/*
 		@docs	http://www.userapps.de/documentation/Channel_getUsers
