@@ -24,7 +24,7 @@
 	@author		Adrian Preuß <Bizarrus>
 */
 
-var VERSION		= '1.0.9';
+var VERSION		= '1.0.10';
 
 var KFramework = (new function KFramework() {
 	this.load = [
@@ -48,6 +48,7 @@ var KFramework = (new function KFramework() {
 		'core/Bot',
 		'core/KCode',
 		'core/KBank',
+		'core/Files',		
 		'core/Channel',
 		'core/User',
 		/* 'core/AppStore', */
