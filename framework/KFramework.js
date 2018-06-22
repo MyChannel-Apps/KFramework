@@ -50,7 +50,7 @@ var KFramework = (new function KFramework() {
 		'core/KBank',
 		'core/Channel',
 		'core/User',
-		'core/AppStore',
+		/* 'core/AppStore', */
 		'core/View',
 		'core/Toplist',
 		'core/AppInfo'
