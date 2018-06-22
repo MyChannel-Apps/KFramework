@@ -169,7 +169,11 @@ var KBank = (new function KBank() {
 			diffKn = 0.01;
 		}
 		
-		var requestKn = new KnuddelAmount(diffKn);
+		try {
+			var requestKn = new KnuddelAmount(diffKn);
+		} catch(e) {
+			callError(user, 'KnValueToHigh');
+		}
 
 		if(!knAcc.hasEnough(requestKn)) {
 			callError(user, 'KnNotEnough');
