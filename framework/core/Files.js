@@ -58,17 +58,23 @@ var Files = (new function Files() {
 	/*
 		@docs	http://www.userapps.de/documentation/Files_updateAppFiles
 	*/
-	this.updateAppFiles = rootInstance.updateAppFiles;
+	this.updateAppFiles = function updateAppFiles(){
+		return rootInstance.updateAppFiles();
+	};
 	
 	/*
 		@docs	http://www.userapps.de/documentation/Files_getPath
 	*/
-	this.getPath = KnuddelsServer.getFullImagePath;
+	this.getPath = function getPath(filename){
+		return KnuddelsServer.getFullImagePath(filename);
+	};
 	
 	/*
 		@docs	http://www.userapps.de/documentation/Files_getSystemPath
 	*/
-	this.getSystemPath = KnuddelsServer.getFullSystemImagePath;
+	this.getSystemPath = function getSystemPath(filename){
+		return KnuddelsServer.getFullSystemImagePath(filename);
+	};
 	
 	/*
 		@docs	http://www.userapps.de/documentation/Files_checkFile
