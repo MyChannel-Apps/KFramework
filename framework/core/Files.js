@@ -32,14 +32,14 @@ var Files = (new function Files() {
 	/*
 		@docs	http://www.userapps.de/documentation/Files_require
 	*/
-	this.require = function require(filename) {
+	this.require = function require (filename) {
 		
 		if(!this.checkFile(filename)) {
 			Logger.fatal(filename+' does not exists!');
 			return false;
 		}
 		
-		KnuddelsServer.require(filename);
+		KnuddelsServer.require (filename);
 	};
 	
 	/*

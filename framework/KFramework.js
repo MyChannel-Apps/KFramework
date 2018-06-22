@@ -48,7 +48,7 @@ var KFramework = (new function KFramework() {
 		'core/Bot',
 		'core/KCode',
 		'core/KBank',
-		//'core/Files',		
+		'core/Files',		
 		'core/Channel',
 		'core/User',
 		/* 'core/AppStore', */
