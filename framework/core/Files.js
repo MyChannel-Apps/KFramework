@@ -34,7 +34,7 @@ var Files = (new function Files() {
 	this.require = function require(filename) {
 		
 		if(!this.checkFile(filename)) {
-			Logger.fatal(filename+' does not exists!')
+			Logger.fatal(filename+' does not exists!');
 			return false;
 		}
 		
@@ -47,7 +47,7 @@ var Files = (new function Files() {
 	this.execute = function execute(filename) {
 		
 		if(!this.checkFile(filename)) {
-			Logger.fatal(filename+' does not exists!')
+			Logger.fatal(filename+' does not exists!');
 			return false;
 		}
 		
