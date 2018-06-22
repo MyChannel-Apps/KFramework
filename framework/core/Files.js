@@ -26,6 +26,7 @@
 */
 
 var Files = (new function Files() {
+	this.javaClassName = 'Files';
 	var rootInstance = KnuddelsServer.getAppAccess().getOwnInstance().getRootInstance();
 	
 	/*
