@@ -290,19 +290,25 @@
 								var key		= null;
 								var data	= null;
 								
-								if(typeof(event.type) != 'undefined') {
-									key = event.type;
-								}
-								
-								if(typeof(event.eventKey) != 'undefined') {
+								/*
+									backward compatibility of deprecated events
+								*/
+								if(typeof event.eventKey !== 'undefined') {
 									key = event.eventKey;
 								}
 								
-								if(typeof(event.eventData) != 'undefined') {
+								if(typeof event.eventData !== 'undefined') {
 									data = event.eventData;
 								}
 								
-								if(typeof(event.data) != 'undefined') {
+								/*
+									new specification of events
+								*/
+								if(typeof event.type !== 'undefined') {
+									key = event.type;
+								}
+								
+								if(typeof event.data !== 'undefined') {
 									data = event.data;
 								}
 								
