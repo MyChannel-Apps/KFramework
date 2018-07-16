@@ -223,7 +223,8 @@
 						};
 						
 						this.init = function init() {
-							document.addEventListener('eventReceived', _instance.onReceive);
+							Client.addEventListener('*', _instance.onReceive);
+							// DEPRECATED: document.addEventListener('eventReceived', _instance.onReceive);
 							
 							if(Client.pageData != undefined) {
 								for(var index in Client.pageData) {
@@ -281,8 +282,29 @@
 						
 						this.onReceive = function onReceive(event) {
 							try {
-								var key		= event.eventKey;
-								var data	= event.eventData;
+								/*
+								 DEPRECATED:
+								 var key		= event.eventKey;
+								 var data	= event.eventData;
+								*/
+								var key		= null;
+								var data	= null;
+								
+								if(typeof(event.type) != 'undefined') {
+									key = event.type;
+								}
+								
+								if(typeof(event.eventKey) != 'undefined') {
+									key = event.eventKey;
+								}
+								
+								if(typeof(event.eventData) != 'undefined') {
+									data = event.eventData;
+								}
+								
+								if(typeof(event.data) != 'undefined') {
+									data = event.data;
+								}
 								
 								switch(key) {
 									case 'close':
