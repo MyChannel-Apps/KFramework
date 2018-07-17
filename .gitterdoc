@@ -1,0 +1,11 @@
+{
+    "title": "KFramework",
+    "description": "This project provides basic and extended methods for the vanilla API from Knuddels.",
+    "version": "1.0.10",
+    "theme": "",
+    "type": "",
+    "options": {
+        "source": "",
+        "output": ""
+    }
+}
