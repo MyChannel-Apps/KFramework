@@ -381,7 +381,7 @@ var KBank = (new function KBank() {
 	/*
 		@docs	TODO
 	*/
-	this.payToAccount = function payout(uid, kn, reason) {
+	this.payToAccount = function payToAccount(uid, kn, reason) {
 		if(uid === undefined) {
 			throw 'No UID submitted!';
 		}
@@ -412,9 +412,9 @@ var KBank = (new function KBank() {
 		_db.addNumber('KBank_payout', kn);
 		
 		if(payoutTaxRate) {
-			Bot.knuddel(_user.getKnuddelAccount(), kn/100*(100-payoutTaxRate), reason);
+			Bot.knuddel(_user.getKnuddelAccount(), kn/100*(100-payoutTaxRate), reason, KnuddelTransferDisplayType.Silent);
 		} else {
-			Bot.knuddel(_user.getKnuddelAccount(), kn, reason);
+			Bot.knuddel(_user.getKnuddelAccount(), kn, reason, KnuddelTransferDisplayType.Silent);
 		}
 
 		if(updateCallback) {
