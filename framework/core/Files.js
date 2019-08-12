@@ -63,6 +63,13 @@ var Files = (new function Files() {
 	};
 	
 	/*
+		@docs	http://www.userapps.de/documentation/Files_updateAppFiles
+	*/
+	this.invalidateClientCache = function invalidateClientCache() {
+		return rootInstance.invalidateClientCache();
+	};
+	
+	/*
 		@docs	http://www.userapps.de/documentation/Files_getPath
 	*/
 	this.getPath = function getPath(filename){
