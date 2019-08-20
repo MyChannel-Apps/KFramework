@@ -61,11 +61,11 @@ var Files = (new function Files() {
 	this.updateAppFiles = function updateAppFiles(){
 		var files = rootInstance.updateAppFiles();
 		
-		var res = files.find(function(filename) {
+		var res = files.filter(function(filename) {
 			return filename.startsWith('www/');
 		});
 		
-		if(res) {
+		if(res.size()) {
 			rootInstance.invalidateClientCache();
 		}
 		
