@@ -59,14 +59,17 @@ var Files = (new function Files() {
 		@docs	http://www.userapps.de/documentation/Files_updateAppFiles
 	*/
 	this.updateAppFiles = function updateAppFiles(){
-		return rootInstance.updateAppFiles();
-	};
-	
-	/*
-		@docs	http://www.userapps.de/documentation/Files_updateAppFiles
-	*/
-	this.invalidateClientCache = function invalidateClientCache() {
-		return rootInstance.invalidateClientCache();
+		var files = rootInstance.updateAppFiles();
+		
+		var res = files.find(function(filename) {
+			return filename.startsWith('www/');
+		});
+		
+		if(res) {
+			rootInstance.invalidateClientCache();
+		}
+		
+		return files;
 	};
 	
 	/*
