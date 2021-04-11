@@ -39,7 +39,7 @@ var Files = (new function Files() {
 			return false;
 		}
 		
-		KnuddelsServer.require (filename);
+		KnuddelsServer.require(filename);
 	};
 	
 	/*

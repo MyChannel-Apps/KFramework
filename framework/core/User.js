@@ -106,8 +106,8 @@ var Users = (new function Users() {
 	/*
 		@docs	TODO
 	*/
-	this.fixNick = function fixNick(nickname) {
-		return UAC.getNick(nickname);
+	this.fixNick = function fixNick(userId) {
+		return UAC.getNick(userId);
 	};
 	
 	/*
