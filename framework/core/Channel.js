@@ -406,7 +406,7 @@ var Channel = (new function Channel() {
 				continue;
 			}
 			
-			if(filter.custom != undefined && typeof(filter.custom) == 'function' && !filter.custom.call(_users[index], [_users[index]])) {
+			if(filter.custom != undefined && typeof(filter.custom) == 'function' && !filter.custom.call(_users[index], _users[index])) {
 				continue;
 			}
 
