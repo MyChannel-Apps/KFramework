@@ -95,9 +95,7 @@ if(!Array.prototype.shuffle) {
 		configurable:	false,
 		writable:		false,
 		value: function shuffle() {
-			this.sort(function sort(a, b) {
-				return (0.5 - Math.random());
-			});
+			return this = RandomOperations.shuffleObjects(this);
 		}
 	});
 }
