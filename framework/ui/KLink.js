@@ -44,7 +44,7 @@ function KLink(text, command_left, command_right) {
 	}
 	
 	function prepareLink(string) {
-		return string.replace(/(<|>|\||°)/g, '\\$1');
+		return string.toString().replace(/(<|>|\||°)/g, '\\$1');
 	}
 	
 	this.connectAsIcon = function connectAsIcon(image) {
