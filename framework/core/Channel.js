@@ -419,7 +419,7 @@ var Channel = (new function Channel() {
 		Create a link to join a channel
 	*/
 	this.getLink = function getLink() {
-		var channelName = Channel.getName();
+		var channelName = this.getName();
 		return "°>" + channelName + "|/go " + channelName + "|/go +" + channelName + "<°";
 	}
 	
