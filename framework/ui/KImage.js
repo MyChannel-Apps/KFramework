@@ -35,6 +35,10 @@
 	Bot.public(link);
 	@docs	http://www.userapps.de/documentation/KImage_constructor
 */
+
+//fix missing prototype in com.knuddels.apps.tools.KImage
+delete KImage;
+
 var KImage			= KImage || (function(image) {
 	this.javaClassName = 'KImage';	
 	this._path			= '';
