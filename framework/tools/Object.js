@@ -155,6 +155,61 @@ if(!Object.prototype.sort) {
 }
 
 /*
+	@docs	http://www.userapps.de/documentation/Object_toSortedArray
+*/
+if(!Object.prototype.toSortedArray) {
+	Object.defineProperty(Object.prototype, 'toSortedArray', {
+		enumerable:		false,
+		configurable:	false,
+		writable:		false,
+		value: function toSortedArray(byKey, order) {
+			if(byKey === undefined) {
+				byKey = 'index';
+			}
+	
+			if(order === undefined) {
+				order = 'ASC'; // Highest value
+			}
+	
+			var keys = [];
+			for(var index in this) {
+				var sortby = 0;
+				
+				if(byKey == 'index') {		
+					sortby = index;
+				} else if(byKey === 'value') {		
+					sortby = this[index];
+				} else if(this[index].hasOwnProperty(byKey)) {
+					sortby = this[index][byKey];
+				}
+			
+				keys.push({
+					key:	index,
+					value:	this[index],
+					sortby:	sortby
+				});
+			}
+	
+			if(order == 'ASC') {
+				keys.sort(function(a, b) {
+					if(a.sortby < b.sortby) return -1;
+					if(a.sortby > b.sortby) return 1;
+					return 0;
+				});
+			} else {
+				keys.sort(function(b, a) {
+					if(a.sortby < b.sortby) return -1;
+					if(a.sortby > b.sortby) return 1;
+					return 0;
+				});
+			}
+			
+			return keys;
+		}
+	});
+}
+
+/*
 	@docs	http://www.userapps.de/documentation/Object_exists
 */
 if(!Object.prototype.exists) {

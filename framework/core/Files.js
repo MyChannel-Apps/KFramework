@@ -138,7 +138,7 @@ var Files = (new function Files() {
 			filterPath: true,
 		};
 		
-		if(override != undefined){
+		if(override !== undefined){
 			override.each(function(val, key){
 				options[key] = val;
 			});
@@ -156,22 +156,22 @@ var Files = (new function Files() {
 				dir = dir.join('/');
 			}
 			
-			if(options.prefix != undefined && !file.startsWith(options.prefix)) {
+			if(options.prefix !== undefined && !file.startsWith(options.prefix)) {
 				return false;
 			}
 			
-			if(options.type != undefined && !file.endsWith('.'+options.type)) {
+			if(options.type !== undefined && !file.endsWith('.'+options.type)) {
 				return false;
 			}
 			
-			if(options.showDir != undefined && !(options.showDir) && file.endsWith('/')) {
+			if(options.showDir !== undefined && !(options.showDir) && file.endsWith('/')) {
 				return false;
 			}
 			
 			return true;
 		});
 		
-		if(options.filterPath != undefined && (options.filterPath)) {
+		if(options.filterPath !== undefined && (options.filterPath)) {
 			return files.map(function(file){
 				if(file.endsWith('/')) {
 					dir = file.split('/'); dir.pop();
