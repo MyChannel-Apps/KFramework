@@ -94,6 +94,8 @@ if(!Object.prototype.sort) {
 		configurable:	false,
 		writable:		false,
 		value: function sort(byKey, order) {
+			Logger.info('Object.sort(byKey, order) is DEPRECATED');
+			
 			if(byKey === undefined) {
 				byKey == 'index';
 			}
