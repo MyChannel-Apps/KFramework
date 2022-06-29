@@ -37,8 +37,7 @@ var Files = (new function Files() {
 		if(!this.checkFile(filename)) {
 			Logger.fatal(filename+' does not exists!');
 			return false;
-		}
-		
+		}		
 		KnuddelsServer.require(filename);
 	};
 	
@@ -50,8 +49,7 @@ var Files = (new function Files() {
 		if(!this.checkFile(filename)) {
 			Logger.fatal(filename+' does not exists!');
 			return false;
-		}
-		
+		}		
 		KnuddelsServer.execute(filename);
 	};
 	
