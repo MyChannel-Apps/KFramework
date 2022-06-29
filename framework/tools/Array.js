@@ -95,7 +95,8 @@ if(!Array.prototype.shuffle) {
 		configurable:	false,
 		writable:		false,
 		value: function shuffle() {
-			return this = RandomOperations.shuffleObjects(this);
+			this = RandomOperations.shuffleObjects(this);
+			return this;			
 		}
 	});
 }
