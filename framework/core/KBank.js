@@ -99,7 +99,7 @@ var KBank = (new function KBank() {
 		}
 		
 		var _user = Users.get(parseInt(uid, 10));
-		return parseFloat((_user.getPersistence().getNumber('KBank_knuddel', 0.00)+_user.getKnuddelAccount().getKnuddelAmount().asNumber()).toFixed(2));
+		return parseFloat((_user.getPersistence().getNumber('KBank_knuddel', 0.00)+_user.getMaxKnuddelToApp().asNumber()).toFixed(2));
 	};
 	
 	/*
@@ -112,7 +112,7 @@ var KBank = (new function KBank() {
 		
 		var _user = Users.get(parseInt(uid, 10));
 		
-		return parseFloat(_user.getKnuddelAccount().getKnuddelAmount().asNumber().toFixed(2));
+		return parseFloat(_user.getKnuddelAmount().asNumber().toFixed(2));
 	};
 	
 	/*
@@ -146,7 +146,7 @@ var KBank = (new function KBank() {
 		} catch(e) {
 			throw e.message;
 		}
-				
+
 		if(kn <= 0.00) {
 			callError(user, 'KnNullOrNeg');
 			return false;
@@ -157,12 +157,11 @@ var KBank = (new function KBank() {
 				callSuccess(user, kn);
 				return true;
 			} else {
-				callError(user, 'CantGetKn');
+				callError(user, 'KnCantSub');
 				return false;
 			}
 		}
 		
-		var knAcc = user.getKnuddelAccount();
 		var diffKn = parseFloat((kn-this.getKn(uid)).toFixed(2));
 		
 		if(diffKn < 0.01) {
@@ -173,18 +172,24 @@ var KBank = (new function KBank() {
 			var requestKn = new KnuddelAmount(diffKn);
 		} catch(e) {
 			callError(user, 'KnValueToHigh');
+			return false;
 		}
 
-		if(!knAcc.hasEnough(requestKn)) {
+		if(user.getKnuddelAmount() > requestKn) {
 			callError(user, 'KnNotEnough');
+			return;
+		}
+
+		if(!user.canTransferKnuddelToApp(requestKn)) {
+			callError(user, 'KnLimitToLow');
 			return false;
 		}
 		
 		try {
-			knAcc.use(requestKn, reason || 'Einzahlung', {
+			user.transferKnuddelToApp(requestKn, reason || 'Einzahlung', {
 				transferReason: reason || 'Einzahlung',
 				onError: function KnOnError() {
-					callError(user, 'KnuddelAccountError');
+					callError(user, 'KnTransferError');
 				},
 				onSuccess: function KnOnSuccess() {
 					if(instance.subKn(uid, kn)) {
@@ -194,14 +199,14 @@ var KBank = (new function KBank() {
 							if(instance.subKn(uid, kn)) {
 								callSuccess(user, kn);
 							} else {
-								callError(user, 'NoKnReceived');
+								callError(user, 'KnNotReceived');
 							}
 						}, 500);
 					}
 				}	
 			});
 		} catch(e) {
-			callError(user, 'KnuddelAccountError');
+			callError(user, 'KnTransferError');
 			Logger.error(e.name + ' : ' + e.message);
 		}
 	};
@@ -412,9 +417,9 @@ var KBank = (new function KBank() {
 		_db.addNumber('KBank_payout', kn);
 		
 		if(payoutTaxRate) {
-			Bot.knuddel(_user.getKnuddelAccount(), kn/100*(100-payoutTaxRate), reason, KnuddelTransferDisplayType.Silent);
+			Bot.knuddel(_user, kn/100*(100-payoutTaxRate), reason, KnuddelTransferDisplayType.Silent);
 		} else {
-			Bot.knuddel(_user.getKnuddelAccount(), kn, reason, KnuddelTransferDisplayType.Silent);
+			Bot.knuddel(_user, kn, reason, KnuddelTransferDisplayType.Silent);
 		}
 
 		if(updateCallback) {
