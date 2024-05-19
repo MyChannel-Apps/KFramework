@@ -175,7 +175,7 @@ var KBank = (new function KBank() {
 			return false;
 		}
 
-		if(user.getKnuddelAmount() > requestKn) {
+		if(requestKn > user.getKnuddelAmount().asNumber()) {
 			callError(user, 'KnNotEnough');
 			return;
 		}
