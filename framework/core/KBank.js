@@ -99,7 +99,7 @@ var KBank = (new function KBank() {
 		}
 		
 		var _user = Users.get(parseInt(uid, 10));
-		return parseFloat((_user.getPersistence().getNumber('KBank_knuddel', 0.00)+_user.getMaxKnuddelToApp().asNumber()).toFixed(2));
+		return parseFloat((_user.getPersistence().getNumber('KBank_knuddel', 0.00)+_user.getKnuddelAmount().asNumber()).toFixed(2));
 	};
 	
 	/*
