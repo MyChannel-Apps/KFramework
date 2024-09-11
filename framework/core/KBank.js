@@ -175,16 +175,13 @@ var KBank = (new function KBank() {
 			return false;
 		}
 
+
+
 		if(requestKn > user.getKnuddelAmount().asNumber()) {
 			callError(user, 'KnNotEnough');
 			return;
 		}
 
-		if(!user.canTransferKnuddelToApp(requestKn)) {
-			callError(user, 'KnLimitToLow');
-			return false;
-		}
-		
 		try {
 			user.transferKnuddelToApp(requestKn, reason || 'Einzahlung', {
 				transferReason: reason || 'Einzahlung',
