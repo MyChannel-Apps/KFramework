@@ -172,11 +172,11 @@ var Files = (new function Files() {
 		if(options.filterPath !== undefined && (options.filterPath)) {
 			return files.map(function(file){
 				if(file.endsWith('/')) {
-					dir = file.split('/'); dir.pop();
+					var dir = file.split('/'); dir.pop();
 					file = dir.pop() + '/';
 					dir = dir.join('/');
 				} else if(file.contains('/')) {
-					dir = file.split('/');
+					var dir = file.split('/');
 					file = dir.pop();
 					dir = dir.join('/');
 				}
